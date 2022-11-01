@@ -10,7 +10,8 @@ class UserModel {
   }
 
   async create(userInfo) {
-    await this.model.create(userInfo);
+    const newUser = await this.model.create(userInfo);
+    return newUser;
   }
 
   async getAll() {

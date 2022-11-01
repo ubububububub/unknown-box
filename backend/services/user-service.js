@@ -16,8 +16,8 @@ class UserService {
         throw new Error("이미 가입된 이메일입니다.");
       }
 
-      await userModel.create(userInfo);
-      res.status(201).json({ message: "success" });
+      const newUser = await userModel.create(userInfo);
+      res.status(201).json(newUser);
     } catch (error) {
       next(error);
     }
