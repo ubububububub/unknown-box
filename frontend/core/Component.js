@@ -6,8 +6,8 @@ export default class Component {
     if (!target) throw new Error("no element");
     this.target = target;
     this.setup();
-    this.setEvent();
     this.render();
+    this.setEvent();
   }
 
   setup() {}
