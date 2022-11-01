@@ -15,11 +15,11 @@ app.use(express.json());
 // Content-Type: application/x-www-form-urlencoded 형태의 데이터를 인식하고 핸들링할 수 있게 함.
 app.use(express.urlencoded({ extended: false }));
 
-app.use("/", express.static(path.resolve(__dirname, "frontend")));
+app.use("/", express.static(path.resolve(__dirname, "../frontend")));
 
 // 여기에도 __dirname 추가
 app.get("/*", (req, res) => {
-  res.sendFile(path.resolve(__dirname, "frontend", "index.html"));
+  res.sendFile(path.resolve(__dirname, "../frontend", "index.html"));
 });
 // // html, css, js 라우팅
 // app.use(viewsRouter);
