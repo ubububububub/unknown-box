@@ -17,6 +17,11 @@ class UserModel {
     const users = await this.model.find({});
     return users;
   }
+
+  async getByEmail(email) {
+    const user = await this.model.findOne({ email });
+    return user;
+  }
 }
 
 const userModel = new UserModel(model);
