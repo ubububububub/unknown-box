@@ -1,38 +1,33 @@
-import { model } from "mongoose";
-import { UserSchema } from "../schemas/user-schema";
+import mongoose from "mongoose";
+import userSchema from "../schemas";
+import { hashPassword } from "../../utils/hash-password";
 
-const User = model("users", UserSchema);
+const model = mongoose.model("User", userSchema);
 
-export class UserModel {
-  async findByEmail(email) {
-    const user = await User.findOne({ email });
-    return user;
+class UserModel {
+  constructor(model) {
+    this.model = model;
   }
 
-  async findById(userId) {
-    const user = await User.findOne({ _id: userId });
-    return user;
-  }
-
-  async create(userInfo) {
-    const createdNewUser = await User.create(userInfo);
-    return createdNewUser;
-  }
-
-  async findAll() {
-    const users = await User.find({});
-    return users;
-  }
-
-  async update({ userId, update }) {
-    const filter = { _id: userId };
-    const option = { returnOriginal: false };
-
-    const updatedUser = await User.findOneAndUpdate(filter, update, option);
-    return updatedUser;
+  async create({ email, password, name, address, phone }) {
+    await this.model.create({
+      email,
+      password,
+      name,
+      address,
+      phone,
+    });
   }
 }
 
-const userModel = new UserModel();
+const userModel = new UserModel(model);
+
+userModel.create({
+  email: process.env.ADMIN,
+  password: hashPassword(process.env.ADMIN),
+  name: process.env.ADMIN,
+  address: process.env.ADMIN,
+  phone: process.env.ADMIN,
+});
 
 export { userModel };
