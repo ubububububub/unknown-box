@@ -4,6 +4,7 @@ import path from "path";
 import express from "express";
 import mongoose from "mongoose";
 import { router } from "./controllers";
+import { errorHandler } from "./middlewares";
 
 mongoose.connect(process.env.MONGODB_URL);
 
@@ -21,5 +22,7 @@ app.use("/api", router);
 app.get("/*", (req, res) => {
   res.sendFile(path.resolve(__dirname, "../frontend", "index.html"));
 });
+
+app.use(errorHandler);
 
 export { app };
