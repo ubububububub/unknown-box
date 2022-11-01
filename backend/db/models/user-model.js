@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-import userSchema from "../schemas";
+import { userSchema } from "../schemas";
 import { hashPassword } from "../../utils/hash-password";
 
 const model = mongoose.model("User", userSchema);
@@ -9,14 +9,13 @@ class UserModel {
     this.model = model;
   }
 
-  async create({ email, password, name, address, phone }) {
-    await this.model.create({
-      email,
-      password,
-      name,
-      address,
-      phone,
-    });
+  async create(userInfo) {
+    await this.model.create(userInfo);
+  }
+
+  async getAll() {
+    const users = await this.model.find({});
+    return users;
   }
 }
 
