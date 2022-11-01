@@ -16,7 +16,6 @@ class UserService {
         throw new Error("이미 가입된 이메일입니다.");
       }
 
-      // this.userModel 안됨
       await userModel.create(userInfo);
       res.status(201).json({ message: "success" });
     } catch (error) {
