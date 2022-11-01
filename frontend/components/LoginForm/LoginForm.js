@@ -3,7 +3,7 @@ import { qs } from "../../utils/index.js";
 
 class LoginForm extends Component {
   template() {
-    return `<form class="loginForm" >
+    return `<form class="login-form" >
     <label for="email">이메일
     </label>
     <input type="text" id="email" name="email" />
@@ -12,7 +12,7 @@ class LoginForm extends Component {
     <input type="password" class="password" name="password"/>
     <button class="loginBtn" type="submit" >로그인하기</button>
    </form>
-    <button class="signInBtn" >회원가입하기</button>
+    <button class="signin-btn" >회원가입하기</button>
     `;
   }
 }
