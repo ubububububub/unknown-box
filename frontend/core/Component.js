@@ -6,8 +6,13 @@ export default class Component {
     if (!target) throw new Error("no element");
     this.target = target;
     this.setup();
+<<<<<<< HEAD
     this.render();
     this.setEvent();
+=======
+    this.setEvent();
+    this.render();
+>>>>>>> feat/join-join
   }
 
   setup() {}
