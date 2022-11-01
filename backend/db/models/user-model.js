@@ -1,38 +1,37 @@
-import { model } from "mongoose";
-import { UserSchema } from "../schemas/user-schema";
+import mongoose from "mongoose";
+import { userSchema } from "../schemas";
+import { hashPassword } from "../../utils/hash-password";
 
-const User = model("users", UserSchema);
+const model = mongoose.model("User", userSchema);
 
-export class UserModel {
-  async findByEmail(email) {
-    const user = await User.findOne({ email });
-    return user;
-  }
-
-  async findById(userId) {
-    const user = await User.findOne({ _id: userId });
-    return user;
+class UserModel {
+  constructor(model) {
+    this.model = model;
   }
 
   async create(userInfo) {
-    const createdNewUser = await User.create(userInfo);
-    return createdNewUser;
+    await this.model.create(userInfo);
   }
 
-  async findAll() {
-    const users = await User.find({});
+  async getAll() {
+    const users = await this.model.find({});
     return users;
   }
 
-  async update({ userId, update }) {
-    const filter = { _id: userId };
-    const option = { returnOriginal: false };
-
-    const updatedUser = await User.findOneAndUpdate(filter, update, option);
-    return updatedUser;
+  async getByEmail(email) {
+    const user = await this.model.findOne({ email });
+    return user;
   }
 }
 
-const userModel = new UserModel();
+const userModel = new UserModel(model);
+
+userModel.create({
+  email: process.env.ADMIN,
+  password: hashPassword(process.env.ADMIN),
+  name: process.env.ADMIN,
+  address: process.env.ADMIN,
+  phone: process.env.ADMIN,
+});
 
 export { userModel };
