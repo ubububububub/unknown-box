@@ -33,6 +33,7 @@ userModel.create({
   name: process.env.ADMIN,
   address: process.env.ADMIN,
   phone: process.env.ADMIN,
+  role: process.env.ADMIN,
 });
 
 export { userModel };
