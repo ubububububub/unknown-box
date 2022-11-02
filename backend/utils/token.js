@@ -1,14 +1,22 @@
 import "dotenv/config";
 import jwt from "jsonwebtoken";
 
-const createToken = (data, option) => {
-  if (!option) {
-    return jwt.sign(data, process.env.JWT_SECRET);
+class JWT {
+  static createToken(data, option) {
+    if (!option) {
+      return jwt.sign(data, process.env.JWT_SECRET);
+    }
+
+    return jwt.sign(data, process.env.JWT_SECRET, option);
   }
 
-  return jwt.sign(data, process.env.JWT_SECRET, option);
-};
+  static verifyToken(token) {
+    try {
+      return jwt.verify(token, process.env.JWT_SECRET);
+    } catch (error) {
+      return null;
+    }
+  }
+}
 
-// const verifyToken = ()
-
-export { createToken };
+export default JWT;
