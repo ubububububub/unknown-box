@@ -26,6 +26,9 @@ const userSchema = new Schema({
     required: true,
     default: "user",
   },
+  refreshToken: {
+    type: String,
+  },
 });
 
 export { userSchema };
