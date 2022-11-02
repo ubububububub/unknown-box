@@ -1,25 +1,29 @@
 import { userModel } from "../db/models";
+import { hashPassword } from "../utils/hash-password";
 
 class UserService {
-  constructor(userModel) {
-    this.userModel = userModel;
+  constructor(model) {
+    this.model = model;
   }
 
   async createUser(userInfo) {
-    const { email } = userInfo;
-    const user = await userModel.getByEmail(email);
+    const { email, password } = userInfo;
+    const user = await this.model.getByEmail(email);
 
     if (user) {
       throw new Error("이미 가입된 이메일입니다.");
     }
 
-    const newUser = await userModel.create(userInfo);
+    const newUser = await this.model.create({
+      ...userInfo,
+      password: hashPassword(password),
+    });
 
     return newUser;
   }
 
   async getUsers() {
-    const users = await userModel.getAll();
+    const users = await this.model.getAll();
     return users;
   }
 }
