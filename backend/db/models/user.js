@@ -23,6 +23,15 @@ class UserModel {
     const user = await this.model.findOne({ email });
     return user;
   }
+
+  async setRefreshToken(email, refreshToken) {
+    await this.model.updateOne({ email }, { refreshToken });
+  }
+
+  async getRefreshTokenByEmail(email) {
+    const user = await this.model.findOne({ email });
+    return user;
+  }
 }
 
 const userModel = new UserModel(model);
