@@ -5,6 +5,7 @@ import { Detail } from "../pages/Detail/Detail.js";
 import { Login } from "../pages/Login/Login.js";
 import { Main } from "../pages/Main/Main.js";
 import { MyOrder } from "../pages/MyOrder/MyOrder.js";
+import { MyOrderEdit } from "../pages/MyOrderEdit/MyOrderEdit.js";
 import { MyPage } from "../pages/MyPage/MyPage.js";
 import { NotFound } from "../pages/NotFound/NotFound.js";
 import { Payment } from "../pages/Payment/Payment.js";
@@ -17,13 +18,14 @@ const routes = [
   { path: "/login", view: Login },
   { path: "/mypage", view: MyPage },
   { path: "/mypage/order", view: MyOrder },
+  { path: "/mypage/order/:id", view: MyOrderEdit },
   { path: "/detail/:id", view: Detail },
   { path: "/cart", view: Cart },
   { path: "/order/payment", view: Payment },
   { path: "/order/recipt", view: Recipt },
   { path: "/admin", view: Admin },
   { path: "/admin/order", view: AdminOrder },
-  { path: "/404", view: NotFound },
+  { path: "/404", view: NotFound }
 ];
 
 export default routes;

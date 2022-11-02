@@ -6,24 +6,32 @@ const navigateTo = url => {
   App();
 };
 
+const pathToRegex = path =>
+  new RegExp("^" + path.replace(/\//g, "\\/").replace(/:\w+/g, "(.+)") + "$");
+
 const App = async () => {
+  const params = [];
   const pageMatches = routes.map(route => {
+    const parsedPath = window.location.pathname.match(pathToRegex(route.path));
+    if (parsedPath) {
+      params.push(parsedPath[1]);
+    }
     return {
       route,
-      isMatch: route.path === window.location.pathname,
+      result: parsedPath
     };
   });
 
-  let match = pageMatches.find(pageMatch => pageMatch.isMatch);
+  let match = pageMatches.find(pageMatch => pageMatch.result);
 
   if (!match) {
     match = {
       route: routes[routes.length - 1],
-      isMatch: true,
+      result: true
     };
   }
 
-  new match.route.view(qs("#app"));
+  new match.route.view(qs("#app"), ...params);
 };
 
 document.addEventListener("DOMContentLoaded", () => {

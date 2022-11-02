@@ -2,9 +2,10 @@
 
 export default class Component {
   state;
-  constructor(target) {
+  constructor(target, props) {
     if (!target) throw new Error("no element");
     this.target = target;
+    this.props = props;
     this.setup();
 <<<<<<< HEAD
     this.render();
