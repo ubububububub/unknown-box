@@ -39,5 +39,6 @@ module.exports = {
     "func-names": "off",
     "no-param-reassign": "off",
     "class-methods-use-this": "off",
+    "consistent-return": "off",
   },
 };
