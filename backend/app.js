@@ -3,7 +3,7 @@ import cors from "cors";
 import path from "path";
 import express from "express";
 import mongoose from "mongoose";
-import { router } from "./routers";
+import { router } from "./controllers";
 import { errorHandler } from "./middlewares";
 
 mongoose.connect(process.env.MONGODB_URL);
