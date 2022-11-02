@@ -1,6 +1,6 @@
 import { userModel } from "../db/models";
 import { hashPassword } from "../utils/hash-password";
-import { createToken } from "../utils/token";
+import JWT from "../utils/token";
 
 class LoginService {
   constructor(model) {
@@ -9,16 +9,22 @@ class LoginService {
 
   async login(loginInfo, token) {
     const { email, password } = loginInfo;
-    const user = await this.model.getByEmail(email);
+    const user = await userModel.getByEmail(email);
+    const newToken = this.auth(user, password, token);
 
-    return this.auth(user, password, token);
+    return newToken;
   }
 
   auth(user, password, token) {
     this.authEmail(user);
+
+    const { email } = user;
+
     this.authPassword(user, password);
 
-    return this.authToken(user, token);
+    const newToken = this.authToken(email, token);
+
+    return newToken;
   }
 
   authEmail(user) {
@@ -33,28 +39,52 @@ class LoginService {
     }
   }
 
-  authToken(user, token) {
+  async authToken(email, token) {
     if (!token.accessToken && !token.refreshToken) {
-      return createTokens(user);
+      return this.createTokens(email);
     }
 
-    // const accessToken = this.authAccessToken(user, token.accessToken);
-    // const refreshToken = this.authAccessToken(user, token.refreshToken);
-    const accessToken = "1";
-    const refreshToken = "2";
+    if (
+      JWT.verifyToken(token.accessToken) &&
+      JWT.verifyToken(token.refreshToken)
+    ) {
+      const { accessToken, refreshToken } = token;
+      // accessToken, refreshToken 토큰 둘다 유효한 경우 코드를 어떻게 이어가야 할까요?
+      return {
+        accessToken,
+        refreshToken,
+      };
+    }
+
+    const accessToken = await this.authAccessToken(email, token);
+    const refreshToken = await this.authRefreshToken(email, token);
+
+    if (!accessToken && !refreshToken) {
+      throw new Error("API 사용 권한이 없습니다.");
+    }
+
     return { accessToken, refreshToken };
   }
 
-  async createTokens(user) {
-    const { email } = user;
-    const accessToken = createToken(
+  async createTokens(email) {
+    const accessToken = this.createAccessToken(email);
+    const refreshToken = await this.createRefreshToken(email);
+
+    return { accessToken, refreshToken };
+  }
+
+  createAccessToken(email) {
+    return JWT.createToken(
       { email },
       {
         expiresIn: "1h",
         issuer: "projectName",
       },
     );
-    const refreshToken = createToken(
+  }
+
+  async createRefreshToken(email) {
+    const refreshToken = JWT.createToken(
       { email },
       {
         expiresIn: "14d",
@@ -62,41 +92,35 @@ class LoginService {
       },
     );
 
-    await this.model.setRefreshToken(email, refreshToken);
+    await userModel.setRefreshToken(email, refreshToken);
 
-    return { accessToken, refreshToken };
+    return refreshToken;
   }
 
-  async authAccessToken(user, accessToken) {
-    console.log(accessToken);
-    // if () {
-    //   // accessToken만 만료된 경우
-    //   // db에 저장되어있는 refreshToken과 쿠키로 보낸 refresh 토큰이 일치한지 확인한다.
-    //   // 일치하면 새로운 accessToken을 발급해서 cookie로 보내준다.
-    //   // 일치하지 않으면 오류를 띄운다.
-    //   const user = await this.model.getByRefreshToken(refreshToken);
-    //   if (refreshToken !== user.refreshToken) {
-    //     throw new Error("refresh 토큰이 일치하지 않습니다.");
-    //   }
-    //   const accessToken = createToken(
-    //     { email: user.email },
-    //     {
-    //       expiresIn: "1h",
-    //       issuer: "projectName",
-    //     },
-    //   );
-    //   return accessToken;
-    // }
-    // return this.authRefreshToken(user, token.refreshToken);
+  async authAccessToken(email, token) {
+    const { accessToken, refreshToken } = token;
+
+    if (!JWT.verifyToken(accessToken)) {
+      const user = await userModel.getRefreshTokenByEmail(email);
+
+      if (user.refreshToken !== refreshToken) {
+        throw new Error("refresh 토큰이 일치하지 않습니다.");
+      }
+
+      return this.createAccessToken(email);
+    }
+
+    return accessToken;
   }
 
-  async authRefreshToken(refreshToken) {
-    // if (!refreshToken) {
-    //   // accessToken, refreshToken이 모두 만료된 경우
-    //   throw new Error(
-    //     "access토큰과, refresh토큰이 모두 만료되었습니다. 다시 로그인 해주십시오.",
-    //   );
-    // }
+  async authRefreshToken(email, token) {
+    const { refreshToken } = token;
+
+    if (!JWT.verifyToken(refreshToken)) {
+      return this.createRefreshToken(email);
+    }
+
+    return refreshToken;
   }
 }
 

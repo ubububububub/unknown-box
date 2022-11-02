@@ -28,8 +28,8 @@ class UserModel {
     await this.model.updateOne({ email }, { refreshToken });
   }
 
-  async getByRefreshToken(refreshToken) {
-    const user = await this.model.findeOne({ refreshToken });
+  async getRefreshTokenByEmail(email) {
+    const user = await this.model.findOne({ email });
     return user;
   }
 }

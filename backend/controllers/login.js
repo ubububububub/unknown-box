@@ -3,16 +3,20 @@ import { loginService } from "../services";
 
 const loginRouter = Router();
 
-loginRouter.get("/", async (req, res, next) => {
+loginRouter.post("/", async (req, res, next) => {
   try {
     const loginInfo = req.body;
     const token = req.cookies;
 
-    const validateToken = await loginService.login(loginInfo, token);
+    const { accessToken, refreshToken } = await loginService.login(
+      loginInfo,
+      token,
+    );
 
-    res.cookie("accessToken", validateToken.accessToken);
-    res.cookie("refreshToken", validateToken.refreshToken);
-    res.send();
+    res.cookie("accessToken", accessToken);
+    res.cookie("refreshToken", refreshToken);
+
+    res.status(200).send();
   } catch (error) {
     next(error);
   }
