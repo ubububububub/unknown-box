@@ -10,7 +10,8 @@ class UserModel {
   }
 
   async create(userInfo) {
-    await this.model.create(userInfo);
+    const newUser = await this.model.create(userInfo);
+    return newUser;
   }
 
   async getAll() {
@@ -32,6 +33,7 @@ userModel.create({
   name: process.env.ADMIN,
   address: process.env.ADMIN,
   phone: process.env.ADMIN,
+  role: process.env.ADMIN,
 });
 
 export { userModel };

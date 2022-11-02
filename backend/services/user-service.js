@@ -5,31 +5,19 @@ class UserService {
     this.userModel = userModel;
   }
 
-  async createUser(req, res, next) {
-    const userInfo = req.body;
-    const { email } = userInfo;
-
-    try {
-      const user = await userModel.getByEmail(email);
-
-      if (user) {
-        throw new Error("이미 가입된 이메일입니다.");
-      }
-
-      await userModel.create(userInfo);
-      res.status(201).json({ message: "success" });
-    } catch (error) {
-      next(error);
-    }
+  async createUser(email) {
+    const newUser = await userModel.create(email);
+    return newUser;
   }
 
-  async getUsers(req, res, next) {
-    try {
-      const users = await userModel.getAll();
-      res.status(200).json(users);
-    } catch (error) {
-      next(error);
-    }
+  async getUsers() {
+    const users = await userModel.getAll();
+    return users;
+  }
+
+  async getUserByEmail(email) {
+    const user = await userModel.getByEmail(email);
+    return user;
   }
 }
 
