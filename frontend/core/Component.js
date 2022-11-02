@@ -7,13 +7,8 @@ export default class Component {
     this.target = target;
     this.props = props;
     this.setup();
-<<<<<<< HEAD
     this.render();
     this.setEvent();
-=======
-    this.setEvent();
-    this.render();
->>>>>>> feat/join-join
   }
 
   setup() {}
