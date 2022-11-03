@@ -33,9 +33,9 @@ const App = async () => {
     };
   }
 
-  new Header(qs("#header"), ...params)
+  new Header(qs("#header"))
   new match.route.view(qs("#app"), ...params);
-  new Footer(qs("#footer"), ...params)
+  new Footer(qs("#footer"))
 };
 
 document.addEventListener("DOMContentLoaded", () => {
