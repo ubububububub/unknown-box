@@ -1,5 +1,6 @@
 import "dotenv/config";
 import jwt from "jsonwebtoken";
+import jwt_decode from "jwt-decode";
 
 class JWT {
   static createToken(data, option) {
@@ -16,6 +17,10 @@ class JWT {
     } catch (error) {
       return null;
     }
+  }
+
+  static decodeToken(token) {
+    return jwt_decode(token);
   }
 }
 
