@@ -1,16 +1,37 @@
+import { postLogin } from "../../apis/index.js";
 import Component from "../../core/Component.js";
-import { qs } from "../../utils/index.js";
+import { emailValidation, passwordValidation, qs } from "../../utils/index.js";
 
 class LoginForm extends Component {
   template() {
-    return `<form class="loginForm">
+    return `<form id="loginForm" method="POST">
               <label for="email">이메일</label>
               <input type="text" id="email" name="email"/>
               <label for="password">비밀번호</label>
-              <input type="password" class="password" name="password"/>
-              <button class="loginBtn" type="submit">로그인하기</button>
+              <input type="password" id="password" name="password"/>
+              <input type="submit" id="loginBtn" value="로그인"/>
             </form>
-            <button class="signInBtn">회원가입하기</button>`;
+            <button id="signInBtn">회원가입하기</button>`;
+  }
+
+  setEvent() {
+    qs("#signInBtn").addEventListener("click", () => {
+      window.location = "/signin";
+    });
+
+    qs("#loginForm").addEventListener("submit", e => {
+      e.preventDefault();
+
+      const [email, password] = Array.from(e.target).map(item => item.value);
+
+      if (emailValidation(email) && passwordValidation(password)) {
+        const loginData = {
+          email,
+          password
+        };
+        postLogin(loginData);
+      }
+    });
   }
 }
 
