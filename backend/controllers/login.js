@@ -8,15 +8,14 @@ loginRouter.post("/", async (req, res, next) => {
     const loginInfo = req.body;
     const token = req.cookies;
 
-    const { accessToken, refreshToken } = await loginService.login(
+    const { newAccessToken, newRefreshToken } = await loginService.login(
       loginInfo,
       token,
     );
 
-    res.cookie("accessToken", accessToken);
-    res.cookie("refreshToken", refreshToken);
-
-    res.status(200).send();
+    res.cookie("accessToken", newAccessToken);
+    res.cookie("refreshToken", newRefreshToken);
+    next();
   } catch (error) {
     next(error);
   }
