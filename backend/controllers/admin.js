@@ -11,7 +11,7 @@ adminController.get("/", async (req, res, next) => {
     next(err);
   }
 });
-adminController.post("/category", async (req, res, next) => {
+adminController.post("/", async (req, res, next) => {
   try {
     const categoryName = await categoryService.regist(req.body);
     res.json({ name: categoryName });
@@ -19,7 +19,7 @@ adminController.post("/category", async (req, res, next) => {
     next(err);
   }
 });
-adminController.put("/category/:name", async (req, res, next) => {
+adminController.put("/:name", async (req, res, next) => {
   try {
     const category = await categoryService.modify(
       req.params.name,
@@ -30,7 +30,7 @@ adminController.put("/category/:name", async (req, res, next) => {
     next(err);
   }
 });
-adminController.delete("/category/:name", async (req, res, next) => {
+adminController.delete("/:name", async (req, res, next) => {
   try {
     const result = await categoryService.remove(req.params);
     res.json(result);

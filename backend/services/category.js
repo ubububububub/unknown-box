@@ -7,8 +7,8 @@ class CategoryService {
   async getList() {
     const categories = await this.categoryModel.getAll();
     if (categories.length === 0) return { error: "카테고리가 없습니다." };
-    return categories.map((category) => ({
-      name: category.name,
+    return categories.map(category => ({
+      name: category.name
     }));
   }
   async regist({ name }) {
@@ -25,11 +25,11 @@ class CategoryService {
     if (category.products.length === 0)
       return { error: "등록된 상품이 없습니다." };
     const products = await category.populate("products");
-    return products.map((product) => ({
+    return products.products.map(product => ({
       id: product._id,
       name: product.name,
       price: product.price,
-      thumbnail: product.thumbnail,
+      thumbnail: product.thumbnail
     }));
   }
   async remove({ name }) {

@@ -17,11 +17,11 @@ class LoginService {
   auth(user, password) {
     this.authEmail(user);
 
-    const { email } = user;
+    const { email, role } = user;
 
     this.authPassword(user, password);
 
-    return this.createTokens(email);
+    return this.createTokens(email, role);
   }
 
   authEmail(user) {
@@ -36,11 +36,11 @@ class LoginService {
     }
   }
 
-  async createTokens(email) {
+  async createTokens(email, role) {
     const newAccessToken = this.createAccessToken(email);
     const newRefreshToken = await this.createRefreshToken(email);
 
-    return { newAccessToken, newRefreshToken };
+    return { newAccessToken, newRefreshToken, role };
   }
 
   createAccessToken(email) {
@@ -48,8 +48,8 @@ class LoginService {
       { email },
       {
         expiresIn: "1h",
-        issuer: "projectName",
-      },
+        issuer: "projectName"
+      }
     );
   }
 
@@ -58,8 +58,8 @@ class LoginService {
       { email },
       {
         expiresIn: "14d",
-        issuer: "projectName",
-      },
+        issuer: "projectName"
+      }
     );
 
     await userModel.setRefreshToken(email, refreshToken);
