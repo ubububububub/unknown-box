@@ -1,5 +1,7 @@
 import { qs } from "./utils/index.js";
 import routes from "./router/index.js";
+import { Header } from "./components/Layout/header.js";
+import { Footer } from "./components/Layout/footer.js";
 
 const navigateTo = url => {
   window.history.pushState(null, null, url);
@@ -31,7 +33,9 @@ const App = async () => {
     };
   }
 
+  new Header(qs("#header"), ...params)
   new match.route.view(qs("#app"), ...params);
+  new Footer(qs("#footer"), ...params)
 };
 
 document.addEventListener("DOMContentLoaded", () => {
