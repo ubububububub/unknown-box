@@ -7,26 +7,13 @@ loginRouter.post("/", async (req, res, next) => {
   try {
     const loginInfo = req.body;
     const token = req.cookies;
-
-<<<<<<< HEAD
-    const { accessToken, refreshToken } = await loginService.login(
-=======
     const { newAccessToken, newRefreshToken } = await loginService.login(
->>>>>>> feat/login-login
       loginInfo,
-      token,
+      token
     );
-
-<<<<<<< HEAD
-    res.cookie("accessToken", accessToken);
-    res.cookie("refreshToken", refreshToken);
-
-    res.status(200).send();
-=======
     res.cookie("accessToken", newAccessToken);
     res.cookie("refreshToken", newRefreshToken);
-    next();
->>>>>>> feat/login-login
+    res.status(200).json({ message: "login success" });
   } catch (error) {
     next(error);
   }
