@@ -1,4 +1,4 @@
-import { getLogout, postLogin } from "../../apis/index.js";
+import { postLogin } from "../../apis/index.js";
 import Component from "../../core/Component.js";
 import { emailValidation, passwordValidation, qs } from "../../utils/index.js";
 
@@ -31,7 +31,12 @@ class LoginForm extends Component {
 
   handleLogout(e) {
     e.preventDefault();
-    getLogout();
+
+    function deleteCookie(token) {
+      document.cookie = token + "=; expires=Thu, 01 Jan 1970 00:00:01 GMT;";
+    }
+    deleteCookie("accessToken");
+    deleteCookie("refreshToken");
   }
 
   handleLogin(e) {
