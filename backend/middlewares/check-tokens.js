@@ -13,7 +13,6 @@ const checkTokens = (req, res, next) => {
     validateExpirationTokens(token);
     authAccessToken(email, token);
     authRefreshToken(email, token);
-    setEmailInfo();
 
     next();
   }
@@ -68,10 +67,6 @@ const checkTokens = (req, res, next) => {
         res.cookie("refreshToken", newFreshToken);
       }
     }
-  }
-
-  function setEmailInfo() {
-    req.userEmail = email;
   }
 };
 
