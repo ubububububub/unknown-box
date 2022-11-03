@@ -15,7 +15,7 @@ loginRouter.post("/", async (req, res, next) => {
 
     res.cookie("accessToken", newAccessToken);
     res.cookie("refreshToken", newRefreshToken);
-    next();
+    res.status(200).json({ message: "login success" });
   } catch (error) {
     next(error);
   }
