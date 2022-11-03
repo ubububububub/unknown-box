@@ -20,18 +20,21 @@ class LoginForm extends Component {
     });
 
     qs("#loginForm").addEventListener("submit", e => {
-      e.preventDefault();
-
-      const [email, password] = Array.from(e.target).map(item => item.value);
-
-      if (emailValidation(email) && passwordValidation(password)) {
-        const loginData = {
-          email,
-          password
-        };
-        postLogin(loginData);
-      }
+      this.handleLogin(e);
     });
+  }
+
+  handleLogin() {
+    e.preventDefault();
+    const [email, password] = Array.from(e.target).map(item => item.value);
+
+    if (emailValidation(email) && passwordValidation(password)) {
+      const loginData = {
+        email,
+        password
+      };
+      postLogin(loginData);
+    }
   }
 }
 
