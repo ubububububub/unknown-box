@@ -7,24 +7,21 @@ class LoginService {
     this.model = model;
   }
 
-  async login(loginInfo, token) {
+  async login(loginInfo) {
     const { email, password } = loginInfo;
     const user = await userModel.getByEmail(email);
-    const newToken = this.auth(user, password, token);
 
-    return newToken;
+    return this.auth(user, password);
   }
 
-  auth(user, password, token) {
+  auth(user, password) {
     this.authEmail(user);
 
     const { email } = user;
 
     this.authPassword(user, password);
 
-    const newToken = this.authToken(email, token);
-
-    return newToken;
+    return this.createTokens(email);
   }
 
   authEmail(user) {
@@ -39,38 +36,11 @@ class LoginService {
     }
   }
 
-  async authToken(email, token) {
-    if (!token.accessToken && !token.refreshToken) {
-      return this.createTokens(email);
-    }
-
-    if (
-      JWT.verifyToken(token.accessToken) &&
-      JWT.verifyToken(token.refreshToken)
-    ) {
-      const { accessToken, refreshToken } = token;
-      // accessToken, refreshToken 토큰 둘다 유효한 경우 코드를 어떻게 이어가야 할까요?
-      return {
-        accessToken,
-        refreshToken,
-      };
-    }
-
-    const accessToken = await this.authAccessToken(email, token);
-    const refreshToken = await this.authRefreshToken(email, token);
-
-    if (!accessToken && !refreshToken) {
-      throw new Error("API 사용 권한이 없습니다.");
-    }
-
-    return { accessToken, refreshToken };
-  }
-
   async createTokens(email) {
-    const accessToken = this.createAccessToken(email);
-    const refreshToken = await this.createRefreshToken(email);
+    const newAccessToken = this.createAccessToken(email);
+    const newRefreshToken = await this.createRefreshToken(email);
 
-    return { accessToken, refreshToken };
+    return { newAccessToken, newRefreshToken };
   }
 
   createAccessToken(email) {
@@ -93,32 +63,6 @@ class LoginService {
     );
 
     await userModel.setRefreshToken(email, refreshToken);
-
-    return refreshToken;
-  }
-
-  async authAccessToken(email, token) {
-    const { accessToken, refreshToken } = token;
-
-    if (!JWT.verifyToken(accessToken)) {
-      const user = await userModel.getRefreshTokenByEmail(email);
-
-      if (user.refreshToken !== refreshToken) {
-        throw new Error("refresh 토큰이 일치하지 않습니다.");
-      }
-
-      return this.createAccessToken(email);
-    }
-
-    return accessToken;
-  }
-
-  async authRefreshToken(email, token) {
-    const { refreshToken } = token;
-
-    if (!JWT.verifyToken(refreshToken)) {
-      return this.createRefreshToken(email);
-    }
 
     return refreshToken;
   }
