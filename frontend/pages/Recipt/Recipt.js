@@ -13,7 +13,7 @@ export class Recipt extends Component {
   }
 
   setEvent() {
-    qs(".recipt__order-list-button").addEventListener("click", async () => {
+    qs(".recipt__order-list-button").addEventListener("click", () => {
       window.location = "/mypage/order";
     });
 
