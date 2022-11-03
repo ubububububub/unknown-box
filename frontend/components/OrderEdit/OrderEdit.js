@@ -6,14 +6,13 @@ class OrderEdit extends Component {
   template() {
     const item = this.state;
     return `<div>
-                <span>${item.orderId}</span>
-                <span>${item.orderTime}</span>
-                <span>${item.orderState}</span>
-                    <div id="address-container"></div>
-                </div>
+              <span>${item.orderId}</span>
+              <span>${item.orderTime}</span>
+              <span>${item.orderState}</span>
+              <div id="address-container"/>
+            </div>
             <button>수정 완료</button>
             <button>취소</button>
-            </div>
         `;
   }
 

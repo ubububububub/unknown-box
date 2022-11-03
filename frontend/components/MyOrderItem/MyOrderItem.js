@@ -1,7 +1,6 @@
 import Component from "../../core/Component.js";
-import { qs } from "../../utils/index.js";
 
-class MyOrderListItem extends Component {
+class MyOrderItem extends Component {
   template() {
     const item = this.props;
     return `<div>
@@ -26,6 +25,10 @@ class MyOrderListItem extends Component {
                 <button>주문 취소</button>
             </div>`;
   }
+
+  render() {
+    this.target.insertAdjacentHTML("beforeend", this.template());
+  }
 }
 
-export default MyOrderListItem;
+export default MyOrderItem;

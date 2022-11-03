@@ -3,9 +3,8 @@ import ProductItem from "../ProductItem/ProductItem.js";
 import { qs } from "../../utils/index.js";
 
 export default class ProductList extends Component {
-    
-    template () {
-        return `
+  template() {
+    return `
             <thead>
                 <tr>
                     <th>No</th>
@@ -17,12 +16,12 @@ export default class ProductList extends Component {
             <tbody id="product-list-body"></tbody>
             <button type="button">추가하기</button>
         </table>
-        `
-    }
+        `;
+  }
 
-    mounted () {
-        this.props.forEach(product =>
-            new ProductItem(qs('#product-list-body'), product)
-        )
-    }  
+  mounted() {
+    this.props.forEach(
+      product => new ProductItem(qs("#product-list-body"), product)
+    );
+  }
 }

@@ -1,6 +1,5 @@
 import Component from "../../core/Component.js";
-import { qs } from "../../utils/index.js";
-import MyOrderListItem from "../MyOrderListItem/MyOrderListItem.js";
+import MyOrderItem from "../MyOrderItem/MyOrderItem.js";
 
 const mockData = [
   {
@@ -86,20 +85,8 @@ const mockData = [
 ];
 
 class MyOrderList extends Component {
-  template() {
-    return `<div>
-                <span>내 주문목록</span>
-                <div id="list-container"></div>
-            </div>`;
-  }
-
-  mounted() {
-    const list = qs("#list-container");
-    mockData.forEach(item => {
-      const itemContainer = document.createElement("div");
-      new MyOrderListItem(itemContainer, item);
-      list.appendChild(itemContainer);
-    });
+  render() {
+    mockData.forEach(item => new MyOrderItem(this.target, item));
   }
 }
 
