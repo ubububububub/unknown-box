@@ -1,4 +1,5 @@
 import { Admin } from "../pages/Admin/Admin.js";
+import { AdminProduct } from "../pages/AdminProduct/AdminProduct.js";
 import { AdminOrder } from "../pages/AdminOrder/AdminOrder.js";
 import { Cart } from "../pages/Cart/Cart.js";
 import { Detail } from "../pages/Detail/Detail.js";
@@ -24,6 +25,7 @@ const routes = [
   { path: "/order/payment", view: Payment },
   { path: "/order/recipt", view: Recipt },
   { path: "/admin", view: Admin },
+  { path: "/admin/products", view: AdminProduct },
   { path: "/admin/order", view: AdminOrder },
   { path: "/404", view: NotFound }
 ];
