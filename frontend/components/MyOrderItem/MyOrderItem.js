@@ -1,10 +1,11 @@
 import Component from "../../core/Component.js";
+import { qs, qsAll } from "../../utils/index.js";
 
 class MyOrderItem extends Component {
   template() {
-    const item = this.props;
+    const { item, idx } = this.props;
     return `<div>
-                <span>주문번호 : ${item.orderId}</span>
+                <span class="order-id">주문번호 : ${item.orderId}</span>
                 <span>주문일시 : ${item.orderTime}</span>
                 <ul id="product-list">
                     ${item.orderProducts
@@ -21,13 +22,19 @@ class MyOrderItem extends Component {
                   return acc;
                 }, 0)}원</span>
                 <span>상태 : ${item.orderState}</span>
-                <button>주문 정보 수정</button>
+                <button class="myorder-edit-btn">주문 정보 수정</button>
                 <button>주문 취소</button>
             </div>`;
   }
 
   render() {
     this.target.insertAdjacentHTML("beforeend", this.template());
+  }
+
+  setEvent() {
+    qsAll(".myorder-edit-btn")[this.props.idx].addEventListener("click", e => {
+      window.location = `/mypage/order/${this.props.item.orderId}`;
+    });
   }
 }
 

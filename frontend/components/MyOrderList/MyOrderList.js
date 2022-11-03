@@ -86,7 +86,9 @@ const mockData = [
 
 class MyOrderList extends Component {
   render() {
-    mockData.forEach(item => new MyOrderItem(this.target, item));
+    mockData.forEach(
+      (item, idx) => new MyOrderItem(this.target, { item, idx })
+    );
   }
 }
 
