@@ -23,9 +23,6 @@ export default class OrderItem extends Component {
                     <button type="button">주문수정</button>
                 </td>
                 <td>
-                    <button type="button">주문취소</button>
-                </td>
-                <td>
                     <button type="button">주문삭제</button>
                 </td>
             </tr>

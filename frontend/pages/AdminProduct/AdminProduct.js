@@ -2,24 +2,9 @@ import Component from "../../core/Component.js";
 import Navbar from "../../components/Navbar/Navbar.js";
 import ProductList from "../../components/ProductList/ProductList.js";
 import { qs } from "../../utils/index.js";
+import { ADMIN_PAGE_NAV } from "../../const/index.js";
 
 export class AdminProduct extends Component {
-    setup () {
-        this.state = [
-          { 
-            title: '상품 카테고리 관리', 
-            path: '/admin' 
-          },
-          { 
-            title: '상품 관리', 
-            path: '/admin/products' 
-          },
-          { 
-            title: '결제 내역 관리', 
-            path: '/admin/order' 
-          }
-        ];
-      }
     
       template () {
         return `
@@ -50,7 +35,7 @@ export class AdminProduct extends Component {
             },
         ];
     
-        new Navbar(qs('#product-nav'), this.state);
+        new Navbar(qs('#product-nav'), ADMIN_PAGE_NAV);
         new ProductList(qs('#product-list-container'), mockData);
     }
 }
