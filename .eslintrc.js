@@ -40,5 +40,6 @@ module.exports = {
     "no-param-reassign": "off",
     "class-methods-use-this": "off",
     "consistent-return": "off",
+    camelcase: "off",
   },
 };
