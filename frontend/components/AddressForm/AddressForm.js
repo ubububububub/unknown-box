@@ -3,13 +3,29 @@ import { qs } from "../../utils/index.js";
 
 class AddressForm extends Component {
   template() {
-    return `<input type="text" id="postcode" placeholder="우편번호">
+    const item = this.props;
+    return `<label for="postcode">우편번호</label>
+            <input type="text" id="postcode" ${
+              item.postcode ? `value="${item.postcode}"` : null
+            } disabled>
             <input type="button" class="address" value="우편번호 찾기"><br>
-            <input type="text" id="roadAddress" placeholder="도로명주소">
-            <input type="text" id="jibunAddress" placeholder="지번주소">
+            <label for="roadAddress">도로명주소</label>
+            <input type="text" id="roadAddress" ${
+              item.roadAddress ? `value="${item.roadAddress}"` : null
+            } disabled>
+            <label for="jibunAddress">지번주소</label>
+            <input type="text" id="jibunAddress" ${
+              item.jibunAddress ? `value="${item.jibunAddress}"` : null
+            } disabled>
             <span id="guide" style="color:#999;display:none"></span>
-            <input type="text" id="detailAddress" placeholder="상세주소">
-            <input type="text" id="extraAddress" placeholder="참고항목">
+            <label for="detailAddress">상세주소</label>
+            <input type="text" id="detailAddress" ${
+              item.detailAddress ? `value="${item.detailAddress}"` : null
+            } >
+            <label for="extraAddress">참고항목</label>
+            <input type="text" id="extraAddress" ${
+              item.extraAddress ? `value="${item.extraAddress}"` : null
+            } disabled>
     `;
   }
 
@@ -17,6 +33,13 @@ class AddressForm extends Component {
     function execDaumPostcode() {
       new daum.Postcode({
         oncomplete(data) {
+          qs("#postcode").value =
+            qs("#roadAddress").value =
+            qs("#jibunAddress").value =
+            qs("#detailAddress").value =
+            qs("#extraAddress").value =
+              "";
+
           const roadAddr = data.roadAddress;
           let extraRoadAddr = "";
 
