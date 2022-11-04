@@ -1,12 +1,16 @@
 import Component from "../../core/Component.js";
-import { Feature } from "./feature.js";
+import * as CART from "../../constants/cart.js";
 
 const DELIVERY_CHARGE = 3000;
 
-export class PaymentInfo extends Component {
+export default class PaymentInfo extends Component {
+  setup() {
+    this.state = this.props;
+  }
+
   template() {
-    const orderProducts = Feature.getOrderProductsText(this.props);
-    const productsTotalPrice = Feature.getProductsTotalPrice(this.props);
+    const orderProducts = this.getOrderProductsText(this.state.cartList);
+    const productsTotalPrice = this.getProductsTotalPrice(this.state.cartList);
     const orderTotalPrice = productsTotalPrice + DELIVERY_CHARGE;
 
     return `<div class="container">
@@ -29,7 +33,32 @@ export class PaymentInfo extends Component {
         <dt>총 결제금액</dt>
         <dd>${orderTotalPrice.toLocaleString()}원</dd>
       </dl>
-      <button type="button">결제하기</button>
+      <button type="button" class="payment-info__button">결제하기</button>
     </div>`;
+  }
+
+  render() {
+    this.target.insertAdjacentHTML("beforeend", this.template());
+  }
+
+  setEvent() {
+    this.target
+      .querySelector(".payment-info__button")
+      .addEventListener("click", this.state.buttonEvent);
+  }
+
+  getOrderProductsText(products) {
+    const [{ name }] = products;
+
+    return products.length === CART.INIT_QUANTITY
+      ? `<dd>${name} / 1개</dd>`
+      : `<dd>${name} 외 ${products.length - CART.EXCEPT_UNIT}개</dd>`;
+  }
+
+  getProductsTotalPrice(products) {
+    return products.reduce(
+      (prev, { price, quantity }) => prev + price * quantity,
+      0
+    );
   }
 }
