@@ -1,5 +1,6 @@
 import { userModel } from "../db/models";
 import { hashPassword } from "../utils/hash-password";
+import JWT from "../utils/token";
 
 class UserService {
   constructor(model) {
@@ -16,7 +17,7 @@ class UserService {
 
     const newUser = await this.model.create({
       ...userInfo,
-      password: hashPassword(password),
+      password: hashPassword(password)
     });
 
     return newUser;
@@ -25,6 +26,23 @@ class UserService {
   async getUsers() {
     const users = await this.model.getAll();
     return users;
+  }
+
+  async getThisUser({ accessToken }) {
+    const { email } = JWT.decodeToken(accessToken);
+    const user = await this.model.getByEmail(email);
+    return { email: user.email, role: user.role };
+  }
+  async changePassword({ accessToken }, { password, newPassword }) {
+    const { email } = JWT.decodeToken(accessToken);
+    const user = await this.model.getByEmail(email);
+    if (user.password !== hashPassword(password))
+      throw new Error("비밀번호가 틀립니다.");
+    const result = await this.model.changePassword(
+      user.email,
+      hashPassword(newPassword)
+    );
+    return result;
   }
 }
 

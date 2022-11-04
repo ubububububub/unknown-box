@@ -8,6 +8,7 @@ import { productController } from "./product";
 import { categoryController } from "./category";
 import { adminCheck } from "../middlewares/adminCheck";
 import { orderController } from "./order";
+import { userController } from "./user";
 
 const router = Router();
 
@@ -18,5 +19,6 @@ router.use("/product", productController);
 router.use("/admin", checkTokens, adminCheck, adminController);
 router.use("/category", categoryController);
 router.use("/order", checkTokens, orderController);
+router.use("/user", checkTokens, userController);
 
 export { router };

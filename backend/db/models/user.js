@@ -31,6 +31,15 @@ class UserModel {
     const user = await this.model.findOne({ email });
     return user;
   }
+
+  async getOne(email) {
+    const user = await this.model.find({ email });
+    return user;
+  }
+  async changePassword(email, password) {
+    const user = await this.model.updateOne({ email }, { password });
+    return user;
+  }
 }
 
 const userModel = new UserModel(model);

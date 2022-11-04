@@ -19,8 +19,6 @@ class OrderService {
     products.forEach(product => (product.count = Number(product.count)));
     for (let i = 0; i < products.length; i++) {
       const product = await productModel.getOne(products[i].product);
-      //   if (product.count < products[i].count)
-      //     throw new Error("재고가 부족합니다.");
       await productModel.modify(product._id, {
         count: product.count - products[i].count
       });
@@ -51,10 +49,7 @@ class OrderService {
   async getWholeOrder() {
     const orders = await this.orderModel.getAll();
     if (orders.length === 0) throw new Error("주문내역이 없습니다.");
-    for (let i = 0; i < orders.length; i++) {
-      await orders[i].populate("products.product");
-    }
-    return orders;
+    return orders.map(order => ({ id: order._id }));
   }
 }
 

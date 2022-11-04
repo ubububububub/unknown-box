@@ -73,7 +73,15 @@ adminController.put("/product/:id", async (req, res, next) => {
 adminController.get("/order", async (req, res, next) => {
   try {
     const orders = await orderService.getWholeOrder();
-    return orders;
+    res.json(orders);
+  } catch (err) {
+    next(err);
+  }
+});
+adminController.get("/order/:orderId", async (req, res, next) => {
+  try {
+    const order = await orderService.getOrder(req.params);
+    res.json(order);
   } catch (err) {
     next(err);
   }
