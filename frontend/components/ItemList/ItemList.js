@@ -19,7 +19,7 @@ export class ItemList extends Component {
     setEvent() {
         getList().then(result => {
             let randomArr = [];
-            
+
             if(!result) {
                 result 	= new Array();
                 for(let i = 1 ; i <= 20 ;i++){
@@ -32,25 +32,27 @@ export class ItemList extends Component {
                     result.push(JSON.parse(jsonObj));
                  }
             }
-            
-            while(result.length > 8){
-                let randomResult = result.splice(Math.floor(Math.random() * result.length),1)[0]
-                randomArr.push(randomResult)
+
+            if(result.length > 8){
+                while(result.length > 8){
+                    let randomResult = result.splice(Math.floor(Math.random() * result.length),1)[0]
+                    randomArr.push(randomResult)
+                }
             }
 
             for(let i  in result){
-                qs('#item-list').innerHTML +=
+                qs("#item-list").innerHTML +=
                     `
                     <article class="list-item">
-                       <a href="/detail/${randomArr[i].id}">
+                       <a href="/detail/${result[i].id}">
                           <div class="list-img">
-                            <img src="${randomArr[i].thumbnail}" alt="">
+                            <img src="${result[i].thumbnail}" alt="">
                           </div>
                           <div class="list-info">
-                            <h4>상품 이름 : ${randomArr[i].name}</h4>
+                            <h4>상품 이름 : ${result[i].name}</h4>
                             <p> </p>
                             <div class="list-pay">
-                              <h5> ${randomArr[i].price}</h5>
+                              <h5> ${result[i].price}</h5>
                             </div>
                           </div>
                         </a>
@@ -61,4 +63,3 @@ export class ItemList extends Component {
 }
 
 export default ItemList;
-
