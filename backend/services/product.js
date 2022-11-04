@@ -8,11 +8,11 @@ class ProductService {
   async getList() {
     const products = await this.productModel.getAll();
     if (products.length === 0) return { error: "등록된 상품이 없습니다." };
-    return products.map((product) => ({
+    return products.map(product => ({
       id: product._id,
       name: product.name,
       price: product.price,
-      thumbnail: product.thumbnail,
+      thumbnail: product.thumbnail
     }));
   }
   async regist({
@@ -22,14 +22,14 @@ class ProductService {
     description,
     imageUrl,
     thumbnail,
-    category,
+    category
   }) {
     const productInfo = {};
     if (name) productInfo.name = name;
     if (price) productInfo.price = Number(price);
     if (count) productInfo.count = Number(count);
     if (description) productInfo.description = description;
-    if (!imageUrl || imageUrl.length) productInfo.imageUrl = imageUrl;
+    if (imageUrl && imageUrl.length) productInfo.imageUrl = imageUrl;
     if (thumbnail) productInfo.thumbnail = thumbnail;
     const product = await this.productModel.regist(productInfo);
     await categoryModel.addProduct(category, product);
@@ -44,7 +44,7 @@ class ProductService {
     if (price) productInfo.price = Number(price);
     if (count) productInfo.count = Number(count);
     if (description) productInfo.description = description;
-    if (!imageUrl || imageUrl.length) productInfo.imageUrl = imageUrl;
+    if (imageUrl && imageUrl.length) productInfo.imageUrl = imageUrl;
     if (thumbnail) productInfo.thumbnail = thumbnail;
     const product = await this.productModel.modify(id, productInfo);
     return product;

@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { productService, categoryService } from "../services";
+import { productService, categoryService, orderService } from "../services";
 
 const adminController = Router();
 
@@ -66,6 +66,14 @@ adminController.put("/product/:id", async (req, res, next) => {
   try {
     const product = await productService.modify(req.params, req.body);
     res.json(product);
+  } catch (err) {
+    next(err);
+  }
+});
+adminController.get("/order", async (req, res, next) => {
+  try {
+    const orders = await orderService.getWholeOrder();
+    return orders;
   } catch (err) {
     next(err);
   }
