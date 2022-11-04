@@ -1,6 +1,6 @@
 export async function getList() {
         try {
-        const response = await fetch("http://localhost:5000/api/product", {
+        const response = await fetch("http://localhost:8080/api/product", {
             method: "GET",
             headers: {
                 "Content-Type": "application/json"
