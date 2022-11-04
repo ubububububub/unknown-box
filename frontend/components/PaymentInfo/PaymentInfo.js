@@ -3,7 +3,7 @@ import { Feature } from "./feature.js";
 
 const DELIVERY_CHARGE = 3000;
 
-export class PaymentInfo extends Component {
+export default class PaymentInfo extends Component {
   template() {
     const orderProducts = Feature.getOrderProductsText(this.props);
     const productsTotalPrice = Feature.getProductsTotalPrice(this.props);
