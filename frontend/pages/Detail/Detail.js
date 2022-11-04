@@ -9,7 +9,6 @@ export class Detail extends Component {
   }
 
   mounted() {
-    console.log(this.props);
     new DetailView(qs("#detail-container"), this.props);
   }
 }
