@@ -1,5 +1,5 @@
 import Component from "../../core/Component.js";
-import style from './layout.css' assert { type: 'css' };
+import style from "./layout.css" assert { type: "css" };
 import {qs} from "../../utils/index.js";
 document.adoptedStyleSheets.push(style);
 
@@ -9,22 +9,19 @@ export class Header extends Component {
             `<section class="header">
             <div class="header-fix">
               <div class="header-top">
-                <a href="#" class="header-logo">Shop logo</a>
+                <a href="/" class="header-logo">Shop logo</a>
                 <div class="header-top-box">
                   <ul class="header-toplist">
                     <li>
-                      <a href="#">로그인</a>
+                      <a href="/login">로그인</a>
                     </li>
                     <li>
-                      <a href="#">회원가입</a>
+                      <a href="/signin">회원가입</a>
                     </li>          
                   </ul>
                   <ul class="header-btlist">
-                    <li class="box-search">
-                      <a href="#">검색</a>
-                    </li>
                     <li class="box-basket">
-                        <a href="#" id="btn-cart" class="btn-cart">
+                        <a href="/cart" id="btn-cart" class="btn-cart">
                           <span class="s_cart_cnt">0</span>
                           장바구니
                         </a>
@@ -39,7 +36,7 @@ export class Header extends Component {
             <nav id="side-nav" class="side-nav">
               <div class="nav-inner">
                 <div class="nav-header">
-                  <a href="#" class="header-logo">Shop logo</a>
+                  <a href="/" class="header-logo">Shop logo</a>
                   <a href="javascript:void(0);" id="side-nav-close">메뉴닫기</a>
                 </div>
                 <ul class="">
@@ -47,22 +44,22 @@ export class Header extends Component {
                     <a href="#">SHOP</a>
                     <div class="depth2">
                       <ul>
-                        <li class=""><a href="#">HOT DEAL</a></li>
-                        <li><a href="#">OTHER</a></li>
-                        <li><a href="#">LOOK BOOK</a></li>
+                        <li class=""><a href="#">신상품</a></li>
+                        <li><a href="#">베스트</a></li>
+                        <li><a href="#">알뜰</a></li>
                       </ul>
                     </div>
                   </li>
                   <li class="menu">
-                    <a href="#">ARTIST SERVICE</a>
+                    <a href="#">CATEGORY</a>
                     <div class="depth2">
-                      <a href="#">ONLINE CONSULTING</a>
+                      <a href="#">가전</a>
                     </div>
                     <div class="depth2">
-                      <a href="#">OFFLINE CONSULTING</a>
+                      <a href="#">의류</a>
                       <ul class="depth3">
-                        <li><a href="#">- TOUCH UP</a></li>
-                        <li><a href="#">- EYEBROW BAR</a></li>
+                        <li><a href="#">- 상의</a></li>
+                        <li><a href="#">- 하의</a></li>
                       </ul>
                     </div>
                   </li>
@@ -73,12 +70,12 @@ export class Header extends Component {
         );
     }
     setEvent() {
-        qs('#btn-nav-open').addEventListener('click',() => {
-           qs('#side-nav').style.left = 0;
+        qs("#btn-nav-open").addEventListener("click",() => {
+           qs("#side-nav").style.left = 0;
         })
 
-        qs('#side-nav-close').addEventListener('click',() => {
-          qs('#side-nav').style.left = '-450px';
+        qs("#side-nav-close").addEventListener("click",() => {
+          qs("#side-nav").style.left = "-450px";
         })
     }
 

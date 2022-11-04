@@ -15,6 +15,7 @@ const App = async () => {
   const params = [];
   const pageMatches = routes.map(route => {
     const parsedPath = window.location.pathname.match(pathToRegex(route.path));
+    console.log(parsedPath)
     if (parsedPath) {
       params.push(parsedPath[1]);
     }
