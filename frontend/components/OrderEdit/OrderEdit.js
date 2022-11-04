@@ -6,6 +6,8 @@ import {
   phoneValidation,
   qs
 } from "../../utils/index.js";
+import Form from "../Form/Form.js";
+import { postOrderInfo } from "../../apis/index.js";
 
 class OrderEdit extends Component {
   template() {
@@ -37,11 +39,11 @@ class OrderEdit extends Component {
       },
       { type: "address" }
     ];
-    const FormProps = {
+    const formProps = {
       formChildren,
       orderAddress: this.state.orderAddress
     };
-    new Form(qs("#shipping-info-container"), FormProps);
+    new Form(qs("#shipping-info-container"), formProps);
   }
 
   async setup() {
@@ -76,7 +78,7 @@ class OrderEdit extends Component {
       phoneValidation(qs("#orderPhone").value) &&
       detailAddressValidation(qs("#detailAddress").value)
     ) {
-      postOrderInfo(Form.getFormData(), this.props.orderId);
+      postOrderInfo(Form.getFormData(), this.props);
     }
   }
 }

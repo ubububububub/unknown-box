@@ -66,10 +66,6 @@ export class Cart extends Component {
       return;
     }
 
-    if (window.location.pathname === "/cart" && this.state.cartList.length) {
-      return (window.location = "/order/payment");
-    }
-
-    return (window.location = "/order/recipt");
+    return (window.location = "/order/payment");
   }
 }

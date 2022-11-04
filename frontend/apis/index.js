@@ -14,13 +14,15 @@ export async function postSignIn(data) {
 
 export async function postLogin(data) {
   try {
-    await fetch("http://localhost:8080/api/login", {
+    const response = await fetch("http://localhost:8080/api/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
       body: JSON.stringify(data)
     });
+    const json = await response.json();
+    localStorage.setItem("role", json.role);
   } catch (err) {
     console.dir(err);
   }

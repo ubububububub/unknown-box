@@ -1,6 +1,5 @@
 @charset "utf-8";
 
-.detail-wrap { width:80%; margin: 0 auto; display: flex; justify-content: space-between; }
+.detail-wrap { width:100%; margin: 0 auto; display: flex; justify-content: space-between; }
 .detail-wrap div.detail-img { width: 70%; }
 .detail-wrap div.detail-info { width: 30%; }
-.detail-view { padding:100px 50px; text-align: center; }
