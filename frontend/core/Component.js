@@ -6,9 +6,13 @@ export default class Component {
     if (!target) throw new Error("no element");
     this.target = target;
     this.props = props;
-    this.setup();
-    this.render();
-    this.setEvent();
+    this.run();
+  }
+
+  async run() {
+    await this.setup();
+    await this.render();
+    await this.setEvent();
   }
 
   setup() {}
