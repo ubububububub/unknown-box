@@ -1,7 +1,7 @@
 import { getList } from "../../apis/main.js";
 import Component from "../../core/Component.js";
 import { qs } from "../../utils/index.js";
-import style from './ItemList.css' assert { type: 'css' };
+import style from "./ItemList.css" assert { type: "css" };
 document.adoptedStyleSheets.push(style);
 
 export class ItemList extends Component {
@@ -19,7 +19,7 @@ export class ItemList extends Component {
     setEvent() {
         getList().then(result => {
             let randomArr = [];
-            // 데이터가 없을경우 임시로 목록 데이터 생성
+            
             if(!result) {
                 result 	= new Array();
                 for(let i = 1 ; i <= 20 ;i++){
@@ -32,7 +32,7 @@ export class ItemList extends Component {
                     result.push(JSON.parse(jsonObj));
                  }
             }
-            // 받아온 데이터 20개중 랜덤한 8개의 상품 재정비
+            
             while(result.length > 8){
                 let randomResult = result.splice(Math.floor(Math.random() * result.length),1)[0]
                 randomArr.push(randomResult)
