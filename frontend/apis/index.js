@@ -83,3 +83,32 @@ export async function deleteOrderInfo(orderId) {
     console.dir(err);
   }
 }
+
+export async function getMyInfo() {
+  try {
+    const response = await fetch(`http://localhost:8080/api/user`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
+    return await response.json();
+  } catch (err) {
+    console.dir(err);
+  }
+}
+
+export async function postMyPassword(data) {
+  try {
+    const response = await fetch(`http://localhost:8080/api/user`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
+    });
+    return await response.json();
+  } catch (err) {
+    console.dir(err);
+  }
+}
