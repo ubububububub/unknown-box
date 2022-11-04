@@ -6,7 +6,9 @@ class Feature {
 
     return products.length === CART.INIT_QUANTITY
       ? `<dd>${firstProduct.name} / 1개</dd>`
-      : `<dd>${firstProduct.name} 외 ${products.length}개</dd>`;
+      : `<dd>${firstProduct.name} 외 ${
+          products.length - CART.EXCEPT_UNIT
+        }개</dd>`;
   }
 
   static getProductsTotalPrice(products) {
