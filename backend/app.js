@@ -8,6 +8,9 @@ import { router } from "./controllers";
 import { errorHandler } from "./middlewares";
 
 mongoose.connect(process.env.MONGODB_URL);
+mongoose.connection.on("connected", () =>
+  console.log("정상적으로 DB를 연결했습니다.")
+);
 
 const app = express();
 
