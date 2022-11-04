@@ -1,28 +1,37 @@
+import { getMyInfo } from "../../apis/index.js";
 import Component from "../../core/Component.js";
 import { qs } from "../../utils/index.js";
 
 class MyInfo extends Component {
   template() {
-    return `<div>
+    const { email, role } = this.state;
+    return `
               <div>
-                <span>이름</span>
-                <span>이상조</span>
+                <h2>환영합니다!</h2>
+                <span>어쩌구저쩌구~</span>
               </div>
+             ${
+               localStorage.getItem("role") === "admin"
+                 ? '<button id="admin-button">관리자 페이지</button>'
+                 : "<span>일반회원</span>"
+             }
               <div>
-                <span>주소</span>
-                <span>서울시 강남구</span>
+                <span>${email}</span>
               </div>
-              <div>
-                <span>이메일</span>
-                <span>cent7425@gmail.com</span>
-              </div>
-              <div>
-                <span>전화번호</span>
-                <span>010-7425-3535</span>
-              </div>
-            </div>
-            <button>수정하기</button>
+              <button>비밀번호수정하기</button>
     `;
+  }
+
+  async setup() {
+    this.state = await getMyInfo();
+  }
+
+  setEvent() {
+    if (qs("#admin-button")) {
+      qs("#admin-button").addEventListener("click", () => {
+        window.location = "/admin";
+      });
+    }
   }
 }
 
