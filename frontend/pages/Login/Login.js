@@ -6,6 +6,7 @@ export class Login extends Component {
   template() {
     return `<div id="contaniner"></div>`;
   }
+
   mounted() {
     new LoginForm(qs("#contaniner"));
   }
