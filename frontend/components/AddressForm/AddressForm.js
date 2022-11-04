@@ -5,27 +5,27 @@ class AddressForm extends Component {
   template() {
     const item = this.props;
     return `<label for="postcode">우편번호</label>
-            <input type="text" id="postcode" ${
+            <input type="text" id="postcode" name="postcode" ${
               item.postcode ? `value="${item.postcode}"` : null
-            } disabled>
+            } readonly>
             <input type="button" class="address" value="우편번호 찾기"><br>
             <label for="roadAddress">도로명주소</label>
-            <input type="text" id="roadAddress" ${
+            <input type="text" id="roadAddress" name="roadAddress" ${
               item.roadAddress ? `value="${item.roadAddress}"` : null
-            } disabled>
+            } readonly>
             <label for="jibunAddress">지번주소</label>
-            <input type="text" id="jibunAddress" ${
+            <input type="text" id="jibunAddress" name="jibunAddress" ${
               item.jibunAddress ? `value="${item.jibunAddress}"` : null
-            } disabled>
+            } readonly>
             <span id="guide" style="color:#999;display:none"></span>
             <label for="detailAddress">상세주소</label>
-            <input type="text" id="detailAddress" ${
+            <input type="text" id="detailAddress" name="detailAddress" ${
               item.detailAddress ? `value="${item.detailAddress}"` : null
             } >
             <label for="extraAddress">참고항목</label>
-            <input type="text" id="extraAddress" ${
+            <input type="text" id="extraAddress" name="extraAddress" ${
               item.extraAddress ? `value="${item.extraAddress}"` : null
-            } disabled>
+            } readonly>
     `;
   }
 
