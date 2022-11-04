@@ -2,7 +2,7 @@ import ItemList from "../../components/ItemList/ItemList.js";
 import Navbar from "../../components/Navbar/Navbar.js";
 import Component from "../../core/Component.js";
 import { qs } from "../../utils/index.js";
-import {MAIN_PAGE_NAV} from "../../const/index.js";
+// import {MAIN_PAGE_NAV} from "../../const/index.js";
 
 export class Main extends Component {
   template() {
