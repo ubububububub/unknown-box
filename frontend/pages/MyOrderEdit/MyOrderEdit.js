@@ -7,12 +7,11 @@ import { qs } from "../../utils/index.js";
 export class MyOrderEdit extends Component {
   template() {
     return `<ul id="mypage-nav"></ul>
-            <span>주문자 정보수정</span>
-            <div id="container"></div>`;
+            <div id="container"/>`;
   }
 
   mounted() {
     new Navbar(qs("#mypage-nav"), MY_PAGE_NAV);
-    new OrderEdit(qs("#container"), this.props);
+    new OrderEdit(qs("#container"));
   }
 }
