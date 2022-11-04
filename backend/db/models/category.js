@@ -3,7 +3,7 @@ import { categorySchema } from "../schemas";
 
 const Category = mongoose.model("categories", categorySchema);
 
-export class CategoryModel {
+class CategoryModel {
   async getAll() {
     const categories = await Category.find({});
     return categories;

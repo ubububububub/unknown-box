@@ -3,7 +3,7 @@ import { productSchema } from "../schemas";
 
 const Product = mongoose.model("products", productSchema);
 
-export class ProductModel {
+class ProductModel {
   async getAll() {
     const products = await Product.find({});
     return products;
