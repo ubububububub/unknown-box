@@ -5,7 +5,6 @@ import Toast from "../components/Toast/Toast.js";
 class Store {
   constructor() {
     this.store = localStorage;
-    this.store.setItem("cart", JSON.stringify([]));
   }
 
   getCartList() {
