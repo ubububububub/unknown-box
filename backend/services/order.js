@@ -49,10 +49,7 @@ class OrderService {
   async getWholeOrder() {
     const orders = await this.orderModel.getAll();
     if (orders.length === 0) throw new Error("주문내역이 없습니다.");
-    for (let i = 0; i < orders.length; i++) {
-      await orders[i].populate("products.product");
-    }
-    return orders;
+    return orders.map(order => ({ id: order._id }));
   }
 }
 
