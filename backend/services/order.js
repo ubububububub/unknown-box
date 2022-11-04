@@ -19,8 +19,6 @@ class OrderService {
     products.forEach(product => (product.count = Number(product.count)));
     for (let i = 0; i < products.length; i++) {
       const product = await productModel.getOne(products[i].product);
-      //   if (product.count < products[i].count)
-      //     throw new Error("재고가 부족합니다.");
       await productModel.modify(product._id, {
         count: product.count - products[i].count
       });
