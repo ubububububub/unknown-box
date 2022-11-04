@@ -11,7 +11,8 @@ class LoginForm extends Component {
               <input type="password" id="password" name="password"/>
               <input type="submit" id="loginBtn" value="로그인"/>
             </form>
-            <button id="signInBtn">회원가입하기</button>`;
+            <button id="signInBtn">회원가입하기</button>
+            <button id="logoutBtn">로그아웃하기</button>`;
   }
 
   setEvent() {
@@ -22,9 +23,23 @@ class LoginForm extends Component {
     qs("#loginForm").addEventListener("submit", e => {
       this.handleLogin(e);
     });
+
+    qs("#logoutBtn").addEventListener("click", e => {
+      this.handleLogout(e);
+    });
   }
 
-  handleLogin() {
+  handleLogout(e) {
+    e.preventDefault();
+
+    function deleteCookie(token) {
+      document.cookie = token + "=; expires=Thu, 01 Jan 1970 00:00:01 GMT;";
+    }
+    deleteCookie("accessToken");
+    deleteCookie("refreshToken");
+  }
+
+  handleLogin(e) {
     e.preventDefault();
     const [email, password] = Array.from(e.target).map(item => item.value);
 

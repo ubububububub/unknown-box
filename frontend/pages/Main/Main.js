@@ -1,7 +1,12 @@
+import ItemList from "../../components/ItemList/ItemList.js";
 import Component from "../../core/Component.js";
+import { qs } from "../../utils/index.js";
 
 export class Main extends Component {
   template() {
-    return `<div>메인 페이지입니다.</div>`;
+    return `<main id="main-container"></main>`;
+  }
+  mounted() {
+    new ItemList(qs("#main-container"));
   }
 }
