@@ -2,7 +2,7 @@ import Component from "../../core/Component.js";
 import { qs } from "../../utils/index.js";
 import AddressForm from "../AddressForm/AddressForm.js";
 
-class InfoEditForm extends Component {
+class Form extends Component {
   template() {
     return `<form id="container-form">
             </form>
@@ -36,6 +36,14 @@ class InfoEditForm extends Component {
       }
     });
   }
+
+  static getFormData() {
+    const formData = new FormData(qs("#container-form"));
+    for (var pair of formData.entries()) {
+      console.log(pair[0] + ", " + pair[1]);
+    }
+    return formData;
+  }
 }
 
-export default InfoEditForm;
+export default Form;
