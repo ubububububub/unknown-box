@@ -1,4 +1,4 @@
-import InfoEditForm from "../InfoEditForm/InfoEditForm.js";
+import Form from "../Form/Form.js";
 import Component from "../../core/Component.js";
 import {
   detailAddressValidation,
@@ -37,11 +37,11 @@ class OrderEdit extends Component {
       },
       { type: "address" }
     ];
-    const InfoEditFormProps = {
+    const FormProps = {
       formChildren,
       orderAddress: this.state.orderAddress
     };
-    new InfoEditForm(qs("#shipping-info-container"), InfoEditFormProps);
+    new Form(qs("#shipping-info-container"), FormProps);
   }
 
   async setup() {
@@ -76,8 +76,7 @@ class OrderEdit extends Component {
       phoneValidation(qs("#orderPhone").value) &&
       detailAddressValidation(qs("#detailAddress").value)
     ) {
-      const formData = new FormData(qs("#container-form"));
-      postOrderInfo(formData, this.props.orderId);
+      postOrderInfo(Form.getFormData(), this.props.orderId);
     }
   }
 }
