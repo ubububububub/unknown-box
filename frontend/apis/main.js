@@ -7,7 +7,6 @@ export async function getList() {
             }
         })
         return await response.json();
-        }
     } catch (err) {
         console.dir(err);
     }
