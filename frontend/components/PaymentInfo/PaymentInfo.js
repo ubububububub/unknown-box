@@ -1,12 +1,11 @@
 import Component from "../../core/Component.js";
-import { Feature } from "./feature.js";
 
 const DELIVERY_CHARGE = 3000;
 
 export default class PaymentInfo extends Component {
   template() {
-    const orderProducts = Feature.getOrderProductsText(this.props);
-    const productsTotalPrice = Feature.getProductsTotalPrice(this.props);
+    const orderProducts = this.getOrderProductsText(this.props);
+    const productsTotalPrice = this.getProductsTotalPrice(this.props);
     const orderTotalPrice = productsTotalPrice + DELIVERY_CHARGE;
 
     return `<div class="container">
@@ -31,5 +30,26 @@ export default class PaymentInfo extends Component {
       </dl>
       <button type="button">결제하기</button>
     </div>`;
+  }
+
+  render() {
+    this.target.insertAdjacentHTML("beforeend", this.template());
+  }
+
+  getOrderProductsText(products) {
+    const [firstProduct] = products;
+
+    return products.length === CART.INIT_QUANTITY
+      ? `<dd>${firstProduct.name} / 1개</dd>`
+      : `<dd>${firstProduct.name} 외 ${
+          products.length - CART.EXCEPT_UNIT
+        }개</dd>`;
+  }
+
+  getProductsTotalPrice(products) {
+    return products.reduce(
+      (prev, { price, quantity }) => prev + price * quantity,
+      0
+    );
   }
 }
