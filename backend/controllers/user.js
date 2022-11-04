@@ -6,7 +6,7 @@ const userController = Router();
 userController.get("/", async (req, res, next) => {
   try {
     const user = await userService.getThisUser(req.cookies);
-    return user;
+    res.status(200).json(user);
   } catch (err) {
     next(err);
   }
@@ -14,7 +14,7 @@ userController.get("/", async (req, res, next) => {
 userController.put("/", async (req, res, next) => {
   try {
     const user = await userService.changePassword(req.cookies, req.body);
-    return user;
+    res.status(200).json(user);
   } catch (err) {
     next(err);
   }
