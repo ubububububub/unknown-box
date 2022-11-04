@@ -1,5 +1,6 @@
 import { v4 as uuidv4 } from "https://jspm.dev/uuid";
 import * as CART from "../constants/cart.js";
+import Toast from "../components/Toast/Toast.js";
 
 class Store {
   constructor() {
@@ -18,6 +19,7 @@ class Store {
 
   setCartItem(product) {
     if (this.checkDuplication(product)) {
+      new Toast("이미 장바구니에 있는 상품입니다.");
       return false;
     }
 
