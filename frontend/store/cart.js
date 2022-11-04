@@ -19,6 +19,10 @@ class Store {
     this.store.setItem("cart", JSON.stringify(cartList));
   }
 
+  deleteAllCartItem() {
+    this.store.setItem("cart", JSON.stringify([]));
+  }
+
   deleteCartItem({ name }) {
     const index = this.getCartItemIndex(name);
     const cartList = this.getCartList();
@@ -59,8 +63,16 @@ class Store {
   getCartListLength() {
     return JSON.parse(this.store.getItem("cart")).length;
   }
+
+  isEmpty() {
+    if (this.getCartListLength()) {
+      return false;
+    }
+
+    return true;
+  }
 }
 
-const store = new Store();
+const cart = new Store();
 
-export { store };
+export { cart };
