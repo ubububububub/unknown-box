@@ -37,6 +37,7 @@ class LoginForm extends Component {
     }
     deleteCookie("accessToken");
     deleteCookie("refreshToken");
+    localStorage.removeItem("role");
   }
 
   handleLogin(e) {
