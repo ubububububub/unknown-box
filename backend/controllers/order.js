@@ -6,7 +6,7 @@ const orderController = Router();
 orderController.get("/", async (req, res, next) => {
   try {
     const orders = await orderService.getList(req.cookies);
-    res.json(orders);
+    res.status(200).json(orders);
   } catch (err) {
     next(err);
   }
@@ -14,7 +14,7 @@ orderController.get("/", async (req, res, next) => {
 orderController.post("/", async (req, res, next) => {
   try {
     const order = await orderService.postOrder(req.body, req.cookies);
-    res.json(order);
+    res.status(201).json(order);
   } catch (err) {
     next(err);
   }
@@ -22,7 +22,7 @@ orderController.post("/", async (req, res, next) => {
 orderController.get("/:orderId", async (req, res, next) => {
   try {
     const order = await orderService.getOrder(req.params);
-    res.json(order);
+    res.status(200).json(order);
   } catch (err) {
     next(err);
   }
@@ -30,7 +30,7 @@ orderController.get("/:orderId", async (req, res, next) => {
 orderController.put("/:orderId", async (req, res, next) => {
   try {
     const order = await orderService.putOrder(req.params, req.body);
-    res.json(order);
+    res.status(200).json(order);
   } catch (err) {
     next(err);
   }
