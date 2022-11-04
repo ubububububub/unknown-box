@@ -42,6 +42,9 @@ module.exports = {
     "consistent-return": "off",
     camelcase: "off",
     "import/extensions": "off",
-    "no-new": "off"
+    "no-new": "off",
+    "import/no-unresolved": "off",
+    "no-return-assign": "off",
+    "array-callback-return": "off"
   }
 };

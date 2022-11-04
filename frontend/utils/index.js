@@ -64,3 +64,27 @@ export function nameValidation(name) {
 
   return true;
 }
+
+export function phoneValidation(phone) {
+  const RegExp = /^010[1-9][0-9]{3}[0-9]{4}$/;
+
+  if (!phone) {
+    alert("휴대전화 번호를 입력해주세요.");
+    return false;
+  }
+  if (!RegExp.test(phone)) {
+    alert("올바른 휴대전화 번호를 입력해주세요.");
+    return false;
+  }
+
+  return true;
+}
+
+export function detailAddressValidation(detailAddress) {
+  if (!detailAddress) {
+    alert("상세주소를 입력해주세요.");
+    return false;
+  }
+
+  return true;
+}

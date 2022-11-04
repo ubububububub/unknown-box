@@ -1,11 +1,10 @@
 import Component from "../../core/Component.js";
 import { qs } from "../../utils/index.js";
-import OrderItem from "../OrderItem/orderItem.js";
+import OrderItem from "../OrderItem/OrderItem.js";
 
 export default class OrderList extends Component {
-    
-    template () {
-        return `
+  template() {
+    return `
             <thead>
                 <tr>
                     <th>주문번호</th>
@@ -17,12 +16,10 @@ export default class OrderList extends Component {
             </thead>
             <tbody id="order-list-body"></tbody>
         </table>
-        `
-    }
+        `;
+  }
 
-    mounted () {
-        this.props.forEach(order =>
-            new OrderItem(qs('#order-list-body'), order)
-        )
-    }  
+  mounted() {
+    this.props.forEach(order => new OrderItem(qs("#order-list-body"), order));
+  }
 }

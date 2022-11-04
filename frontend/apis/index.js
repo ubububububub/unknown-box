@@ -25,3 +25,59 @@ export async function postLogin(data) {
     console.dir(err);
   }
 }
+
+export async function getMyOrder() {
+  try {
+    const response = await fetch(`http://localhost:8080/api/order`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
+    return await response.json();
+  } catch (err) {
+    console.dir(err);
+  }
+}
+
+export async function getOrderInfo(orderId) {
+  try {
+    const response = await fetch(`http://localhost:8080/api/order/${orderId}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
+    return await response.json();
+  } catch (err) {
+    console.dir(err);
+  }
+}
+
+export async function postOrderInfo(data, orderId) {
+  try {
+    await fetch(`http://localhost:8080/api/order/${orderId}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
+    });
+  } catch (err) {
+    console.dir(err);
+  }
+}
+
+export async function deleteOrderInfo(orderId) {
+  try {
+    await fetch(`http://localhost:8080/api/order/${orderId}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
+    });
+  } catch (err) {
+    console.dir(err);
+  }
+}
