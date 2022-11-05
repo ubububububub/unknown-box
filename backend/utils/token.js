@@ -36,7 +36,7 @@ class JWT {
     return JWT.createToken(
       { email },
       {
-        expiresIn: 1,
+        expiresIn: "1h",
         issuer: "projectName"
       }
     );
