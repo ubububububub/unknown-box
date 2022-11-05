@@ -6,7 +6,6 @@ import {
   phoneValidation,
   qs
 } from "../../utils/index.js";
-import Form from "../Form/Form.js";
 import { postOrderInfo } from "../../apis/index.js";
 
 class OrderEdit extends Component {
