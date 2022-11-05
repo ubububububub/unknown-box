@@ -1,6 +1,6 @@
 import "dotenv/config";
 import jwt from "jsonwebtoken";
-import jwt_decode from "jwt-decode";
+import { userModel } from "../db/models";
 
 class JWT {
   static createToken(data, option) {
@@ -15,12 +15,45 @@ class JWT {
     try {
       return jwt.verify(token, process.env.JWT_SECRET);
     } catch (error) {
-      return null;
+      if (error instanceof jwt.TokenExpiredError) {
+        return "TokenExpiredError";
+      }
     }
   }
 
   static decodeToken(token) {
-    return jwt_decode(token);
+    return jwt.decode(token);
+  }
+
+  static async createTokens(email) {
+    const newAccessToken = this.createAccessToken(email);
+    const newRefreshToken = await this.createRefreshToken(email);
+
+    return { newAccessToken, newRefreshToken };
+  }
+
+  static createAccessToken(email) {
+    return JWT.createToken(
+      { email },
+      {
+        expiresIn: 1,
+        issuer: "projectName"
+      }
+    );
+  }
+
+  static async createRefreshToken(email) {
+    const refreshToken = JWT.createToken(
+      { email },
+      {
+        expiresIn: "7d",
+        issuer: "projectName"
+      }
+    );
+
+    await userModel.setRefreshToken(email, refreshToken);
+
+    return refreshToken;
   }
 }
 

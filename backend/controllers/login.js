@@ -9,7 +9,7 @@ loginRouter.post("/", async (req, res, next) => {
     const { newAccessToken, newRefreshToken, role } = await loginService.login(
       loginInfo
     );
-    console.log(newAccessToken, newRefreshToken);
+
     res.status(200).json({
       accessToken: newAccessToken,
       refreshToken: newRefreshToken,
