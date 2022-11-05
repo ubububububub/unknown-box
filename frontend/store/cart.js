@@ -37,20 +37,25 @@ class Store {
   checkDuplication(product) {
     const cartList = this.getCartList();
 
-    const checkedNameCartList = cartList.filter(
+    const isDuplication = cartList.some(
       cartItem => cartItem.name === product.name
     );
 
-    const isDuplication = checkedNameCartList.some(cartItem => {
-      const productOptions = Object.values(product.options);
-      const cartItemOptions = Object.values(cartItem.options);
+    // 옵션 중복 체크 로직
+    // const checkedNameCartList = cartList.filter(
+    //   cartItem => cartItem.name === product.name
+    // );
 
-      for (let i = 0; i < productOptions.length; i += 1) {
-        if (productOptions[i] === cartItemOptions[i]) {
-          return true;
-        }
-      }
-    });
+    // const isDuplication = checkedNameCartList.some(cartItem => {
+    //   const productOptions = Object.values(product.options);
+    //   const cartItemOptions = Object.values(cartItem.options);
+
+    //   for (let i = 0; i < productOptions.length; i += 1) {
+    //     if (productOptions[i] === cartItemOptions[i]) {
+    //       return true;
+    //     }
+    //   }
+    // });
 
     if (isDuplication) {
       return true;
