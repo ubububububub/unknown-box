@@ -12,6 +12,7 @@ import { NotFound } from "../pages/NotFound/NotFound.js";
 import { Payment } from "../pages/Payment/Payment.js";
 import { Recipt } from "../pages/Recipt/Recipt.js";
 import { SignIn } from "../pages/SignIn/SignIn.js";
+import { RandomBox } from "../pages/RandomBox/RandomBox.js";
 
 const routes = [
   { path: "/", view: Main },
@@ -27,7 +28,8 @@ const routes = [
   { path: "/admin", view: Admin },
   { path: "/admin/products", view: AdminProduct },
   { path: "/admin/order", view: AdminOrder },
-  { path: "/404", view: NotFound }
+  { path: "/404", view: NotFound },
+  { path: "/randombox", view: RandomBox }
 ];
 
 export default routes;
