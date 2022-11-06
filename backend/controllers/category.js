@@ -11,7 +11,7 @@ categoryController.get("/", async (req, res, next) => {
     next(err);
   }
 });
-categoryController.get("/:name", async (req, res, next) => {
+categoryController.get("/:categoryId", async (req, res, next) => {
   try {
     const products = await categoryService.getProductsByCategory(req.params);
     res.status(200).json(products);
