@@ -8,6 +8,7 @@ class CategoryService {
     const categories = await this.categoryModel.getAll();
     if (categories.length === 0) return { error: "카테고리가 없습니다." };
     return categories.map(category => ({
+      id: category._id,
       name: category.name
     }));
   }
