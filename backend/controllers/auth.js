@@ -22,4 +22,21 @@ authRouter.post("/", async (req, res, next) => {
   }
 });
 
+authRouter.get("/kakao/callback", async (req, res, next) => {
+  const { code } = req.query;
+
+  try {
+    const query = await authService.authKakao(code);
+    res.redirect("/?access_token=" + query);
+  } catch (error) {
+    next(error);
+  }
+});
+
+authRouter.get("/kakao/join/callback", async (req, res, next) => {
+  const { code } = req.query;
+
+  await authService.authKakaoJoin(code);
+});
+
 export { authRouter };
