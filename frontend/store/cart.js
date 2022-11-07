@@ -37,7 +37,7 @@ class Store {
   checkDuplication(product) {
     const cartList = this.getCartList();
 
-    const isDuplication = cartList.some(
+    const isDuplicationExist = cartList.some(
       cartItem => cartItem.name === product.name
     );
 
@@ -57,11 +57,7 @@ class Store {
     //   }
     // });
 
-    if (isDuplication) {
-      return true;
-    }
-
-    return false;
+    return isDuplicationExist;
   }
 }
 
