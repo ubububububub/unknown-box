@@ -3,7 +3,7 @@ import { productService, categoryService, orderService } from "../services";
 
 const adminController = Router();
 
-adminController.get("/", async (req, res, next) => {
+adminController.get("/category", async (req, res, next) => {
   try {
     const categories = await categoryService.getList();
     res.status(200).json(categories);
@@ -11,7 +11,7 @@ adminController.get("/", async (req, res, next) => {
     next(err);
   }
 });
-adminController.post("/", async (req, res, next) => {
+adminController.post("/category", async (req, res, next) => {
   try {
     const categoryName = await categoryService.regist(req.body);
     res.status(201).json({ name: categoryName });
@@ -19,18 +19,15 @@ adminController.post("/", async (req, res, next) => {
     next(err);
   }
 });
-adminController.put("/:name", async (req, res, next) => {
+adminController.put("/:categoryId", async (req, res, next) => {
   try {
-    const category = await categoryService.modify(
-      req.params.name,
-      req.body.name
-    );
+    const category = await categoryService.modify(req.params, req.body);
     res.status(200).json(category);
   } catch (err) {
     next(err);
   }
 });
-adminController.delete("/:name", async (req, res, next) => {
+adminController.delete("/:categoryId", async (req, res, next) => {
   try {
     const result = await categoryService.remove(req.params);
     res.status(200).json(result);
@@ -54,7 +51,7 @@ adminController.post("/product", async (req, res, next) => {
     next(err);
   }
 });
-adminController.delete("/product/:id", async (req, res, next) => {
+adminController.delete("/product/:productId", async (req, res, next) => {
   try {
     const result = await productService.remove(req.params);
     res.status(200).json(result);
@@ -62,7 +59,7 @@ adminController.delete("/product/:id", async (req, res, next) => {
     next(err);
   }
 });
-adminController.put("/product/:id", async (req, res, next) => {
+adminController.put("/product/:productId", async (req, res, next) => {
   try {
     const product = await productService.modify(req.params, req.body);
     res.status(200).json(product);
