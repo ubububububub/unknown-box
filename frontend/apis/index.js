@@ -1,27 +1,23 @@
-export async function postSignIn(data) {
+export async function postSignIn(formData) {
   try {
     await fetch("http://localhost:8080/api/join", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(data)
+      body: formData
     });
   } catch (err) {
     console.dir(err);
   }
 }
 
-export async function postLogin(data) {
+export async function postLogin(formData) {
   try {
     const response = await fetch("http://localhost:8080/api/login", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(data)
+      body: formData
     });
     const json = await response.json();
+    localStorage.setItem("accessToken", json.accessToken);
+    localStorage.setItem("refreshToken", json.refreshToken);
     localStorage.setItem("role", json.role);
   } catch (err) {
     console.dir(err);
@@ -33,11 +29,16 @@ export async function getMyOrder() {
     const response = await fetch(`http://localhost:8080/api/order`, {
       method: "GET",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "X-Access-Token": localStorage.getItem("accessToken")
       }
     });
     return await response.json();
   } catch (err) {
+    if (err.response.status === 403) {
+      await postRefreshToken();
+      await getMyOrder();
+    }
     console.dir(err);
   }
 }
@@ -47,25 +48,32 @@ export async function getOrderInfo(orderId) {
     const response = await fetch(`http://localhost:8080/api/order/${orderId}`, {
       method: "GET",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "X-Access-Token": localStorage.getItem("accessToken")
       }
     });
     return await response.json();
   } catch (err) {
+    if (err.response.status === 403) {
+      await postRefreshToken();
+      await getOrderInfo(orderId);
+    }
     console.dir(err);
   }
 }
 
-export async function postOrderInfo(data, orderId) {
+export async function postOrderInfo(formData, orderId) {
   try {
     await fetch(`http://localhost:8080/api/order/${orderId}`, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(data)
+      "X-Access-Token": localStorage.getItem("accessToken"),
+      body: formData
     });
   } catch (err) {
+    if (err.response.status === 403) {
+      await postRefreshToken();
+      await postOrderInfo(formData, orderId);
+    }
     console.dir(err);
   }
 }
@@ -75,11 +83,16 @@ export async function deleteOrderInfo(orderId) {
     await fetch(`http://localhost:8080/api/order/${orderId}`, {
       method: "DELETE",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "X-Access-Token": localStorage.getItem("accessToken")
       },
       body: JSON.stringify(data)
     });
   } catch (err) {
+    if (err.response.status === 403) {
+      await postRefreshToken();
+      await deleteOrderInfo(orderId);
+    }
     console.dir(err);
   }
 }
@@ -89,10 +102,67 @@ export async function postOrder(data) {
     await fetch("http://localhost:8080/api/order", {
       method: "POST",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "X-Access-Token": localStorage.getItem("accessToken")
       },
       body: JSON.stringify(data)
     });
+  } catch (err) {
+    if (err.response.status === 403) {
+      await postRefreshToken();
+      await postOrder(data);
+    }
+    console.dir(err);
+  }
+}
+
+export async function getMyInfo() {
+  try {
+    const response = await fetch(`http://localhost:8080/api/user`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "X-Access-Token": localStorage.getItem("accessToken")
+      }
+    });
+    return await response.json();
+  } catch (err) {
+    if (response.status === 403) {
+      await postRefreshToken();
+      await getMyInfo();
+    }
+    console.dir(err);
+  }
+}
+
+export async function postMyPassword(formData) {
+  try {
+    await fetch(`http://localhost:8080/api/user`, {
+      method: "POST",
+      body: formData,
+      "X-Access-Token": localStorage.getItem("accessToken")
+    });
+  } catch (err) {
+    if (response.status === 403) {
+      await postRefreshToken();
+      await postMyPassword(formData);
+    }
+    console.dir(err);
+  }
+}
+
+export async function postRefreshToken() {
+  try {
+    const response = await fetch("http://localhost:8080/api/auth", {
+      method: "POST",
+      headers: {
+        "X-Access-Token": localStorage.getItem("accessToken"),
+        "X-Refresh-Token": localStorage.getItem("refreshToken")
+      }
+    });
+    const json = await response.json();
+    localStorage.setItem("accessToken", json.accessToken);
+    localStorage.setItem("refreshToken", json.refreshToken);
   } catch (err) {
     console.dir(err);
   }
