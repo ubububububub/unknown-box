@@ -1,14 +1,80 @@
 @charset "utf-8";
 
-.carousel {
-  width: 400px;
-  height: 400px;
+#randombox_container {
+  padding: 32px;
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  background-color: #97dcdf;
+}
+
+.randombox_title {
+  font-size: 40px;
+  margin: 32px 0;
+  color: #fce374;
+}
+
+.randombox_desc {
+  padding: 16px 0;
+  border-top: 2px solid #fce374;
+  border-bottom: 2px solid #fce374;
+  margin-bottom: 32px;
+  font-size: 32px;
+  color: #fce374;
+}
+
+.randombox_carousel-container {
+  position: relative;
+}
+
+.randombox_carousel {
+  margin-bottom: 32px;
+  display: none;
+  width: 600px;
+  height: 600px;
   overflow: hidden;
   position: relative;
 }
 
-.carousel .carousel-list {
+.randombox_carousel-list {
   display: flex;
   position: absolute;
-  transition: all 1s;
+  left: 0;
+  transition: left 8s cubic-bezier(0.25, 0, 0.01, 1);
+}
+
+.randombox_carousel-item-desc {
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #fce374;
+}
+
+.randombox_carousel-item-name {
+  margin: 0;
+  font-size: 24px;
+}
+
+.randombox_carousel-item-price {
+  font-size: 16px;
+}
+
+.randombox_button {
+  padding: 12px 20px;
+  border: none;
+  background: transparent;
+  background-color: #fce374;
+  border-radius: 4px;
+  color: #fff;
+  position: absolute;
+  bottom: -8px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  display: none;
 }
