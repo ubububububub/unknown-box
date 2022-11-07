@@ -1,3 +1,4 @@
+import Form from "../Form/Form.js";
 import Component from "../../core/Component.js";
 import {
   detailAddressValidation,
@@ -5,7 +6,6 @@ import {
   phoneValidation,
   qs
 } from "../../utils/index.js";
-import Form from "../Form/Form.js";
 import { postOrderInfo } from "../../apis/index.js";
 
 class OrderEdit extends Component {
@@ -77,7 +77,7 @@ class OrderEdit extends Component {
       phoneValidation(qs("#orderPhone").value) &&
       detailAddressValidation(qs("#detailAddress").value)
     ) {
-      postOrderInfo(Form.getFormData(), this.state.orderId);
+      postOrderInfo(Form.getFormData(), this.props);
     }
   }
 }

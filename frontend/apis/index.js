@@ -83,3 +83,17 @@ export async function deleteOrderInfo(orderId) {
     console.dir(err);
   }
 }
+
+export async function postOrder(data) {
+  try {
+    await fetch("http://localhost:8080/api/order", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
+    });
+  } catch (err) {
+    console.dir(err);
+  }
+}
