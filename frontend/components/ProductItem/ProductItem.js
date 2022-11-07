@@ -2,6 +2,7 @@
 import Component from "../../core/Component.js";
 import { qs } from "../../utils/index.js";
 import Modal from "../Modal/Modal.js";
+import { isClassContained } from "../../utils/index.js";
 
 export default class ProductItem extends Component {
   template() {
@@ -64,7 +65,7 @@ export default class ProductItem extends Component {
     productLi.addEventListener("click", e => {
       const target = e.target.closest("li").querySelector("span");
 
-      if (this.isContained(e.target, "product-editBtn")) {
+      if (isContained(e.target, "product-editBtn")) {
         this.editHandler(target);
       }
 
@@ -72,10 +73,6 @@ export default class ProductItem extends Component {
         this.deleteHandler();
       }
     });
-  }
-
-  isContained(dom, selector) {
-    return dom.classList.contains(selector);
   }
 
   editHandler() {

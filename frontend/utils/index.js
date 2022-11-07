@@ -6,6 +6,10 @@ export function qsAll(selector) {
   return Array.from(document.querySelectorAll(selector));
 }
 
+export function isClassContained(dom, selector) {
+  return dom.classList.contains(selector);
+}
+
 export function emailValidation(email) {
   const RegExp =
     /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
