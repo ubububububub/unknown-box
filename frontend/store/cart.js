@@ -16,6 +16,10 @@ class Store {
     return true;
   }
 
+  initCartItem() {
+    this.store.setItem("cart", JSON.stringify([]));
+  }
+
   setCartItem(product) {
     if (this.checkDuplication(product)) {
       new Toast("이미 장바구니에 있는 상품입니다.");
@@ -36,6 +40,10 @@ class Store {
 
   checkDuplication(product) {
     const cartList = this.getCartList();
+
+    if (this.isEmpty()) {
+      return;
+    }
 
     const isDuplicationExist = cartList.some(
       cartItem => cartItem.name === product.name
@@ -58,6 +66,16 @@ class Store {
     // });
 
     return isDuplicationExist;
+  }
+
+  isEmpty() {
+    const cartList = this.getCartList();
+
+    if (cartList.length === 0) {
+      return true;
+    }
+
+    return false;
   }
 }
 
