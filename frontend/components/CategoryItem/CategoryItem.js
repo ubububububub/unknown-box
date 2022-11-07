@@ -1,17 +1,57 @@
+//import { editCategory, deleteCategory } from "../../apis/index.js";
 import Component from "../../core/Component.js";
+import { qs } from "../../utils/index.js";
+import Modal from "../Modal/Modal.js";
 
 export default class CategoryItem extends Component {
   template() {
     return `
-            <div id="category-item">
-                <div class="category-item-name">${this.props.title}</div>
-                <button type="button">수정하기</button>
-                <button type="button">삭제하기</button>
-            </div>
+            <li class="category-item-${this.props.id}">
+                <span>${this.props.name}</span>
+                <button type="button" class="btn category-editBtn">수정하기</button>
+                <button type="button" class="btn category-delBtn">삭제하기</button>
+            </li>
         `;
   }
 
   render() {
     this.target.insertAdjacentHTML("beforeend", this.template());
+  }
+
+  setEvent() {
+    const categoryLi = qs(`.category-item-${this.props.id}`);
+
+    categoryLi.addEventListener("click", e => {
+      const target = e.target.closest("li").querySelector("span");
+
+      if (this.isContained(e.target, "category-editBtn")) {
+        this.editHandler(target);
+        return;
+      }
+
+      if (this.isContained(e.target, "category-delBtn")) {
+        this.deleteHandler();
+        return;
+      }
+    });
+  }
+
+  isContained(dom, selector) {
+    return dom.classList.contains(selector);
+  }
+
+  editHandler() {
+    new Modal(qs("#app"), {
+      id: this.props.id,
+      headerText: "카테고리 수정",
+      type: "EDIT",
+      contents: `<form><input name="name" value="${this.props.name}"/></form>`,
+      submit: this.props.editCategory.bind(this, this.props.id),
+      path: "/admin"
+    });
+  }
+
+  deleteHandler() {
+    this.props.deleteCategory(this.props.id);
   }
 }
