@@ -75,6 +75,20 @@ export async function deleteOrderInfo(orderId) {
   }
 }
 
+export async function postOrder(data) {
+  try {
+    await fetch("http://localhost:8080/api/order", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
+    });
+  } catch (err) {
+    console.dir(err);
+  }
+}
+
 export async function getMyInfo() {
   try {
     const response = await fetch(`http://localhost:8080/api/user`, {
