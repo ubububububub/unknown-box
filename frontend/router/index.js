@@ -28,8 +28,8 @@ const routes = [
   { path: "/admin", view: Admin },
   { path: "/admin/products", view: AdminProduct },
   { path: "/admin/order", view: AdminOrder },
-  { path: "/404", view: NotFound },
-  { path: "/randombox", view: RandomBox }
+  { path: "/randombox", view: RandomBox },
+  { path: "/404", view: NotFound }
 ];
 
 export default routes;
