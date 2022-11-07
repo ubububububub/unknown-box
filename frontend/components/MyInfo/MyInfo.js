@@ -18,7 +18,7 @@ class MyInfo extends Component {
               <div>
                 <span>${email}</span>
               </div>
-              <button>비밀번호수정하기</button>
+              <button class="mypage_myinfo_modal_btn">비밀번호수정하기</button>
     `;
   }
 
@@ -32,6 +32,7 @@ class MyInfo extends Component {
         window.location = "/admin";
       });
     }
+    qs(".mypage_myinfo_modal_btn").addEventListener("click", () => {});
   }
 }
 
