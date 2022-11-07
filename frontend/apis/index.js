@@ -1,25 +1,19 @@
-export async function postSignIn(data) {
+export async function postSignIn(formData) {
   try {
     await fetch("http://localhost:8080/api/join", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(data)
+      body: formData
     });
   } catch (err) {
     console.dir(err);
   }
 }
 
-export async function postLogin(data) {
+export async function postLogin(formData) {
   try {
     const response = await fetch("http://localhost:8080/api/login", {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(data)
+      body: formData
     });
     const json = await response.json();
     localStorage.setItem("role", json.role);
@@ -56,14 +50,11 @@ export async function getOrderInfo(orderId) {
   }
 }
 
-export async function postOrderInfo(data, orderId) {
+export async function postOrderInfo(formData, orderId) {
   try {
     await fetch(`http://localhost:8080/api/order/${orderId}`, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(data)
+      body: formData
     });
   } catch (err) {
     console.dir(err);
@@ -98,16 +89,12 @@ export async function getMyInfo() {
   }
 }
 
-export async function postMyPassword(data) {
+export async function postMyPassword(formData) {
   try {
-    const response = await fetch(`http://localhost:8080/api/user`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(data)
+    await fetch(`http://localhost:8080/api/user`, {
+      method: "POST",
+      body: formData
     });
-    return await response.json();
   } catch (err) {
     console.dir(err);
   }
