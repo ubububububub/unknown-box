@@ -1,15 +1,15 @@
 import Component from "../../core/Component.js";
 import CategoryItem from "../CategoryItem/CategoryItem.js";
-import { qs } from "../../utils/index.js";
+import { MODAL, qs } from "../../utils/index.js";
 //import { getCategoryList, addCategory, deleteCategory } from "../../apis/index.js";
 import Modal from "../Modal/Modal.js";
 
 export default class CategoryList extends Component {
   setup() {
     const mockData = [
-      { id: 1, name: "의류 랜덤박스" },
-      { id: 2, name: "전자제품 랜덤박스" },
-      { id: 3, name: "랜덤박스" }
+      { id: 1, Name: "의류 랜덤박스" },
+      { id: 2, Name: "전자제품 랜덤박스" },
+      { id: 3, Name: "랜덤박스" }
     ];
 
     this.state = {
@@ -25,15 +25,15 @@ export default class CategoryList extends Component {
   }
 
   mounted() {
-    // const list = await getCategoryList();
+    // const list = await API.getCategoryList();
     // this.state = { category: list };
 
-    this.state.category.forEach(({ id, name }) => {
+    this.state.category.forEach(({ id, Name }) => {
       new CategoryItem(qs(".category-list"), {
-        name,
         id,
-        editCategory: this.editCategoryState.bind(this),
-        deleteCategory: this.deleteCategoryState.bind(this)
+        Name,
+        editCategory: this.editCategory.bind(this),
+        deleteCategory: this.deleteCategory.bind(this)
       });
     });
   }
@@ -43,26 +43,26 @@ export default class CategoryList extends Component {
       new Modal(qs("#app"), {
         headerText: "카테고리 추가",
         type: "ADD",
-        contents: `<form><input name="name"/></form>`,
-        submit: this.addCategoryState.bind(this),
-        path: "/admin"
+        contents: {
+          body: [MODAL.Form({}, [MODAL.Input({ type: "text", name: "Name" })])]
+        },
+        submit: this.addCategory.bind(this)
       });
     });
   }
 
-  async addCategoryState(data) {
-    // 동일한 카테고리명이 존재할 경우 toast 처리
-    // await addCategory(data);
+  async addCategory(data) {
+    // await API.addCategory(data);
     location = "/admin";
   }
 
-  editCategoryState(id, name) {
-    // await editCategory(id, name);
+  editCategory(id, data) {
+    // await API.editCategory(id, data);
     location = "/admin";
   }
 
-  deleteCategoryState(id) {
-    // await deleteCategory(id);
+  deleteCategory(id) {
+    // await API.deleteCategory(id);
     const categories = this.state.category.filter(
       category => category.id !== id
     );

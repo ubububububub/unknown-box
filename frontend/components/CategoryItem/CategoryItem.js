@@ -1,6 +1,6 @@
 //import { editCategory, deleteCategory } from "../../apis/index.js";
 import Component from "../../core/Component.js";
-import { qs } from "../../utils/index.js";
+import { qs, MODAL } from "../../utils/index.js";
 import Modal from "../Modal/Modal.js";
 import { isClassContained } from "../../utils/index.js";
 
@@ -8,7 +8,7 @@ export default class CategoryItem extends Component {
   template() {
     return `
             <li class="category-item-${this.props.id}">
-                <span>${this.props.name}</span>
+                <span>${this.props.Name}</span>
                 <button type="button" class="btn category-editBtn">수정하기</button>
                 <button type="button" class="btn category-delBtn">삭제하기</button>
             </li>
@@ -30,7 +30,7 @@ export default class CategoryItem extends Component {
         return;
       }
 
-      if (this.isContained(e.target, "category-delBtn")) {
+      if (isClassContained(e.target, "category-delBtn")) {
         this.deleteHandler();
         return;
       }
@@ -42,9 +42,14 @@ export default class CategoryItem extends Component {
       id: this.props.id,
       headerText: "카테고리 수정",
       type: "EDIT",
-      contents: `<form><input name="name" value="${this.props.name}"/></form>`,
-      submit: this.props.editCategory.bind(this, this.props.id),
-      path: "/admin"
+      contents: {
+        body: [
+          MODAL.Form({}, [
+            MODAL.Input({ value: this.props.Name, name: "Name" })
+          ])
+        ]
+      },
+      submit: this.props.editCategory.bind(this)
     });
   }
 

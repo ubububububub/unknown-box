@@ -102,10 +102,7 @@ export async function addCategory(data) {
   try {
     const response = await fetch(`http://localhost:8080/api/admin/category`, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(data)
+      body: data
     });
     return response.json();
   } catch (err) {
@@ -113,16 +110,13 @@ export async function addCategory(data) {
   }
 }
 
-export async function editCategory(id) {
+export async function editCategory(id, data) {
   try {
     const response = await fetch(
       `http://localhost:8080/api/admin/category/${id}`,
       {
         method: "PUT",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data)
+        body: data
       }
     );
     return response.json();
