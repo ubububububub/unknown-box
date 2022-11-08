@@ -25,24 +25,3 @@ export async function getItem(id) {
     console.dir(err);
   }
 }
-
-export async function getKakaoProfile(accessToken) {
-  try {
-    const response = await fetch("https://kapi.kakao.com/v2/user/me", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
-        Authorization: `Bearer ${accessToken}`
-      }
-    });
-    const { kakao_account } = await response.json();
-    const {
-      email,
-      profile: { nickname }
-    } = kakao_account;
-
-    return { email, nickname };
-  } catch (err) {
-    console.dir(err);
-  }
-}

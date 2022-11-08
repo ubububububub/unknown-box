@@ -1,5 +1,5 @@
 import Component from "../../core/Component.js";
-import { getKakaoLoginToken } from "../../apis/main.js";
+import { getKakaoLoginToken } from "../../apis/index.js";
 
 export class KakaoCallback extends Component {
   setEvent() {
@@ -8,21 +8,19 @@ export class KakaoCallback extends Component {
     });
   }
 
-  getAccessTokenQuery() {
+  getEmailQuery() {
     const params = new URLSearchParams(location.search);
     return params.get("email");
   }
 
   async setLoginTokens() {
-    const emailQuery = decodeURIComponent(this.getAccessTokenQuery());
+    const email = this.getEmailQuery();
 
-    if (!emailQuery) {
+    if (!email) {
       return;
     }
 
-    const { newAccessToken, newRefreshToken } = await getKakaoLoginToken(
-      emailQuery
-    );
+    const { newAccessToken, newRefreshToken } = await getKakaoLoginToken(email);
 
     localStorage.setItem("accessToken", newAccessToken);
     localStorage.setItem("refreshToken", newRefreshToken);

@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { authService } from "../services";
+import JWT from "../utils/token";
 
 const authRouter = Router();
 
@@ -26,17 +27,24 @@ authRouter.get("/kakao/callback", async (req, res, next) => {
   const { code } = req.query;
 
   try {
-    const query = await authService.authKakao(code);
-    res.redirect("/?access_token=" + query);
+    const email = await authService.authKakaoJoin(code);
+
+    res.redirect("/login/kakao/callback?email=" + email);
   } catch (error) {
     next(error);
   }
 });
 
-authRouter.get("/kakao/join/callback", async (req, res, next) => {
-  const { code } = req.query;
+authRouter.post("/kakao/tokens", async (req, res, next) => {
+  const { email } = req.body;
 
-  await authService.authKakaoJoin(code);
+  try {
+    const { newAccessToken, newRefreshToken } = await JWT.createTokens(email);
+
+    res.status(201).json({ newAccessToken, newRefreshToken });
+  } catch (error) {
+    next(error);
+  }
 });
 
 export { authRouter };
