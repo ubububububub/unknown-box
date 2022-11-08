@@ -58,8 +58,8 @@ export class RandomBox extends Component {
     ];
 
     const maxIndex = this.getMaxPriceIndex(this.state.productItems);
-    this.state.count = this.getRandomNum(); // 랜덤 값
-    this.state.productItems = this.convertProductItems(maxIndex); // 랜덤 값 앞에 넣어줌
+    this.state.count = this.getRandomNum();
+    this.state.productItems = this.convertProductItems(maxIndex);
   }
 
   template() {
@@ -101,7 +101,7 @@ export class RandomBox extends Component {
       this.hideReadyImgAndText();
       this.showCarousel();
 
-      await postRandomBoxResult(this.state.productItems[this.state.count]);
+      // await postRandomBoxResult(this.state.productItems[this.state.count]);
 
       this.startCarouselAnimation();
     });
