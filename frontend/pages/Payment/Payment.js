@@ -1,9 +1,15 @@
 import Component from "../../core/Component.js";
-import OrderEdit from "../../components/OrderEdit/OrderEdit.js";
 import PaymentInfo from "../../components/PaymentInfo/PaymentInfo.js";
-import { qs, qsAll } from "../../utils/index.js";
+import {
+  detailAddressValidation,
+  nameValidation,
+  phoneValidation,
+  qs,
+  qsAll
+} from "../../utils/index.js";
+import Form from "../../components/Form/Form.js";
 import { cart } from "../../store/cart.js";
-import { postOrder } from "../../apis/index.js";
+import { postOrderInfo, postOrder } from "../../apis/index.js";
 
 export class Payment extends Component {
   setup() {
@@ -21,7 +27,30 @@ export class Payment extends Component {
   }
 
   mounted() {
-    new OrderEdit(qs("#content"));
+    const formChildren = [
+      {
+        id: "orderName",
+        title: "주문자명",
+        type: "text"
+      },
+      {
+        id: "orderPhone",
+        title: "주문자 전화번호",
+        type: "text"
+      },
+      { type: "address" }
+    ];
+    const formProps = {
+      formChildren,
+      orderAddress: {
+        postcode: "123123",
+        roadAddress: "사랑시 고백구 행복동",
+        jibunAddress: "사랑시 고백구 행복동",
+        detailAddress: "상세한주소",
+        extraAddress: "이건뭐이야"
+      }
+    };
+    new Form(qs("#content"), formProps);
     new PaymentInfo(qs("#content"), this.state);
   }
 
@@ -31,6 +60,8 @@ export class Payment extends Component {
     if (clickedElClassName !== "payment-info__button") {
       return;
     }
+
+    this.handleEditBtn(e);
 
     const product = {
       productName: this.parsePaymentProductName(".payment-info__product-name"),
@@ -70,5 +101,16 @@ export class Payment extends Component {
     const regex = /\d/g;
 
     return Number(qs(selector).innerText.match(regex).join(""));
+  }
+
+  handleEditBtn(e) {
+    e.preventDefault();
+    if (
+      nameValidation(qs("#orderName").value) &&
+      phoneValidation(qs("#orderPhone").value) &&
+      detailAddressValidation(qs("#detailAddress").value)
+    ) {
+      postOrderInfo(Form.getFormData(), this.props);
+    }
   }
 }

@@ -1,5 +1,6 @@
 import Component from "../../core/Component.js";
 import { cart } from "../../store/cart.js";
+import { qs } from "../../utils/index.js";
 import * as CART from "../../constants/cart.js";
 
 const category = ["상품명", "가격", "수량", "총 가격"];
@@ -14,11 +15,7 @@ export class CartList extends Component {
       return this.getEmptyTemplate();
     }
 
-    return (
-      this.getDeleteButtonTemplate() +
-      this.getCategoryTemplate() +
-      this.getCartListTemplate()
-    );
+    return this.getCategoryTemplate() + this.getCartListTemplate();
   }
 
   render() {
@@ -45,12 +42,14 @@ export class CartList extends Component {
       }
     });
 
-    this.target
-      .querySelector(".cart-list__button--delete")
-      .addEventListener("click", () => {
-        cart.setCartList([]);
-        this.state.setCartList({ cartList: [] });
-      });
+    qs(".cart-list__button--delete").addEventListener("click", () => {
+      if (this.isEmptyCartList()) {
+        return;
+      }
+
+      cart.setCartList([]);
+      this.state.setCartList({ cartList: [] });
+    });
   }
 
   getEmptyTemplate() {
@@ -141,10 +140,10 @@ export class CartList extends Component {
   }
 
   isEmptyCartList() {
-    if (!this.state.cartList.length) {
-      return true;
+    if (this.state.cartList.length !== 0) {
+      return false;
     }
 
-    return false;
+    return true;
   }
 }

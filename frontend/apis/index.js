@@ -167,3 +167,31 @@ export async function postRefreshToken() {
     console.dir(err);
   }
 }
+
+export async function getRandomBoxProducts() {
+  try {
+    const response = await fetch("랜덤 박스 상품 api", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
+    return await response.json();
+  } catch (err) {
+    console.dir(err);
+  }
+}
+
+export async function postRandomBoxResult(product) {
+  try {
+    await fetch("랜덤 박스 결과 api", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ product })
+    });
+  } catch (err) {
+    console.dir(err);
+  }
+}

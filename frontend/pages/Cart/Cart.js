@@ -49,6 +49,7 @@ export class Cart extends Component {
   template() {
     return `<div class="container">
       <h2>장바구니</h2>
+      <button type="button" class="cart-list__button--delete">전체 삭제</button>
       <ul class="cart-list">
       </ul>
     </div>`;
