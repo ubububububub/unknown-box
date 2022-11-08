@@ -73,9 +73,9 @@ class OrderEdit extends Component {
   handleEditBtn(e) {
     e.preventDefault();
     if (
-      nameValidation(qs("#orderName").value) &&
-      phoneValidation(qs("#orderPhone").value) &&
-      detailAddressValidation(qs("#detailAddress").value)
+      nameValidation(qs("#orderName")) &&
+      phoneValidation(qs("#orderPhone")) &&
+      detailAddressValidation(qs("#detailAddress"))
     ) {
       postOrderInfo(Form.getFormData(), this.props);
     }

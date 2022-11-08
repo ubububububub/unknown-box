@@ -64,10 +64,7 @@ export class Login extends Component {
   handleLogin(e) {
     e.preventDefault();
 
-    if (
-      emailValidation(qs("#email").value) &&
-      passwordValidation(qs("#password").value)
-    ) {
+    if (emailValidation(qs("#email")) && passwordValidation(qs("#password"))) {
       postLogin(Form.getFormData());
     }
   }
