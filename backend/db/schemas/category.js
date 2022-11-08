@@ -7,13 +7,12 @@ const categorySchema = new Schema(
       required: true,
       default: "etc.",
       unique: true,
-      trim: true,
-    },
-    products: [{ type: Schema.Types.ObjectId, ref: "products" }],
+      trim: true
+    }
   },
   {
     collection: "categories",
-    timestamps: true,
+    timestamps: true
   }
 );
 
