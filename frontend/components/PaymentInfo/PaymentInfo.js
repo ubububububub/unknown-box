@@ -1,4 +1,6 @@
 import Component from "../../core/Component.js";
+import style from "./paymentInfo.css" assert { type: "css" };
+document.adoptedStyleSheets.push(style);
 
 const DELIVERY_PRICE = 3000;
 
@@ -12,27 +14,30 @@ export default class PaymentInfo extends Component {
     const productsTotalPrice = this.getProductsTotalPrice(this.state.cartList);
     const orderTotalPrice = productsTotalPrice + DELIVERY_PRICE;
 
-    return `<div class="container">
-      <h2>결제정보</h2>
-      <dl>
-        <div>
-          <dt>주문상품</dt>
-          ${orderProducts}
-        </div>
-        <div>
-          <dt>상품총액</dt>
-          <dd class="payment-info__products-price">${productsTotalPrice.toLocaleString()}원</dd>
-        </div>
-        <div>
-          <dt>배송비</dt>
-          <dd class="payment-info__delivery-price">${DELIVERY_PRICE.toLocaleString()}원</dd>
-        </div>
-      </dl>
-      <dl>
-        <dt>총 결제금액</dt>
-        <dd class="payment-info__total-price">${orderTotalPrice.toLocaleString()}원</dd>
-      </dl>
-      <button type="button" class="payment-info__button">결제하기</button>
+    return `<div id="paymentInfo_container">
+      <h3 class="paymentInfo_title">결제정보</h3>
+      <section class="paymentInfo_sub-container">
+        <dl class="paymentInfo_product-list">
+          <div class="paymentInfo_product-list-container">
+            ${orderProducts}
+          </div>
+        </dl>
+        <dl class="paymentInfo_price-list">
+          <div class="paymentInfo_price-item">
+            <dt>상품총액</dt>
+            <dd class="paymentInfo_products-price">${productsTotalPrice.toLocaleString()}원</dd>
+          </div>
+          <div class="paymentInfo_price-item">
+            <dt>배송비</dt>
+            <dd class="paymentInfo_delivery-price">${DELIVERY_PRICE.toLocaleString()}원</dd>
+          </div>
+          <div class="paymentInfo_price-item">
+            <dt>총 결제금액</dt>
+            <dd class="paymentInfo_total-price">${orderTotalPrice.toLocaleString()}원</dd>
+          </div>
+          <button type="button" class="paymentInfo_button">${this.getButtonText()}</button>
+        </dl>
+      </section>
     </div>`;
   }
 
@@ -42,7 +47,7 @@ export default class PaymentInfo extends Component {
 
   setEvent() {
     this.target
-      .querySelector(".payment-info__button")
+      .querySelector(".paymentInfo_button")
       .addEventListener("click", this.state.buttonEvent);
   }
 
@@ -50,7 +55,18 @@ export default class PaymentInfo extends Component {
     return products.reduce(
       (prev, curr) =>
         prev +
-        `<dd class="payment-info__product-name">${curr.name}, ${curr.quantity}개</dd>`,
+        `<dd class="paymentInfo_product-item">
+          <ul class="paymentInfo_product-info-list">
+            <li class="paymentInfo_product-img">
+              <img src="https://picsum.photos/id/235/72/72" alt="product-img"/>
+            </li>
+            <li class="paymentInfo_product-name">${curr.name}</li>
+            <li class="paymentInfo_product-quantity">${curr.quantity}개</li>
+            <li class="paymentInfo_product-price">${
+              curr.price * curr.quantity
+            }원</li>
+          </ul>
+        </dd>`,
       ""
     );
   }
@@ -60,5 +76,15 @@ export default class PaymentInfo extends Component {
       (prev, { price, quantity }) => prev + price * quantity,
       0
     );
+  }
+
+  getButtonText() {
+    const uri = location.pathname;
+
+    if (uri === "/cart") {
+      return "주문하기";
+    }
+
+    return "결제하기";
   }
 }

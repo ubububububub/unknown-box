@@ -101,7 +101,7 @@ export class RandomBox extends Component {
       this.hideReadyImgAndText();
       this.showCarousel();
 
-      await postRandomBoxResult(this.state.productItems[this.state.count]);
+      // await postRandomBoxResult(this.state.productItems[this.state.count]);
 
       this.startCarouselAnimation();
     });
@@ -166,10 +166,6 @@ export class RandomBox extends Component {
     const temp = this.state.productItems.filter(
       (_, index) => index !== this.state.count && index !== maxIndex
     );
-
-    // const temp = this.state.productItems.filter(
-    //   (product, index) => index !== this.state.count || index !== maxIndex
-    // );
 
     let newProducts = [];
 

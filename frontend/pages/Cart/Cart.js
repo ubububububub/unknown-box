@@ -3,6 +3,8 @@ import PaymentInfo from "../../components/PaymentInfo/PaymentInfo.js";
 import { qs } from "../../utils/index.js";
 import { cart } from "../../store/cart.js";
 import { CartList } from "../../components/CartList/CartList.js";
+import style from "./cart.css" assert { type: "css" };
+document.adoptedStyleSheets.push(style);
 
 export class Cart extends Component {
   setup() {
@@ -47,23 +49,24 @@ export class Cart extends Component {
   }
 
   template() {
-    return `<div class="container">
+    return `<div id="cart_container">
       <h2>장바구니</h2>
-      <button type="button" class="cart-list__button--delete">전체 삭제</button>
-      <ul class="cart-list">
-      </ul>
+      <section class="cart_sub-container">
+        <ul class="cart_list">
+        </ul>
+      </section>
     </div>`;
   }
 
   mounted() {
-    new CartList(qs(".cart-list"), this.state);
-    new PaymentInfo(qs(".container"), this.state);
+    new CartList(qs(".cart_list"), this.state);
+    new PaymentInfo(qs(".cart_sub-container"), this.state);
   }
 
   handleMoveNextPage({ target }) {
     const className = target.classList.value;
 
-    if (className !== "payment-info__button") {
+    if (className !== "paymentInfo_button") {
       return;
     }
 
