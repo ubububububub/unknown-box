@@ -8,6 +8,7 @@ class CategoryService {
     const categories = await this.categoryModel.getAll();
     if (categories.length === 0) return { error: "카테고리가 없습니다." };
     return categories.map(category => ({
+      id: category._id,
       name: category.name
     }));
   }
@@ -15,12 +16,12 @@ class CategoryService {
     const category = await this.categoryModel.regist(name);
     return category.name;
   }
-  async modify(name, newName) {
-    const category = await this.categoryModel.modify(name, newName);
+  async modify({ categoryId }, { name }) {
+    const category = await this.categoryModel.modify(categoryId, name);
     return category;
   }
-  async getProductsByCategory({ name }) {
-    const category = await this.categoryModel.getOne(name);
+  async getProductsByCategory({ categoryId }) {
+    const category = await this.categoryModel.getOne(categoryId);
     if (!category) return { error: "카테고리를 찾을 수 없습니다." };
     if (category.products.length === 0)
       return { error: "등록된 상품이 없습니다." };
@@ -32,8 +33,8 @@ class CategoryService {
       thumbnail: product.thumbnail
     }));
   }
-  async remove({ name }) {
-    const result = await this.categoryModel.remove(name);
+  async remove({ categoryId }) {
+    const result = await this.categoryModel.remove(categoryId);
     return result.deletedCount ? { result: "success" } : { result: "fail" };
   }
 }

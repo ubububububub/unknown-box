@@ -16,6 +16,10 @@ class Store {
     return true;
   }
 
+  initCartItem() {
+    this.store.setItem("cart", JSON.stringify([]));
+  }
+
   setCartItem(product) {
     if (this.checkDuplication(product)) {
       new Toast("이미 장바구니에 있는 상품입니다.");
@@ -37,27 +41,21 @@ class Store {
   checkDuplication(product) {
     const cartList = this.getCartList();
 
-    const isDuplication = cartList.some(
+    if (this.isEmpty()) {
+      return;
+    }
+
+    const isDuplicationExist = cartList.some(
       cartItem => cartItem.name === product.name
     );
 
-    // 옵션 중복 체크 로직
-    // const checkedNameCartList = cartList.filter(
-    //   cartItem => cartItem.name === product.name
-    // );
+    return isDuplicationExist;
+  }
 
-    // const isDuplication = checkedNameCartList.some(cartItem => {
-    //   const productOptions = Object.values(product.options);
-    //   const cartItemOptions = Object.values(cartItem.options);
+  isEmpty() {
+    const cartList = this.getCartList();
 
-    //   for (let i = 0; i < productOptions.length; i += 1) {
-    //     if (productOptions[i] === cartItemOptions[i]) {
-    //       return true;
-    //     }
-    //   }
-    // });
-
-    if (isDuplication) {
+    if (cartList.length === 0) {
       return true;
     }
 

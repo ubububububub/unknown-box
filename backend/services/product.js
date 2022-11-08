@@ -36,7 +36,7 @@ class ProductService {
     return product._id;
   }
   async modify(
-    { id },
+    { productId },
     { name, price, count, description, imageUrl, thumbnail }
   ) {
     const productInfo = {};
@@ -46,16 +46,16 @@ class ProductService {
     if (description) productInfo.description = description;
     if (imageUrl && imageUrl.length) productInfo.imageUrl = imageUrl;
     if (thumbnail) productInfo.thumbnail = thumbnail;
-    const product = await this.productModel.modify(id, productInfo);
+    const product = await this.productModel.modify(productId, productInfo);
     return product;
   }
-  async getProduct({ id }) {
-    const product = await this.productModel.getOne(id);
+  async getProduct({ productId }) {
+    const product = await this.productModel.getOne(productId);
     if (!product) return { error: "없는 상품입니다." };
     return product;
   }
-  async remove({ id }) {
-    const result = await this.productModel.remove(id);
+  async remove({ productId }) {
+    const result = await this.productModel.remove(productId);
     return result.deletedCount ? { result: "success" } : { result: "fail" };
   }
 }

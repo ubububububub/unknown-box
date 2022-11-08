@@ -11,7 +11,7 @@ productController.get("/", async (req, res, next) => {
     next(err);
   }
 });
-productController.get("/:id", async (req, res, next) => {
+productController.get("/:productId", async (req, res, next) => {
   try {
     const product = await productService.getProduct(req.params);
     res.status(200).json(product);

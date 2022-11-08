@@ -12,6 +12,6 @@ export class MyOrderEdit extends Component {
 
   mounted() {
     new Navbar(qs("#mypage-nav"), MY_PAGE_NAV);
-    new OrderEdit(qs("#container"));
+    new OrderEdit(qs("#container"), this.props);
   }
 }

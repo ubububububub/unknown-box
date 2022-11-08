@@ -1,6 +1,7 @@
 import Component from "../../core/Component.js";
 import { qs } from "../../utils/index.js";
 import AddressForm from "../AddressForm/AddressForm.js";
+import ImageUploadForm from "../ImageUploadForm/ImageUploadForm.js";
 
 class Form extends Component {
   template() {
@@ -33,6 +34,12 @@ class Form extends Component {
           `<div id="address-container" ></div>`
         );
         new AddressForm(qs("#address-container"), this.props.orderAddress);
+      } else if (item.type === "image") {
+        qs("#container-form").insertAdjacentHTML(
+          "beforeend",
+          `<div id="image-upload-container"></div>`
+        );
+        new ImageUploadForm(qs("#image-upload-container"));
       }
     });
   }
