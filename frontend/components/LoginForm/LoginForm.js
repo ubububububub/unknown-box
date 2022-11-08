@@ -12,7 +12,6 @@ class LoginForm extends Component {
               <input type="submit" id="loginBtn" value="로그인"/>
             </form>
             <a href=https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=86c7682643aad4626e8d5822b0107da9&redirect_uri=http://localhost:8080/api/auth/kakao/callback>카카오 로그인</a>
-            <a href=https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=86c7682643aad4626e8d5822b0107da9&redirect_uri=http://localhost:8080/api/auth/kakao/join/callback>카카오 회원가입</a>
             <button id="signInBtn">회원가입하기</button>
             <button id="logoutBtn">로그아웃하기</button>`;
   }
