@@ -8,12 +8,19 @@ import {
   passwordValidation,
   qs
 } from "../../utils/index.js";
+import style from "./signIn.css" assert { type: "css" };
+document.adoptedStyleSheets.push(style);
 
 export class SignIn extends Component {
   template() {
-    return `<div id="signin_contaniner"></div>
+    return `<div id="signin_contaniner">
+            <div id="signin_section">
+            <H1>회원가입</H1>
+            <div id="signin-form_section"></div>
             <button class="signin_signin_btn">회원가입</button>
-            <button class="signin_login_btn">로그인</button>`;
+            </div>
+            </div>
+            `;
   }
 
   mounted() {
@@ -39,7 +46,7 @@ export class SignIn extends Component {
         type: "password"
       }
     ];
-    new Form(qs("#signin_contaniner"), { formChildren });
+    new Form(qs("#signin-form_section"), { formChildren });
   }
 
   setEvent() {
@@ -52,13 +59,10 @@ export class SignIn extends Component {
     e.preventDefault();
 
     if (
-      emailValidation(qs("#email").value) &&
-      passwordValidation(qs("#password").value, qs("#passwordConfirm").value) &&
-      passwordConfirmValidation(
-        qs("#password").value,
-        qs("#passwordConfirm").value
-      ) &&
-      nameValidation(qs("#name").value)
+      emailValidation(qs("#email")) &&
+      passwordValidation(qs("#password")) &&
+      passwordConfirmValidation(qs("#password"), qs("#passwordConfirm")) &&
+      nameValidation(qs("#name"))
     ) {
       postSignIn(Form.getFormData());
     }

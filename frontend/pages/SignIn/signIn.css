@@ -1,0 +1,52 @@
+@charset "utf-8";
+
+#signin_contaniner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+#signin_section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  max-width: 544px;
+  padding: 40px;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+#signin-form_section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 24px;
+}
+
+button {
+  width: 100%;
+  max-width: 432px;
+  height: 48px;
+  background: #fb2e86;
+  border: none;
+  border-radius: 2px;
+  text-align: center;
+  font-size: 16px;
+  color: #ffffff;
+  margin-bottom: 8px;
+}
+
+.login-signin_btn {
+  background: transparent;
+  color: grey;
+}
+
+.login-kakao-login_btn {
+  background: #fce374;
+  color: black;
+}
