@@ -162,10 +162,8 @@ export async function addProduct(data) {
   try {
     await fetch(`http://localhost:8080/api/admin/product`, {
       method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(data)
+
+      body: data
     });
   } catch (err) {
     console.dir(err);
@@ -190,10 +188,7 @@ export async function editProduct(id, data) {
   try {
     await fetch(`http://localhost:8080/api/admin/product/${id}`, {
       method: "PUT",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(data)
+      body: data
     });
   } catch (err) {
     console.dir(err);

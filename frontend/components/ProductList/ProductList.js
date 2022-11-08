@@ -1,5 +1,5 @@
 import Component from "../../core/Component.js";
-import { qs } from "../../utils/index.js";
+import { isClassContained, qs, editForm } from "../../utils/index.js";
 import Modal from "../Modal/Modal.js";
 import ProductItem from "../ProductItem/ProductItem.js";
 // import {
@@ -22,117 +22,114 @@ export default class ProductList extends Component {
     const mockData = [
       {
         productId: 1,
-        productName: "의류 랜덤박스 Platinum",
-        categoryName: "의류",
+        Name: "의류 랜덤박스 Platinum",
+        category: "의류",
         price: 39900,
-        desc: "",
-        count: 10,
+        productMin: 5000,
+        productMax: 100000,
         thumbnail: "#",
-        itemList: [],
-        discountRate: 0,
-        discountedPrice: 39900
+        discount: null,
+        count: 10,
+        description: "",
+        products: ["아이템1", "아이템2", "아이템3"]
       },
       {
         productId: 2,
-        productName: "전자제품 랜덤박스 Dia",
-        categoryName: "전자제품",
+        Name: "전자제품 랜덤박스 Dia",
+        category: "전자제품",
         price: 49900,
-        desc: "",
-        count: 10,
+        productMin: 5000,
+        productMax: 120000,
         thumbnail: "#",
-        itemList: [],
-        discountRate: 10,
-        discountedPrice: 44910
+        discount: 44910,
+        count: 20,
+        description: "",
+        products: ["아이템1", "아이템2", "아이템3"]
       },
       {
         productId: 3,
-        productName: "의류 랜덤박스 Gold",
-        categoryName: "의류",
+        Name: "의류 랜덤박스 Gold",
+        category: "의류",
         price: 29900,
-        desc: "",
-        count: 30,
+        productMin: 2000,
+        productMax: 80000,
         thumbnail: "#",
-        itemList: [],
-        discountRate: 0,
-        discountedPrice: 0
+        discount: null,
+        count: 7,
+        description: "",
+        products: ["아이템1", "아이템2", "아이템3"]
       }
     ];
-    this.state = { products: mockData };
-    this.state.products.forEach(
+
+    this.state = { productList: mockData };
+
+    this.state.productList.forEach(
       product =>
         new ProductItem(qs(".products-list"), {
           product,
-          editProduct: this.editProductState.bind(this),
-          deleteProduct: this.deleteProductState.bind(this)
+          editProduct: this.editProduct.bind(this),
+          deleteProduct: this.deleteProduct.bind(this)
         })
     );
   }
 
   setEvent() {
     this.target.addEventListener("click", e => {
-      if (!e.target.classList.contains("btn")) return;
+      if (!isClassContained(e.target, "btn")) return;
 
-      if (e.target.classList.contains("product-addBtn")) {
+      if (isClassContained(e.target, "product-addBtn")) {
         this.addHandler();
       }
     });
   }
 
   addHandler() {
-    const contents = `
-        <form id="form">
-              <img class="thumbnail"/>
-              <div class="productName">
-                  <span>상품명</span>
-                  <input name="productName"/>
-              </div>
-              <div class="categotyName">
-                  <span>카테고리명</span>
-                  <input name="categoryName"/>
-              </div>
-              <div class="price">
-                  <span>가격</span>
-                  <input name="price" />
-              </div>
-              <div class="discountRate">
-                  <span>할인율</span>
-                  <input name="discountRate"/>
-              </div>
-              <div class="count">
-                  <span>재고</span>
-                  <input name="count"/>
-              </div>
-              <div class="desc">
-                  <span>상세 설명</span>
-                  <input name="desc"/>
-              </div>
-          </form>`;
+    const domList = [
+      { className: "product-name", title: "상품명", attr: { name: "Name" } },
+      {
+        className: "category-name",
+        title: "카테고리명",
+        attr: { name: "category" }
+      },
+      { className: "price", title: "가격", attr: { name: "price" } },
+      { className: "discount", title: "할인율", attr: { name: "discount" } },
+      { className: "count", title: "재고", attr: { name: "count" } },
+      {
+        className: "item-min-price",
+        title: "최저가",
+        attr: { name: "productMin" }
+      },
+      {
+        className: "item-max-price",
+        title: "최고가",
+        attr: { name: "productMax" }
+      },
+      { className: "desc", title: "상세설명", attr: { name: "description" } }
+    ];
 
     new Modal(qs("#app"), {
       type: "ADD",
-      headerText: "랜덤박스 상세 정보",
-      contents,
-      submit: this.addProductState.bind(this)
+      headerText: "상품 추가하기",
+      contents: { body: [editForm(domList)] },
+      submit: this.addProduct.bind(this)
     });
   }
 
-  async addProductState(data) {
-    // await addCategory(data);
+  async addProduct(data) {
+    // await API.addProduct(data);
     location = "/admin/products";
   }
 
-  async deleteProductState(id) {
-    // await deleteCategory(id);
-
-    const remain = this.state.products.filter(
-      product => product.productId != id
+  async deleteProduct(id) {
+    // await API.deleteCategory(id);
+    const remain = this.state.productList.filter(
+      product => product.productId !== id
     );
-    this.setState({ products: remain });
-    location = "/admin/products";
+    this.setState({ productList: remain });
   }
 
-  async editProductState(id, data) {
-    // await editCategory(id, data);
+  async editProduct(id, data) {
+    // await API.editCategory(id, data);
     location = "/admin/products";
   }
 }

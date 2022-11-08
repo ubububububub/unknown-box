@@ -1,22 +1,13 @@
 //import { editProduct, deleteProduct } from "../../apis/index.js";
 import Component from "../../core/Component.js";
-import { qs } from "../../utils/index.js";
+import { qs, editForm, MODAL } from "../../utils/index.js";
 import Modal from "../Modal/Modal.js";
 import { isClassContained } from "../../utils/index.js";
 
 export default class ProductItem extends Component {
   template() {
-    const {
-      productId,
-      productName,
-      categoryName,
-      price,
-      desc,
-      count,
-      thumbnail,
-      discountRate,
-      discountedPrice
-    } = this.props.product;
+    const { productId, Name, category, price, thumbnail, discount } =
+      this.props.product;
 
     return `
             <li class="product-item-${productId}">
@@ -26,28 +17,20 @@ export default class ProductItem extends Component {
               <div class="info">
                 <div class="product-name">
                   <span>상품명</span>
-                  <span>${productName}</span>
+                  <span>${Name}</span>
                 </div>
                 <div class="category-name">
                   <span>카테고리명</span>
-                  <span>${categoryName}</span>
+                  <span>${category}</span>
                 </div>
                 <div class="price">
                   <span>가격</span>
                   ${
-                    discountRate
+                    discount
                       ? `<span style="text-decoration: line-through">${price}</span>
-                          <span>${discountedPrice}</span>`
+                          <span>${discount}</span>`
                       : `<span>${price}</span>`
                   }
-                </div>
-                <div class="desc">
-                  <span>상세 설명</span>
-                  <span>${desc}</span>
-                </div>
-                <div class="count">
-                  <span>재고</span>
-                  <span>${count}</span>
                 </div>
               </div>
                 <button type="button" class="btn product-editBtn">수정하기</button>
@@ -63,53 +46,91 @@ export default class ProductItem extends Component {
   setEvent() {
     const productLi = qs(`.product-item-${this.props.product.productId}`);
     productLi.addEventListener("click", e => {
-      const target = e.target.closest("li").querySelector("span");
-
-      if (isContained(e.target, "product-editBtn")) {
-        this.editHandler(target);
+      if (isClassContained(e.target, "product-editBtn")) {
+        this.editHandler();
       }
 
-      if (this.isContained(e.target, "product-delBtn")) {
+      if (isClassContained(e.target, "product-delBtn")) {
         this.deleteHandler();
       }
     });
   }
 
   editHandler() {
-    const contents = `
-        <form>
-        <img url="${this.props.product.thumbnail}"/>
-        <div class="productName">
-            <span>상품명</span>
-            <input name="productName" value="${this.props.product.productName}"/>
-        </div>
-        <div class="categotyName">
-            <span>카테고리명</span>
-            <input name="categoryName" value="${this.props.product.categoryName}"/>
-        </div>
-        <div class="price">
-            <span>가격</span>
-            <input name="price" value="${this.props.product.price}"/>
-        </div>
-        <div class="discountRate">
-            <span>할인율</span>
-            <input name="discountRate" value="${this.props.product.discountRate}"/>
-        </div>
-        <div class="count">
-            <span>재고</span>
-            <input name="count" value="${this.props.product.count}"/>
-        </div>
-        <div class="desc">
-            <span>상세 설명</span>
-            <input name="desc" value="${this.props.product.desc}"/>
-        </div>
-    </form>`;
+    // const product = await API.getProductDetail(this.props.product.id);
+    // props 데이터가 아닌 디테일 정보를 받아왔다 가정
+    const {
+      productId,
+      thumbnail,
+      Name,
+      category,
+      price,
+      discount,
+      productMin,
+      productMax,
+      description,
+      products,
+      count
+    } = this.props.product;
 
+    const domList = [
+      {
+        className: "product-name",
+        title: "상품명",
+        attr: { name: "Name", value: Name }
+      },
+      {
+        className: "category-name",
+        title: "카테고리명",
+        text: category,
+        attr: { name: "category", value: category }
+      },
+      {
+        className: "price",
+        title: "가격",
+        attr: { name: "price", value: price }
+      },
+      {
+        className: "discount",
+        title: "할인율",
+        attr: {
+          name: "discount",
+          value: discount ? Math.round(100 - (discount / price) * 100) : 0
+        }
+      },
+      {
+        className: "count",
+        title: "재고",
+        attr: { name: "count", value: count }
+      },
+      {
+        className: "item-min-price",
+        title: "최저가",
+        attr: { name: "prouctMin", value: productMin }
+      },
+      {
+        className: "item-max-price",
+        title: "최고가",
+        attr: { name: "productMax", value: productMax }
+      },
+      {
+        className: "desc",
+        title: "상세설명",
+        attr: { name: "description", value: description }
+      }
+    ];
     new Modal(qs("#app"), {
-      id: this.props.product.productId,
-      headerText: "아이템 수정",
+      id: productId,
+      headerText: "상품 수정",
       type: "EDIT",
-      contents,
+      contents: {
+        body: [
+          editForm(domList),
+          MODAL.Div({ className: "item-list" }, [
+            ...products.map(item => MODAL.Span({}, [item]))
+          ])
+        ]
+      },
       submit: this.props.editProduct.bind(this)
     });
   }

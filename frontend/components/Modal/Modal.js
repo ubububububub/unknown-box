@@ -39,10 +39,9 @@ export default class Modal extends Component {
                         <button class="close-modal">X</button>
                     </div>
                     <div class="modal-body">
-                        ${this.props.contents}
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn modal-save-btn">완료</button>
+                        <button type="button" class="btn modal-submit-btn">완료</button>
                     </div>
                 </div>
             </div>`;
@@ -50,12 +49,17 @@ export default class Modal extends Component {
 
   render() {
     this.target.insertAdjacentHTML("afterbegin", this.template());
+    const { contents } = this.props;
+    contents.header && qs(".modal-header").append(...contents.header);
+    contents.body && qs(".modal-body").append(...contents.body);
+    contents.footer && qs(".modal-footer").append(...contents.footer);
   }
 
   setEvent() {
-    qs(".modal-save-btn").addEventListener("click", () => {
+    qs(".modal-submit-btn")?.addEventListener("click", () => {
       const form = new FormData(qs(".modal-body > form"));
-      this.props?.type === "ADD"
+
+      this.props.type === "ADD"
         ? this.props.submit(form)
         : this.props.submit(this.props.id, form);
     });
