@@ -2,8 +2,16 @@ import Component from "../../core/Component.js";
 import { cart } from "../../store/cart.js";
 import { qs } from "../../utils/index.js";
 import * as CART from "../../constants/cart.js";
+import style from "./cartList.css" assert { type: "css" };
+document.adoptedStyleSheets.push(style);
 
-const category = ["상품명", "가격", "수량", "총 가격"];
+const category = [
+  { name: "상품명", className: "cart_category-name" },
+  { name: "가격", className: "cart_category-price" },
+  { name: "수량", className: "cart_category-quantity" },
+  { name: "총 가격", className: "cart_category-total-price" },
+  { name: "제거", className: "cart_category-delete" }
+];
 
 export class CartList extends Component {
   setup() {
@@ -15,7 +23,11 @@ export class CartList extends Component {
       return this.getEmptyTemplate();
     }
 
-    return this.getCategoryTemplate() + this.getCartListTemplate();
+    return (
+      this.getAllDeleteButtonTemplate() +
+      this.getCategoryTemplate() +
+      this.getCartListTemplate()
+    );
   }
 
   render() {
@@ -24,17 +36,17 @@ export class CartList extends Component {
 
   setEvent() {
     this.target.addEventListener("click", ({ target }) => {
-      const { id } = target.closest(".cart-item").dataset;
+      const { id } = target.closest(".cart_item").dataset;
       const className = target.classList.value;
 
       switch (className) {
-        case "cart-item__button--add":
+        case "cart_product-button-add":
           this.addCartItemQuantity(id);
           break;
-        case "cart-item__button--subtract":
+        case "cart_product-button-subtract":
           this.subtractCartItemQuantity(id);
           break;
-        case "cart-item__button--delete":
+        case "cart_product-button-delete":
           this.deleteCartItem(id);
           break;
         default:
@@ -42,7 +54,7 @@ export class CartList extends Component {
       }
     });
 
-    qs(".cart-list__button--delete").addEventListener("click", () => {
+    qs(".cart_button-delete").addEventListener("click", () => {
       if (this.isEmptyCartList()) {
         return;
       }
@@ -52,19 +64,21 @@ export class CartList extends Component {
     });
   }
 
-  getEmptyTemplate() {
-    return `<div>장바구니가 텅 비었습니다.</div>`;
+  getAllDeleteButtonTemplate() {
+    return `<li class="cart_button">
+      <button type="button" class="cart_button-delete">전체 삭제</button>
+    </li>`;
   }
 
-  getDeleteButtonTemplate() {
-    return `<button type="button" class="cart-list__button--delete">전체 삭제</button>`;
+  getEmptyTemplate() {
+    return `<div class="cart_product_empty">장바구니가 텅 비었습니다.</div>`;
   }
 
   getCategoryTemplate() {
     return (
-      category.reduce((prev, curr) => {
-        return prev + `<li>${curr}</li>`;
-      }, "<li><ul>") + "</li></ul>"
+      category.reduce((prev, { name, className }) => {
+        return prev + `<li class="${className}">${name}</li>`;
+      }, "<li><ul class='cart_category'>") + "</ul></li>"
     );
   }
 
@@ -74,23 +88,25 @@ export class CartList extends Component {
         (prev, { id, name, price, quantity, total }) => {
           return (
             prev +
-            `<li class="cart-item" data-id="${id}">
-              <ul>
-                <li>${name}</li>
-                <li>${price.toLocaleString()}</li>
-                <li class="counter">
-                  <button type="button" class="cart-item__button--subtract">-</button>
-                  ${quantity}
-                  <button type="button" class="cart-item__button--add">+</button>
+            `<li class="cart_item" data-id="${id}">
+              <ul class="cart_product-list">
+                <li class="cart_product-item-name">${name}</li>
+                <li class="cart_product-item-price">${price.toLocaleString()}</li>
+                <li class="cart_product-item-quantity">
+                  <button type="button" class="cart_product-button-subtract">-</button>
+                  <span class="cart_product-item-quantity-text">${quantity}</span>
+                  <button type="button" class="cart_product-button-add">+</button>
                 </li>
-                <li>${total.toLocaleString()}</li>
-                <button type="button" class="cart-item__button--delete">x</button>
+                <li class="cart_product-item-total-price">${total.toLocaleString()}</li>
+                <li class="cart_product-item-button">
+                  <button type="button" class="cart_product-button-delete">x</button>
+                </li>
               </ul>
             </li>`
           );
         },
-        "<ul>"
-      ) + "</ul>"
+        "<li><ul>"
+      ) + "</ul></li>"
     );
   }
 
