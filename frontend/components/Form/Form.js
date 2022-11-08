@@ -49,6 +49,7 @@ class Form extends Component {
     for (var pair of formData.entries()) {
       console.log(pair[0] + ", " + pair[1]);
     }
+
     return formData;
   }
 }

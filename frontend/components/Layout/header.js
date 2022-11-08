@@ -4,7 +4,13 @@ import {qs} from "../../utils/index.js";
 document.adoptedStyleSheets.push(style);
 
 export class Header extends Component {
+
     template() {
+        let loginYn = localStorage.getItem('role');
+        let loginModal,myPageYn,adminPageYn  = "";
+        loginYn ==  null ? loginModal = "<a href='/login'>로그인</a>" :  loginModal = `<a href="javasciript:void(0);" id="login_logout_btn">로그아웃</a>`;
+        loginYn ==  null ? myPageYn = "<a href='/signin'>회원가입</a>" :  myPageYn = `<a href='/mypage'>마이페이지</a>`;
+        (loginYn !== null && loginYn.value == 'admin') ? adminPageYn = "<a>관리자 계정입니다.</a>" :'';
         return (
             `<section class="header">
             <div class="header-fix">
@@ -13,11 +19,14 @@ export class Header extends Component {
                 <div class="header-top-box">
                   <ul class="header-toplist">
                     <li>
-                      <a href="/login">로그인</a>
+                     ${loginModal} 
                     </li>
                     <li>
-                      <a href="/signin">회원가입</a>
-                    </li>          
+                      ${myPageYn}
+                    </li>
+                    <li>
+                      ${adminPageYn}
+                    </li>
                   </ul>
                   <ul class="header-btlist">
                     <li class="box-basket">
@@ -45,6 +54,7 @@ export class Header extends Component {
                     <div class="depth2">
                       <ul>
                         <li class=""><a href="#">신상품</a></li>
+                         <li><a href="/qnaboard">Q&A 게시판</a></li>
                         <li><a href="#">베스트</a></li>
                         <li><a href="#">알뜰</a></li>
                       </ul>
@@ -70,14 +80,26 @@ export class Header extends Component {
         );
     }
     setEvent() {
+        qs('#login_logout_btn').addEventListener("click",(e) => {
+            e.preventDefault();
+            function deleteCookie(token) {
+                document.cookie = token + "=; expires=Thu, 01 Jan 1970 00:00:01 GMT;";
+            }
+            deleteCookie("accessToken");
+            deleteCookie("refreshToken");
+            localStorage.removeItem("role");
+            location.reload();
+        });
         qs("#btn-nav-open").addEventListener("click",() => {
-           qs("#side-nav").style.left = 0;
+            qs("#side-nav").style.left = 0;
         })
 
         qs("#side-nav-close").addEventListener("click",() => {
-          qs("#side-nav").style.left = "-450px";
+            qs("#side-nav").style.left = "-450px";
         })
     }
+
+
 
 }
 
