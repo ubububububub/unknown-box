@@ -1,0 +1,35 @@
+@charset "utf-8";
+
+#cart_container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.cart_button-delete {
+  padding: 8px 16px;
+  border: none;
+  background: transparent;
+  background-color: #fce374;
+  border-radius: 4px;
+  font-weight: 600;
+}
+
+.cart_sub-container {
+  padding: 32px;
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.cart_list {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+}
+
+.cart_button {
+}
