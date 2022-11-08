@@ -9,10 +9,6 @@ export default class MainBanner extends Component {
         `;
     }
 
-    setEvent() {
-
-    }
-
     render() {
         this.target.innerHTML += this.template();
     }
