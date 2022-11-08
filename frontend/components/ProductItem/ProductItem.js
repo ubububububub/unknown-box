@@ -119,6 +119,7 @@ export default class ProductItem extends Component {
         attr: { name: "description", value: description }
       }
     ];
+
     new Modal(qs("#app"), {
       id: productId,
       headerText: "상품 수정",

@@ -23,16 +23,12 @@ export default class CategoryItem extends Component {
     const categoryLi = qs(`.category-item-${this.props.id}`);
 
     categoryLi.addEventListener("click", e => {
-      const target = e.target.closest("li").querySelector("span");
-
       if (isClassContained(e.target, "category-editBtn")) {
-        this.editHandler(target);
-        return;
+        this.editHandler();
       }
 
       if (isClassContained(e.target, "category-delBtn")) {
         this.deleteHandler();
-        return;
       }
     });
   }
