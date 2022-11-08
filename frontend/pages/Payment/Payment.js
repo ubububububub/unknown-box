@@ -10,6 +10,8 @@ import {
 import Form from "../../components/Form/Form.js";
 import { cart } from "../../store/cart.js";
 import { postOrderInfo, postOrder } from "../../apis/index.js";
+import style from "./payment.css" assert { type: "css" };
+document.adoptedStyleSheets.push(style);
 
 export class Payment extends Component {
   setup() {
@@ -20,9 +22,9 @@ export class Payment extends Component {
   }
 
   template() {
-    return `<section id="container">
-      <h2>주문 결제</h2>
-      <div id="content"></div>
+    return `<section id="payment_container">
+      <h2 class="payment_title">주문 결제</h2>
+      <div class="payment_content"></div>
     </section>`;
   }
 
@@ -50,29 +52,28 @@ export class Payment extends Component {
         extraAddress: "이건뭐이야"
       }
     };
-    new Form(qs("#content"), formProps);
-    new PaymentInfo(qs("#content"), this.state);
+    new Form(qs(".payment_content"), formProps);
+    new PaymentInfo(qs(".payment_content"), this.state);
   }
 
-  handleMoveNextPage({ target }) {
+  handleMoveNextPage(event) {
+    const { target } = event;
     const clickedElClassName = target.classList.value;
 
-    if (clickedElClassName !== "payment-info__button") {
+    if (clickedElClassName !== "paymentInfo_button") {
       return;
     }
 
-    this.handleEditBtn(e);
+    this.handleEditBtn(event);
 
     const product = {
-      productName: this.parsePaymentProductName(".payment-info__product-name"),
-      productNum: this.parsePaymentProductNum(".payment-info__product-name"),
-      productsPrice: this.parsePaymentPriceInfo(
-        ".payment-info__products-price"
+      productName: this.parsePaymentProductName(".paymentInfo_product-name"),
+      productNum: this.parsePaymentProductQuantity(
+        ".paymentInfo_product-quantity"
       ),
-      deliveryPrice: this.parsePaymentPriceInfo(
-        ".payment-info__delivery-price"
-      ),
-      orderPrice: this.parsePaymentPriceInfo(".payment-info__total-price")
+      productsPrice: this.parsePaymentPriceInfo(".paymentInfo_product-price"),
+      deliveryPrice: this.parsePaymentPriceInfo(".paymentInfo_delivery-price"),
+      orderPrice: this.parsePaymentPriceInfo(".paymentInfo_total-price")
     };
 
     postOrder(product);
@@ -88,12 +89,11 @@ export class Payment extends Component {
     });
   }
 
-  parsePaymentProductNum(selector) {
+  parsePaymentProductQuantity(selector) {
     return Array.from(qsAll(selector)).map(product => {
-      const [_, productPriceText] = product.innerText.split(",");
-      const [productNumText] = productPriceText.split("개");
+      const [productQuantityText] = product.innerText.split("개");
 
-      return Number(productNumText);
+      return Number(productQuantityText);
     }, 0);
   }
 
