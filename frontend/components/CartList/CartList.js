@@ -140,10 +140,6 @@ export class CartList extends Component {
   }
 
   isEmptyCartList() {
-    if (this.state.cartList.length !== 0) {
-      return false;
-    }
-
-    return true;
+    return this.state.cartList.length === 0;
   }
 }

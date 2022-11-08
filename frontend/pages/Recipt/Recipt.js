@@ -18,11 +18,11 @@ export class Recipt extends Component {
 
   setEvent() {
     qs(".recipt_order-list-button").addEventListener("click", () => {
-      window.location = "/mypage/order";
+      return (window.location = "/mypage/order");
     });
 
     qs(".recipt_shopping-button").addEventListener("click", () => {
-      window.location = "/";
+      return (window.location = "/");
     });
   }
 }
