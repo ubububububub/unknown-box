@@ -9,7 +9,7 @@ import {
 } from "../../utils/index.js";
 import Form from "../../components/Form/Form.js";
 import { cart } from "../../store/cart.js";
-import { postOrderInfo, postOrder } from "../../apis/index.js";
+import { postPayment } from "../../apis/index.js";
 import style from "./payment.css" assert { type: "css" };
 document.adoptedStyleSheets.push(style);
 
@@ -17,7 +17,7 @@ export class Payment extends Component {
   setup() {
     this.state = {
       cartList: cart.getCartList(),
-      buttonEvent: this.handleMoveNextPage.bind(this)
+      buttonEvent: this.handleClickPayment.bind(this)
     };
   }
 
@@ -56,15 +56,13 @@ export class Payment extends Component {
     new PaymentInfo(qs(".payment_content"), this.state);
   }
 
-  handleMoveNextPage(event) {
+  handleClickPayment(event) {
     const { target } = event;
     const clickedElClassName = target.classList.value;
 
     if (clickedElClassName !== "paymentInfo_button") {
       return;
     }
-
-    this.handleEditBtn(event);
 
     const product = {
       productName: this.parsePaymentProductName(".paymentInfo_product-name"),
@@ -75,10 +73,7 @@ export class Payment extends Component {
       deliveryPrice: this.parsePaymentPriceInfo(".paymentInfo_delivery-price"),
       orderPrice: this.parsePaymentPriceInfo(".paymentInfo_total-price")
     };
-
-    postOrder(product);
-
-    return (window.location = "/order/recipt");
+    this.handleEditBtn(event, product);
   }
 
   parsePaymentProductName(selector) {
@@ -103,14 +98,15 @@ export class Payment extends Component {
     return Number(qs(selector).innerText.match(regex).join(""));
   }
 
-  handleEditBtn(e) {
-    e.preventDefault();
+  handleEditBtn(event, product) {
+    event.preventDefault();
     if (
       nameValidation(qs("#orderName").value) &&
       phoneValidation(qs("#orderPhone").value) &&
       detailAddressValidation(qs("#detailAddress").value)
     ) {
-      postOrderInfo(Form.getFormData(), this.props);
+      postPayment(Form.getFormData(), this.props, product);
+      return (window.location = "/order/recipt");
     }
   }
 }

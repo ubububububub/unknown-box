@@ -196,7 +196,7 @@ export async function postRandomBoxResult(product) {
   }
 }
 
-export async function getKakaoLoginToken(email) {
+export async function postKakaoLoginToken(email) {
   try {
     const res = await fetch("http://localhost:8080/api/auth/kakao/tokens", {
       method: "POST",
@@ -207,6 +207,22 @@ export async function getKakaoLoginToken(email) {
     });
     return await res.json();
   } catch (err) {
+    console.dir(err);
+  }
+}
+
+export async function postPayment(formData, orderId, product) {
+  try {
+    await fetch(`http://localhost:8080/api/order/${orderId}`, {
+      method: "POST",
+      "X-Access-Token": localStorage.getItem("accessToken"),
+      body: JSON.stringify({ ...formData, ...product })
+    });
+  } catch (err) {
+    if (err.response.status === 403) {
+      await postRefreshToken();
+      await postPayment(formData, orderId, product);
+    }
     console.dir(err);
   }
 }
