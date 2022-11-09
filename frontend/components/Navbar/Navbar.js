@@ -18,8 +18,6 @@ export default class Navbar extends Component {
 
   mounted() {
     this.props.forEach(navItem => {
-      console.log(window.location.pathname, navItem.path);
-
       window.location.pathname === navItem.path
         ? qs(`#${navItem.id}`).classList.add("navbar-item-selected")
         : qs(`#${navItem.id}`).classList.remove("navbar-item-selected");
