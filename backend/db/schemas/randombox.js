@@ -2,12 +2,12 @@ import { Schema } from "mongoose";
 
 const randomboxSchema = new Schema(
   {
-    name: {
+    randomboxName: {
       type: String,
       required: true,
       trim: true
     },
-    category: { type: Schema.Types.ObjectId, required: true },
+    categoryName: { type: String, required: true },
     price: { type: Number, required: true, default: 0 },
     discount: { type: Number, required: true, default: this.price }, // this가 되나?
     count: { type: Number, required: true, default: 0 },

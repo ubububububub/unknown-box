@@ -2,13 +2,13 @@ import { Schema } from "mongoose";
 
 const productSchema = new Schema(
   {
-    name: {
+    productName: {
       type: String,
       required: true,
       default: "고객센터에 문의하세요",
       trim: true
     },
-    category: { type: Schema.Types.ObjectId, required: true },
+    categoryName: { type: String, required: true },
     price: { type: Number, required: true, default: 0 },
     count: { type: Number, required: true, default: 0 },
     description: { type: String, required: false },

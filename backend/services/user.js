@@ -15,12 +15,10 @@ class UserService {
       throw new Error("이미 가입된 이메일입니다.");
     }
 
-    const newUser = await this.model.create({
+    await this.model.create({
       ...userInfo,
       password: hashPassword(password)
     });
-
-    return newUser;
   }
 
   async getUsers() {
@@ -42,7 +40,7 @@ class UserService {
       user.email,
       hashPassword(newPassword)
     );
-    return result;
+    return { result: result.matchedCount ? "success" : "fail" };
   }
 }
 
