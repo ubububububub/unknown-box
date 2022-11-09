@@ -5,7 +5,7 @@ const orderController = Router();
 
 orderController.get("/", async (req, res, next) => {
   try {
-    const orders = await orderService.getList(req.cookies);
+    const orders = await orderService.getList(req.headers["x-access-token"]);
     res.status(200).json(orders);
   } catch (err) {
     next(err);
@@ -13,7 +13,10 @@ orderController.get("/", async (req, res, next) => {
 });
 orderController.post("/", async (req, res, next) => {
   try {
-    const orderId = await orderService.postOrder(req.body, req.cookies);
+    const orderId = await orderService.postOrder(
+      req.body,
+      req.headers["x-access-token"]
+    );
     res.status(201).json({ orderId });
   } catch (err) {
     next(err);

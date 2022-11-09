@@ -5,7 +5,7 @@ const userController = Router();
 
 userController.get("/", async (req, res, next) => {
   try {
-    const user = await userService.getThisUser(req.cookies);
+    const user = await userService.getThisUser(req.headers["x-access-token"]);
     res.status(200).json(user);
   } catch (err) {
     next(err);
@@ -13,7 +13,10 @@ userController.get("/", async (req, res, next) => {
 });
 userController.put("/", async (req, res, next) => {
   try {
-    const result = await userService.changePassword(req.cookies, req.body);
+    const result = await userService.changePassword(
+      req.headers["x-access-token"],
+      req.body
+    );
     res.status(200).json(result);
   } catch (err) {
     next(err);

@@ -13,7 +13,7 @@ class OrderService {
     this.randomboxModel = randomboxModel;
     this.userModel = userModel;
   }
-  async getList({ accessToken }) {
+  async getList(accessToken) {
     const token = JWT.decodeToken(accessToken);
     let orders = await this.orderModel.getAllByUser(token.email);
     if (orders.length === 0) throw new Error("주문 이력이 없습니다.");
@@ -25,7 +25,7 @@ class OrderService {
     return orders;
   }
   // 주문결제창에서 고객이 이전에 사용한 이름,주소,전화가 있는지 - 근데 이건 userService에 있어야 될 수도...
-  async getUser({ accessToken }) {
+  async getUser(accessToken) {
     const token = JWT.decodeToken(accessToken);
     const { name, address, phone } = await this.userModel.getByEmail(
       token.email
@@ -47,7 +47,7 @@ class OrderService {
       deliveryPrice,
       totalPrice
     },
-    { accessToken }
+    accessToken
   ) {
     const token = JWT.decodeToken(accessToken);
     await this.userModel.modify(token.email, {
