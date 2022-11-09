@@ -14,6 +14,7 @@ import { Payment } from "../pages/Payment/Payment.js";
 import { Recipt } from "../pages/Recipt/Recipt.js";
 import { SignIn } from "../pages/SignIn/SignIn.js";
 import { RandomBox } from "../pages/RandomBox/RandomBox.js";
+import { QnaBoard } from "../pages/QnaBoard/QnaBoard.js";
 
 const routes = [
   { path: "/", view: Main },
@@ -31,6 +32,7 @@ const routes = [
   { path: "/admin/products", view: AdminProduct },
   { path: "/admin/order", view: AdminOrder },
   { path: "/randombox", view: RandomBox },
+  { path: "/qnaboard", view: QnaBoard },
   { path: "/404", view: NotFound }
 ];
 

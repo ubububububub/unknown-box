@@ -5,6 +5,8 @@ document.adoptedStyleSheets.push(style);
 
 export class Header extends Component {
     template() {
+      const isLogin = !!localStorage.getItem('role');
+      const isAdmin = localStorage.getItem('role') === "admin"        
         return (
             `<section class="header">
             <div class="header-fix">
@@ -13,11 +15,14 @@ export class Header extends Component {
                 <div class="header-top-box">
                   <ul class="header-toplist">
                     <li>
-                      <a href="/login">로그인</a>
+                      ${!isLogin ? `<a href='/login'>로그인</a>`: `<a href="javascript:void(0);" id='login_logout_btn'>로그아웃</a>` }
                     </li>
                     <li>
-                      <a href="/signin">회원가입</a>
-                    </li>          
+                      ${!isLogin ? `<a href='/signin'>회원가입</a>` :  `<a href='/mypage'>마이페이지</a>` }
+                    </li>
+                    <li>
+                      ${isAdmin ?  `<a>관리자 계정입니다.</a>`: ``}
+                    </li>
                   </ul>
                   <ul class="header-btlist">
                     <li class="box-basket">
@@ -45,6 +50,7 @@ export class Header extends Component {
                     <div class="depth2">
                       <ul>
                         <li class=""><a href="#">신상품</a></li>
+                         <li><a href="/qnaboard">Q&A 게시판</a></li>
                         <li><a href="#">베스트</a></li>
                         <li><a href="#">알뜰</a></li>
                       </ul>
@@ -69,7 +75,19 @@ export class Header extends Component {
           </section>`
         );
     }
-    setEvent() {
+     setEvent() {
+      if(qs('#login_logout_btn')){
+          qs('#login_logout_btn').addEventListener("click",(e) => {
+            e.preventDefault();
+            function deleteCookie(token) {
+                document.cookie = token + "=; expires=Thu, 01 Jan 1970 00:00:01 GMT;";
+            }
+            deleteCookie("accessToken");
+            deleteCookie("refreshToken");
+            localStorage.removeItem("role");
+            location.reload();
+        });
+      }
         qs("#btn-nav-open").addEventListener("click",() => {
            qs("#side-nav").style.left = 0;
         })
@@ -78,7 +96,6 @@ export class Header extends Component {
           qs("#side-nav").style.left = "-450px";
         })
     }
-
 }
 
 export default Header;
