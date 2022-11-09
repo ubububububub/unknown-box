@@ -96,6 +96,22 @@ adminController.get("/order/:orderId", async (req, res, next) => {
     next(err);
   }
 });
+adminController.put("/order/:orderId", async (req, res, next) => {
+  try {
+    const result = await orderService.changeState(req.params, req.body);
+    res.status(200).json(result);
+  } catch (err) {
+    next(err);
+  }
+});
+adminController.delete("/order/:orderId", async (req, res, next) => {
+  try {
+    const result = await orderService.cancel(req.params);
+    res.status(200).json(result);
+  } catch (err) {
+    next(err);
+  }
+});
 adminController.get("/randombox", async (req, res, next) => {
   try {
     const randomboxes = await randomboxService.getRandomboxes();
