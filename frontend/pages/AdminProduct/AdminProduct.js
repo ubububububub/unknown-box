@@ -1,8 +1,8 @@
 import Component from "../../core/Component.js";
 import Navbar from "../../components/Navbar/Navbar.js";
-import ProductList from "../../components/ProductList/ProductList.js";
 import { qs } from "../../utils/index.js";
 import { ADMIN_PAGE_NAV } from "../../constants/index.js";
+import { ProductList } from "../../components/ProductList/ProductList.js";
 
 export class AdminProduct extends Component {
   template() {

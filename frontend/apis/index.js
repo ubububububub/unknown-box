@@ -282,6 +282,69 @@ export async function deleteCategory(id) {
   }
 }
 
+export async function getBoxList() {
+  try {
+    const response = await fetch("http://localhost:8080/api/admin/randombox", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
+    return await response.json();
+  } catch (err) {
+    console.dir(err);
+  }
+}
+
+export async function addBox(data) {
+  try {
+    await fetch(`http://localhost:8080/api/admin/randombox`, {
+      method: "POST",
+      body: data
+    });
+  } catch (err) {
+    console.dir(err);
+  }
+}
+
+export async function getBoxDetail(id) {
+  try {
+    const response = await fetch(`http://localhost:8080/api/randombox/${id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
+    return response.json();
+  } catch (err) {
+    console.dir(err);
+  }
+}
+
+export async function editBox(id, data) {
+  try {
+    await fetch(`http://localhost:8080/api/admin/randombox/${id}`, {
+      method: "PUT",
+      body: data
+    });
+  } catch (err) {
+    console.dir(err);
+  }
+}
+
+export async function deletebox(id) {
+  try {
+    await fetch(`http://localhost:8080/api/admin/randombox/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
+  } catch (err) {
+    console.dir(err);
+  }
+}
+
 export async function getProductList() {
   try {
     const response = await fetch("http://localhost:8080/api/admin/product", {
@@ -300,7 +363,6 @@ export async function addProduct(data) {
   try {
     await fetch(`http://localhost:8080/api/admin/product`, {
       method: "POST",
-
       body: data
     });
   } catch (err) {
@@ -362,12 +424,15 @@ export async function getOrderList() {
 
 export async function getOrderDetail(id) {
   try {
-    const response = await fetch(`http://localhost:8080/api/order/${id}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json"
+    const response = await fetch(
+      `http://localhost:8080/api/admin/order/${id}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json"
+        }
       }
-    });
+    );
     return response.json();
   } catch (err) {
     console.dir(err);
@@ -380,10 +445,7 @@ export async function editOrder(id, data) {
       `http://localhost:8080/api/admin/order/${id}`,
       {
         method: "PUT",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data)
+        body: data
       }
     );
     return response.json();
