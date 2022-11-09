@@ -4,7 +4,7 @@ import { qs, editForm, MODAL } from "../../utils/index.js";
 import Modal from "../Modal/Modal.js";
 import { isClassContained } from "../../utils/index.js";
 
-export default class ProductItem extends Component {
+export default class Product extends Component {
   template() {
     const { productId, Name, category, price, thumbnail, discount } =
       this.props.product;

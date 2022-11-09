@@ -1,6 +1,7 @@
 import { Admin } from "../pages/Admin/Admin.js";
-import { AdminProduct } from "../pages/AdminProduct/AdminProduct.js";
+import { AdminRandomBox } from "../pages/AdminRandomBox/AdminRandomBox.js";
 import { AdminOrder } from "../pages/AdminOrder/AdminOrder.js";
+import { AdminProduct } from "../pages/AdminProduct/AdminProduct.js";
 import { Cart } from "../pages/Cart/Cart.js";
 import { Detail } from "../pages/Detail/Detail.js";
 import { Login } from "../pages/Login/Login.js";
@@ -29,7 +30,8 @@ const routes = [
   { path: "/order/payment", view: Payment },
   { path: "/order/recipt", view: Recipt },
   { path: "/admin", view: Admin },
-  { path: "/admin/products", view: AdminProduct },
+  { path: "/admin/randombox", view: AdminRandomBox },
+  { path: "/admin/product", view: AdminProduct },
   { path: "/admin/order", view: AdminOrder },
   { path: "/qnaboard", view: QnaBoard },
   { path: "/randombox/:id", view: RandomBox },

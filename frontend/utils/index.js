@@ -46,7 +46,7 @@ export function editForm(elementList) {
   return MODAL.Form(
     {},
     elementList.map(({ className, title, attr = {} }) =>
-      MODAL.Div({ classname: className }, [
+      MODAL.Div({ className: className }, [
         MODAL.Span({}, [title]),
         MODAL.Input({ ...attr })
       ])

@@ -5,7 +5,11 @@ export const ADMIN_PAGE_NAV = [
   },
   {
     title: "상품 관리",
-    path: "/admin/products"
+    path: "/admin/randombox"
+  },
+  {
+    title: "아이템 관리",
+    path: "/admin/product"
   },
   {
     title: "결제 내역 관리",

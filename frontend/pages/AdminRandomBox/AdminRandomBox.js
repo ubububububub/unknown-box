@@ -1,10 +1,10 @@
 import Component from "../../core/Component.js";
 import Navbar from "../../components/Navbar/Navbar.js";
+import ProductList from "../../components/RandomBoxList/RandomBoxList.js";
 import { qs } from "../../utils/index.js";
 import { ADMIN_PAGE_NAV } from "../../constants/index.js";
-import { ProductList } from "../../components/ProductList/ProductList.js";
 
-export class AdminProduct extends Component {
+export class AdminRandomBox extends Component {
   template() {
     return `
           <ul id="product-nav"></ul>
