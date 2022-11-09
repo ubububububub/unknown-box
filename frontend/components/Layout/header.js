@@ -4,13 +4,9 @@ import {qs} from "../../utils/index.js";
 document.adoptedStyleSheets.push(style);
 
 export class Header extends Component {
-
     template() {
-        let loginYn = localStorage.getItem('role');
-        let loginModal,myPageYn,adminPageYn  = "";
-        loginYn ==  null ? loginModal = "<a href='/login'>로그인</a>" :  loginModal = `<a href="javasciript:void(0);" id="login_logout_btn">로그아웃</a>`;
-        loginYn ==  null ? myPageYn = "<a href='/signin'>회원가입</a>" :  myPageYn = `<a href='/mypage'>마이페이지</a>`;
-        (loginYn !== null && loginYn.value == 'admin') ? adminPageYn = "<a>관리자 계정입니다.</a>" :'';
+      const isLogin = !!localStorage.getItem('role');
+      const isAdmin = localStorage.getItem('role') === "admin"        
         return (
             `<section class="header">
             <div class="header-fix">
@@ -19,13 +15,13 @@ export class Header extends Component {
                 <div class="header-top-box">
                   <ul class="header-toplist">
                     <li>
-                     ${loginModal} 
+                      ${!isLogin ? `<a href='/login'>로그인</a>`: `<a href="javascript:void(0);" id='login_logout_btn'>로그아웃</a>` }
                     </li>
                     <li>
-                      ${myPageYn}
+                      ${!isLogin ? `<a href='/signin'>회원가입</a>` :  `<a href='/mypage'>마이페이지</a>` }
                     </li>
                     <li>
-                      ${adminPageYn}
+                      ${isAdmin ?  `<a>관리자 계정입니다.</a>`: ``}
                     </li>
                   </ul>
                   <ul class="header-btlist">
@@ -79,8 +75,9 @@ export class Header extends Component {
           </section>`
         );
     }
-    setEvent() {
-        qs('#login_logout_btn').addEventListener("click",(e) => {
+     setEvent() {
+      if(qs('#login_logout_btn')){
+          qs('#login_logout_btn').addEventListener("click",(e) => {
             e.preventDefault();
             function deleteCookie(token) {
                 document.cookie = token + "=; expires=Thu, 01 Jan 1970 00:00:01 GMT;";
@@ -90,17 +87,15 @@ export class Header extends Component {
             localStorage.removeItem("role");
             location.reload();
         });
+      }
         qs("#btn-nav-open").addEventListener("click",() => {
-            qs("#side-nav").style.left = 0;
+           qs("#side-nav").style.left = 0;
         })
 
         qs("#side-nav-close").addEventListener("click",() => {
-            qs("#side-nav").style.left = "-450px";
+          qs("#side-nav").style.left = "-450px";
         })
     }
-
-
-
 }
 
 export default Header;
