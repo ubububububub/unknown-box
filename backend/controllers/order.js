@@ -38,7 +38,7 @@ orderController.put("/:orderId", async (req, res, next) => {
     next(err);
   }
 });
-adminController.delete("/:orderId", async (req, res, next) => {
+orderController.delete("/:orderId", async (req, res, next) => {
   try {
     const result = await orderService.cancel(req.params);
     res.status(200).json(result);
