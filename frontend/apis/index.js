@@ -195,3 +195,18 @@ export async function postRandomBoxResult(product) {
     console.dir(err);
   }
 }
+
+export async function getKakaoLoginToken(email) {
+  try {
+    const res = await fetch("http://localhost:8080/api/auth/kakao/tokens", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ email })
+    });
+    return await res.json();
+  } catch (err) {
+    console.dir(err);
+  }
+}

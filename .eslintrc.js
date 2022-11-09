@@ -45,6 +45,7 @@ module.exports = {
     "no-new": "off",
     "import/no-unresolved": "off",
     "no-return-assign": "off",
-    "array-callback-return": "off"
+    "array-callback-return": "off",
+    "no-restricted-globals": "off"
   }
 };

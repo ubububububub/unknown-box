@@ -3,31 +3,30 @@ import { Schema } from "mongoose";
 const userSchema = new Schema({
   email: {
     type: String,
-    required: true,
+    required: true
   },
   password: {
-    type: String,
-    required: true,
+    type: String
   },
   name: {
-    type: String,
+    type: String
   },
   address: {
-    type: String,
+    type: String
   },
   phone: {
-    type: String,
+    type: String
   },
   role: {
     type: String,
     required: true,
-    default: "user",
+    default: "user"
   },
   refreshToken: {
     type: String,
     required: true,
-    default: "empty",
-  },
+    default: "empty"
+  }
 });
 
 export { userSchema };

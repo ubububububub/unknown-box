@@ -49,22 +49,6 @@ class Store {
       cartItem => cartItem.name === product.name
     );
 
-    // 옵션 중복 체크 로직
-    // const checkedNameCartList = cartList.filter(
-    //   cartItem => cartItem.name === product.name
-    // );
-
-    // const isDuplication = checkedNameCartList.some(cartItem => {
-    //   const productOptions = Object.values(product.options);
-    //   const cartItemOptions = Object.values(cartItem.options);
-
-    //   for (let i = 0; i < productOptions.length; i += 1) {
-    //     if (productOptions[i] === cartItemOptions[i]) {
-    //       return true;
-    //     }
-    //   }
-    // });
-
     return isDuplicationExist;
   }
 

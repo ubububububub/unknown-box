@@ -4,6 +4,7 @@ import { AdminOrder } from "../pages/AdminOrder/AdminOrder.js";
 import { Cart } from "../pages/Cart/Cart.js";
 import { Detail } from "../pages/Detail/Detail.js";
 import { Login } from "../pages/Login/Login.js";
+import { KakaoCallback } from "../pages/KakaoCallback/KakaoCallback.js";
 import { Main } from "../pages/Main/Main.js";
 import { MyOrder } from "../pages/MyOrder/MyOrder.js";
 import { MyOrderEdit } from "../pages/MyOrderEdit/MyOrderEdit.js";
@@ -18,6 +19,7 @@ const routes = [
   { path: "/", view: Main },
   { path: "/signin", view: SignIn },
   { path: "/login", view: Login },
+  { path: "/login/kakao/callback", view: KakaoCallback },
   { path: "/mypage", view: MyPage },
   { path: "/mypage/order", view: MyOrder },
   { path: "/mypage/order/:id", view: MyOrderEdit },
