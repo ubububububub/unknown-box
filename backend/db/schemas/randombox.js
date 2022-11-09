@@ -9,7 +9,7 @@ const randomboxSchema = new Schema(
     },
     categoryName: { type: String, required: true },
     price: { type: Number, required: true, default: 0 },
-    discount: { type: Number, required: true, default: this.price }, // this가 되나?
+    discount: { type: Number, required: true, default: 0 },
     count: { type: Number, required: true, default: 0 },
     description: { type: String, required: false },
     thumbnail: { type: String, required: true, default: "#" }, // default: 상품준비중.jpg
