@@ -12,9 +12,9 @@ export class Login extends Component {
     <div id="login_section">
     <H1>로그인</H1>
     <div id="login-form_section"></div>
-    <button class="login-signin_btn">아직 회원이 아니신가요?</button>
-    <button class="login-login_btn">로그인</button>
-    <button class="login-kakao-login_btn">카카오 로그인</button>
+    <button class="login-signin_btn form_btn">아직 회원이 아니신가요?</button>
+    <button class="login-login_btn form_btn">로그인</button>
+    <button class="login-kakao-login_btn form_btn">카카오 로그인</button>
     </div>
     </div>`;
     // <button class="login-logout_btn">로그아웃</button>

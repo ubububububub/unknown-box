@@ -27,7 +27,7 @@
   width: 100%;
 }
 
-button {
+.form_btn {
   width: 100%;
   max-width: 432px;
   height: 48px;

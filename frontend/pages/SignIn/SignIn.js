@@ -17,7 +17,7 @@ export class SignIn extends Component {
             <div id="signin_section">
             <H1>회원가입</H1>
             <div id="signin-form_section"></div>
-            <button class="signin_signin_btn">회원가입</button>
+            <button class="signin_signin_btn form_btn">회원가입</button>
             </div>
             </div>
             `;
