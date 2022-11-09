@@ -6,6 +6,52 @@ export function qsAll(selector) {
   return Array.from(document.querySelectorAll(selector));
 }
 
+export function isClassContained(dom, selector) {
+  return dom.classList.contains(selector);
+}
+
+export function createDom(tagName, attr = {}, children = []) {
+  const dom = document.createElement(tagName);
+
+  for (let [key, value] of Object.entries(attr)) {
+    dom[key] = value;
+  }
+  children.forEach(child => dom.append(child));
+
+  return dom;
+}
+
+export const MODAL = {
+  Form(attr, children) {
+    return createDom("form", attr, children);
+  },
+  Input(attr) {
+    return createDom("input", attr);
+  },
+  Span(attr, children) {
+    return createDom("span", attr, children);
+  },
+
+  Div(attr, children) {
+    return createDom("div", attr, children);
+  },
+  Button(attr, children) {
+    return createDom("button", attr, children);
+  }
+};
+
+export function editForm(elementList) {
+  return MODAL.Form(
+    {},
+    elementList.map(({ className, title, attr = {} }) =>
+      MODAL.Div({ classname: className }, [
+        MODAL.Span({}, [title]),
+        MODAL.Input({ ...attr })
+      ])
+    )
+  );
+}
+
 export function emailValidation(email) {
   const RegExp =
     /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
