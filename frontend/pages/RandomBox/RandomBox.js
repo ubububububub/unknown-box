@@ -100,8 +100,14 @@ export class RandomBox extends Component {
     qs(".randombox_img").addEventListener("click", async () => {
       this.hideReadyImgAndText();
       this.showCarousel();
+      const id = this.getProductId();
 
-      // await postRandomBoxResult(this.state.productItems[this.state.count]);
+      if (!id) return;
+
+      await postRandomBoxResult({
+        result: this.state.productItems[this.state.count],
+        id
+      });
 
       this.startCarouselAnimation();
     });
@@ -180,5 +186,15 @@ export class RandomBox extends Component {
     }
 
     return [...newProducts, ...newProducts, ...newProducts];
+  }
+
+  getProductId() {
+    const params = location.pathname.split("/")[2].split("=");
+
+    if (params.length !== 2 && params[0] !== "id") {
+      return;
+    }
+
+    return Number(params[1]);
   }
 }

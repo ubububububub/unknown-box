@@ -31,8 +31,8 @@ const routes = [
   { path: "/admin", view: Admin },
   { path: "/admin/products", view: AdminProduct },
   { path: "/admin/order", view: AdminOrder },
-  { path: "/randombox", view: RandomBox },
   { path: "/qnaboard", view: QnaBoard },
+  { path: "/randombox/:id", view: RandomBox },
   { path: "/404", view: NotFound }
 ];
 
