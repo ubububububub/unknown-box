@@ -1,8 +1,5 @@
 @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css");
 
-* {
-  font-family: Pretendard, sans-serif;
-}
 html,
 body,
 div,
@@ -90,6 +87,7 @@ video {
   font-size: 100%;
   font: inherit;
   vertical-align: baseline;
+  font-family: Pretendard, sans-serif;
 }
 /* HTML5 display-role reset for older browsers */
 article,
