@@ -4,6 +4,7 @@ export async function postSignIn(formData) {
       method: "POST",
       body: formData
     });
+    window.history.back();
   } catch (err) {
     console.dir(err);
   }
@@ -19,10 +20,9 @@ export async function postLogin(formData) {
     localStorage.setItem("accessToken", json.accessToken);
     localStorage.setItem("refreshToken", json.refreshToken);
     localStorage.setItem("role", json.role);
+    window.history.back();
   } catch (err) {
     console.dir(err);
-  } finally {
-    window.history.back();
   }
 }
 
