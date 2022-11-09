@@ -21,6 +21,22 @@ class RandomboxService {
       })
     );
   }
+  async getTwoForMain() {
+    const randomboxes = await this.randomboxModel.getAll();
+    if (randomboxes.length < 2) return [];
+    const one = Math.floor(Math.random() * randomboxes.length);
+    const two = Math.floor(Math.random() * randomboxes.length);
+    return [randomboxes[one], randomboxes[two]].map(
+      ({ _id, randomboxName, categoryName, price, discount, thumbnail }) => ({
+        randomboxId: _id,
+        randomboxName,
+        categoryName,
+        price,
+        discount,
+        thumbnail
+      })
+    );
+  }
   async getRandombox({ randomboxId }) {
     const randombox = await this.randomboxModel.getOne(randomboxId);
     if (!randombox) throw new Error("등록되지 않은 랜덤박스입니다.");

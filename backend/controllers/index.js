@@ -11,6 +11,8 @@ import { adminCheck } from "../middlewares/adminCheck";
 import { orderController } from "./order";
 import { userController } from "./user";
 import { randomboxController } from "./randombox";
+import { qnaboardController } from "./qnaboard";
+import { mainController } from "./main";
 
 const router = Router();
 
@@ -24,5 +26,7 @@ router.use("/category", categoryController);
 router.use("/order", checkTokens, orderController);
 router.use("/user", checkTokens, userController);
 router.use("/randombox", randomboxController);
+router.use("/qnaboard", qnaboardController);
+router.use("/main", mainController);
 
 export { router };

@@ -3,7 +3,8 @@ import {
   productService,
   categoryService,
   orderService,
-  randomboxService
+  randomboxService,
+  qnaboardService
 } from "../services";
 
 const adminController = Router();
@@ -147,6 +148,38 @@ adminController.put("/randombox/:randomboxId", async (req, res, next) => {
 adminController.delete("/randombox/:randomboxId", async (req, res, next) => {
   try {
     const result = await randomboxService.remove(req.params);
+    res.status(200).json(result);
+  } catch (err) {
+    next(err);
+  }
+});
+adminController.get("/qnaboard", async (req, res, next) => {
+  try {
+    const qnaboards = await qnaboardService.getList();
+    res.status(200).json(qnaboards);
+  } catch (err) {
+    next(err);
+  }
+});
+adminController.get("/qnaboard/:qnaboardId", async (req, res, next) => {
+  try {
+    const qnaboard = await qnaboardService.getPostForAdmin(req.params);
+    res.status(200).json(qnaboard);
+  } catch (err) {
+    next(err);
+  }
+});
+adminController.post("/qnaboard/:qnaboardId", async (req, res, next) => {
+  try {
+    const qnaboard = await qnaboardService.addAnswer(req.params, req.body);
+    res.status(201).json(qnaboard);
+  } catch (err) {
+    next(err);
+  }
+});
+adminController.delete("/qnaboard/:qnaboardId", async (req, res, next) => {
+  try {
+    const result = await qnaboardService.removeByAdmin(req.params);
     res.status(200).json(result);
   } catch (err) {
     next(err);
