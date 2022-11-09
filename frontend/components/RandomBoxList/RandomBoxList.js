@@ -4,27 +4,27 @@ import ImageUploadForm from "../ImageUploadForm/ImageUploadForm.js";
 import Modal from "../Modal/Modal.js";
 import RandomBox from "../RandomBox/RandomBox.js";
 // import {
-//   getProducts,
-//   editProduct,
-//   deleteProduct,
-//   addProduct
+//   getBoxList,
+//   editBox,
+//   deleteBox,
+//   addBox
 // } from "../../apis/index.js";
 
 export default class RandomBoxList extends Component {
   template() {
     return `
-      <ul class="products-list">
-          <button type="button" class="btn product-addBtn">추가하기</button>
+      <ul class="randombox-list">
+          <button type="button" class="btn randombox-addBtn">추가하기</button>
       </ul>`;
   }
 
   mounted() {
-    // const productList = await getProducts();
+    // const boxList = await getboxList();
     const mockData = [
       {
-        productId: 1,
-        Name: "의류 랜덤박스 Platinum",
-        category: "의류",
+        randomboxId: 1,
+        randomboxName: "의류 랜덤박스 Platinum",
+        categoryName: "의류",
         price: 39900,
         productMin: 5000,
         productMax: 100000,
@@ -35,9 +35,9 @@ export default class RandomBoxList extends Component {
         products: ["아이템1", "아이템2", "아이템3"]
       },
       {
-        productId: 2,
-        Name: "전자제품 랜덤박스 Dia",
-        category: "전자제품",
+        randomboxId: 2,
+        randomboxName: "전자제품 랜덤박스 Dia",
+        categoryName: "전자제품",
         price: 49900,
         productMin: 5000,
         productMax: 120000,
@@ -48,9 +48,9 @@ export default class RandomBoxList extends Component {
         products: ["아이템1", "아이템2", "아이템3"]
       },
       {
-        productId: 3,
-        Name: "의류 랜덤박스 Gold",
-        category: "의류",
+        randomboxId: 3,
+        randomboxName: "의류 랜덤박스 Gold",
+        categoryName: "의류",
         price: 29900,
         productMin: 2000,
         productMax: 80000,
@@ -62,14 +62,14 @@ export default class RandomBoxList extends Component {
       }
     ];
 
-    this.state = { productList: mockData };
+    this.state = { boxList: mockData };
 
-    this.state.productList.forEach(
-      product =>
-        new RandomBox(qs(".products-list"), {
-          product,
-          editProduct: this.editProduct.bind(this),
-          deleteProduct: this.deleteProduct.bind(this)
+    this.state.boxList.forEach(
+      box =>
+        new RandomBox(qs(".randombox-list"), {
+          box,
+          editBoxProduct: this.editBoxProduct.bind(this),
+          deleteBoxProduct: this.deleteBoxProduct.bind(this)
         })
     );
   }
@@ -78,60 +78,65 @@ export default class RandomBoxList extends Component {
     this.target.addEventListener("click", e => {
       if (!isClassContained(e.target, "btn")) return;
 
-      if (isClassContained(e.target, "product-addBtn")) {
+      if (isClassContained(e.target, "randombox-addBtn")) {
         this.addHandler();
       }
     });
   }
 
-  addHandler() {
+  async addHandler() {
     const domList = [
-      { className: "product-name", title: "상품명", attr: { name: "Name" } },
+      {
+        className: "randombox-img"
+      },
+      {
+        className: "randombox-name",
+        title: "상품명",
+        attr: { name: "randomboxName" }
+      },
       {
         className: "category-name",
         title: "카테고리명",
-        attr: { name: "category" }
+        attr: { name: "categoryName" }
       },
       { className: "price", title: "가격", attr: { name: "price" } },
       { className: "discount", title: "할인율", attr: { name: "discount" } },
       { className: "count", title: "재고", attr: { name: "count" } },
       {
-        className: "item-min-price",
+        className: "product-min-price",
         title: "최저가",
         attr: { name: "productMin" }
       },
       {
-        className: "item-max-price",
+        className: "product-max-price",
         title: "최고가",
         attr: { name: "productMax" }
       },
       { className: "desc", title: "상세설명", attr: { name: "description" } }
     ];
 
-    new Modal(qs("#app"), {
+    await new Modal(qs("#app"), {
       type: "ADD",
       headerText: "상품 추가하기",
       contents: { body: [editForm(domList)] },
-      submit: this.addProduct.bind(this)
+      submit: this.addBoxProduct.bind(this)
     });
-    new ImageUploadForm(qs("form > .product-img"));
+    new ImageUploadForm(qs("form > .randombox-img"));
   }
 
-  async addProduct(data) {
-    // await API.addProduct(data);
-    location = "/admin/products";
+  async addBoxProduct(data) {
+    // await addBox(data);
+    location = "/admin/randombox";
   }
 
-  async deleteProduct(id) {
-    // await API.deleteCategory(id);
-    const remain = this.state.productList.filter(
-      product => product.productId !== id
-    );
-    this.setState({ productList: remain });
+  async deleteBoxProduct(id) {
+    // await deleteBox(id);
+    const remain = this.state.boxList.filter(box => box.randomboxId !== id);
+    this.setState({ boxList: remain });
   }
 
-  async editProduct(id, data) {
-    // await API.editCategory(id, data);
-    location = "/admin/products";
+  async editBoxProduct(id, data) {
+    // await editBox(id, data);
+    location = "/admin/randombox";
   }
 }

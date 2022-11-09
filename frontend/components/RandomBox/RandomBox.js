@@ -1,27 +1,32 @@
-//import { editProduct, deleteProduct } from "../../apis/index.js";
+//import { editBox, deleteBox } from "../../apis/index.js";
 import Component from "../../core/Component.js";
-import { qs, editForm, MODAL } from "../../utils/index.js";
+import { qs, editForm, MODAL, isClassContained } from "../../utils/index.js";
 import Modal from "../Modal/Modal.js";
-import { isClassContained } from "../../utils/index.js";
 
 export default class Product extends Component {
   template() {
-    const { productId, Name, category, price, thumbnail, discount } =
-      this.props.product;
+    const {
+      randomboxId,
+      randomboxName,
+      categoryName,
+      price,
+      thumbnail,
+      discount
+    } = this.props.box;
 
     return `
-            <li class="product-item-${productId}">
+            <li class="randombox-${randomboxId}">
               <div class="image">
                 <img src="${thumbnail}"/>
               </div>
               <div class="info">
-                <div class="product-name">
+                <div class="randombox-name">
                   <span>상품명</span>
-                  <span>${Name}</span>
+                  <span>${randomboxName}</span>
                 </div>
                 <div class="category-name">
                   <span>카테고리명</span>
-                  <span>${category}</span>
+                  <span>${categoryName}</span>
                 </div>
                 <div class="price">
                   <span>가격</span>
@@ -33,8 +38,8 @@ export default class Product extends Component {
                   }
                 </div>
               </div>
-                <button type="button" class="btn product-editBtn">수정하기</button>
-                <button type="button" class="btn product-delBtn">삭제하기</button>
+                <button type="button" class="btn randombox-editBtn">수정하기</button>
+                <button type="button" class="btn randombox-delBtn">삭제하기</button>
             </li>
         `;
   }
@@ -44,26 +49,26 @@ export default class Product extends Component {
   }
 
   setEvent() {
-    const productLi = qs(`.product-item-${this.props.product.productId}`);
-    productLi.addEventListener("click", e => {
-      if (isClassContained(e.target, "product-editBtn")) {
+    const boxLi = qs(`.randombox-${this.props.box.randomboxId}`);
+    boxLi.addEventListener("click", e => {
+      if (isClassContained(e.target, "randombox-editBtn")) {
         this.editHandler();
       }
 
-      if (isClassContained(e.target, "product-delBtn")) {
+      if (isClassContained(e.target, "randombox-delBtn")) {
         this.deleteHandler();
       }
     });
   }
 
   editHandler() {
-    // const product = await API.getProductDetail(this.props.product.id);
+    // const box = await getBoxDetail(this.props.box.randomboxId);
     // props 데이터가 아닌 디테일 정보를 받아왔다 가정
     const {
-      productId,
+      randomboxId,
       thumbnail,
-      Name,
-      category,
+      randomboxName,
+      categoryName,
       price,
       discount,
       productMin,
@@ -71,19 +76,18 @@ export default class Product extends Component {
       description,
       products,
       count
-    } = this.props.product;
+    } = this.props.box;
 
     const domList = [
       {
-        className: "product-name",
+        className: "box-name",
         title: "상품명",
-        attr: { name: "Name", value: Name }
+        attr: { name: "Name", value: randomboxName }
       },
       {
         className: "category-name",
         title: "카테고리명",
-        text: category,
-        attr: { name: "category", value: category }
+        attr: { name: "category", value: categoryName }
       },
       {
         className: "price",
@@ -104,12 +108,12 @@ export default class Product extends Component {
         attr: { name: "count", value: count }
       },
       {
-        className: "item-min-price",
+        className: "product-min-price",
         title: "최저가",
         attr: { name: "prouctMin", value: productMin }
       },
       {
-        className: "item-max-price",
+        className: "product-max-price",
         title: "최고가",
         attr: { name: "productMax", value: productMax }
       },
@@ -121,22 +125,22 @@ export default class Product extends Component {
     ];
 
     new Modal(qs("#app"), {
-      id: productId,
+      id: randomboxId,
       headerText: "상품 수정",
       type: "EDIT",
       contents: {
         body: [
           editForm(domList),
-          MODAL.Div({ className: "item-list" }, [
-            ...products.map(item => MODAL.Span({}, [item]))
+          MODAL.Div({ className: "products-list" }, [
+            ...products.map(product => MODAL.Span({}, [product]))
           ])
         ]
       },
-      submit: this.props.editProduct.bind(this)
+      submit: this.props.editBoxProduct.bind(this)
     });
   }
 
   deleteHandler() {
-    this.props.deleteProduct(this.props.product.productId);
+    this.props.deleteBoxProduct(this.props.box.randomboxId);
   }
 }

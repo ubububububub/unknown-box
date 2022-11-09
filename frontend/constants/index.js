@@ -4,11 +4,11 @@ export const ADMIN_PAGE_NAV = [
     path: "/admin"
   },
   {
-    title: "상품 관리",
+    title: "랜덤박스 상품 관리",
     path: "/admin/randombox"
   },
   {
-    title: "아이템 관리",
+    title: "상품 아이템 관리",
     path: "/admin/product"
   },
   {
