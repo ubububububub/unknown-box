@@ -19,7 +19,7 @@ const orderSchema = new Schema(
       type: [
         {
           randombox: { type: Schema.Types.ObjectId, ref: "randomboxes" },
-          boxCount: { type: Number, required: true },
+          count: { type: Number, required: true },
           _id: false
         }
       ]
