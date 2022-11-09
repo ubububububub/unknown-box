@@ -12,20 +12,20 @@ class CategoryModel {
     const category = await Category.findOne({ _id });
     return category;
   }
-  async regist(name) {
-    const category = await Category.create({ name });
+  async regist(categoryName) {
+    await Category.create({ categoryName });
+  }
+  async findByName(categoryName) {
+    const category = await Category.findOne({ categoryName });
     return category;
   }
-  async modify(_id, name) {
-    const category = await Category.updateOne({ _id }, { name });
-    return category;
+  async modify(_id, categoryName) {
+    const result = await Category.updateOne({ _id }, { categoryName });
+    return result;
   }
   async remove(_id) {
     const result = await Category.deleteOne({ _id });
     return result;
-  }
-  async addProduct(name, product) {
-    await Category.updateOne({ name }, { $push: { products: product } });
   }
 }
 

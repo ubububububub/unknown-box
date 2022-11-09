@@ -13,13 +13,7 @@ export class Admin extends Component {
   }
 
   mounted() {
-    const mockData = [
-      { title: "식품" },
-      { title: "가전" },
-      { title: "화장품" }
-    ];
-
     new Navbar(qs("#category-nav"), ADMIN_PAGE_NAV);
-    new CategoryList(qs("#category-list-container"), mockData);
+    new CategoryList(qs("#category-list-container"));
   }
 }
