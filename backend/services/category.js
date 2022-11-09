@@ -12,6 +12,14 @@ class CategoryService {
       categoryName
     }));
   }
+  async getListForMain() {
+    const categories = await this.categoryModel.getAll();
+    if (categories.length === 0) return [];
+    return categories.map(({ _id, categoryName }) => ({
+      categoryId: _id,
+      categoryName
+    }));
+  }
   async regist({ categoryName }) {
     const category = await this.categoryModel.findByName(categoryName);
     if (category) throw new Error("이미 등록된 카테고리입니다.");
