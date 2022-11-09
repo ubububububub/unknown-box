@@ -24,7 +24,7 @@ adminController.post("/category", async (req, res, next) => {
     next(err);
   }
 });
-adminController.put("/:categoryId", async (req, res, next) => {
+adminController.put("/category/:categoryId", async (req, res, next) => {
   try {
     const result = await categoryService.modify(req.params, req.body);
     res.status(200).json(result);
@@ -32,7 +32,7 @@ adminController.put("/:categoryId", async (req, res, next) => {
     next(err);
   }
 });
-adminController.delete("/:categoryId", async (req, res, next) => {
+adminController.delete("/category/:categoryId", async (req, res, next) => {
   try {
     const result = await categoryService.remove(req.params);
     res.status(200).json(result);
@@ -48,7 +48,7 @@ adminController.get("/product", async (req, res, next) => {
     next(err);
   }
 });
-adminController.get("/:productId", async (req, res, next) => {
+adminController.get("/product/:productId", async (req, res, next) => {
   try {
     const product = await productService.getProduct(req.params);
     res.status(200).json(product);
