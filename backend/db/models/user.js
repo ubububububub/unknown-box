@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import { userSchema } from "../schemas";
 
-const model = mongoose.model("User", userSchema);
+const model = mongoose.model("users", userSchema);
 
 class UserModel {
   constructor(model) {
@@ -9,8 +9,7 @@ class UserModel {
   }
 
   async create(userInfo) {
-    const newUser = await this.model.create(userInfo);
-    return newUser;
+    await this.model.create(userInfo);
   }
 
   async getAll() {
@@ -37,8 +36,8 @@ class UserModel {
     return user;
   }
   async changePassword(email, password) {
-    const user = await this.model.updateOne({ email }, { password });
-    return user;
+    const result = await this.model.updateOne({ email }, { password });
+    return result;
   }
 }
 

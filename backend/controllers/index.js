@@ -10,6 +10,7 @@ import { categoryController } from "./category";
 import { adminCheck } from "../middlewares/adminCheck";
 import { orderController } from "./order";
 import { userController } from "./user";
+import { randomboxController } from "./randombox";
 
 const router = Router();
 
@@ -22,5 +23,6 @@ router.use("/admin", checkTokens, adminCheck, adminController);
 router.use("/category", categoryController);
 router.use("/order", checkTokens, orderController);
 router.use("/user", checkTokens, userController);
+router.use("/randombox", randomboxController);
 
 export { router };

@@ -13,16 +13,22 @@ class ProductModel {
     return product;
   }
   async regist(productInfo) {
-    const product = await Product.create(productInfo);
-    return product;
+    await Product.create(productInfo);
   }
   async remove(_id) {
     const result = await Product.deleteOne({ _id });
     return result;
   }
   async modify(_id, productInfo) {
-    const product = await Product.updateOne({ _id }, productInfo);
-    return product;
+    const result = await Product.updateOne({ _id }, productInfo);
+    return result;
+  }
+  async getSome(categoryName, min, max) {
+    const products = await Product.find({
+      categoryName,
+      price: { $gte: min, $lte: max }
+    });
+    return products;
   }
 }
 

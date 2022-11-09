@@ -5,54 +5,64 @@ class ProductService {
     this.productModel = productModel;
     this.categoryModel = categoryModel;
   }
-  async getList() {
+  // async getList()
+  async getProducts() {
     const products = await this.productModel.getAll();
-    if (products.length === 0) return { error: "등록된 상품이 없습니다." };
-    return products.map(product => ({
-      id: product._id,
-      name: product.name,
-      price: product.price,
-      thumbnail: product.thumbnail
-    }));
+    if (products.length === 0) throw new Error("등록된 상품이 없습니다.");
+    return products.map(
+      ({ _id, productName, categoryName, price, thumbnail }) => ({
+        productId: _id,
+        productName,
+        categoryName,
+        price,
+        thumbnail
+      })
+    );
   }
   async regist({
-    name,
+    productName,
+    categoryName,
     price,
     count,
     description,
-    imageUrl,
-    thumbnail,
-    category
+    thumbnail
   }) {
+    const category = await this.categoryModel.findByName(categoryName);
+    if (!category) throw new Error("등록되지 않은 카테고리입니다.");
     const productInfo = {};
-    if (name) productInfo.name = name;
+    if (productName) productInfo.productName = productName;
+    productInfo.categoryName = categoryName;
     if (price) productInfo.price = Number(price);
     if (count) productInfo.count = Number(count);
     if (description) productInfo.description = description;
-    if (imageUrl && imageUrl.length) productInfo.imageUrl = imageUrl;
     if (thumbnail) productInfo.thumbnail = thumbnail;
-    const product = await this.productModel.regist(productInfo);
-    await categoryModel.addProduct(category, product);
-    return product._id;
+    await this.productModel.regist(productInfo);
   }
   async modify(
     { productId },
-    { name, price, count, description, imageUrl, thumbnail }
+    { productName, price, count, description, thumbnail }
   ) {
     const productInfo = {};
-    if (name) productInfo.name = name;
+    if (productName) productInfo.productName = productName;
     if (price) productInfo.price = Number(price);
     if (count) productInfo.count = Number(count);
     if (description) productInfo.description = description;
-    if (imageUrl && imageUrl.length) productInfo.imageUrl = imageUrl;
     if (thumbnail) productInfo.thumbnail = thumbnail;
-    const product = await this.productModel.modify(productId, productInfo);
-    return product;
+    const result = await this.productModel.modify(productId, productInfo);
+    return { result: result.matchedCount ? "success" : "false" };
   }
   async getProduct({ productId }) {
     const product = await this.productModel.getOne(productId);
-    if (!product) return { error: "없는 상품입니다." };
-    return product;
+    if (!product) throw new Error("없는 상품입니다.");
+    return {
+      productId: product._id,
+      productName: product.name,
+      categoryName: product.category,
+      price: product.price,
+      count: product.count,
+      description: product.description,
+      thumbnail: product.thumbnail
+    };
   }
   async remove({ productId }) {
     const result = await this.productModel.remove(productId);
