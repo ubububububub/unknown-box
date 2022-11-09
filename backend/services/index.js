@@ -5,6 +5,7 @@ import { productService } from "./product";
 import { categoryService } from "./category";
 import { orderService } from "./order";
 import { randomboxService } from "./randombox";
+import { qnaboardService } from "./qnaboard";
 
 export {
   userService,
@@ -13,5 +14,6 @@ export {
   productService,
   categoryService,
   orderService,
-  randomboxService
+  randomboxService,
+  qnaboardService
 };
