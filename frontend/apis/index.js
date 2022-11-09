@@ -21,6 +21,8 @@ export async function postLogin(formData) {
     localStorage.setItem("role", json.role);
   } catch (err) {
     console.dir(err);
+  } finally {
+    window.history.back();
   }
 }
 

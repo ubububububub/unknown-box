@@ -1,4 +1,6 @@
 import { qs } from "../../utils/index.js";
+import style from "./toast.css" assert { type: "css" };
+document.adoptedStyleSheets.push(style);
 
 class Toast {
   constructor(text) {

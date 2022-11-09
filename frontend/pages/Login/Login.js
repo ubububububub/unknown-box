@@ -2,13 +2,22 @@ import { postLogin } from "../../apis/index.js";
 import Form from "../../components/Form/Form.js";
 import Component from "../../core/Component.js";
 import { emailValidation, passwordValidation, qs } from "../../utils/index.js";
+import style from "./login.css" assert { type: "css" };
+document.adoptedStyleSheets.push(style);
 
 export class Login extends Component {
   template() {
-    return `<div id="login_contaniner"></div>
-    <button class="login_login_btn">로그인</button>
-    <button class="login_signin_btn">회원가입</button>
-    <button class="login_logout_btn">로그아웃</button>`;
+    return `
+    <div id="login_contaniner">
+    <div id="login_section">
+    <H1>로그인</H1>
+    <div id="login-form_section"></div>
+    <button class="login-signin_btn">아직 회원이 아니신가요?</button>
+    <button class="login-login_btn">로그인</button>
+    <button class="login-kakao-login_btn">카카오 로그인</button>
+    </div>
+    </div>`;
+    // <button class="login-logout_btn">로그아웃</button>
   }
 
   mounted() {
@@ -24,19 +33,19 @@ export class Login extends Component {
         type: "password"
       }
     ];
-    new Form(qs("#login_contaniner"), { formChildren });
+    new Form(qs("#login-form_section"), { formChildren });
   }
 
   setEvent() {
-    qs(".login_signin_btn").addEventListener("click", () => {
+    qs(".login-signin_btn").addEventListener("click", () => {
       window.location = "/signin";
     });
 
-    qs(".login_logout_btn").addEventListener("click", e => {
-      this.handleLogout(e);
-    });
+    // qs(".login-logout_btn").addEventListener("click", e => {
+    //   this.handleLogout(e);
+    // });
 
-    qs(".login_login_btn").addEventListener("click", e => {
+    qs(".login-login_btn").addEventListener("click", e => {
       this.handleLogin(e);
     });
   }

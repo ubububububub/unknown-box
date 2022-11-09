@@ -7,15 +7,15 @@ class ImageUploadForm extends Component {
   }
 
   template() {
-    const { base64Image, previewImage } = this.state;
-    return `<div class="image-upload-form-container">
-                <div class="image-upload-form-preview">
+    const { base64Image } = this.state;
+    return `<div class="image-upload-form_container">
+                <div class="image-upload-form_preview">
                     <div>
                         <img src="${base64Image}" />
                     </div>
                 </div>
-                <input type="file" accept="image/*" class="image-upload-form-input" />
-                <input type="hidden" id="hiddenInput" name="thumbnail" class="image-upload-form-hidden-input"/> 
+                <input type="file" accept="image/*" class="image-upload-form_input" />
+                <input type="hidden" id="hiddenInput" name="thumbnail" class="image-upload-form_hidden-input"/> 
             </div>
 
     `;
@@ -28,7 +28,7 @@ class ImageUploadForm extends Component {
   }
 
   setEvent() {
-    qs(".image-upload-form-input").addEventListener("change", e => {
+    qs(".image-upload-form_input").addEventListener("change", e => {
       this.handleImageUpload(e);
     });
   }
@@ -47,7 +47,7 @@ class ImageUploadForm extends Component {
         this.setState({
           base64Image: reader.result
         });
-        qs(".image-upload-form-hidden-input").setAttribute(
+        qs(".image-upload-form_hidden-input").setAttribute(
           "value",
           reader.result
         );
