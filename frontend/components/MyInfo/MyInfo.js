@@ -4,7 +4,7 @@ import { qs } from "../../utils/index.js";
 
 class MyInfo extends Component {
   template() {
-    const { email, role } = this.state;
+    const { email, role } = this.props;
     return `
               <div>
                 <h2>환영합니다!</h2>
@@ -20,10 +20,6 @@ class MyInfo extends Component {
               </div>
               <button class="mypage_myinfo_modal_btn">비밀번호수정하기</button>
     `;
-  }
-
-  async setup() {
-    this.state = await getMyInfo();
   }
 
   setEvent() {
