@@ -18,7 +18,7 @@ export class ProductList extends Component {
       </ul>`;
   }
 
-  mounted() {
+  async mounted() {
     // const products = await getProductList();
     const mockData = [
       {
@@ -94,7 +94,7 @@ export class ProductList extends Component {
 
     await new Modal(qs("#app"), {
       type: "ADD",
-      headerText: "상품 추가하기",
+      headerText: "상품 아이템 추가하기",
       contents: { body: [editForm(domList)] },
       submit: this.addProductItem.bind(this)
     });

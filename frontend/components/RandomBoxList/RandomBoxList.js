@@ -18,7 +18,7 @@ export default class RandomBoxList extends Component {
       </ul>`;
   }
 
-  mounted() {
+  async mounted() {
     // const boxList = await getboxList();
     const mockData = [
       {
@@ -117,7 +117,7 @@ export default class RandomBoxList extends Component {
 
     await new Modal(qs("#app"), {
       type: "ADD",
-      headerText: "상품 추가하기",
+      headerText: "랜덤박스 추가하기",
       contents: { body: [editForm(domList)] },
       submit: this.addBoxProduct.bind(this)
     });
