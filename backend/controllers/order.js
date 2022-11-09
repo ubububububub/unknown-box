@@ -5,7 +5,7 @@ const orderController = Router();
 
 orderController.get("/", async (req, res, next) => {
   try {
-    const orders = await orderService.getList(req.cookies);
+    const orders = await orderService.getList(req.headers["x-access-token"]);
     res.status(200).json(orders);
   } catch (err) {
     next(err);
@@ -13,8 +13,11 @@ orderController.get("/", async (req, res, next) => {
 });
 orderController.post("/", async (req, res, next) => {
   try {
-    const order = await orderService.postOrder(req.body, req.cookies);
-    res.status(201).json(order);
+    const orderId = await orderService.postOrder(
+      req.body,
+      req.headers["x-access-token"]
+    );
+    res.status(201).json({ orderId });
   } catch (err) {
     next(err);
   }
@@ -29,8 +32,16 @@ orderController.get("/:orderId", async (req, res, next) => {
 });
 orderController.put("/:orderId", async (req, res, next) => {
   try {
-    const order = await orderService.putOrder(req.params, req.body);
-    res.status(200).json(order);
+    const result = await orderService.putOrder(req.params, req.body);
+    res.status(200).json(result);
+  } catch (err) {
+    next(err);
+  }
+});
+adminController.delete("/:orderId", async (req, res, next) => {
+  try {
+    const result = await orderService.cancel(req.params);
+    res.status(200).json(result);
   } catch (err) {
     next(err);
   }

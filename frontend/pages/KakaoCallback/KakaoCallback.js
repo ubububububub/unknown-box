@@ -1,5 +1,5 @@
 import Component from "../../core/Component.js";
-import { getKakaoLoginToken } from "../../apis/index.js";
+import { postKakaoLoginToken } from "../../apis/index.js";
 
 export class KakaoCallback extends Component {
   setEvent() {
@@ -20,7 +20,9 @@ export class KakaoCallback extends Component {
       return;
     }
 
-    const { newAccessToken, newRefreshToken } = await getKakaoLoginToken(email);
+    const { newAccessToken, newRefreshToken } = await postKakaoLoginToken(
+      email
+    );
 
     localStorage.setItem("accessToken", newAccessToken);
     localStorage.setItem("refreshToken", newRefreshToken);
