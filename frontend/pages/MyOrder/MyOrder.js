@@ -6,11 +6,15 @@ import { qs } from "../../utils/index.js";
 
 export class MyOrder extends Component {
   template() {
-    return `<ul id="mypage-nav"></ul>
-            <div>
-              <span>내 주문목록</span>
-              <div id="list-container"></div>
-            </div>`;
+    return `
+    <div id="mypage-container">
+      <div id="mypage-nav"></div>
+      <div>
+        <span>내 주문목록</span>
+        <div id="list-container"></div>
+      </div>
+    </div>
+    `;
   }
 
   mounted() {
