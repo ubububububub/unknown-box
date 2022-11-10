@@ -71,7 +71,7 @@ export class RandomBox extends Component {
       await putRandomBoxResult({
         randomboxId: this.state.randomboxId,
         orderId: this.state.orderId,
-        productId: this.state.productItems.prodcuts[this.state.count]._id
+        productId: this.state.productItems.prodcuts[this.state.count].productId
       });
 
       this.startCarouselAnimation();
