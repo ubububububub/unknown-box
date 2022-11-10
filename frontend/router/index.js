@@ -1,7 +1,6 @@
 import { Admin } from "../pages/Admin/Admin.js";
 import { AdminRandomBox } from "../pages/AdminRandomBox/AdminRandomBox.js";
 import { AdminOrder } from "../pages/AdminOrder/AdminOrder.js";
-import { AdminOrderEdit } from "../pages/AdminOrderEdit/AdminOrderEdit.js";
 import { AdminProduct } from "../pages/AdminProduct/AdminProduct.js";
 import { Cart } from "../pages/Cart/Cart.js";
 import { Detail } from "../pages/Detail/Detail.js";
@@ -17,6 +16,7 @@ import { Recipt } from "../pages/Recipt/Recipt.js";
 import { SignIn } from "../pages/SignIn/SignIn.js";
 import { RandomBox } from "../pages/RandomBox/RandomBox.js";
 import { QnaBoard } from "../pages/QnaBoard/QnaBoard.js";
+import { Rank } from "../pages/Rank/Rank.js";
 
 const routes = [
   { path: "/", view: Main },
@@ -26,6 +26,7 @@ const routes = [
   { path: "/mypage", view: MyPage },
   { path: "/mypage/order", view: MyOrder },
   { path: "/mypage/order/:id", view: MyOrderEdit },
+  { path: "/rank", view: Rank },
   { path: "/detail/:id", view: Detail },
   { path: "/cart", view: Cart },
   { path: "/order/payment", view: Payment },
@@ -34,8 +35,7 @@ const routes = [
   { path: "/admin/randombox", view: AdminRandomBox },
   { path: "/admin/product", view: AdminProduct },
   { path: "/admin/order", view: AdminOrder },
-  { path: "/admin/order/:id", view: AdminOrderEdit },
-  { path: "/qnaboard", view: QnaBoard },
+  { path: "/qnaboard/:mode", view: QnaBoard },
   { path: "/randombox/:id", view: RandomBox },
   { path: "/404", view: NotFound }
 ];

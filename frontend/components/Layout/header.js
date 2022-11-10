@@ -46,26 +46,19 @@ export class Header extends Component {
                 </div>
                 <ul class="">
                   <li class="menu">
-                    <a href="#">SHOP</a>
+                      <a href="#">카테고리</a>
+                      <div class="depth2">
+                        <a href="#">가전</a>
+                      </div>
+                      <div class="depth2">
+                        <a href="#">의류</a>
+                      </div>
+                    </li>
+                  <li class="menu">
+                    <a href="#">고객센터</a>
                     <div class="depth2">
                       <ul>
-                        <li class=""><a href="#">신상품</a></li>
-                         <li><a href="/qnaboard">Q&A 게시판</a></li>
-                        <li><a href="#">베스트</a></li>
-                        <li><a href="#">알뜰</a></li>
-                      </ul>
-                    </div>
-                  </li>
-                  <li class="menu">
-                    <a href="#">CATEGORY</a>
-                    <div class="depth2">
-                      <a href="#">가전</a>
-                    </div>
-                    <div class="depth2">
-                      <a href="#">의류</a>
-                      <ul class="depth3">
-                        <li><a href="#">- 상의</a></li>
-                        <li><a href="#">- 하의</a></li>
+                         <li><a href="/qnaboard/list">Q&A 게시판</a></li>
                       </ul>
                     </div>
                   </li>

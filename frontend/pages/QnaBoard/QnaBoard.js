@@ -1,14 +1,27 @@
-import QnaList from "../../components/QnaBoard/QnaList.js";
+import QnaList from "../../components/QnaList/QnaList.js";
+import QnaWrite from "../../components/QnaWrite/QnaWrite.js";
+import QnaView from "../../components/QnaView/QnaView.js";
 import Component from "../../core/Component.js";
 import { qs } from "../../utils/index.js";
 
 
 export class QnaBoard extends Component {
     template() {
-        return `<table class="table table-hover" id="qna-container">`;
+        return `
+        <section class="qnaboard-title">
+            <h2>Q&A 게시판</h2>
+            <h5>자유롭게 문의 남겨주세요~</h5>
+        </section>
+        <section id="qna-container"></section>`;
     }
 
     mounted() {
-            new QnaList(qs("#qna-container"));
+            if(this.props ==='list'){
+                new QnaList(qs("#qna-container"));
+            }else if(this.props === 'write'){
+                new QnaWrite(qs("#qna-container"),this.props);
+            }else{
+                new QnaView(qs("#qna-container"),this.props);
+            }
     }
 }

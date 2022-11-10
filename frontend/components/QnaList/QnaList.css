@@ -1,0 +1,68 @@
+@charset "utf-8";
+
+.qnaboard-title { 
+  text-align: center;
+}
+
+#qna-container {
+  margin: 50px;
+}
+
+#qna-container table {
+  width: 100%;
+}
+
+#qna-container table, 
+#qna-container td, 
+#qna-container th {
+  border-collapse : collapse;
+  border-spacing: 0;
+};
+
+#qna-container table.qnalist-table tr {
+  border-top: 1px solid #333;
+}
+
+#qna-container table.qnalist-table {
+  border-top: 2px solid #333;
+}
+
+#qna-container table.qnalist-table th {
+  padding: 10px;
+  border-bottom: 1px solid #e1e1e1;
+}
+
+#qna-container table.qnalist-table td{
+  padding: 15px;
+  border-bottom: 1px solid #e1e1e1;
+}
+
+#qna-container table.qnalist-table td:nth-child(1) {
+  width: 10%;
+}
+#qna-container table.qnalist-table td:nth-child(2) {
+  width: 70%;
+}
+
+#qna-container table.qnalist-table td:last-child {
+  width: 20%;
+}
+
+#qna-container table.qnalist-table tr:hover td {
+  background-color: #fff5cb;
+}
+
+#qna-container .qna-list-paging {
+  margin: 20px 0;
+  text-align: center;
+}
+
+#qna-container .qna-list-paging input {
+  margin: 0 3px;
+  border: none;
+}
+
+#qna-container .qnalist-btn {
+  display: block;
+  text-align: right;
+}
