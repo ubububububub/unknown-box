@@ -28,11 +28,12 @@ const orderSchema = new Schema(
       type: [
         {
           product: { type: Schema.Types.ObjectId, ref: "products" },
-          count: { type: Number, required: true },
           _id: false
         }
       ]
     },
+    randomboxesCount: Number,
+    productsCount: Number,
     boxesPrice: { type: Number, required: true, default: 0 },
     deliveryPrice: { type: Number, required: true, default: 0 },
     totalPrice: { type: Number, required: true, default: 0 }
