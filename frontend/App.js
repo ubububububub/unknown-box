@@ -32,6 +32,16 @@ const App = async () => {
       route: routes[routes.length - 1],
       result: true
     };
+  } else if (!match.route.isPublic && !localStorage.getItem("accessToken")) {
+    match = {
+      route: routes[2],
+      result: true
+    };
+  } else if (match.route?.isAdmin && localStorage.getItem("role") !== "admin") {
+    match = {
+      route: routes[routes.length - 1],
+      result: true
+    };
   }
 
   new Header(qs("#header"));

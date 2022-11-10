@@ -19,25 +19,40 @@ import { RandomBox } from "../pages/RandomBox/RandomBox.js";
 import { QnaBoard } from "../pages/QnaBoard/QnaBoard.js";
 
 const routes = [
-  { path: "/", view: Main },
-  { path: "/signin", view: SignIn },
-  { path: "/login", view: Login },
-  { path: "/login/kakao/callback", view: KakaoCallback },
-  { path: "/mypage", view: MyPage },
-  { path: "/mypage/order", view: MyOrder },
-  { path: "/mypage/order/:id", view: MyOrderEdit },
-  { path: "/detail/:id", view: Detail },
-  { path: "/cart", view: Cart },
-  { path: "/order/payment", view: Payment },
-  { path: "/order/recipt", view: Recipt },
-  { path: "/admin", view: Admin },
-  { path: "/admin/randombox", view: AdminRandomBox },
-  { path: "/admin/product", view: AdminProduct },
-  { path: "/admin/order", view: AdminOrder },
-  { path: "/admin/order/:id", view: AdminOrderEdit },
-  { path: "/qnaboard", view: QnaBoard },
-  { path: "/randombox/:id", view: RandomBox },
-  { path: "/404", view: NotFound }
+  { path: "/", view: Main, isPublic: true },
+  { path: "/signin", view: SignIn, isPublic: true },
+  { path: "/login", view: Login, isPublic: true },
+  { path: "/login/kakao/callback", view: KakaoCallback, isPublic: true },
+  { path: "/mypage", view: MyPage, isPublic: false },
+  { path: "/mypage/order", view: MyOrder, isPublic: false },
+  { path: "/mypage/order/:id", view: MyOrderEdit, isPublic: false },
+  { path: "/detail/:id", view: Detail, isPublic: true },
+  { path: "/cart", view: Cart, isPublic: true },
+  { path: "/order/payment", view: Payment, isPublic: false },
+  { path: "/order/recipt", view: Recipt, isPublic: false },
+  { path: "/admin", view: Admin, isPublic: false, isAdmin: true },
+  {
+    path: "/admin/randombox",
+    view: AdminRandomBox,
+    isPublic: false,
+    isAdmin: true
+  },
+  {
+    path: "/admin/product",
+    view: AdminProduct,
+    isPublic: false,
+    isAdmin: true
+  },
+  { path: "/admin/order", view: AdminOrder, isPublic: false, isAdmin: true },
+  {
+    path: "/admin/order/:id",
+    view: AdminOrderEdit,
+    isPublic: false,
+    isAdmin: true
+  },
+  { path: "/qnaboard", view: QnaBoard, isPublic: true },
+  { path: "/randombox/:id", view: RandomBox, isPublic: false },
+  { path: "/404", view: NotFound, isPublic: true }
 ];
 
 export default routes;
