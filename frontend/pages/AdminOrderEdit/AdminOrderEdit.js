@@ -4,7 +4,7 @@ import { qs } from "../../utils/index.js";
 
 export class AdminOrderEdit extends Component {
   setup() {
-    const orderId = location.pathname.split("/").pop();
+    const orderId = this.props[0];
     //const order = await getOrderDetail(orderId);
 
     const mockData = {
@@ -29,6 +29,7 @@ export class AdminOrderEdit extends Component {
     };
     this.state = { order: mockData };
   }
+
   template() {
     const {
       orderId,

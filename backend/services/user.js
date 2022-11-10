@@ -42,6 +42,12 @@ class UserService {
     );
     return { result: result.matchedCount ? "success" : "fail" };
   }
+  async getInMyPage(accessToken) {
+    const { email } = JWT.decodeToken(accessToken);
+    const { benefit, randomboxes, products, role } =
+      await this.model.getByEmail(email);
+    return { email, benefit, randomboxes, products, role };
+  }
 }
 
 const userService = new UserService(userModel);

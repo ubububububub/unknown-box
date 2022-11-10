@@ -1,10 +1,25 @@
-import { productModel, categoryModel, randomboxModel } from "../db/models";
+import {
+  userModel,
+  productModel,
+  categoryModel,
+  orderModel,
+  randomboxModel
+} from "../db/models";
+import JWT from "../utils/token";
 
 class RandomboxService {
-  constructor(randomboxModel, categoryModel, productModel) {
+  constructor(
+    randomboxModel,
+    categoryModel,
+    productModel,
+    orderModel,
+    userModel
+  ) {
     this.randomboxModel = randomboxModel;
     this.categoryModel = categoryModel;
     this.productModel = productModel;
+    this.orderModel = orderModel;
+    this.userModel = userModel;
   }
   async getRandomboxes() {
     const randomboxes = await this.randomboxModel.getAll();
@@ -153,12 +168,32 @@ class RandomboxService {
     const result = await this.randomboxModel.remove(randomboxId);
     return { result: result.deletedCount ? "success" : "fail" };
   }
+  async openRandombox({ randomboxId }, { orderId, productId }, accessToken) {
+    const { count } = await this.productModel.getOne(productId);
+    await this.productModel.modify(productId, { count: count - 1 });
+    const order = await this.orderModel.getOne(orderId);
+    const state =
+      order.randomboxesCount === order.productsCount + 1
+        ? "상품준비중"
+        : order.state;
+    await this.orderModel.modify(orderId, {
+      $push: { products: { product: productId } }
+    });
+    const { email } = JWT.decodeToken(accessToken);
+    await this.userModel.modify(email, {
+      state,
+      $pull: { randomboxes: { randomboxId } },
+      productsCount: order.productsCount + 1
+    });
+  }
 }
 
 const randomboxService = new RandomboxService(
   randomboxModel,
   categoryModel,
-  productModel
+  productModel,
+  orderModel,
+  userModel
 );
 
 export { randomboxService };

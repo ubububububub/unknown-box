@@ -32,6 +32,32 @@ const userSchema = new Schema(
     phone: {
       type: String
     },
+    benefit: { type: Number, requried: true, default: 0 },
+    randomboxes: {
+      type: [
+        {
+          randomboxId: String,
+          randomboxName: String,
+          thumbnail: String,
+          price: Number,
+          orderId: String
+        }
+      ],
+      required: true,
+      default: []
+    },
+    products: {
+      type: [
+        {
+          productId: String,
+          productName: String,
+          thumbnail: String,
+          price: Number
+        }
+      ],
+      required: true,
+      default: []
+    },
     role: {
       type: String,
       required: true,

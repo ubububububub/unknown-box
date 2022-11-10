@@ -2,7 +2,11 @@ import { Schema } from "mongoose";
 
 const orderSchema = new Schema(
   {
-    state: { type: String, required: true, default: "상품준비중" },
+    state: {
+      type: String,
+      required: true,
+      default: "랜덤박스를 마저 열어주세요."
+    },
     orderEmail: { type: String, required: true },
     orderName: { type: String, required: true },
     orderPhone: { type: String, required: true },
@@ -28,11 +32,12 @@ const orderSchema = new Schema(
       type: [
         {
           product: { type: Schema.Types.ObjectId, ref: "products" },
-          count: { type: Number, required: true },
           _id: false
         }
       ]
     },
+    randomboxesCount: Number,
+    productsCount: Number,
     boxesPrice: { type: Number, required: true, default: 0 },
     deliveryPrice: { type: Number, required: true, default: 0 },
     totalPrice: { type: Number, required: true, default: 0 }
