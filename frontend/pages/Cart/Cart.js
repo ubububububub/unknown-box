@@ -8,39 +8,6 @@ document.adoptedStyleSheets.push(style);
 
 export class Cart extends Component {
   setup() {
-    cart.setCartItem({
-      name: "MATIN FLEECE ZIP UP JUMPER IN BLACK",
-      price: 198000,
-      options: {
-        color: "orange",
-        size: "L"
-      }
-    });
-    cart.setCartItem({
-      name: "[유아인 착용 상품] 리버서블 플리스 숏 패딩 재킷 [블랙/크림] ",
-      price: 89900,
-      options: {
-        color: "yellow",
-        size: "M"
-      }
-    });
-    cart.setCartItem({
-      name: "NJ1DN82B 여성 눕시 하이브리드 다운 볼 자켓",
-      price: 249000,
-      options: {
-        color: "blue",
-        size: "M"
-      }
-    });
-    cart.setCartItem({
-      name: "[유아인 착용 상품] 리버서블 플리스 숏 패딩 재킷 [블랙/크림] ",
-      price: 89900,
-      options: {
-        color: "yellow",
-        size: "M"
-      }
-    });
-
     this.state = {
       cartList: cart.getCartList(),
       setCartList: this.setState.bind(this),
@@ -70,6 +37,12 @@ export class Cart extends Component {
       return;
     }
 
-    return (window.location = "/order/payment");
+    if (!this.isEmpty()) {
+      return (window.location = "/order/payment");
+    }
+  }
+
+  isEmpty() {
+    return this.state.cartList.length === 0;
   }
 }
