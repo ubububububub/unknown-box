@@ -218,7 +218,7 @@ export async function postPayment(formData, product) {
     await fetch(`http://localhost:8080/api/order`, {
       method: "POST",
       "X-Access-Token": localStorage.getItem("accessToken"),
-      body: JSON.stringify({ orderAddress: formData, ...product })
+      body: JSON.stringify({ ...formData, ...product })
     });
   } catch (err) {
     if (err.response.status === 403) {
