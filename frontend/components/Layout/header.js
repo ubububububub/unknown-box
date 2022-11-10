@@ -85,9 +85,6 @@ export class Header extends Component {
     if (qs("#login_logout_btn")) {
       qs("#login_logout_btn").addEventListener("click", e => {
         e.preventDefault();
-        function deleteCookie(token) {
-          document.cookie = token + "=; expires=Thu, 01 Jan 1970 00:00:01 GMT;";
-        }
         localStorage.removeItem("accessToken");
         localStorage.removeItem("refreshToken");
         localStorage.removeItem("role");
