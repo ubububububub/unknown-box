@@ -1,22 +1,16 @@
-#admin-order-list-wrapper {
-  width: 80%;
-  border-collapse: separate;
-  border-spacing: 0 50px;
+#admin_order-list-wrapper {
   text-align: center;
   font-size: 18px;
+  border-collapse: separate;
 }
 
-#admin-order-list-wrapper > thead {
+#admin_order-list-wrapper th {
   font-weight: 600;
   font-size: 20px;
+  padding: 20px 0;
 }
 
-#admin-order-list-wrapper > tbody {
-}
-
-#admin-order-list-wrapper tr {
+#admin_order-list-wrapper td {
   border-bottom: 1px solid #e7e6ef;
-}
-
-#admin-order-list-wrapper td:last-child {
+  padding: 25px 0;
 }

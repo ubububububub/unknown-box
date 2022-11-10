@@ -9,7 +9,7 @@ document.adoptedStyleSheets.push(style);
 export default class CategoryList extends Component {
   template() {
     return `<button type="button" class="category-addBtn">추가하기</button>
-            <ul class="category-list"></ul>`;
+            <ul class="admin_category-list"></ul>`;
   }
 
   async mounted() {
@@ -26,7 +26,7 @@ export default class CategoryList extends Component {
     };
 
     this.state.category.forEach(({ categoryId, categoryName }) => {
-      new CategoryItem(qs(".category-list"), {
+      new CategoryItem(qs(".admin_category-list"), {
         categoryId,
         categoryName,
         editCategoryName: this.editCategoryName.bind(this),

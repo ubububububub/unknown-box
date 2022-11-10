@@ -9,15 +9,15 @@ document.adoptedStyleSheets.push(style);
 export class AdminOrder extends Component {
   template() {
     return `
-          <section id="admin-order-container">
-            <div id="admin-order-nav"></div>
-            <table id="admin-order-list-wrapper"></table>
+          <section id="admin_order-container">
+            <div id="admin_order-nav"></div>
+            <table id="admin_order-list-wrapper"></table>
           </section>
         `;
   }
 
   mounted() {
-    new Navbar(qs("#admin-order-nav"), ADMIN_PAGE_NAV);
-    new OrderList(qs("#admin-order-list-wrapper"));
+    new Navbar(qs("#admin_order-nav"), ADMIN_PAGE_NAV);
+    new OrderList(qs("#admin_order-list-wrapper"));
   }
 }

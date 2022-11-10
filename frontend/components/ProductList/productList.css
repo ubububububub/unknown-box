@@ -1,0 +1,17 @@
+.admin_product-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.product-addBtn {
+  width: 100px;
+  height: 40px;
+  background: #e7e6ef;
+  border: none;
+  border-radius: 2px;
+  text-align: center;
+  color: #ffffff;
+  margin-right: 40px;
+}

@@ -14,10 +14,8 @@ document.adoptedStyleSheets.push(style);
 
 export class ProductList extends Component {
   template() {
-    return `
-      <ul class="product-list">
-          <button type="button" class="btn product-addBtn">추가하기</button>
-      </ul>`;
+    return `<button type="button" class="btn product-addBtn">추가하기</button>
+            <ul class="admin_product-list"></ul>`;
   }
 
   async mounted() {
@@ -28,7 +26,8 @@ export class ProductList extends Component {
         productName: "에어팟",
         categoryName: "전자제품",
         price: 190000,
-        thumbnail: "#",
+        thumbnail:
+          "https://i.picsum.photos/id/32/400/400.jpg?hmac=QyKPcU_C9dLLat_LHQnq5_FJlOJPGxo2okcvlCjXQYQ",
         count: 10,
         description: ""
       },
@@ -49,6 +48,24 @@ export class ProductList extends Component {
         thumbnail: "#",
         count: 10,
         description: ""
+      },
+      {
+        productId: 1,
+        productName: "에어팟",
+        categoryName: "전자제품",
+        price: 190000,
+        thumbnail: "#",
+        count: 10,
+        description: ""
+      },
+      {
+        productId: 1,
+        productName: "에어팟",
+        categoryName: "전자제품",
+        price: 190000,
+        thumbnail: "#",
+        count: 10,
+        description: ""
       }
     ];
 
@@ -56,7 +73,7 @@ export class ProductList extends Component {
 
     this.state.products.forEach(
       product =>
-        new Product(qs(".product-list"), {
+        new Product(qs(".admin_product-list"), {
           product,
           editProductItem: this.editProductItem.bind(this),
           deleteProductItem: this.deleteProductItem.bind(this)

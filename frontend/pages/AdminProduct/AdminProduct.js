@@ -8,15 +8,15 @@ document.adoptedStyleSheets.push(style);
 
 export class AdminProduct extends Component {
   template() {
-    return `<section id="admin-product-container"> 
-              <div id="admin-product-nav"></div>
-              <div id="admin-product-list-wrapper"></div>
+    return `<section id="admin_product-container"> 
+              <div id="admin_product-nav"></div>
+              <div id="admin_product-list-wrapper"></div>
             </section>
         `;
   }
 
   mounted() {
-    new Navbar(qs("#admin-product-nav"), ADMIN_PAGE_NAV);
-    new ProductList(qs("#admin-product-list-wrapper"));
+    new Navbar(qs("#admin_product-nav"), ADMIN_PAGE_NAV);
+    new ProductList(qs("#admin_product-list-wrapper"));
   }
 }

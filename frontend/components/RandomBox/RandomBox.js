@@ -18,7 +18,7 @@ export default class Product extends Component {
 
     return `
             <li class="randombox-item randombox-${randomboxId}">
-              <div class="thumbnail">
+              <div class="randombox-thumbnail">
                 <img src="${thumbnail}"/>
               </div>
               <div class="info">
@@ -31,9 +31,9 @@ export default class Product extends Component {
                 <div class="price">
                   ${
                     discount
-                      ? `<span style="text-decoration: line-through">${price}</span>
-                          <span>${discount}</span>`
-                      : `<span>${price}</span>`
+                      ? `<span style="text-decoration: line-through">${price.toLocaleString()}원</span>
+                          <span>${discount.toLocaleString()}원</span>`
+                      : `<span>${price.toLocaleString()}원</span>`
                   }
                 </div>
               </div>

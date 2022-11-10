@@ -1,4 +1,4 @@
-.randombox-item {
+.admin_randombox-list .randombox-item {
   width: 25%;
   margin: 40px 0;
   text-align: center;
@@ -8,7 +8,7 @@
   height: 100%;
 }
 
-.randombox-item .thumbnail {
+.admin_randombox-list .randombox-thumbnail {
   width: 150px;
   height: 150px;
   position: relative;
@@ -19,7 +19,7 @@
   margin-bottom: 10px;
 }
 
-.randombox-item .thumbnail .img {
+.admin_randombox-list .randombox-thumbnail .img {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -28,7 +28,7 @@
   border-radius: 12px;
 }
 
-.randombox-item .info {
+.admin_randombox-list .info {
   display: flex;
   height: 80px;
   flex-direction: column;
@@ -38,4 +38,14 @@
 .randombox-item .info .randombox-name {
   font-size: 18px;
   font-weight: 600;
+}
+
+.randombox-btns > button {
+  width: 68px;
+  height: 30px;
+  background-color: #fce374;
+  border: none;
+  border-radius: 2px;
+  text-align: center;
+  color: #ffffff;
 }

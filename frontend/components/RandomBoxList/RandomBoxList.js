@@ -16,7 +16,7 @@ document.adoptedStyleSheets.push(style);
 export default class RandomBoxList extends Component {
   template() {
     return `<button type="button" class="btn randombox-addBtn">추가하기</button>
-              <ul class="randombox-list"></ul>`;
+              <ul class="admin_randombox-list"></ul>`;
   }
 
   async mounted() {
@@ -29,7 +29,8 @@ export default class RandomBoxList extends Component {
         price: 39900,
         productMin: 5000,
         productMax: 100000,
-        thumbnail: "#",
+        thumbnail:
+          "https://i.picsum.photos/id/32/400/400.jpg?hmac=QyKPcU_C9dLLat_LHQnq5_FJlOJPGxo2okcvlCjXQYQ",
         discount: null,
         count: 10,
         description: "",
@@ -97,20 +98,8 @@ export default class RandomBoxList extends Component {
         price: 29900,
         productMin: 2000,
         productMax: 80000,
-        thumbnail: "#",
-        discount: null,
-        count: 7,
-        description: "",
-        products: ["아이템1", "아이템2", "아이템3"]
-      },
-      {
-        randomboxId: 3,
-        randomboxName: "의류 랜덤박스 Gold",
-        categoryName: "의류",
-        price: 29900,
-        productMin: 2000,
-        productMax: 80000,
-        thumbnail: "#",
+        thumbnail:
+          "https://i.picsum.photos/id/32/400/400.jpg?hmac=QyKPcU_C9dLLat_LHQnq5_FJlOJPGxo2okcvlCjXQYQ",
         discount: null,
         count: 7,
         description: "",
@@ -122,7 +111,7 @@ export default class RandomBoxList extends Component {
 
     this.state.boxList.forEach(
       box =>
-        new RandomBox(qs(".randombox-list"), {
+        new RandomBox(qs(".admin_randombox-list"), {
           box,
           editBoxProduct: this.editBoxProduct.bind(this),
           deleteBoxProduct: this.deleteBoxProduct.bind(this)

@@ -1,5 +1,7 @@
 import Component from "../../core/Component.js";
 import { qs, isClassContained } from "../../utils/index.js";
+import style from "./orderItem.css" assert { type: "css" };
+document.adoptedStyleSheets.push(style);
 
 export default class OrderItem extends Component {
   template() {
@@ -10,7 +12,7 @@ export default class OrderItem extends Component {
                 <td>${orderState}</td>
                 <td>${createdAt}</td>
                 <td>${updatedAt}</td>
-                <td>
+                <td class="order-btns">
                     <button type="button" class="order-editBtn">배송상태 수정</button>
                     <button type="button" class="order-cancelBtn">주문 취소</button>
                 </td>

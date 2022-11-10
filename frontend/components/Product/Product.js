@@ -11,27 +11,25 @@ export default class Product extends Component {
     const { productId, productName, categoryName, price, thumbnail } =
       this.props.product;
 
-    return `
-            <li class="product-${productId}">
-              <div class="product-img">
+    return `<li class="product-item product-${productId}">
+              <div class="product-thumbnail">
                 <img src="${thumbnail}"/>
               </div>
               <div class="info">
-                <div class="item-name">
-                  <span>상품명</span>
+                <div class="product-name">
                   <span>${productName}</span>
                 </div>
                 <div class="category-name">
-                  <span>카테고리명</span>
                   <span>${categoryName}</span>
                 </div>
-                <div class="price">
-                  <span>가격</span>
-                  <span>${price}</span>
+                <div class="product-price">
+                  <span>${price.toLocaleString()}원</span>
                 </div>
               </div>
+              <div class="product-btns">
                 <button type="button" class="btn product-editBtn">수정하기</button>
                 <button type="button" class="btn product-delBtn">삭제하기</button>
+              <div>
             </li>
         `;
   }

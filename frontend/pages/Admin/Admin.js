@@ -8,16 +8,15 @@ document.adoptedStyleSheets.push(style);
 
 export class Admin extends Component {
   template() {
-    return `
-            <section id="category-container">  
-              <div id="category-nav"></div>
-              <div id="category-wrapper"></div>
+    return `<section id="admin_category-container">  
+              <div id="admin_category-nav"></div>
+              <div id="admin_category-wrapper"></div>
             </sction>
     `;
   }
 
   mounted() {
-    new Navbar(qs("#category-nav"), ADMIN_PAGE_NAV);
-    new CategoryList(qs("#category-wrapper"));
+    new Navbar(qs("#admin_category-nav"), ADMIN_PAGE_NAV);
+    new CategoryList(qs("#admin_category-wrapper"));
   }
 }
