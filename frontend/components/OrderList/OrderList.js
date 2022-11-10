@@ -27,7 +27,7 @@ export default class OrderList extends Component {
         orderName: "이상조",
         orderPhone: "01074253535",
         orderAddress: {
-          postcode: "123123",
+          postalcode: "123123",
           roadAddress: "사랑시 고백구 행복동",
           jibunAddress: "사랑시 고백구 행복동",
           detailAddress: "상세한주소",
@@ -47,7 +47,7 @@ export default class OrderList extends Component {
         orderName: "고나현",
         orderPhone: "01074253535",
         orderAddress: {
-          postcode: "123123",
+          postalcode: "123123",
           roadAddress: "사랑시 고백구 행복동",
           jibunAddress: "사랑시 고백구 행복동",
           detailAddress: "상세한주소",
@@ -67,7 +67,7 @@ export default class OrderList extends Component {
         orderName: "김지택",
         orderPhone: "01074253535",
         orderAddress: {
-          postcode: "123123",
+          postalcode: "123123",
           roadAddress: "사랑시 고백구 행복동",
           jibunAddress: "사랑시 고백구 행복동",
           detailAddress: "상세한주소",

@@ -4,9 +4,9 @@ import { qs } from "../../utils/index.js";
 class AddressForm extends Component {
   template() {
     const item = this.props;
-    return `<label for="postcode">우편번호</label>
-            <input type="text" id="postcode" name="postcode" ${
-              item.postcode ? `value="${item.postcode}"` : null
+    return `<label for="postalcode">우편번호</label>
+            <input type="text" id="postalcode" name="postalcode" ${
+              item.postalcode ? `value="${item.postalcode}"` : null
             } readonly>
             <input type="button" class="address" value="우편번호 찾기"><br>
             <label for="roadAddress">도로명주소</label>
@@ -33,7 +33,7 @@ class AddressForm extends Component {
     function execDaumPostcode() {
       new daum.Postcode({
         oncomplete(data) {
-          qs("#postcode").value =
+          qs("#postalcode").value =
             qs("#roadAddress").value =
             qs("#jibunAddress").value =
             qs("#detailAddress").value =
@@ -58,7 +58,7 @@ class AddressForm extends Component {
             extraRoadAddr = " (" + extraRoadAddr + ")";
           }
 
-          qs("#postcode").value = data.zonecode;
+          qs("#postalcode").value = data.zonecode;
           qs("#roadAddress").value = roadAddr;
           qs("#jibunAddress").value = data.jibunAddress;
 

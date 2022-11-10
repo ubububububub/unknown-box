@@ -14,7 +14,7 @@ export class AdminOrderEdit extends Component {
       orderName: "이상조",
       orderPhone: "01074253535",
       orderAddress: {
-        postcode: "123123",
+        postalcode: "123123",
         roadAddress: "사랑시 고백구 행복동",
         jibunAddress: "사랑시 고백구 행복동",
         detailAddress: "상세한주소",
@@ -65,7 +65,7 @@ export class AdminOrderEdit extends Component {
                         </div>
                         <div class="order-address">
                             <span>우편 번호</span>
-                            <p>${orderAddress.postcode}</p>
+                            <p>${orderAddress.postalcode}</p>
                             <span>도로명 주소</span>
                             <p>${orderAddress.roadAddress}</p>
                             <span>지번 주소</span>
