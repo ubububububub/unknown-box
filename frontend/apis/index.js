@@ -213,7 +213,7 @@ export async function postKakaoLoginToken(email) {
   }
 }
 
-export async function postPayment(formData, orderId, product) {
+export async function postPayment(formData, product) {
   try {
     await fetch(`http://localhost:8080/api/order/${orderId}`, {
       method: "POST",
