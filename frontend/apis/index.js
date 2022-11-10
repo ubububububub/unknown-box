@@ -213,9 +213,9 @@ export async function postKakaoLoginToken(email) {
   }
 }
 
-export async function postPayment(formData, orderId, product) {
+export async function postPayment(formData, product) {
   try {
-    await fetch(`http://localhost:8080/api/order/${orderId}`, {
+    await fetch(`http://localhost:8080/api/order`, {
       method: "POST",
       "X-Access-Token": localStorage.getItem("accessToken"),
       body: JSON.stringify({ ...formData, ...product })

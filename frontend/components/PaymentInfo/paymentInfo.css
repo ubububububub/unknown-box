@@ -1,7 +1,7 @@
 @charset "utf-8";
 
 #paymentInfo_container {
-  width: 376px;
+  width: 400px;
   height: 896px;
   display: flex;
   flex-direction: column;
@@ -10,6 +10,7 @@
 }
 
 .paymentInfo_sub-container {
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -36,7 +37,9 @@
 
 .paymentInfo_product-info-list {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  gap: 32px;
+  align-items: center;
 }
 
 .paymentInfo_product-name {
@@ -72,4 +75,17 @@
   background-color: #fce374;
   border-radius: 4px;
   font-weight: 600;
+}
+
+.paymentInfo_product-quantity {
+  flex-basis: 64px;
+}
+
+.paymentInfo_product-price {
+  flex-basis: 200px;
+}
+
+.paymentInfo_product-item-category-name-item {
+  margin-top: 4px;
+  color: #a1a8c1;
 }

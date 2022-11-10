@@ -11,5 +11,11 @@
 .payment_content {
   width: 100%;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
+  gap: 256px;
+}
+
+.payment_content #form_section {
+  display: flex;
+  width: 436px;
 }

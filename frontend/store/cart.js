@@ -1,5 +1,4 @@
 import { v4 as uuidv4 } from "https://jspm.dev/uuid";
-import * as CART from "../constants/cart.js";
 import Toast from "../components/Toast/Toast.js";
 
 class Store {
@@ -26,12 +25,12 @@ class Store {
       return false;
     }
 
-    const { price } = product;
+    const { price, quantity } = product;
     const cartList = this.getCartList();
 
     const newCartList = [
       ...cartList,
-      { ...product, id: uuidv4(), quantity: CART.INIT_QUANTITY, total: price }
+      { ...product, id: uuidv4(), quantity, total: price * quantity }
     ];
 
     this.store.setItem("cart", JSON.stringify(newCartList));
@@ -45,8 +44,12 @@ class Store {
       return;
     }
 
-    const isDuplicationExist = cartList.some(
-      cartItem => cartItem.name === product.name
+    const checkedNameCartList = cartList.filter(
+      cartItem => cartItem.randomboxName === product.randomboxName
+    );
+
+    const isDuplicationExist = checkedNameCartList.some(
+      cartItem => product.categoryName === cartItem.categoryName
     );
 
     return isDuplicationExist;
@@ -55,11 +58,7 @@ class Store {
   isEmpty() {
     const cartList = this.getCartList();
 
-    if (cartList.length === 0) {
-      return true;
-    }
-
-    return false;
+    return cartList.length === 0;
   }
 }
 
