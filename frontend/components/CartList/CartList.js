@@ -85,17 +85,30 @@ export class CartList extends Component {
   getCartListTemplate() {
     return (
       this.state.cartList.reduce(
-        (prev, { id, name, price, quantity, total }) => {
+        (
+          prev,
+          { thumbnail, id, randomboxName, categoryName, price, quantity, total }
+        ) => {
           return (
             prev +
             `<li class="cart_item" data-id="${id}">
               <ul class="cart_product-list">
-                <li class="cart_product-item-name">${name}</li>
+                <li class="cart_product-item-thumbnail">
+                  <img class="cart_product-item-thumbnail-img" src="${thumbnail}" alt="상품 이미지" width="75px" height="75px"/>
+                </li>
+                <li class="cart_product-item-name">
+                  <ul class="cart_product-item-name-list">
+                    <li class="cart_product-item-randombox-name-item">${randomboxName}</li>
+                    <li class="cart_product-item-category-name-item">종류: ${categoryName}</li>
+                  </ul>
+                </li>
                 <li class="cart_product-item-price">${price.toLocaleString()}</li>
-                <li class="cart_product-item-quantity">
-                  <button type="button" class="cart_product-button-subtract">-</button>
-                  <span class="cart_product-item-quantity-text">${quantity}</span>
-                  <button type="button" class="cart_product-button-add">+</button>
+                <li class="cart_product-item-quantity>
+                  <div class="temp">
+                    <button type="button" class="cart_product-button-subtract">-</button>
+                    <span class="cart_product-item-quantity-text">${quantity}</span>
+                    <button type="button" class="cart_product-button-add">+</button>
+                  </div>
                 </li>
                 <li class="cart_product-item-total-price">${total.toLocaleString()}</li>
                 <li class="cart_product-item-button">
