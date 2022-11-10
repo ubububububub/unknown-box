@@ -42,7 +42,6 @@ class OrderService {
       orderPhone,
       orderAddress,
       randomboxes,
-      products,
       boxesPrice,
       deliveryPrice,
       totalPrice
@@ -50,14 +49,28 @@ class OrderService {
     accessToken
   ) {
     const token = JWT.decodeToken(accessToken);
-    await this.userModel.modify(token.email, {
+    let randomboxesCount = 0;
+    randomboxes.forEach(randombox => {
+      randombox.count = Number(randombox.count);
+      randomboxesCount += randombox.count;
+    });
+    const order = await this.orderModel.createOrder({
+      orderEmail: token.email,
+      orderName,
+      orderPhone,
+      orderAddress,
+      randomboxes,
+      randomboxesCount,
+      boxesPrice: Number(boxesPrice),
+      deliveryPrice: Number(deliveryPrice),
+      totalPrice: Number(totalPrice)
+    });
+    const userInfo = {
       name: orderName,
       address: orderAddress,
-      phone: orderPhone
-    });
-    randomboxes.forEach(
-      randombox => (randombox.count = Number(randombox.count))
-    );
+      phone: orderPhone,
+      randomboxes: []
+    };
     for (let i = 0; i < randomboxes.length; i++) {
       const randombox = await this.randomboxModel.getOne(
         randomboxes[i].randombox
@@ -65,25 +78,15 @@ class OrderService {
       await this.randomboxModel.modify(randombox._id, {
         count: randombox.count - randomboxes[i].count
       });
-    }
-    products.forEach(product => (product.count = Number(product.count)));
-    for (let i = 0; i < products.length; i++) {
-      const product = await this.productModel.getOne(products[i].product);
-      await this.productModel.modify(product._id, {
-        count: product.count - products[i].count
+      userInfo.randomboxes.push({
+        randomboxId: randombox._id,
+        randomboxName: randombox.randomboxName,
+        thumbnail: randombox.thumbnail,
+        price: randombox.discount,
+        orderId: order._id
       });
     }
-    const order = await this.orderModel.createOrder({
-      orderEmail: token.email,
-      orderName,
-      orderPhone,
-      orderAddress,
-      randomboxes,
-      products,
-      boxesPrice: Number(boxesPrice),
-      deliveryPrice: Number(deliveryPrice),
-      totalPrice: Number(totalPrice)
-    });
+    await this.userModel.modify(token.email, userInfo);
     return order._id;
   }
   async getOrder({ orderId }) {
@@ -103,7 +106,12 @@ class OrderService {
   async getWholeOrder() {
     const orders = await this.orderModel.getAll();
     if (orders.length === 0) throw new Error("주문내역이 없습니다.");
-    return orders.map(order => ({ orderId: order._id, state: order.state }));
+    return orders.map(({ _id, state, createdAt, updatedAt }) => ({
+      orderId: _id,
+      state,
+      createdAt,
+      updatedAt
+    }));
   }
   async changeState({ orderId }, { state }) {
     const result = this.orderModel.modify(orderId, { state });
