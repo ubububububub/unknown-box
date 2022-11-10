@@ -45,11 +45,11 @@ export class Payment extends Component {
     const formProps = {
       formChildren,
       orderAddress: {
-        postcode: "",
-        roadAddress: "",
-        jibunAddress: "",
-        detailAddress: "",
-        extraAddress: ""
+        postalcode: "123123",
+        roadAddress: "사랑시 고백구 행복동",
+        jibunAddress: "사랑시 고백구 행복동",
+        detailAddress: "상세한주소",
+        extraAddress: "이건뭐이야"
       }
     };
     new Form(qs(".payment_content"), formProps);
