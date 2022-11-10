@@ -441,14 +441,13 @@ export async function getOrderDetail(id) {
 
 export async function editOrder(id, data) {
   try {
-    const response = await fetch(
-      `http://localhost:8080/api/admin/order/${id}`,
-      {
-        method: "PUT",
-        body: data
-      }
-    );
-    return response.json();
+    await fetch(`http://localhost:8080/api/admin/order/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
+    });
   } catch (err) {
     console.dir(err);
   }
