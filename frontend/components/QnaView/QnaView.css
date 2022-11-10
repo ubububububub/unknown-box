@@ -2,11 +2,11 @@
 
 #qna-container table.qnaview-table {
   border-top: 2px solid #FCE374;
-  border-bottom: 1px solid #c9c9c9;
+  border-bottom: 1px solid #333333;
 }
 
 #qna-container table.qnaview-table tr {
-  border-top: 1px solid #e7e7e7;
+  border-top: 1px solid #333333;
 }
 
 #qna-container table.qnaview-table tr td {

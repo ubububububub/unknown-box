@@ -14,31 +14,31 @@ export default class MainRandom extends Component {
 
         qs(".main-catelist").innerHTML = `
         <li>
-           <a href="/category/${category[0]}">
+           <a href="/rank?cate=${category[0]}">
              <img src="https://cdn-icons-png.flaticon.com/512/2357/2357127.png" />
            </a>
            <span>${category[0]}</span>
          </li>
          <li>
-           <a href="/category1">
+           <a href="/rank?cate=${category[1]}">
              <img src="https://cdn-icons-png.flaticon.com/512/3057/3057396.png" />
            </a>
            <span>${category[1]}</span>
          </li>
          <li>
-           <a href="/category1">
+           <a href="/rank?cate=${category[2]}">
              <img src="https://cdn-icons-png.flaticon.com/512/2756/2756708.png" />
            </a>
            <span>${category[2]}</span>
          </li>
          <li>
-           <a href="/category1">
+           <a href="/rank?cate=${category[3]}">
              <img src="https://cdn-icons-png.flaticon.com/512/3659/3659944.png" />
            </a>
            <span>${category[3]}</span>
          </li>
          <li>
-           <a href="/category1">
+           <a href="/rank?cate=${category[4]}">
              <img src="https://cdn-icons-png.flaticon.com/512/5726/5726678.png" />
            </a>
            <span>${category[4]}</span>

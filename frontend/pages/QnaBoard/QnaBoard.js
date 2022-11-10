@@ -16,12 +16,13 @@ export class QnaBoard extends Component {
     }
 
     mounted() {
-            if(this.props ==='list'){
+            console.log(this.props[0])
+            if(this.props[0] ==='list'){
                 new QnaList(qs("#qna-container"));
-            }else if(this.props === 'write'){
-                new QnaWrite(qs("#qna-container"),this.props);
+            }else if(this.props[0] === 'write'){
+                new QnaWrite(qs("#qna-container"));
             }else{
-                new QnaView(qs("#qna-container"),this.props);
+                new QnaView(qs("#qna-container"));
             }
     }
 }

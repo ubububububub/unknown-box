@@ -19,7 +19,7 @@ form.qnawrite-form {
   display: block;
   width: 100%;
   border: none;
-  border-bottom: 1px solid #e1e1e1;
+  border-bottom: 1px solid #333333;
   padding: 5px;
   height: 25px;
 }
@@ -35,9 +35,9 @@ form.qnawrite-form {
   line-height: 33px;
 }
 
-.qnawrite-form .qnawrite-content-wrap input {
+.qnawrite-form .qnawrite-content-wrap textarea {
   width: 100%;
-  border: 1px solid #e1e1e1;
+  border: 1px solid #333333;
   height: 200px;
 }
 

@@ -19,7 +19,7 @@ export default class QnaWrite extends Component {
                 </div>
                 <div class="qnawrite-content-wrap">
                     <label for="qnawrite-content">내용</label>
-                    <input id="qnawrite-content"  name="content" type="text"> 
+                    <textarea id="qnawrite-content"  rows="30"  name="content" ></textarea> 
                 </div>
                  <button id="submit">작성</button>
             </form> 
