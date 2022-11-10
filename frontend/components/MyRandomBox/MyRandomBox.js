@@ -20,7 +20,7 @@ class MyRandomBox extends Component {
     const { randomboxes, products } = this.props;
     const myrandomboxesTemplate = randomboxes.reduce((template, randombox) => {
       template += `
-                    <div class="myrandombox-item myrandombox-item-randombox" id="${randombox.randomboxId}">
+                    <div class="myrandombox-item myrandombox-item-randombox" id="${randombox.orderId},${randombox.randomboxId}">
                       <img src="${randombox.thumbnail}"/>
                       <span class="myrandombox-item-title">${randombox.randomboxName}</span>
                     </div>`;
@@ -48,7 +48,8 @@ class MyRandomBox extends Component {
   setEvent() {
     qsAll(".myrandombox-item-randombox").forEach(qs =>
       qs.addEventListener("click", e => {
-        window.location = `/randombox/${e.currentTarget.id}`;
+        const [orderId, randomboxId] = e.currentTarget.id.split(",");
+        window.location = `/randombox/${orderId}/${randomboxId}`;
       })
     );
   }
