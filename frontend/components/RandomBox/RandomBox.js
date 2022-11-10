@@ -2,6 +2,8 @@
 import Component from "../../core/Component.js";
 import { qs, editForm, MODAL, isClassContained } from "../../utils/index.js";
 import Modal from "../Modal/Modal.js";
+import style from "./randomBox.css" assert { type: "css" };
+document.adoptedStyleSheets.push(style);
 
 export default class Product extends Component {
   template() {
@@ -15,21 +17,18 @@ export default class Product extends Component {
     } = this.props.box;
 
     return `
-            <li class="randombox-${randomboxId}">
-              <div class="image">
+            <li class="randombox-item randombox-${randomboxId}">
+              <div class="thumbnail">
                 <img src="${thumbnail}"/>
               </div>
               <div class="info">
                 <div class="randombox-name">
-                  <span>상품명</span>
                   <span>${randomboxName}</span>
                 </div>
                 <div class="category-name">
-                  <span>카테고리명</span>
                   <span>${categoryName}</span>
                 </div>
                 <div class="price">
-                  <span>가격</span>
                   ${
                     discount
                       ? `<span style="text-decoration: line-through">${price}</span>
@@ -38,8 +37,10 @@ export default class Product extends Component {
                   }
                 </div>
               </div>
+              <div class="randombox-btns">
                 <button type="button" class="btn randombox-editBtn">수정하기</button>
                 <button type="button" class="btn randombox-delBtn">삭제하기</button>
+              </div>
             </li>
         `;
   }

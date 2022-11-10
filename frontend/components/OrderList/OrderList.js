@@ -2,6 +2,8 @@ import Component from "../../core/Component.js";
 import { qs } from "../../utils/index.js";
 import OrderItem from "../OrderItem/OrderItem.js";
 //import { getOrderList } from "../../apis/index.js";
+import style from "./orderList.css" assert { type: "css" };
+document.adoptedStyleSheets.push(style);
 
 export default class OrderList extends Component {
   template() {

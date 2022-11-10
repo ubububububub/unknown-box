@@ -1,0 +1,7 @@
+.randombox-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  width: 80%;
+  margin: 0 auto;
+}

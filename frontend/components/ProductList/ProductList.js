@@ -9,6 +9,8 @@ import ImageUploadForm from "../ImageUploadForm/ImageUploadForm.js";
 //   deleteProduct,
 //   addProduct
 // } from "../../apis/index.js";
+import style from "./productList.css" assert { type: "css" };
+document.adoptedStyleSheets.push(style);
 
 export class ProductList extends Component {
   template() {

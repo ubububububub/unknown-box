@@ -12,8 +12,6 @@ export default class OrderItem extends Component {
                 <td>${updatedAt}</td>
                 <td>
                     <button type="button" class="order-editBtn">배송상태 수정</button>
-                </td>
-                <td>
                     <button type="button" class="order-cancelBtn">주문 취소</button>
                 </td>
             </tr>

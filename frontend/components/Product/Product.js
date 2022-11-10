@@ -3,6 +3,8 @@ import ImageUploadForm from "../ImageUploadForm/ImageUploadForm.js";
 import Component from "../../core/Component.js";
 import Modal from "../Modal/Modal.js";
 // import { getProductDetail } from "../../apis/index.js";
+import style from "./product.css" assert { type: "css" };
+document.adoptedStyleSheets.push(style);
 
 export default class Product extends Component {
   template() {

@@ -1,0 +1,22 @@
+#admin-order-list-wrapper {
+  width: 80%;
+  border-collapse: separate;
+  border-spacing: 0 50px;
+  text-align: center;
+  font-size: 18px;
+}
+
+#admin-order-list-wrapper > thead {
+  font-weight: 600;
+  font-size: 20px;
+}
+
+#admin-order-list-wrapper > tbody {
+}
+
+#admin-order-list-wrapper tr {
+  border-bottom: 1px solid #e7e6ef;
+}
+
+#admin-order-list-wrapper td:last-child {
+}
