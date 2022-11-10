@@ -1,0 +1,53 @@
+@charset "utf-8";
+
+form.qnawrite-form {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.qnawrite-form div {
+  width: 100%;
+  margin: 10px 0;
+}
+
+.qnawrite-form label {
+  display: block;
+  width: 100%;
+  padding: 5px;
+}
+.qnawrite-form input {
+  display: block;
+  width: 100%;
+  border: none;
+  border-bottom: 1px solid #e1e1e1;
+  padding: 5px;
+  height: 25px;
+}
+
+.qnawrite-form .qnawrite-col-wrap {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+}
+
+.qnawrite-form .qnawrite-col-wrap label {
+  width: 30%;
+  line-height: 33px;
+}
+
+.qnawrite-form .qnawrite-content-wrap input {
+  width: 100%;
+  border: 1px solid #e1e1e1;
+  height: 200px;
+}
+
+.qnawrite-form button { 
+  display: block;
+  margin: 20px auto;
+ }
+
+.qnawrite-control a {
+  width: 90%;
+  display: block;
+  margin: 0 auto;
+ }

@@ -1,7 +1,6 @@
 import { Admin } from "../pages/Admin/Admin.js";
 import { AdminRandomBox } from "../pages/AdminRandomBox/AdminRandomBox.js";
 import { AdminOrder } from "../pages/AdminOrder/AdminOrder.js";
-import { AdminOrderEdit } from "../pages/AdminOrderEdit/AdminOrderEdit.js";
 import { AdminProduct } from "../pages/AdminProduct/AdminProduct.js";
 import { Cart } from "../pages/Cart/Cart.js";
 import { Detail } from "../pages/Detail/Detail.js";
@@ -17,6 +16,7 @@ import { Recipt } from "../pages/Recipt/Recipt.js";
 import { SignIn } from "../pages/SignIn/SignIn.js";
 import { RandomBox } from "../pages/RandomBox/RandomBox.js";
 import { QnaBoard } from "../pages/QnaBoard/QnaBoard.js";
+import { Rank } from "../pages/Rank/Rank.js";
 
 const routes = [
   { path: "/", view: Main, isPublic: true },
@@ -30,6 +30,8 @@ const routes = [
   { path: "/cart", view: Cart, isPublic: true },
   { path: "/order/payment", view: Payment, isPublic: false },
   { path: "/order/recipt", view: Recipt, isPublic: false },
+  { path: "/qnaboard/:mode", view: QnaBoard },
+  { path: "/rank", view: Rank },
   { path: "/admin", view: Admin, isPublic: false, isAdmin: true },
   {
     path: "/admin/randombox",
