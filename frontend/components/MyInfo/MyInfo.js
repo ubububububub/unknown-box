@@ -9,13 +9,13 @@ class MyInfo extends Component {
     return `<div class="myinfo-container">
               <div class="myinfo-myinfo-section">
                 <span class="myinfo-section-title">내 정보</span>
+                <span>${email}</span>
+                <button class="mypage_myinfo_modal_btn">비밀번호 수정</button>
                 ${
                   localStorage.getItem("role") === "admin"
                     ? '<button id="admin-button">관리자 페이지</button>'
                     : ""
                 }
-                <span>${email}</span>
-                <button class="mypage_myinfo_modal_btn">비밀번호 수정</button>
               </div>
               <div class="myinfo-myprofit-section">
                 <span class="myinfo-section-title">얼마나 이득봤을까요?</span>

@@ -43,6 +43,10 @@
   color: #ffffff;
 }
 
+.admin-button {
+  background: grey;
+}
+
 .myinfo-myprofit-section {
   position: relative;
   display: flex;
