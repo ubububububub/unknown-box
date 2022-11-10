@@ -15,9 +15,9 @@ const App = async () => {
   const params = [];
   const pageMatches = routes.map(route => {
     const parsedPath = window.location.pathname.match(pathToRegex(route.path));
-    
+
     if (parsedPath) {
-      params.push(parsedPath[1]);
+      params.push(...parsedPath.filter((param, idx) => idx !== 0));
     }
     return {
       route,
@@ -34,9 +34,9 @@ const App = async () => {
     };
   }
 
-  new Header(qs("#header"))
-  new match.route.view(qs("#app"), ...params);
-  new Footer(qs("#footer"))
+  new Header(qs("#header"));
+  new match.route.view(qs("#app"), params);
+  new Footer(qs("#footer"));
 };
 
 document.addEventListener("DOMContentLoaded", () => {
