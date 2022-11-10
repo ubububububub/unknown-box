@@ -65,7 +65,7 @@ export class Payment extends Component {
     }
 
     const products = {
-      productsName: this.parsePaymentProductName(".paymentInfo_product-name"),
+      products: this.parsePaymentProductName(".paymentInfo_product-name"),
       randomboxes: this.parsePaymentProductQuantity(
         ".paymentInfo_product-quantity"
       ),
