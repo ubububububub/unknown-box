@@ -190,7 +190,7 @@ export async function getRandomBoxProducts(randomboxId) {
 export async function putRandomBoxResult(randomboxId, orderId, productId) {
   try {
     await fetch(`http://localhost:8080/api/randombox/${randomboxId}`, {
-      method: "POST",
+      method: "PUT",
       headers: {
         "Content-Type": "application/json",
         "X-Access-Token": localStorage.getItem("accessToken")
