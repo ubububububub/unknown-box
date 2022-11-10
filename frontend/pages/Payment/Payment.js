@@ -45,7 +45,7 @@ export class Payment extends Component {
     const formProps = {
       formChildren,
       orderAddress: {
-        postcode: "123123",
+        postalcode: "123123",
         roadAddress: "사랑시 고백구 행복동",
         jibunAddress: "사랑시 고백구 행복동",
         detailAddress: "상세한주소",
