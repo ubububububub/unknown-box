@@ -1,4 +1,3 @@
-import { getMyInfo } from "../../apis/index.js";
 import Component from "../../core/Component.js";
 import { qs } from "../../utils/index.js";
 import style from "./myInfo.css" assert { type: "css" };
@@ -6,7 +5,7 @@ document.adoptedStyleSheets.push(style);
 
 class MyInfo extends Component {
   template() {
-    const { email, role } = this.props;
+    const { email, benefit } = this.props;
     return `<div class="myinfo-container">
               <div class="myinfo-myinfo-section">
                 <span class="myinfo-section-title">내 정보</span>
@@ -23,15 +22,15 @@ class MyInfo extends Component {
                 <div class="myinfo-myprofit-wrapper">
                   <div class="myinfo-myprofit-item">
                     <img src="../../assets/chicken.png" width="64px"/>
-                    <span>치킨 100마리</span>
+                    <span>치킨 ${Math.floor(benefit / 20000)}마리</span>
                   </div>
                   <div class="myinfo-myprofit-item">
                     <img src="../../assets/coffee.png" width="64px">
-                    <span>커피 100잔</span>
+                    <span>커피 1${Math.floor(benefit / 4500)}잔</span>
                   </div>
                   <div class="myinfo-myprofit-item">
                     <img src="../../assets/dollars.png" width="64px">
-                    <span>100000원</span>
+                    <span>${benefit}원</span>
                   </div>
                 </div>
               </div>
@@ -40,11 +39,10 @@ class MyInfo extends Component {
   }
 
   setEvent() {
-    if (qs("#admin-button")) {
-      qs("#admin-button").addEventListener("click", () => {
-        window.location = "/admin";
-      });
-    }
+    qs("#admin-button")?.addEventListener("click", () => {
+      window.location = "/admin";
+    });
+
     qs(".mypage_myinfo_modal_btn").addEventListener("click", () => {});
   }
 }
