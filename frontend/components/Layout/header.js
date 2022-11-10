@@ -1,27 +1,34 @@
 import Component from "../../core/Component.js";
 import style from "./layout.css" assert { type: "css" };
-import {qs} from "../../utils/index.js";
+import { qs } from "../../utils/index.js";
 document.adoptedStyleSheets.push(style);
 
 export class Header extends Component {
-    template() {
-      const isLogin = !!localStorage.getItem('role');
-      const isAdmin = localStorage.getItem('role') === "admin"        
-        return (
-            `<section class="header">
+  template() {
+    const isLogin = !!localStorage.getItem("role");
+    const isAdmin = localStorage.getItem("role") === "admin";
+    return `<section class="header">
             <div class="header-fix">
               <div class="header-top">
                 <a href="/" class="header-logo">Shop logo</a>
                 <div class="header-top-box">
                   <ul class="header-toplist">
                     <li>
-                      ${!isLogin ? `<a href='/login'>로그인</a>`: `<a href="javascript:void(0);" id='login_logout_btn'>로그아웃</a>` }
+                      ${
+                        !isLogin
+                          ? `<a href='/login'>로그인</a>`
+                          : `<a href="javascript:void(0);" id='login_logout_btn'>로그아웃</a>`
+                      }
                     </li>
                     <li>
-                      ${!isLogin ? `<a href='/signin'>회원가입</a>` :  `<a href='/mypage'>마이페이지</a>` }
+                      ${
+                        !isLogin
+                          ? `<a href='/signin'>회원가입</a>`
+                          : `<a href='/mypage'>마이페이지</a>`
+                      }
                     </li>
                     <li>
-                      ${isAdmin ?  `<a>관리자 계정입니다.</a>`: ``}
+                      ${isAdmin ? `<a>관리자 계정입니다.</a>` : ``}
                     </li>
                   </ul>
                   <ul class="header-btlist">
@@ -72,30 +79,29 @@ export class Header extends Component {
                 </ul> 
               </div>
             </nav>
-          </section>`
-        );
+          </section>`;
+  }
+  setEvent() {
+    if (qs("#login_logout_btn")) {
+      qs("#login_logout_btn").addEventListener("click", e => {
+        e.preventDefault();
+        function deleteCookie(token) {
+          document.cookie = token + "=; expires=Thu, 01 Jan 1970 00:00:01 GMT;";
+        }
+        localStorage.removeItem("accessToken");
+        localStorage.removeItem("refreshToken");
+        localStorage.removeItem("role");
+        location.reload();
+      });
     }
-     setEvent() {
-      if(qs('#login_logout_btn')){
-          qs('#login_logout_btn').addEventListener("click",(e) => {
-            e.preventDefault();
-            function deleteCookie(token) {
-                document.cookie = token + "=; expires=Thu, 01 Jan 1970 00:00:01 GMT;";
-            }
-            deleteCookie("accessToken");
-            deleteCookie("refreshToken");
-            localStorage.removeItem("role");
-            location.reload();
-        });
-      }
-        qs("#btn-nav-open").addEventListener("click",() => {
-           qs("#side-nav").style.left = 0;
-        })
+    qs("#btn-nav-open").addEventListener("click", () => {
+      qs("#side-nav").style.left = 0;
+    });
 
-        qs("#side-nav-close").addEventListener("click",() => {
-          qs("#side-nav").style.left = "-450px";
-        })
-    }
+    qs("#side-nav-close").addEventListener("click", () => {
+      qs("#side-nav").style.left = "-450px";
+    });
+  }
 }
 
 export default Header;
