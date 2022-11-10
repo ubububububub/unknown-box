@@ -58,7 +58,13 @@ class RandomboxService {
     await randombox.populate("products.product");
     return {
       randomboxId: randombox._id,
-      ...randombox
+      ...randombox,
+      products: randombox.products.map(obj => ({
+        productId: obj.product._id,
+        productName: obj.product.productName,
+        price: obj.product.price,
+        thumbnail: obj.product.thumbnail
+      }))
     };
   }
   async getRandomboxForAdmin({ randomboxId }) {

@@ -33,7 +33,7 @@ class OrderService {
     const user = {};
     if (name) user.orderName = name;
     if (phone) user.orderPhone = phone;
-    user.orderName = address;
+    user.orderAddress = address;
     return user;
   }
   async postOrder(
