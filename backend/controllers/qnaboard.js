@@ -13,7 +13,7 @@ qnaboardController.get("/", async (req, res, next) => {
 });
 qnaboardController.get("/:qnaboardId", async (req, res, next) => {
   try {
-    const qnaboard = await qnaboardService.getPost(req.params, req.body);
+    const qnaboard = await qnaboardService.getPost(req.params, req.query);
     res.status(200).json(qnaboard);
   } catch (err) {
     next(err);
