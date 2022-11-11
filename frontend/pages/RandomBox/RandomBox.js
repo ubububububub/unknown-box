@@ -134,14 +134,17 @@ export class RandomBox extends Component {
   }
 
   convertProductItems(maxIndex) {
-    const temp = this.state.productItems.filter(
+    const temp = this.state.productItems.products.filter(
       (_, index) => index !== this.state.count && index !== maxIndex
     );
 
     let newProducts = [];
 
     if (this.state.count === maxIndex) {
-      newProducts = [...temp, this.state.productItems[this.state.count]];
+      newProducts = [
+        ...temp,
+        this.state.productItems.products[this.state.count]
+      ];
     } else if (this.state.count !== maxIndex) {
       newProducts = [
         ...temp,
