@@ -24,46 +24,8 @@ export class MyPage extends Component {
   }
 
   mounted() {
-    const mockData = {
-      email: "asdfasdf@asdfasdf.com",
-      role: "user",
-      benefit: 1000000,
-      randomboxes: [
-        {
-          randomboxId: "1",
-          randomboxName: "그냥 랜덤박스",
-          thumbnail:
-            "https://image.zdnet.co.kr/2022/03/03/e5c4619a509cbb6dcbd3713a6baee749.png",
-          price: 20000,
-          orderId: "56"
-        },
-        {
-          randomboxId: "2",
-          randomboxName: "비싼 랜덤박스",
-          thumbnail:
-            "https://image.zdnet.co.kr/2022/03/03/e5c4619a509cbb6dcbd3713a6baee749.png",
-          price: 100000,
-          orderId: "78"
-        }
-      ],
-      products: [
-        {
-          productId: "3",
-          productName: "인형",
-          thumbnail:
-            "https://image.zdnet.co.kr/2022/03/03/e5c4619a509cbb6dcbd3713a6baee749.png"
-        },
-        {
-          productId: "4",
-          productName: "노트북",
-          thumbnail:
-            "https://image.zdnet.co.kr/2022/03/03/e5c4619a509cbb6dcbd3713a6baee749.png"
-        }
-      ]
-    };
-
     new Navbar(qs("#mypage-nav"), MY_PAGE_NAV);
-    new MyInfo(qs("#mypage-myinfo-container"), mockData);
-    new MyRandomBox(qs("#mypage-myrandombox-container"), mockData);
+    new MyInfo(qs("#mypage-myinfo-container"), this.state);
+    new MyRandomBox(qs("#mypage-myrandombox-container"), this.state);
   }
 }

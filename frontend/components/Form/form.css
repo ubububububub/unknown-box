@@ -36,3 +36,24 @@
   outline: none;
   border: 1px solid #fb2e86;
 }
+
+.form_input-margin-none {
+  margin-bottom: 0px !important;
+}
+
+.form_btn {
+  width: 100%;
+  max-width: 432px;
+  height: 48px;
+  background-color: #fb2e86;
+  border: none;
+  border-radius: 2px;
+  text-align: center;
+  font-size: 16px;
+  color: #ffffff;
+  margin-bottom: 8px;
+}
+
+.form_btn:disabled {
+  background-color: grey;
+}
