@@ -5,7 +5,6 @@ import Modal from "../Modal/Modal.js";
 import RandomBox from "../RandomBox/RandomBox.js";
 import { getBoxList, editBox, deleteBox, addBox } from "../../apis/index.js";
 import style from "./randomBoxList.css" assert { type: "css" };
-import Toast from "../Toast/Toast.js";
 document.adoptedStyleSheets.push(style);
 
 export default class RandomBoxList extends Component {
@@ -82,7 +81,7 @@ export default class RandomBoxList extends Component {
 
   async addBoxProduct(data) {
     const res = await addBox(data);
-    //location = "/admin/randombox";
+    location = "/admin/randombox";
   }
 
   async deleteBoxProduct(id) {

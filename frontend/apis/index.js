@@ -439,13 +439,14 @@ export async function getProductList() {
 
 export async function addProduct(data) {
   try {
-    await fetch(`http://localhost:8080/api/admin/product`, {
+    const res = await fetch(`http://localhost:8080/api/admin/product`, {
       method: "POST",
       headers: {
         "X-Access-Token": localStorage.getItem("accessToken")
       },
       body: data
     });
+    console.log("res", res);
   } catch (err) {
     console.dir(err);
   }
@@ -453,13 +454,16 @@ export async function addProduct(data) {
 
 export async function getProductDetail(id) {
   try {
-    const response = await fetch(`http://localhost:8080/api/product/${id}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        "X-Access-Token": localStorage.getItem("accessToken")
+    const response = await fetch(
+      `http://localhost:8080/api/admin/product/${id}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "X-Access-Token": localStorage.getItem("accessToken")
+        }
       }
-    });
+    );
     if (response.status === 403) {
       await postRefreshToken();
       await getProductDetail(id);
@@ -598,6 +602,7 @@ export async function getAdminQnaList() {
         "X-Access-Token": localStorage.getItem("accessToken")
       }
     });
+
     return response.json();
   } catch (err) {
     console.dir(err);
@@ -606,13 +611,16 @@ export async function getAdminQnaList() {
 
 export async function getAdminQnaDetail(id) {
   try {
-    const response = await fetch(`http://localhost:8080/api/qnaboard/${id}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        "X-Access-Token": localStorage.getItem("accessToken")
+    const response = await fetch(
+      `http://localhost:8080/api/admin/qnaboard/${id}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "X-Access-Token": localStorage.getItem("accessToken")
+        }
       }
-    });
+    );
     if (response.status === 403) {
       await postRefreshToken();
       await getAdminQnaDetail(id);
@@ -625,14 +633,17 @@ export async function getAdminQnaDetail(id) {
 
 export async function postAdminQna(id, data) {
   try {
-    const response = await fetch(`http://localhost:8080/api/qnaboard/${id}`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "X-Access-Token": localStorage.getItem("accessToken")
-      },
-      body: JSON.stringify(data)
-    });
+    const response = await fetch(
+      `http://localhost:8080/api/admin/qnaboard/${id}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-Access-Token": localStorage.getItem("accessToken")
+        },
+        body: JSON.stringify(data)
+      }
+    );
     if (response.status === 403) {
       await postRefreshToken();
       await postAdminQna(id, data);
@@ -645,13 +656,16 @@ export async function postAdminQna(id, data) {
 
 export async function deleteAdminQna(id) {
   try {
-    const response = await fetch(`http://localhost:8080/api/qnaboard/${id}`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-        "X-Access-Token": localStorage.getItem("accessToken")
+    const response = await fetch(
+      `http://localhost:8080/api/admin/qnaboard/${id}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          "X-Access-Token": localStorage.getItem("accessToken")
+        }
       }
-    });
+    );
     if (response.status === 403) {
       await postRefreshToken();
       await deleteAdminQna(id);

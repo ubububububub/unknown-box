@@ -1,6 +1,10 @@
 import Component from "../../core/Component.js";
 import { qs } from "../../utils/index.js";
 import { getOrderDetail, deleteOrder, editOrder } from "../../apis/index.js";
+import Navbar from "../../components/Navbar/Navbar.js";
+import { ADMIN_PAGE_NAV } from "../../constants/index.js";
+import style from "./adminOrderEdit.css" assert { type: "css" };
+document.adoptedStyleSheets.push(style);
 
 export class AdminOrderEdit extends Component {
   async setup() {
@@ -23,8 +27,10 @@ export class AdminOrderEdit extends Component {
       totalPrice
     } = this.state.order;
 
-    return `<section id="order-edit-container">
-            <h2>주문 상세 정보</h2>
+    return `<section id="admin_order-container"> 
+              <div id="admin_order-nav"></div>
+              <div id="admin_order-list-wrapper">
+              <span class="detail-info">주문 상세 정보</span>
                 <div class="order-info">
                     <div class="order-time">
                         <span>주문날짜</span>
@@ -44,18 +50,28 @@ export class AdminOrderEdit extends Component {
                             <span>${orderPhone}</span>
                         </div>
                         <div class="order-address">
+                            <div>
                             <span>우편 번호</span>
-                            <p>${orderAddress.postalCode}</p>
+                            <p>${orderAddress.postalcode}</p>
+                            </div>
+                            <div>
                             <span>도로명 주소</span>
                             <p>${orderAddress.roadAddress}</p>
+                            </div>
+                            <div>
                             <span>지번 주소</span>
                             <p>${orderAddress.jibunAddress}</p>
+                            </div>
+                            <div>
                             <span>상세 주소</span>
                             <p>${orderAddress.detailAddress}</p>
+                            </div>
+                            <div>
                             <span>추가 주소</span>
                             <p>${orderAddress.extraAddress}</p>
+                            </div>
                         </div>
-                    <div>
+                    </div>
                     <div class="order-list">
                         <span>주문상품<span>
                         <ul>
@@ -68,7 +84,7 @@ export class AdminOrderEdit extends Component {
                                 <div>${
                                   opened
                                     ? `<span>당첨 상품</span>
-                                  <div>${product.thumbnail}</div>
+                                  <img src="${product.thumbnail}"/>
                                   <div>${product.productName}</div>
                                   <div>${product.price}</div>`
                                     : ""
@@ -87,10 +103,13 @@ export class AdminOrderEdit extends Component {
                 </div>       
                 <button type="button" class="order-submitBtn">수정 완료</button>
                 <button type="button" class="order-cancelBtn">주문 취소</button>
-            </section>
+          </div>
+        </section>
         `;
   }
-
+  mounted() {
+    new Navbar(qs("#admin_order-nav"), ADMIN_PAGE_NAV);
+  }
   setEvent() {
     const { orderId } = this.state.order;
 
@@ -102,7 +121,7 @@ export class AdminOrderEdit extends Component {
 
     qs(".order-cancelBtn").addEventListener("click", async () => {
       await deleteOrder(orderId);
-      // location = "/admin/order";
+      location = "/admin/order";
     });
   }
 }

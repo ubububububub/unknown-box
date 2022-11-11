@@ -59,7 +59,7 @@ export default class Product extends Component {
       productName,
       categoryName,
       price,
-      description,
+      description = "",
       count
     } = product;
 

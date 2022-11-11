@@ -9,6 +9,8 @@ import {
 import Navbar from "../../components/Navbar/Navbar.js";
 import { ADMIN_PAGE_NAV } from "../../constants/index.js";
 import Modal from "../../components/Modal/Modal.js";
+import style from "./adminQna.css" assert { type: "css" };
+document.adoptedStyleSheets.push(style);
 
 export class AdminQna extends Component {
   async setup() {
@@ -26,6 +28,7 @@ export class AdminQna extends Component {
                     <th>제목</th>
                     <th>작성자</th>
                     <th>작성일</th>
+                    <th>수정일</th>
                 </tr>
             </thead>
             <tbody id="admin_qna-list-body">
@@ -51,7 +54,7 @@ export class AdminQna extends Component {
         `;
   }
 
-  mounted() {
+  async mounted() {
     new Navbar(qs("#admin_qna-nav"), ADMIN_PAGE_NAV);
   }
 
@@ -108,10 +111,12 @@ export class AdminQna extends Component {
 
   async answerQna(id, data) {
     await postAdminQna(id, { answer: data });
+    location = "/admin/qna";
   }
 
   async deleteHandler(id) {
     await deleteAdminQna(id);
-    //location = "/admin/qna";
+    const remain = this.state.qnaList.filter(post => post.qnaboardId != id);
+    this.setState({ qnaList: remain });
   }
 }

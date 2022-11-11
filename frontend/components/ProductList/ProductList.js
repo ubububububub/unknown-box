@@ -87,6 +87,6 @@ export class ProductList extends Component {
 
   async editProductItem(id, data) {
     await editProduct(id, data);
-    //location = "/admin/product";
+    location = "/admin/product";
   }
 }
