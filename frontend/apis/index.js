@@ -228,8 +228,11 @@ export async function postPayment(formData, product) {
   try {
     const response = await fetch(`http://localhost:8080/api/order`, {
       method: "POST",
-      "X-Access-Token": localStorage.getItem("accessToken"),
-      body: JSON.stringify({ ...formData, ...product })
+      headers: {
+        "Content-Type": "application/json",
+        "X-Access-Token": localStorage.getItem("accessToken")
+      },
+      body: JSON.stringify({ formData: [...formData], product })
     });
     if (response.status === 403) {
       await postRefreshToken();
@@ -253,7 +256,7 @@ export async function getCategoryList() {
       await postRefreshToken();
       await getCategoryList();
     }
-     return await response.json();
+    return await response.json();
   } catch (err) {
     console.dir(err);
   }
@@ -457,7 +460,7 @@ export async function getProductDetail(id) {
 
 export async function editProduct(id, data) {
   try {
-    for (let [key, value] of data.entries()) {
+    for (const [key, value] of data.entries()) {
       console.log(key, value);
     }
     await fetch(`http://localhost:8080/api/admin/product/${id}`, {
@@ -633,7 +636,7 @@ export async function postAdminQna(id, data) {
 
 export async function deleteAdminQna(id) {
   try {
-   const response =  await fetch(`http://localhost:8080/api/qnaboard/${id}`, {
+    const response = await fetch(`http://localhost:8080/api/qnaboard/${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",

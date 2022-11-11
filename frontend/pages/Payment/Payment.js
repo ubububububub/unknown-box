@@ -110,6 +110,7 @@ export class Payment extends Component {
     ) {
       await postPayment(Form.getFormData(), products);
 
+      cart.initCartItem();
       return (window.location = "/order/recipt");
     }
   }
