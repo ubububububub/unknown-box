@@ -1,6 +1,7 @@
 import { Admin } from "../pages/Admin/Admin.js";
 import { AdminRandomBox } from "../pages/AdminRandomBox/AdminRandomBox.js";
 import { AdminOrder } from "../pages/AdminOrder/AdminOrder.js";
+import { AdminOrderEdit } from "../pages/AdminOrderEdit/AdminOrderEdit.js";
 import { AdminProduct } from "../pages/AdminProduct/AdminProduct.js";
 import { Cart } from "../pages/Cart/Cart.js";
 import { Detail } from "../pages/Detail/Detail.js";

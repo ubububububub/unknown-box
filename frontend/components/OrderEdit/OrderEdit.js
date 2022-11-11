@@ -7,17 +7,16 @@ import {
   qs
 } from "../../utils/index.js";
 import { postOrderInfo } from "../../apis/index.js";
+import style from "./orderEdit.css" assert { type: "css" };
+document.adoptedStyleSheets.push(style);
 
 class OrderEdit extends Component {
   template() {
     const item = this.state;
-    return `<span>주문자 정보수정</span>
-            <div>
-              <span>주문번호 : ${item.orderId}</span>
-              <span>주문일자 : ${item.orderTime}</span>
-              <span>주문상태 : ${item.orderState}</span>
-              <div id="shipping-info-container"></div>
-              <button id="edit-btn">수정 완료</button>
+    return `<H1>주문자 정보수정</H1>
+            <div class="orderedit-edit-container">
+              <div class="orderedit-shipping-container"></div>
+              <button class="orderedit-edit-btn form_btn">수정 완료</button>
             </div>
             `;
   }
@@ -42,7 +41,7 @@ class OrderEdit extends Component {
       formChildren,
       orderAddress: this.state.orderAddress
     };
-    new Form(qs("#shipping-info-container"), formProps);
+    new Form(qs(".orderedit-shipping-container"), formProps);
   }
 
   async setup() {
@@ -65,7 +64,7 @@ class OrderEdit extends Component {
   }
 
   setEvent() {
-    qs("#edit-btn").addEventListener("click", e => {
+    qs(".orderedit-edit-btn").addEventListener("click", e => {
       this.handleEditBtn(e);
     });
   }
