@@ -80,19 +80,22 @@ class OrderService {
     for (let i = 0; i < orders.length; i++) {
       await orders[i].populate("randomboxes.randombox");
     }
-    return orders.map(({ _id, createdAt, updatedAt, state, randomboxes }) => ({
-      orderId: _id,
-      createdAt,
-      updatedAt,
-      state,
-      randomboxes: randomboxes.map(({ randombox, opened, product }) => ({
-        randomboxId: randombox._id,
-        randomboxName: randombox.randomboxName,
-        price: randombox.price,
-        opened,
-        product
-      }))
-    }));
+    return orders.map(
+      ({ _id, createdAt, updatedAt, state, randomboxes, totalPrice }) => ({
+        orderId: _id,
+        createdAt,
+        updatedAt,
+        state,
+        randomboxes: randomboxes.map(({ randombox, opened, product }) => ({
+          randomboxId: randombox._id,
+          randomboxName: randombox.randomboxName,
+          price: randombox.price,
+          opened,
+          product
+        })),
+        totalPrice
+      })
+    );
   }
   async putOrder({ orderId }, { orderName, orderPhone, orderAddress }) {
     const orderInfo = {};
