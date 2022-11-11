@@ -8,11 +8,11 @@ export class Header extends Component {
   template() {
     const isLogin = !!localStorage.getItem("role");
     const isAdmin = localStorage.getItem("role") === "admin";
-    const cartCount = JSON.parse(localStorage.getItem("cart")).length
+    const cartCount = JSON.parse(localStorage.getItem("cart")).length;
     return `<section class="header">
             <div class="header-fix">
               <div class="header-top">
-                <a href="/" class="header-logo">Shop logo</a>
+                <a href="/" class="header-logo">UnknownBox</a>
                 <div class="header-top-box">
                   <ul class="header-toplist">
                     <li>
@@ -90,14 +90,13 @@ export class Header extends Component {
   mounted() {
     super.mounted();
     getMain().then(result => {
-      result.categories.map(x =>
-      {
+      result.categories.map(x => {
         qs("#side-menu").innerHTML += `
                       <div class="depth2">
                         <a href="/rank?cate=${x.categoryId}">${x.categoryName}</a>
                       </div>
-                    `
-      })
+                    `;
+      });
     });
   }
 }
