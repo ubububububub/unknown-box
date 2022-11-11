@@ -12,7 +12,7 @@ const orderSchema = new Schema(
     orderPhone: { type: String, required: true },
     orderAddress: {
       type: {
-        postalCode: { type: String, required: true },
+        postalcode: { type: String, required: true },
         roadAddress: String,
         jibunAddress: String,
         detailAddress: String,
