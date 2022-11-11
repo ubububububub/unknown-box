@@ -120,7 +120,7 @@ export async function postOrder(data) {
 
 export async function getMyInfo() {
   try {
-    const response = await fetch(`http://localhost:8080/api/user`, {
+    const response = await fetch(`http://localhost:8080/api/mypage`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -538,6 +538,37 @@ export async function deleteAdminQna(id) {
         "X-Access-Token": localStorage.getItem("accessToken")
       }
     });
+  } catch (err) {
+    console.dir(err);
+  }
+}
+
+export async function postEmailConfirmSend(email) {
+  try {
+    const response = await fetch("http://localhost:8080/api/auth/mail", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ email })
+    });
+    return await response.json();
+  } catch (err) {
+    console.dir(err);
+  }
+}
+
+export async function getEmailConfirmVerified(email, mailnum) {
+  try {
+    const response = await fetch(`http://localhost:8080/api/auth/mailnum`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "x-email": email,
+        "x-mail-num": mailnum
+      }
+    });
+    return await response.json();
   } catch (err) {
     console.dir(err);
   }
