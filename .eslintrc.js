@@ -46,6 +46,7 @@ module.exports = {
     "import/no-unresolved": "off",
     "no-return-assign": "off",
     "array-callback-return": "off",
-    "no-restricted-globals": "off"
+    "no-restricted-globals": "off",
+    "import/no-cycle": "off"
   }
 };
