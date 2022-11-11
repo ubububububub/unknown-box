@@ -35,7 +35,7 @@ class AuthService {
       });
     }
 
-    return encodeURIComponent(email);
+    return { email, role: data.role };
   }
 
   async authKakao(code) {

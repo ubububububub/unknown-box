@@ -8,13 +8,14 @@ export class KakaoCallback extends Component {
     });
   }
 
-  getEmailQuery() {
-    const params = new URLSearchParams(location.search);
-    return params.get("email");
+  getQuery() {
+    const [_, email, __, role] = location.search.split(/=|&/g);
+
+    return { email, role };
   }
 
   async setLoginTokens() {
-    const email = this.getEmailQuery();
+    const { email, role } = this.getQuery();
 
     if (!email) {
       return;
@@ -26,6 +27,7 @@ export class KakaoCallback extends Component {
 
     localStorage.setItem("accessToken", newAccessToken);
     localStorage.setItem("refreshToken", newRefreshToken);
+    localStorage.setItem("role", role);
 
     return (window.location = "/");
   }
