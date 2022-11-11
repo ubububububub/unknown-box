@@ -54,11 +54,11 @@ authRouter.post("/mail", async (req, res, next) => {
     const isDuplicationExist = await authService.authCreateMailNum(email);
 
     if (isDuplicationExist) {
-      res.status(401).json({ message: "fail" });
+      res.status(404).json({ message: "fail" });
       return;
     }
 
-    res.status(201).json(isDuplicationExist);
+    res.status(203).json({ message: "success" });
   } catch (error) {
     next(error);
   }
@@ -72,11 +72,11 @@ authRouter.get("/mailnum", async (req, res, next) => {
     const isAuth = await authService.authMailNum(email, mailNum);
 
     if (isAuth) {
-      res.status(201).json({ message: "success" });
+      res.status(203).json({ message: "success" });
       return;
     }
 
-    res.status(401).json({ message: "fail" });
+    res.status(404).json({ message: "fail" });
   } catch (error) {
     next(error);
   }
