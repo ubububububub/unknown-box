@@ -1,9 +1,10 @@
 import fetch from "node-fetch";
 import qs from "qs";
-import crypto from "crypto";
 import { userModel } from "../db/models";
 import JWT from "../utils/token";
+import { randomNum } from "../utils/random";
 import { mail } from "../utils/mail";
+import { redisCli } from "../app";
 
 const IV_LENGTH = 16;
 
@@ -91,8 +92,11 @@ class AuthService {
         return true;
       }
 
-      const authNum = this.authMailNumCipher(email);
+      const authNum = randomNum();
+      await redisCli.set(email, authNum);
+      await redisCli.expire(email, 300);
       this.authCreateMail(email, authNum);
+
       return false;
     } catch (error) {
       throw new Error(error);
@@ -108,42 +112,17 @@ class AuthService {
     }
   }
 
-  authMailNumCipher(email) {
-    const iv = crypto.randomBytes(IV_LENGTH);
-    const cipher = crypto.createCipheriv(
-      "aes-256-cbc",
-      Buffer.from(process.env.MAIL_KEY),
-      iv
-    );
-    const encrypted = cipher.update(email);
-    const encryptResult = Buffer.concat([encrypted, cipher.final()]);
-    return iv.toString("hex") + ":" + encryptResult.toString("hex");
-  }
-
   async authMailNum(email, mailNum) {
-    const decodeMailNum = this.authMailNumDecipher(mailNum);
+    const user = await redisCli.get(email);
 
-    return email === decodeMailNum;
-  }
-
-  authMailNumDecipher(mailNum) {
-    const textParts = mailNum.split(":");
-    const iv = Buffer.from(textParts.shift(), "hex");
-    const encryptedText = Buffer.from(textParts.join(":"), "hex");
-    const decipher = crypto.createDecipheriv(
-      "aes-256-cbc",
-      Buffer.from(process.env.MAIL_KEY),
-      iv
-    );
-    const decrypted = decipher.update(encryptedText);
-
-    const decryptResult = Buffer.concat([decrypted, decipher.final()]);
-
-    return decryptResult.toString();
+    return user === mailNum;
   }
 
   async authCreateMail(email, authNum) {
-    mail.setMessage(email, `인증번호는 ${authNum} 입니다.`);
+    mail.setMessage(
+      email,
+      `인증번호는 ${authNum} 입니다. 5분 내로 입력해주세요.`
+    );
     mail.sendMail();
   }
 }
