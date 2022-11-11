@@ -18,6 +18,11 @@ export const ADMIN_PAGE_NAV = [
     title: "결제 내역 관리",
     path: "/admin/order",
     id: "navbar-item-admin-order"
+  },
+  {
+    title: "Q&A 게시판 관리",
+    path: "/admin/qna",
+    id: "navbar-item-admin-qna"
   }
 ];
 

@@ -473,3 +473,57 @@ export async function deleteOrder(id) {
     console.dir(err);
   }
 }
+
+export async function getAdminQnaList() {
+  try {
+    const response = await fetch(`http://localhost:8080/api/admin/qnaboard`, {
+      method: "POST"
+    });
+    return response.json();
+  } catch (err) {
+    console.dir(err);
+  }
+}
+
+export async function getAdminQnaDetail(id) {
+  try {
+    const response = await fetch(`http://localhost:8080/api/qnaboard/${id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
+    console.log(response);
+    return await response.json();
+  } catch (err) {
+    console.dir(err);
+  }
+}
+
+export async function postAdminQna(id, data) {
+  try {
+    const response = await fetch(`http://localhost:8080/api/qnaboard/${id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(body)
+    });
+    return await response.json();
+  } catch (err) {
+    console.dir(err);
+  }
+}
+
+export async function deleteAdminQna(id) {
+  try {
+    await fetch(`http://localhost:8080/api/qnaboard/${id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
+  } catch (err) {
+    console.dir(err);
+  }
+}
