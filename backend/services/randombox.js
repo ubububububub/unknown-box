@@ -84,23 +84,29 @@ class RandomboxService {
       order.randomboxesCount === order.productsCount + 1
         ? "배송 준비중"
         : order.state;
-    await this.orderModel.modify(
-      { _id: orderId, "randomboxes.randombox": randomboxId },
+    const result = await this.orderModel.modify(
+      {
+        _id: orderId,
+        "randomboxes.randombox": randomboxId,
+        "randomboxes.opened": false
+      },
       {
         state,
         $set: {
-          "randomboxes.$.opened": false,
+          "randomboxes.$.opened": true,
           "randomboxes.$.product": { productId, productName, price, thumbnail }
         },
         productsCount: order.productsCount + 1
       }
     );
-    const { email } = JWT.decodeToken(accessToken);
-    await this.userModel.modify(email, {
-      $inc: { benefit: discount - price },
-      $pull: { randomboxes: { randomboxId } },
-      $push: { products: { productId, productName, thumbnail, price } }
-    });
+    if (result.modifiedCount !== 0) {
+      const { email } = JWT.decodeToken(accessToken);
+      await this.userModel.modify(email, {
+        $inc: { benefit: discount - price },
+        $pull: { randomboxes: { randomboxId } },
+        $push: { products: { productId, productName, thumbnail, price } }
+      });
+    }
   }
   async getRandomboxes() {
     const randomboxes = await this.randomboxModel.getAll();
