@@ -2,6 +2,11 @@ import fetch from "node-fetch";
 import qs from "qs";
 import { userModel } from "../db/models";
 import JWT from "../utils/token";
+import { randomNum } from "../utils/random";
+import { mail } from "../utils/mail";
+import { redisCli } from "../app";
+
+const IV_LENGTH = 16;
 
 class AuthService {
   async auth(accessToken, refreshToken) {
@@ -77,6 +82,48 @@ class AuthService {
     } catch (error) {
       throw new Error(error);
     }
+  }
+
+  async authCreateMailNum(email) {
+    try {
+      const isDuplicationExist = await this.authMailExist(email);
+
+      if (isDuplicationExist) {
+        return true;
+      }
+
+      const authNum = randomNum();
+      await redisCli.set(email, authNum);
+      await redisCli.expire(email, 300);
+      this.authCreateMail(email, authNum);
+
+      return false;
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+
+  async authMailExist(email) {
+    try {
+      const user = await userModel.getByEmail(email);
+      return user;
+    } catch (error) {
+      throw new Error(error);
+    }
+  }
+
+  async authMailNum(email, mailNum) {
+    const user = await redisCli.get(email);
+
+    return user === mailNum;
+  }
+
+  async authCreateMail(email, authNum) {
+    mail.setMessage(
+      email,
+      `인증번호는 ${authNum} 입니다. 5분 내로 입력해주세요.`
+    );
+    mail.sendMail();
   }
 }
 

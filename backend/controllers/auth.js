@@ -47,4 +47,39 @@ authRouter.post("/kakao/tokens", async (req, res, next) => {
   }
 });
 
+authRouter.post("/mail", async (req, res, next) => {
+  const { email } = req.body;
+
+  try {
+    const isDuplicationExist = await authService.authCreateMailNum(email);
+
+    if (isDuplicationExist) {
+      res.status(404).json({ message: "fail" });
+      return;
+    }
+
+    res.status(203).json({ message: "success" });
+  } catch (error) {
+    next(error);
+  }
+});
+
+authRouter.get("/mailnum", async (req, res, next) => {
+  const email = req.headers["x-email"];
+  const mailNum = req.headers["x-mail-num"];
+
+  try {
+    const isAuth = await authService.authMailNum(email, mailNum);
+
+    if (isAuth) {
+      res.status(203).json({ message: "success" });
+      return;
+    }
+
+    res.status(404).json({ message: "fail" });
+  } catch (error) {
+    next(error);
+  }
+});
+
 export { authRouter };
