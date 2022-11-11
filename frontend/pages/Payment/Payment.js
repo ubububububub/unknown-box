@@ -118,30 +118,30 @@ export class Payment extends Component {
   setUserInfo() {
     let formProps;
 
-    if (this.userInfo) {
+    if (this.state.userInfo) {
       const formChildren = [
         {
           id: "orderName",
           title: "주문자명",
           type: "text",
-          value: this.userInfo.orderName
+          value: this.state.userInfo.orderName
         },
         {
           id: "orderPhone",
           title: "주문자 전화번호",
           type: "text",
-          value: this.userInfo.orderPhone
+          value: this.state.userInfo.orderPhone
         },
         { type: "address" }
       ];
       formProps = {
         formChildren,
         orderAddress: {
-          postalcode: this.userInfo.orderAddress.postalCode,
-          roadAddress: this.userInfo.orderAddress.roadAddress,
-          jibunAddress: this.userInfo.orderAddress.jibunAddress,
-          detailAddress: this.userInfo.orderAddress.detailAddress,
-          extraAddress: this.userInfo.orderAddress.extraAddress
+          postalcode: this.state.userInfo.orderAddress.postalCode,
+          roadAddress: this.state.userInfo.orderAddress.roadAddress,
+          jibunAddress: this.state.userInfo.orderAddress.jibunAddress,
+          detailAddress: this.state.userInfo.orderAddress.detailAddress,
+          extraAddress: this.state.userInfo.orderAddress.extraAddress
         }
       };
     } else {
