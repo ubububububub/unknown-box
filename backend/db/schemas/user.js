@@ -17,7 +17,7 @@ const userSchema = new Schema(
     },
     address: {
       type: {
-        postalCode: String,
+        postalcode: String,
         roadAddress: String,
         jibunAddress: String,
         detailAddress: String,

@@ -82,10 +82,14 @@ class RandomboxService {
     const order = await this.orderModel.getOne(orderId);
     const state =
       order.randomboxesCount === order.productsCount + 1
-        ? "상품준비중"
+        ? "배송 준비중"
         : order.state;
-    await this.orderModel.modify(
-      { _id: orderId, "randomboxes.randombox": randomboxId },
+    const result = await this.orderModel.modify(
+      {
+        _id: orderId,
+        "randomboxes.randombox": randomboxId,
+        "randomboxes.opened": false
+      },
       {
         state,
         $set: {
@@ -95,12 +99,14 @@ class RandomboxService {
         productsCount: order.productsCount + 1
       }
     );
-    const { email } = JWT.decodeToken(accessToken);
-    await this.userModel.modify(email, {
-      $inc: { benefit: discount - price },
-      $pull: { randomboxes: { randomboxId } },
-      $push: { products: { productId, productName, thumbnail, price } }
-    });
+    if (result.modifiedCount !== 0) {
+      const { email } = JWT.decodeToken(accessToken);
+      await this.userModel.modify(email, {
+        $inc: { benefit: discount - price },
+        $pull: { randomboxes: { randomboxId } },
+        $push: { products: { productId, productName, thumbnail, price } }
+      });
+    }
   }
   async getRandomboxes() {
     const randomboxes = await this.randomboxModel.getAll();
@@ -167,14 +173,7 @@ class RandomboxService {
       if (!category) throw new Error("등록되지 않은 카테고리입니다.");
       randomboxInfo.categoryName = categoryName;
     }
-    if (price) {
-      price = Number(price);
-      randomboxInfo.price = price;
-    } else {
-      const randombox = await this.randomboxModel.getOne(randomboxId);
-      price = randombox.price;
-    }
-    if (discount)
+    if (discount > 0)
       randomboxInfo.discount = price - (price * Number(discount)) / 100;
     if (count) randomboxInfo.count = Number(count);
     if (description) randomboxInfo.description = description;

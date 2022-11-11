@@ -23,11 +23,7 @@ export class CartList extends Component {
       return this.getEmptyTemplate();
     }
 
-    return (
-      this.getAllDeleteButtonTemplate() +
-      this.getCategoryTemplate() +
-      this.getCartListTemplate()
-    );
+    return this.getCategoryTemplate() + this.getCartListTemplate();
   }
 
   render() {
@@ -36,6 +32,10 @@ export class CartList extends Component {
 
   setEvent() {
     this.target.addEventListener("click", ({ target }) => {
+      if (cart.isEmpty()) {
+        return;
+      }
+
       const { id } = target.closest(".cart_item").dataset;
       const className = target.classList.value;
 

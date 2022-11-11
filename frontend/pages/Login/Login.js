@@ -1,5 +1,6 @@
 import { postLogin } from "../../apis/index.js";
 import Form from "../../components/Form/Form.js";
+import Toast from "../../components/Toast/Toast.js";
 import Component from "../../core/Component.js";
 import { emailValidation, passwordValidation, qs } from "../../utils/index.js";
 import style from "./login.css" assert { type: "css" };
@@ -50,11 +51,12 @@ export class Login extends Component {
     });
   }
 
-  handleLogin(e) {
+  async handleLogin(e) {
     e.preventDefault();
 
     if (emailValidation(qs("#email")) && passwordValidation(qs("#password"))) {
-      postLogin(Form.getFormData());
+      const response = await postLogin(Form.getFormData());
+      new Toast(response.message);
     }
   }
 }

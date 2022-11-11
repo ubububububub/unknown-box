@@ -89,6 +89,16 @@ export function passwordValidation(password) {
   return true;
 }
 
+export function newPasswordValidation(password, newPassword) {
+  if (password.value === newPassword.value) {
+    new Toast("현재 비밀번호와 다른 비밀번호를 입력해주세요.");
+    newPassword.focus();
+    return false;
+  }
+
+  return true;
+}
+
 export function passwordConfirmValidation(password, passwordConfirm) {
   if (!passwordConfirm.value) {
     new Toast("비밀번호 확인을 입력해주세요.");

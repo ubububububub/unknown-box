@@ -5,14 +5,14 @@ const orderSchema = new Schema(
     state: {
       type: String,
       required: true,
-      default: "랜덤박스를 마저 열어주세요."
+      default: "박스 미오픈"
     },
     orderEmail: { type: String, required: true },
     orderName: { type: String, required: true },
     orderPhone: { type: String, required: true },
     orderAddress: {
       type: {
-        postalCode: { type: String, required: true },
+        postalcode: { type: String, required: true },
         roadAddress: String,
         jibunAddress: String,
         detailAddress: String,

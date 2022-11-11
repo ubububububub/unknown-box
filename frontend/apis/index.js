@@ -16,13 +16,17 @@ export async function postLogin(formData) {
       method: "POST",
       body: formData
     });
-    const json = await response.json();
-    localStorage.setItem("accessToken", json.accessToken);
-    localStorage.setItem("refreshToken", json.refreshToken);
-    localStorage.setItem("role", json.role);
-    window.location = "/";
+    if (response.status !== 200) {
+      throw new Error("가입된 회원 아이디가 아니거나 비밀번호가 틀립니다.");
+    } else {
+      const json = await response.json();
+      localStorage.setItem("accessToken", json.accessToken);
+      localStorage.setItem("refreshToken", json.refreshToken);
+      localStorage.setItem("role", json.role);
+      window.location = "/";
+    }
   } catch (err) {
-    console.dir(err);
+    return err;
   }
 }
 
@@ -64,16 +68,18 @@ export async function getOrderInfo(orderId) {
   }
 }
 
-export async function postOrderInfo(formData, orderId) {
+export async function putOrderInfo(formData, orderId) {
   try {
     const response = await fetch(`http://localhost:8080/api/order/${orderId}`, {
-      method: "POST",
-      "X-Access-Token": localStorage.getItem("accessToken"),
+      method: "PUT",
+      headers: {
+        "X-Access-Token": localStorage.getItem("accessToken")
+      },
       body: formData
     });
     if (response.status === 403) {
       await postRefreshToken();
-      await postOrderInfo(formData, orderId);
+      await putOrderInfo(formData, orderId);
     }
   } catch (err) {
     console.dir(err);
@@ -87,8 +93,7 @@ export async function deleteOrderInfo(orderId) {
       headers: {
         "Content-Type": "application/json",
         "X-Access-Token": localStorage.getItem("accessToken")
-      },
-      body: JSON.stringify(data)
+      }
     });
     if (response.status === 403) {
       await postRefreshToken();
@@ -137,19 +142,26 @@ export async function getMyInfo() {
   }
 }
 
-export async function postMyPassword(formData) {
+export async function putMyPassword(formData) {
   try {
-    const response = await fetch(`http://localhost:8080/api/user`, {
-      method: "POST",
-      body: formData,
-      "X-Access-Token": localStorage.getItem("accessToken")
+    const response = await fetch(`http://localhost:8080/api/mypage`, {
+      method: "PUT",
+      headers: {
+        "X-Access-Token": localStorage.getItem("accessToken")
+      },
+      body: formData
     });
     if (response.status === 403) {
       await postRefreshToken();
-      await postMyPassword(formData);
+      await putMyPassword(formData);
+    }
+    if (response.status === 200) {
+      location.reload();
+    } else {
+      throw new Error("현재 비밀번호가 틀렸습니다.");
     }
   } catch (err) {
-    console.dir(err);
+    return err;
   }
 }
 
@@ -187,7 +199,7 @@ export async function getRandomBoxProducts(randomboxId) {
   }
 }
 
-export async function putRandomBoxResult(randomboxId, orderId, productId) {
+export async function putRandomBoxResult({ randomboxId, orderId, productId }) {
   try {
     const response = await fetch(
       `http://localhost:8080/api/randombox/${randomboxId}`,
@@ -228,8 +240,11 @@ export async function postPayment(formData, product) {
   try {
     const response = await fetch(`http://localhost:8080/api/order`, {
       method: "POST",
-      "X-Access-Token": localStorage.getItem("accessToken"),
-      body: JSON.stringify({ ...formData, ...product })
+      headers: {
+        "Content-Type": "application/json",
+        "X-Access-Token": localStorage.getItem("accessToken")
+      },
+      body: JSON.stringify({ formData: [...formData], product })
     });
     if (response.status === 403) {
       await postRefreshToken();
@@ -461,9 +476,6 @@ export async function getProductDetail(id) {
 
 export async function editProduct(id, data) {
   try {
-    for (let [key, value] of data.entries()) {
-      console.log(key, value);
-    }
     await fetch(`http://localhost:8080/api/admin/product/${id}`, {
       method: "PUT",
       headers: {

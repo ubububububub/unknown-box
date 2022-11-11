@@ -24,35 +24,43 @@ export default class QnaList extends Component {
                 <span id="paging"></span>
             </div>
             <a href="/qnaboard/write" class="qnalist-btn">글쓰기</a>
-            `
+            `;
   }
 
   mounted() {
     getQnaList().then(list => {
-      const pagingCount = 10;
+      const pagingCount = 7;
       list.reverse();
-      for (let i = 0; i <= (list.length / pagingCount +1); i++) {
-        console.log(i);
-        if (i !== 0){
-          qs('#paging').innerHTML += `<input type="button" value=${i}></input>`;
+      for (let i = 0; i <= list.length / pagingCount + 1; i++) {
+        if (i !== 0) {
+          qs("#paging").innerHTML += `<input type="button" value=${i}></input>`;
         }
       }
-      list.push([{startPage:0,endPage:9,boardNum:list.length}])
-      qs("#paging").addEventListener('click',(e) =>{
-        if(e.target.value){
+      list.push([{ startPage: 0, endPage: 6, boardNum: list.length }]);
+      qs("#paging").addEventListener("click", e => {
+        if (e.target.value) {
           qs("#qna-list-body").innerHTML = "";
-          list[list.length - 1][0].startPage = (e.target.value * pagingCount) - pagingCount;
-          list[list.length - 1][0].endPage =  (e.target.value * pagingCount) - 1 ;
-          for(let i = list[list.length - 1][0].startPage; i <= list[list.length - 1][0].endPage; i++){
-            list[i].boardNum = (list.length - i);
-            new  QnaItem(qs("#qna-list-body"), list[i]);
+          list[list.length - 1][0].startPage =
+            e.target.value * pagingCount - pagingCount;
+          list[list.length - 1][0].endPage = e.target.value * pagingCount - 1;
+          for (
+            let i = list[list.length - 1][0].startPage;
+            i <= list[list.length - 1][0].endPage;
+            i++
+          ) {
+            list[i].boardNum = list.length - i;
+            new QnaItem(qs("#qna-list-body"), list[i]);
           }
         }
-      })
-      for(let i = list[list.length - 1][0].startPage; i <= list[list.length - 1][0].endPage; i++){
-        list[i].boardNum = (list.length - i);
+      });
+      for (
+        let i = list[list.length - 1][0].startPage;
+        i <= list[list.length - 1][0].endPage;
+        i++
+      ) {
+        list[i].boardNum = list.length - i;
         new QnaItem(qs("#qna-list-body"), list[i]);
       }
-    })
+    });
   }
 }

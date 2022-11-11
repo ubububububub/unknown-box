@@ -1,7 +1,14 @@
-import { postMyPassword } from "../../apis/index.js";
+import { putMyPassword } from "../../apis/index.js";
 import Component from "../../core/Component.js";
-import { MODAL, passwordConfirmValidation, qs } from "../../utils/index.js";
+import {
+  MODAL,
+  newPasswordValidation,
+  passwordConfirmValidation,
+  passwordValidation,
+  qs
+} from "../../utils/index.js";
 import Modal from "../Modal/Modal.js";
+import Toast from "../Toast/Toast.js";
 import style from "./myInfo.css" assert { type: "css" };
 document.adoptedStyleSheets.push(style);
 
@@ -77,14 +84,17 @@ class MyInfo extends Component {
     });
   }
 
-  handleChangePassword(id, formData) {
+  async handleChangePassword(id, formData) {
+    const pastPassword = qs('[name="password"]');
     const password = qs('[name="newPassword"]');
     const passwordConfirm = qs('[name="newPasswordConfirm"]');
     if (
-      passwordConfirm(password) &&
+      newPasswordValidation(pastPassword, password) &&
+      passwordValidation(password) &&
       passwordConfirmValidation(password, passwordConfirm)
     ) {
-      // postMyPassword(formData);
+      const response = await putMyPassword(formData);
+      new Toast(response.message);
     }
   }
 }

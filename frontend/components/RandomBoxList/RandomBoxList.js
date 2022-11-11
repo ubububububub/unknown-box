@@ -92,7 +92,6 @@ export default class RandomBoxList extends Component {
 
   async editBoxProduct(id, data) {
     const res = await editBox(id, data);
-    console.log(res);
     //location = "/admin/randombox";
   }
 }
