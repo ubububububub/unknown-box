@@ -10,8 +10,8 @@ export default class OrderItem extends Component {
     return `<tr class="order-${orderId}">
                 <td>${orderId}</td>
                 <td>${state}</td>
-                <td>${createdAt}</td>
-                <td>${updatedAt}</td>
+                <td>${createdAt.slice(0, 10)} ${createdAt.slice(11, 19)}</td>
+                <td>${updatedAt.slice(0, 10)} ${createdAt.slice(11, 19)}</td>
                 <td class="order-btns">
                     <button type="button" class="order-editBtn">배송상태 수정</button>
                     <button type="button" class="order-cancelBtn">주문 취소</button>

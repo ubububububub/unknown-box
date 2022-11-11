@@ -58,7 +58,7 @@ export default class PaymentInfo extends Component {
         `<dd class="paymentInfo_product-item">
           <ul class="paymentInfo_product-info-list">
             <li class="paymentInfo_product-img">
-              <img src="https://picsum.photos/id/235/72/72" alt="product-img"/>
+              <img src="${curr.thumbnail}" alt="product-img"/>
             </li>
             <li class="paymentInfo_product-name">
               <ul>

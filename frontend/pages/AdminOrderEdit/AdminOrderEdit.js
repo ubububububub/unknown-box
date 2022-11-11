@@ -30,17 +30,17 @@ export class AdminOrderEdit extends Component {
     return `<section id="admin_order-container"> 
               <div id="admin_order-nav"></div>
               <div id="admin_order-list-wrapper">
-              <span class="detail-info">주문 상세 정보</span>
-                <div class="order-info">
-                    <div class="order-time">
-                        <span>주문날짜</span>
-                        <span>${createdAt}</span>
-                    </div>
-                    <div class="order-state">
-                        <span>배송상태</span>
-                        <input value="${state}"/>
-                    </div>
-                    <div class="orderer-info">
+                <span class="detail-info">주문 상세 정보</span>
+                <div class="detail-contents">
+                    <div class="order-info">
+                        <div class="order-time">
+                            <span>주문날짜</span>
+                            <span>${createdAt.slice(0, 10)}</span>
+                        </div>
+                        <div class="order-state">
+                            <span>배송상태</span>
+                            <input value="${state}"/>
+                        </div>
                         <div class="order-name">
                             <span>주문자명</span>
                             <span>${orderName}</span>
@@ -49,60 +49,74 @@ export class AdminOrderEdit extends Component {
                             <span>전화번호</span>
                             <span>${orderPhone}</span>
                         </div>
-                        <div class="order-address">
-                            <div>
+                        <div>
                             <span>우편 번호</span>
-                            <p>${orderAddress.postalcode}</p>
-                            </div>
-                            <div>
+                            <span>${orderAddress.postalcode}</span>
+                          </div>
+                          <div>
                             <span>도로명 주소</span>
-                            <p>${orderAddress.roadAddress}</p>
-                            </div>
-                            <div>
-                            <span>지번 주소</span>
-                            <p>${orderAddress.jibunAddress}</p>
-                            </div>
-                            <div>
-                            <span>상세 주소</span>
-                            <p>${orderAddress.detailAddress}</p>
-                            </div>
-                            <div>
-                            <span>추가 주소</span>
-                            <p>${orderAddress.extraAddress}</p>
-                            </div>
+                            <span>${orderAddress.roadAddress}</span>
+                          </div>
+                        <div>
+                          <span>지번 주소</span>
+                          <span>${orderAddress.jibunAddress}</span>
                         </div>
-                    </div>
+                        <div>
+                          <span>상세 주소</span>
+                          <span>${orderAddress.detailAddress}</span>
+                        </div>
+                        <div>
+                          <span>추가 주소</span>
+                          <span>${orderAddress.extraAddress}</span>
+                        </div>
+                      </div>
+                  <div class="order-wrapper">
                     <div class="order-list">
-                        <span>주문상품<span>
                         <ul>
+                        <span class="order-product">주문 상품</span>
                         ${randomboxes
                           .map(
                             ({ opened, randomboxName, price, product }) =>
-                              `<li>
-                                <div>${randomboxName}</div>
-                                <div>${price}</div>
-                                <div>${
-                                  opened
-                                    ? `<span>당첨 상품</span>
-                                  <img src="${product.thumbnail}"/>
-                                  <div>${product.productName}</div>
-                                  <div>${product.price}</div>`
-                                    : ""
-                                }
-                                </div>
+                              `
+                                <li class="order-item">
+                                  <div>
+                                      <div>${randomboxName}</div>
+                                      <div>${price.toLocaleString()}원</div>
+                                    <div class="selected-product">${
+                                      opened
+                                        ? `<p class="order-product">당첨 상품</p>
+                                      <img src="${product.thumbnail}"/>
+                                      <div>${product.productName}</div>
+                                      <div>${product.price.toLocaleString()}원</div>`
+                                        : ""
+                                    }
+                                  </div>
                             </li>`
                           )
                           .join("")}
                         </ul>
-                    </div>
+                      </div>
+                  
                     <div class="order-price">
-                        <p>${boxesPrice}</p>
-                        <p>${deliveryPrice}</p>
-                        <p>${totalPrice}</p>
+                        <div>
+                          <span>가격</span>
+                          <span>${boxesPrice.toLocaleString()}원</span>
+                        </div>
+                        <div>
+                          <span>배송비</span>
+                          <span>${deliveryPrice.toLocaleString()}원</span>
+                        </div>
+                        <div>
+                          <span>배송비</span>
+                          <span>${totalPrice.toLocaleString()}원</span>
+                        </div>
                     </div>
-                </div>       
-                <button type="button" class="order-submitBtn">수정 완료</button>
-                <button type="button" class="order-cancelBtn">주문 취소</button>
+                  </div>
+                </div>
+                <div class="order-btns"> 
+                  <button type="button" class="order-submitBtn">수정 완료</button>
+                  <button type="button" class="order-cancelBtn">주문 취소</button>
+                </div>
           </div>
         </section>
         `;
