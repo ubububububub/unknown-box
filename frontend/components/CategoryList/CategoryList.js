@@ -3,37 +3,34 @@ import CategoryItem from "../CategoryItem/CategoryItem.js";
 import { MODAL, qs } from "../../utils/index.js";
 //import { getCategoryList, addCategory, deleteCategory } from "../../apis/index.js";
 import Modal from "../Modal/Modal.js";
+import style from "./categoryList.css" assert { type: "css" };
+document.adoptedStyleSheets.push(style);
 
 export default class CategoryList extends Component {
-  setup() {
+  template() {
+    return `<button type="button" class="category-addBtn">추가하기</button>
+            <ul class="admin_category-list"></ul>`;
+  }
+
+  async mounted() {
+    // const list = await getCategoryList();
+    // this.state = { category: list };
     const mockData = [
-      { id: 1, Name: "의류 랜덤박스" },
-      { id: 2, Name: "전자제품 랜덤박스" },
-      { id: 3, Name: "랜덤박스" }
+      { categoryId: 1, categoryName: "의류 랜덤박스" },
+      { categoryId: 2, categoryName: "전자제품 랜덤박스" },
+      { categoryId: 3, categoryName: "랜덤박스" }
     ];
 
     this.state = {
       category: mockData
     };
-  }
 
-  template() {
-    return `<ul class="category-list">
-              <button type="button" class="category-addBtn">추가하기</button>
-            </ul>
-              `;
-  }
-
-  mounted() {
-    // const list = await API.getCategoryList();
-    // this.state = { category: list };
-
-    this.state.category.forEach(({ id, Name }) => {
-      new CategoryItem(qs(".category-list"), {
-        id,
-        Name,
-        editCategory: this.editCategory.bind(this),
-        deleteCategory: this.deleteCategory.bind(this)
+    this.state.category.forEach(({ categoryId, categoryName }) => {
+      new CategoryItem(qs(".admin_category-list"), {
+        categoryId,
+        categoryName,
+        editCategoryName: this.editCategoryName.bind(this),
+        deleteCategoryName: this.deleteCategoryName.bind(this)
       });
     });
   }
@@ -44,28 +41,32 @@ export default class CategoryList extends Component {
         headerText: "카테고리 추가",
         type: "ADD",
         contents: {
-          body: [MODAL.Form({}, [MODAL.Input({ type: "text", name: "Name" })])]
+          body: [
+            MODAL.Form({}, [
+              MODAL.Input({ type: "text", name: "categoryName" })
+            ])
+          ]
         },
-        submit: this.addCategory.bind(this)
+        submit: this.addCategoryName.bind(this)
       });
     });
   }
 
-  async addCategory(data) {
-    // await API.addCategory(data);
+  async addCategoryName(data) {
+    // await addCategory(data);
     location = "/admin";
   }
 
-  editCategory(id, data) {
-    // await API.editCategory(id, data);
+  async editCategoryName(id, data) {
+    // await editCategory(id, data);
     location = "/admin";
   }
 
-  deleteCategory(id) {
-    // await API.deleteCategory(id);
-    const categories = this.state.category.filter(
-      category => category.id !== id
+  async deleteCategoryName(id) {
+    // await deleteCategory(id);
+    const remain = this.state.category.filter(
+      category => category.categoryId !== id
     );
-    this.setState({ category: categories });
+    this.setState({ category: remain });
   }
 }

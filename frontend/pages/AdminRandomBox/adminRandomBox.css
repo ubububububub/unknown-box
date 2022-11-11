@@ -1,0 +1,23 @@
+#admin_randombox-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#admin_randombox-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 48px;
+  background-color: #e7e6ef;
+  margin-bottom: 48px;
+  gap: 16px;
+}
+
+#admin_randombox-list-wrapper {
+  width: 900px;
+  font-size: 17px;
+  display: inline-block;
+  text-align: right;
+}

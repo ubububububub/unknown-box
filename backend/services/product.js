@@ -5,7 +5,6 @@ class ProductService {
     this.productModel = productModel;
     this.categoryModel = categoryModel;
   }
-  // async getList()
   async getProducts() {
     const products = await this.productModel.getAll();
     if (products.length === 0) throw new Error("등록된 상품이 없습니다.");

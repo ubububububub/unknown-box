@@ -1,5 +1,39 @@
 @charset "utf-8";
 
-.detail-wrap { width:100%; margin: 0 auto; display: flex; justify-content: space-between; }
-.detail-wrap div.detail-img { width: 70%; }
-.detail-wrap div.detail-info { width: 30%; }
+h5 {
+    font-size: 20px;
+}
+
+#detail-container {
+    margin: 50px;
+}
+.detail-wrap {
+    width:100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+.detail-wrap div.detail-img {
+    width: 60%;
+}
+
+.detail-wrap div.detail-img img {
+    width: 100%;
+}
+
+.detail-wrap div.detail-info {
+    padding-left: 30px;
+    width: 40%;
+}
+
+.detail-wrap .detail-item-btn {
+    margin-top: 50px;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+}
+
+.detail-wrap .detail-item-btn button {
+    width: 49%;
+}

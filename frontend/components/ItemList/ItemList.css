@@ -1,16 +1,81 @@
 @charset "utf-8";
 
-a { list-style:none; }
-h1 { font-size: 40px; }
-.sub-title { text-align: center; }
+a { 
+  list-style:none;
+}
 
-.category nav { margin-bottom: 30px; }
-.list-wrap { display: flex; flex-wrap: wrap; justify-content: space-around; width: 80%; margin: 0 auto; }
-.list-wrap .list-item { width: 201px; margin-bottom: 56px; margin-right: 44px; }
-.list-wrap .list-item:nth-child(4n) { margin-right: 0; }
-.list-wrap .list-item .list-info h4 { font-size: 25px; line-height: 1.5; margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.list-wrap .list-item .list-info h5 { font-size: 20px; margin-bottom: 4px; }
-.list-wrap .list-item .list-info p { font-size: 16px; }
-.list-wrap .list-item .list-img { width: 100%; padding-top: 100%; position: relative; overflow: hidden; border-radius: 12px; background-color: #f8f9fa; box-shadow: inset 0px 0px 0px 1px rgb(0 0 0 / 15%); box-sizing: border-box; }
-.list-wrap .list-item .list-img img { position: absolute; top: 0; bottom: 0; width: 100%; box-sizing: border-box; border-radius: 12px; border: 1px solid transparent; }
-.list-wrap .list-item .list-pay { display: flex; justify-content: space-between; }
+h1 { 
+  font-size: 40px; 
+}
+
+.ltemList-title { 
+  margin-bottom: 30px; 
+}
+
+.ltemList-title h1 { 
+  text-align: center; 
+}
+#main-container {
+  margin: 50px 0;
+}
+
+#ltemList-listwrap {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-around;
+  width: 450px;
+  margin: 0px auto;
+}
+
+#ltemList-listwrap .ltemList-item {
+  width: 100%;
+  margin: 0 10px;
+}
+
+#ltemList-listwrap .ltemList-item:nth-child(4n) { 
+  margin-right: 0; 
+}
+
+#ltemList-listwrap .ltemList-item .ltemList-info h4 { 
+  font-size: 25px; 
+  line-height: 1.5; 
+  margin-bottom: 4px; 
+  white-space: nowrap; 
+  overflow: hidden; 
+  text-overflow: ellipsis;
+  text-align: center;
+}
+
+#ltemList-listwrap .ltemList-item .ltemList-info h5 { 
+  font-size: 20px; 
+  margin-bottom: 4px; 
+}
+
+#ltemList-listwrap .ltemList-item .ltemList-info p { 
+  font-size: 16px; 
+}
+
+#ltemList-listwrap .ltemList-item .ltemList-img { 
+  width: 100%; 
+  padding-top: 100%; 
+  position: relative; 
+  overflow: hidden; 
+  border-radius: 12px; 
+  background-color: #f8f9fa; 
+  box-shadow: inset 0px 0px 0px 1px rgb(0 0 0 / 15%); 
+  box-sizing: border-box; 
+}
+
+#ltemList-listwrap .ltemList-item .ltemList-img img { 
+  position: absolute; 
+  top: 0; 
+  bottom: 0;
+  width: 100%; 
+  box-sizing: border-box; 
+  border-radius: 12px; 
+  border: 1px solid transparent; 
+}
+
+#ltemList-listwrap .ltemList-item .ltemList-pay {
+  text-align: center;
+}

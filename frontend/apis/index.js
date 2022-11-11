@@ -4,7 +4,7 @@ export async function postSignIn(formData) {
       method: "POST",
       body: formData
     });
-    window.history.back();
+    window.location = "/login";
   } catch (err) {
     console.dir(err);
   }
@@ -20,7 +20,7 @@ export async function postLogin(formData) {
     localStorage.setItem("accessToken", json.accessToken);
     localStorage.setItem("refreshToken", json.refreshToken);
     localStorage.setItem("role", json.role);
-    window.history.back();
+    window.location = "/";
   } catch (err) {
     console.dir(err);
   }
@@ -170,30 +170,38 @@ export async function postRefreshToken() {
   }
 }
 
-export async function getRandomBoxProducts() {
+export async function getRandomBoxProducts(randomboxId) {
   try {
-    const response = await fetch("랜덤 박스 상품 api", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json"
+    const response = await fetch(
+      `http://localhost:8080/api/randombox/${randomboxId}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json"
+        }
       }
-    });
+    );
     return await response.json();
   } catch (err) {
     console.dir(err);
   }
 }
 
-export async function postRandomBoxResult(product) {
+export async function putRandomBoxResult(randomboxId, orderId, productId) {
   try {
-    await fetch("랜덤 박스 결과 api", {
-      method: "POST",
+    await fetch(`http://localhost:8080/api/randombox/${randomboxId}`, {
+      method: "PUT",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "X-Access-Token": localStorage.getItem("accessToken")
       },
-      body: JSON.stringify({ product })
+      body: JSON.stringify({ orderId, productId })
     });
   } catch (err) {
+    if (response.status === 403) {
+      await postRefreshToken();
+      await putRandomBoxResult(randomboxId);
+    }
     console.dir(err);
   }
 }
@@ -213,9 +221,9 @@ export async function postKakaoLoginToken(email) {
   }
 }
 
-export async function postPayment(formData, orderId, product) {
+export async function postPayment(formData, product) {
   try {
-    await fetch(`http://localhost:8080/api/order/${orderId}`, {
+    await fetch(`http://localhost:8080/api/order`, {
       method: "POST",
       "X-Access-Token": localStorage.getItem("accessToken"),
       body: JSON.stringify({ ...formData, ...product })
@@ -282,6 +290,69 @@ export async function deleteCategory(id) {
   }
 }
 
+export async function getBoxList() {
+  try {
+    const response = await fetch("http://localhost:8080/api/admin/randombox", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
+    return await response.json();
+  } catch (err) {
+    console.dir(err);
+  }
+}
+
+export async function addBox(data) {
+  try {
+    await fetch(`http://localhost:8080/api/admin/randombox`, {
+      method: "POST",
+      body: data
+    });
+  } catch (err) {
+    console.dir(err);
+  }
+}
+
+export async function getBoxDetail(id) {
+  try {
+    const response = await fetch(`http://localhost:8080/api/randombox/${id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
+    return response.json();
+  } catch (err) {
+    console.dir(err);
+  }
+}
+
+export async function editBox(id, data) {
+  try {
+    await fetch(`http://localhost:8080/api/admin/randombox/${id}`, {
+      method: "PUT",
+      body: data
+    });
+  } catch (err) {
+    console.dir(err);
+  }
+}
+
+export async function deletebox(id) {
+  try {
+    await fetch(`http://localhost:8080/api/admin/randombox/${id}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
+  } catch (err) {
+    console.dir(err);
+  }
+}
+
 export async function getProductList() {
   try {
     const response = await fetch("http://localhost:8080/api/admin/product", {
@@ -300,7 +371,6 @@ export async function addProduct(data) {
   try {
     await fetch(`http://localhost:8080/api/admin/product`, {
       method: "POST",
-
       body: data
     });
   } catch (err) {
@@ -362,12 +432,15 @@ export async function getOrderList() {
 
 export async function getOrderDetail(id) {
   try {
-    const response = await fetch(`http://localhost:8080/api/order/${id}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json"
+    const response = await fetch(
+      `http://localhost:8080/api/admin/order/${id}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json"
+        }
       }
-    });
+    );
     return response.json();
   } catch (err) {
     console.dir(err);
@@ -376,17 +449,13 @@ export async function getOrderDetail(id) {
 
 export async function editOrder(id, data) {
   try {
-    const response = await fetch(
-      `http://localhost:8080/api/admin/order/${id}`,
-      {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data)
-      }
-    );
-    return response.json();
+    await fetch(`http://localhost:8080/api/admin/order/${id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
+    });
   } catch (err) {
     console.dir(err);
   }

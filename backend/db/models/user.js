@@ -39,6 +39,9 @@ class UserModel {
     const result = await this.model.updateOne({ email }, { password });
     return result;
   }
+  async modify(email, userInfo) {
+    await this.model.updateOne({ email }, userInfo);
+  }
 }
 
 const userModel = new UserModel(model);

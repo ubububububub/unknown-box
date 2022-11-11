@@ -42,11 +42,11 @@ export const MODAL = {
   }
 };
 
-export function editForm(elementList) {
+export function createEditForm(elementList) {
   return MODAL.Form(
     {},
     elementList.map(({ className, title, attr = {} }) =>
-      MODAL.Div({ classname: className }, [
+      MODAL.Div({ className: className }, [
         MODAL.Span({}, [title]),
         MODAL.Input({ ...attr })
       ])

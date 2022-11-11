@@ -60,11 +60,20 @@ export default class PaymentInfo extends Component {
             <li class="paymentInfo_product-img">
               <img src="https://picsum.photos/id/235/72/72" alt="product-img"/>
             </li>
-            <li class="paymentInfo_product-name">${curr.name}</li>
-            <li class="paymentInfo_product-quantity">${curr.quantity}개</li>
-            <li class="paymentInfo_product-price">${
+            <li class="paymentInfo_product-name">
+              <ul>
+                <li>${curr.randomboxName}</li>
+                <li class="paymentInfo_product-item-category-name-item">종류: ${
+                  curr.categoryName
+                }</li>
+              </ul>
+            </li>
+            <li class="paymentInfo_product-quantity" data-randombox="${
+              curr.randombox
+            }">${curr.quantity}개</li>
+            <li class="paymentInfo_product-price">${(
               curr.price * curr.quantity
-            }원</li>
+            ).toLocaleString()}원</li>
           </ul>
         </dd>`,
       ""

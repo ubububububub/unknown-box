@@ -9,15 +9,14 @@ export class Login extends Component {
   template() {
     return `
     <div id="login_contaniner">
-    <div id="login_section">
-    <H1>로그인</H1>
-    <div id="login-form_section"></div>
-    <button class="login-signin_btn">아직 회원이 아니신가요?</button>
-    <button class="login-login_btn">로그인</button>
-    <button class="login-kakao-login_btn">카카오 로그인</button>
-    </div>
+      <div id="login_section">
+        <H1>로그인</H1>
+        <div id="login-form_section"></div>
+        <button class="login-signin_btn form_btn">아직 회원이 아니신가요?</button>
+        <button class="login-login_btn form_btn">로그인</button>
+        <button class="login-kakao-login_btn form_btn">카카오 로그인</button>
+      </div>
     </div>`;
-    // <button class="login-logout_btn">로그아웃</button>
   }
 
   mounted() {
@@ -41,24 +40,14 @@ export class Login extends Component {
       window.location = "/signin";
     });
 
-    // qs(".login-logout_btn").addEventListener("click", e => {
-    //   this.handleLogout(e);
-    // });
-
     qs(".login-login_btn").addEventListener("click", e => {
       this.handleLogin(e);
     });
-  }
 
-  handleLogout(e) {
-    e.preventDefault();
-
-    function deleteCookie(token) {
-      document.cookie = token + "=; expires=Thu, 01 Jan 1970 00:00:01 GMT;";
-    }
-    deleteCookie("accessToken");
-    deleteCookie("refreshToken");
-    localStorage.removeItem("role");
+    qs(".login-kakao-login_btn").addEventListener("click", () => {
+      window.location =
+        "https://kauth.kakao.com/oauth/authorize?client_id=86c7682643aad4626e8d5822b0107da9&redirect_uri=http://localhost:8080/api/auth/kakao/callback&response_type=code";
+    });
   }
 
   handleLogin(e) {

@@ -6,6 +6,7 @@
   justify-content: center;
   align-items: center;
   width: 100%;
+  margin: 80px auto 160px auto;
 }
 
 #signin_section {
@@ -25,28 +26,5 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  margin-bottom: 24px;
-}
-
-button {
-  width: 100%;
-  max-width: 432px;
-  height: 48px;
-  background: #fb2e86;
-  border: none;
-  border-radius: 2px;
-  text-align: center;
-  font-size: 16px;
-  color: #ffffff;
-  margin-bottom: 8px;
-}
-
-.login-signin_btn {
-  background: transparent;
-  color: grey;
-}
-
-.login-kakao-login_btn {
-  background: #fce374;
-  color: black;
+  margin: 24px 0;
 }

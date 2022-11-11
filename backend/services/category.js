@@ -6,7 +6,7 @@ class CategoryService {
   }
   async getList() {
     const categories = await this.categoryModel.getAll();
-    if (categories.length === 0) throw new Error("카테고리가 없습니다.");
+    if (categories.length === 0) return [];
     return categories.map(({ _id, categoryName }) => ({
       categoryId: _id,
       categoryName
@@ -19,7 +19,7 @@ class CategoryService {
   }
   async modify({ categoryId }, { categoryName }) {
     const result = await this.categoryModel.modify(categoryId, categoryName);
-    return { result: result.matchedCount ? "success" : "false" };
+    return { result: result.matchedCount ? "success" : "fail" };
   }
   async remove({ categoryId }) {
     const result = await this.categoryModel.remove(categoryId);

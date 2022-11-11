@@ -6,6 +6,7 @@
   justify-content: center;
   align-items: center;
   width: 100%;
+  margin: 80px auto 160px auto;
 }
 
 #login_section {
@@ -25,9 +26,10 @@
   justify-content: center;
   align-items: center;
   width: 100%;
+  margin: 24px 0;
 }
 
-button {
+.form_btn {
   width: 100%;
   max-width: 432px;
   height: 48px;

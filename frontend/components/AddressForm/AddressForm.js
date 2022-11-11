@@ -1,31 +1,46 @@
 import Component from "../../core/Component.js";
 import { qs } from "../../utils/index.js";
+import style from "./addressForm.css" assert { type: "css" };
+document.adoptedStyleSheets.push(style);
 
 class AddressForm extends Component {
   template() {
     const item = this.props;
-    return `<label for="postcode">우편번호</label>
-            <input type="text" id="postcode" name="postcode" ${
-              item.postcode ? `value="${item.postcode}"` : null
-            } readonly>
-            <input type="button" class="address" value="우편번호 찾기"><br>
-            <label for="roadAddress">도로명주소</label>
-            <input type="text" id="roadAddress" name="roadAddress" ${
-              item.roadAddress ? `value="${item.roadAddress}"` : null
-            } readonly>
-            <label for="jibunAddress">지번주소</label>
-            <input type="text" id="jibunAddress" name="jibunAddress" ${
-              item.jibunAddress ? `value="${item.jibunAddress}"` : null
-            } readonly>
-            <span id="guide" style="color:#999;display:none"></span>
-            <label for="detailAddress">상세주소</label>
-            <input type="text" id="detailAddress" name="detailAddress" ${
-              item.detailAddress ? `value="${item.detailAddress}"` : null
-            } >
-            <label for="extraAddress">참고항목</label>
-            <input type="text" id="extraAddress" name="extraAddress" ${
-              item.extraAddress ? `value="${item.extraAddress}"` : null
-            } readonly>
+    return `
+            <div id="address-from-container">
+              <div>
+                <label for="postalcode">우편번호</label>
+                <input type="text" id="postalcode" name="postalcode" ${
+                  item.postalcode ? `value="${item.postalcode}"` : null
+                } readonly>
+                <input type="button" class="address" value="우편번호 찾기">
+              </div>
+              <div>
+                <label for="roadAddress">도로명주소</label>
+                <input type="text" id="roadAddress" name="roadAddress" ${
+                  item.roadAddress ? `value="${item.roadAddress}"` : null
+                } readonly>
+              </div>
+              <div>
+                <label for="jibunAddress">지번주소</label>
+                <input type="text" id="jibunAddress" name="jibunAddress" ${
+                  item.jibunAddress ? `value="${item.jibunAddress}"` : null
+                } readonly>
+                <span id="guide" style="color:#999;display:none"></span>
+              </div>
+              <div>
+                <label for="detailAddress">상세주소</label>
+                <input type="text" id="detailAddress" name="detailAddress" ${
+                  item.detailAddress ? `value="${item.detailAddress}"` : null
+                } >
+              </div>
+              <div>
+                <label for="extraAddress">참고항목</label>
+                <input type="text" id="extraAddress" name="extraAddress" ${
+                  item.extraAddress ? `value="${item.extraAddress}"` : null
+                } readonly>
+              </div>
+            </div>
     `;
   }
 
@@ -33,7 +48,7 @@ class AddressForm extends Component {
     function execDaumPostcode() {
       new daum.Postcode({
         oncomplete(data) {
-          qs("#postcode").value =
+          qs("#postalcode").value =
             qs("#roadAddress").value =
             qs("#jibunAddress").value =
             qs("#detailAddress").value =
@@ -58,7 +73,7 @@ class AddressForm extends Component {
             extraRoadAddr = " (" + extraRoadAddr + ")";
           }
 
-          qs("#postcode").value = data.zonecode;
+          qs("#postalcode").value = data.zonecode;
           qs("#roadAddress").value = roadAddr;
           qs("#jibunAddress").value = data.jibunAddress;
 

@@ -26,12 +26,12 @@ class UserService {
     return users;
   }
 
-  async getThisUser({ accessToken }) {
+  async getThisUser(accessToken) {
     const { email } = JWT.decodeToken(accessToken);
     const user = await this.model.getByEmail(email);
     return { email: user.email, role: user.role };
   }
-  async changePassword({ accessToken }, { password, newPassword }) {
+  async changePassword(accessToken, { password, newPassword }) {
     const { email } = JWT.decodeToken(accessToken);
     const user = await this.model.getByEmail(email);
     if (user.password !== hashPassword(password))
@@ -41,6 +41,12 @@ class UserService {
       hashPassword(newPassword)
     );
     return { result: result.matchedCount ? "success" : "fail" };
+  }
+  async getInMyPage(accessToken) {
+    const { email } = JWT.decodeToken(accessToken);
+    const { benefit, randomboxes, products, role } =
+      await this.model.getByEmail(email);
+    return { email, benefit, randomboxes, products, role };
   }
 }
 

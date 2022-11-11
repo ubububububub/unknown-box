@@ -1,27 +1,34 @@
 import Component from "../../core/Component.js";
 import style from "./layout.css" assert { type: "css" };
-import {qs} from "../../utils/index.js";
+import { qs } from "../../utils/index.js";
 document.adoptedStyleSheets.push(style);
 
 export class Header extends Component {
-    template() {
-      const isLogin = !!localStorage.getItem('role');
-      const isAdmin = localStorage.getItem('role') === "admin"        
-        return (
-            `<section class="header">
+  template() {
+    const isLogin = !!localStorage.getItem("role");
+    const isAdmin = localStorage.getItem("role") === "admin";
+    return `<section class="header">
             <div class="header-fix">
               <div class="header-top">
                 <a href="/" class="header-logo">Shop logo</a>
                 <div class="header-top-box">
                   <ul class="header-toplist">
                     <li>
-                      ${!isLogin ? `<a href='/login'>로그인</a>`: `<a href="javascript:void(0);" id='login_logout_btn'>로그아웃</a>` }
+                      ${
+                        !isLogin
+                          ? `<a href='/login'>로그인</a>`
+                          : `<a href="javascript:void(0);" id='login_logout_btn'>로그아웃</a>`
+                      }
                     </li>
                     <li>
-                      ${!isLogin ? `<a href='/signin'>회원가입</a>` :  `<a href='/mypage'>마이페이지</a>` }
+                      ${
+                        !isLogin
+                          ? `<a href='/signin'>회원가입</a>`
+                          : `<a href='/mypage'>마이페이지</a>`
+                      }
                     </li>
                     <li>
-                      ${isAdmin ?  `<a>관리자 계정입니다.</a>`: ``}
+                      ${isAdmin ? `<a>관리자 계정입니다.</a>` : ``}
                     </li>
                   </ul>
                   <ul class="header-btlist">
@@ -46,56 +53,45 @@ export class Header extends Component {
                 </div>
                 <ul class="">
                   <li class="menu">
-                    <a href="#">SHOP</a>
+                      <a href="#">카테고리</a>
+                      <div class="depth2">
+                        <a href="#">가전</a>
+                      </div>
+                      <div class="depth2">
+                        <a href="#">의류</a>
+                      </div>
+                    </li>
+                  <li class="menu">
+                    <a href="#">고객센터</a>
                     <div class="depth2">
                       <ul>
-                        <li class=""><a href="#">신상품</a></li>
-                         <li><a href="/qnaboard">Q&A 게시판</a></li>
-                        <li><a href="#">베스트</a></li>
-                        <li><a href="#">알뜰</a></li>
-                      </ul>
-                    </div>
-                  </li>
-                  <li class="menu">
-                    <a href="#">CATEGORY</a>
-                    <div class="depth2">
-                      <a href="#">가전</a>
-                    </div>
-                    <div class="depth2">
-                      <a href="#">의류</a>
-                      <ul class="depth3">
-                        <li><a href="#">- 상의</a></li>
-                        <li><a href="#">- 하의</a></li>
+                         <li><a href="/qnaboard/list">Q&A 게시판</a></li>
                       </ul>
                     </div>
                   </li>
                 </ul> 
               </div>
             </nav>
-          </section>`
-        );
+          </section>`;
+  }
+  setEvent() {
+    if (qs("#login_logout_btn")) {
+      qs("#login_logout_btn").addEventListener("click", e => {
+        e.preventDefault();
+        localStorage.removeItem("accessToken");
+        localStorage.removeItem("refreshToken");
+        localStorage.removeItem("role");
+        location.reload();
+      });
     }
-     setEvent() {
-      if(qs('#login_logout_btn')){
-          qs('#login_logout_btn').addEventListener("click",(e) => {
-            e.preventDefault();
-            function deleteCookie(token) {
-                document.cookie = token + "=; expires=Thu, 01 Jan 1970 00:00:01 GMT;";
-            }
-            deleteCookie("accessToken");
-            deleteCookie("refreshToken");
-            localStorage.removeItem("role");
-            location.reload();
-        });
-      }
-        qs("#btn-nav-open").addEventListener("click",() => {
-           qs("#side-nav").style.left = 0;
-        })
+    qs("#btn-nav-open").addEventListener("click", () => {
+      qs("#side-nav").style.left = 0;
+    });
 
-        qs("#side-nav-close").addEventListener("click",() => {
-          qs("#side-nav").style.left = "-450px";
-        })
-    }
+    qs("#side-nav-close").addEventListener("click", () => {
+      qs("#side-nav").style.left = "-450px";
+    });
+  }
 }
 
 export default Header;

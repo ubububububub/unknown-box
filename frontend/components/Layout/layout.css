@@ -36,13 +36,13 @@ body { margin: 0; }
 
 
 /*footer*/
-#footer { padding:50px; background-color: var(—main-background-color); }
-#footer { background-color: var(—main-background-color); }
+#footer { padding:50px; background-color: var(--main-background-color); }
+#footer { background-color: var(--main-background-color); }
 #footer .footer-content { display: flex; justify-content: space-between; border-bottom: 1px solid #545454; padding-bottom: 30px; }
 #footer a,
 #footer span,
 #footer p,
-#footer li { color:var(—main-footer-color) }
+#footer li { color:var(--main-footer-color) }
 #footer .footer-nav li { font-size: 22px; padding-bottom: 8px; }
 #footer .service li:first-child { font-size: 14px;  }
 #footer .service li:nth-child(2) { font-size: 20px; font-weight: bold; padding: 5px 0; }

@@ -15,9 +15,9 @@ const App = async () => {
   const params = [];
   const pageMatches = routes.map(route => {
     const parsedPath = window.location.pathname.match(pathToRegex(route.path));
-    
+
     if (parsedPath) {
-      params.push(parsedPath[1]);
+      params.push(...parsedPath.filter((param, idx) => idx !== 0));
     }
     return {
       route,
@@ -32,11 +32,21 @@ const App = async () => {
       route: routes[routes.length - 1],
       result: true
     };
+  } else if (!match.route.isPublic && !localStorage.getItem("accessToken")) {
+    match = {
+      route: routes[2],
+      result: true
+    };
+  } else if (match.route?.isAdmin && localStorage.getItem("role") !== "admin") {
+    match = {
+      route: routes[routes.length - 1],
+      result: true
+    };
   }
 
-  new Header(qs("#header"))
-  new match.route.view(qs("#app"), ...params);
-  new Footer(qs("#footer"))
+  new Header(qs("#header"));
+  new match.route.view(qs("#app"), params);
+  new Footer(qs("#footer"));
 };
 
 document.addEventListener("DOMContentLoaded", () => {

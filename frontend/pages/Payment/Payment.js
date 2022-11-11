@@ -45,7 +45,7 @@ export class Payment extends Component {
     const formProps = {
       formChildren,
       orderAddress: {
-        postcode: "123123",
+        postalcode: "123123",
         roadAddress: "사랑시 고백구 행복동",
         jibunAddress: "사랑시 고백구 행복동",
         detailAddress: "상세한주소",
@@ -64,16 +64,17 @@ export class Payment extends Component {
       return;
     }
 
-    const product = {
-      productName: this.parsePaymentProductName(".paymentInfo_product-name"),
-      productNum: this.parsePaymentProductQuantity(
+    const products = {
+      products: this.parsePaymentProductName(".paymentInfo_product-name"),
+      randomboxes: this.parsePaymentProductQuantity(
         ".paymentInfo_product-quantity"
       ),
-      productsPrice: this.parsePaymentPriceInfo(".paymentInfo_product-price"),
+      boxesPrice: this.parsePaymentProductsPrice(".paymentInfo_product-price"),
       deliveryPrice: this.parsePaymentPriceInfo(".paymentInfo_delivery-price"),
-      orderPrice: this.parsePaymentPriceInfo(".paymentInfo_total-price")
+      totalPrice: this.parsePaymentPriceInfo(".paymentInfo_total-price")
     };
-    this.handleEditBtn(event, product);
+
+    this.handleEditBtn(event, products);
   }
 
   parsePaymentProductName(selector) {
@@ -88,24 +89,36 @@ export class Payment extends Component {
     return Array.from(qsAll(selector)).map(product => {
       const [productQuantityText] = product.innerText.split("개");
 
-      return Number(productQuantityText);
+      return {
+        randombox: product.dataset.randombox,
+        count: Number(productQuantityText)
+      };
+    }, 0);
+  }
+
+  parsePaymentProductsPrice(selector) {
+    return Array.from(qsAll(selector)).map(product => {
+      const [productPriceUnitText] = product.innerText.split("원");
+      const productPriceText = productPriceUnitText.split(",").join("");
+
+      return Number(productPriceText);
     }, 0);
   }
 
   parsePaymentPriceInfo(selector) {
     const regex = /\d/g;
-
     return Number(qs(selector).innerText.match(regex).join(""));
   }
 
-  handleEditBtn(event, product) {
+  async handleEditBtn(event, products) {
     event.preventDefault();
     if (
       nameValidation(qs("#orderName")) &&
       phoneValidation(qs("#orderPhone")) &&
       detailAddressValidation(qs("#detailAddress"))
     ) {
-      postPayment(Form.getFormData(), this.props, product);
+      await postPayment(Form.getFormData(), products);
+
       return (window.location = "/order/recipt");
     }
   }

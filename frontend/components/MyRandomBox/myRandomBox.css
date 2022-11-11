@@ -1,0 +1,43 @@
+@charset "utf-8";
+
+.myrandombox-container {
+  position: relative;
+  display: flex;
+  width: 100%;
+  justify-content: flex-start;
+  padding: 64px;
+  border: 1px solid #e7e6ef;
+  border-radius: 2px;
+  margin-top: 16px;
+  box-sizing: border-box;
+  flex-wrap: wrap;
+  white-space: pre-wrap;
+  gap: 40px;
+}
+
+.myrandombox-container-title {
+  color: #9096b2;
+  position: absolute;
+  top: 16px;
+  left: 16px;
+}
+
+.myrandombox-item {
+  display: flex;
+  flex-direction: column;
+  width: 10%;
+  justify-content: center;
+  align-items: center;
+
+  padding: 16px;
+  border: 1px solid #e7e6ef;
+  border-radius: 2px;
+}
+
+.myrandombox-item > img {
+  width: 100%;
+}
+
+.myrandombox-item > span {
+  margin-top: 16px;
+}

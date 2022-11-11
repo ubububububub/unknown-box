@@ -19,6 +19,17 @@ randomboxController.get("/:randomboxId", async (req, res, next) => {
     next(err);
   }
 });
+randomboxController.put("/:randomboxId", async (req, res, next) => {
+  try {
+    await randomboxService.openRandombox(
+      req.params,
+      req.body,
+      req.headers["x-access-token"]
+    );
+  } catch (err) {
+    next(err);
+  }
+});
 randomboxController.get("/", async (req, res, next) => {
   try {
     const randomboxes = await randomboxService.getRandomboxes();

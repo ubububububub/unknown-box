@@ -8,21 +8,25 @@ class OrderModel {
     const orders = await Order.find({});
     return orders;
   }
-  async getAllByUser(email) {
-    const orders = await Order.find({ email });
+  async getAllByUser(orderEmail) {
+    const orders = await Order.find({ orderEmail });
     return orders;
   }
-  async createOrder(state, email, products) {
-    const order = await Order.create({ state, email, products });
+  async createOrder(orderInfo) {
+    const order = await Order.create(orderInfo);
     return order;
   }
   async getOne(_id) {
     const order = await Order.findOne({ _id });
     return order;
   }
-  async modify(_id, newInfo) {
-    const order = await Order.updateOne({ _id }, newInfo);
-    return order;
+  async modify(_id, orderInfo) {
+    const result = await Order.updateOne({ _id }, orderInfo);
+    return result;
+  }
+  async remove(_id) {
+    const result = await Order.deleteOne({ _id });
+    return result;
   }
 }
 
