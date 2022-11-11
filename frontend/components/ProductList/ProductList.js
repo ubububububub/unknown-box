@@ -3,12 +3,12 @@ import { isClassContained, qs, createEditForm } from "../../utils/index.js";
 import Modal from "../Modal/Modal.js";
 import Product from "../Product/Product.js";
 import ImageUploadForm from "../ImageUploadForm/ImageUploadForm.js";
-// import {
-//   getProductList,
-//   editProduct,
-//   deleteProduct,
-//   addProduct
-// } from "../../apis/index.js";
+import {
+  getProductList,
+  editProduct,
+  deleteProduct,
+  addProduct
+} from "../../apis/index.js";
 import style from "./productList.css" assert { type: "css" };
 document.adoptedStyleSheets.push(style);
 
@@ -19,57 +19,8 @@ export class ProductList extends Component {
   }
 
   async mounted() {
-    // const products = await getProductList();
-    const mockData = [
-      {
-        productId: 1,
-        productName: "에어팟",
-        categoryName: "전자제품",
-        price: 190000,
-        thumbnail:
-          "https://i.picsum.photos/id/32/400/400.jpg?hmac=QyKPcU_C9dLLat_LHQnq5_FJlOJPGxo2okcvlCjXQYQ",
-        count: 10,
-        description: ""
-      },
-      {
-        productId: 2,
-        productName: "의자",
-        categoryName: "잡화",
-        price: 79900,
-        thumbnail: "#",
-        count: 20,
-        description: ""
-      },
-      {
-        productId: 3,
-        productName: "블루투스 스피커",
-        categoryName: "전자제품",
-        price: 100000,
-        thumbnail: "#",
-        count: 10,
-        description: ""
-      },
-      {
-        productId: 4,
-        productName: "에어팟",
-        categoryName: "전자제품",
-        price: 190000,
-        thumbnail: "#",
-        count: 10,
-        description: ""
-      },
-      {
-        productId: 5,
-        productName: "에어팟",
-        categoryName: "전자제품",
-        price: 190000,
-        thumbnail: "#",
-        count: 10,
-        description: ""
-      }
-    ];
-
-    this.state = { products: mockData };
+    const products = await getProductList();
+    this.state = { products };
 
     this.state.products.forEach(
       product =>
@@ -122,12 +73,12 @@ export class ProductList extends Component {
   }
 
   async addProductItem(data) {
-    // await addProduct(data);
+    await addProduct(data);
     location = "/admin/product";
   }
 
   async deleteProductItem(id) {
-    // await deleteProduct(id);
+    await deleteProduct(id);
     const remain = this.state.products.filter(
       product => product.productId !== id
     );
@@ -135,7 +86,7 @@ export class ProductList extends Component {
   }
 
   async editProductItem(id, data) {
-    // await editProduct(id, data);
-    location = "/admin/product";
+    await editProduct(id, data);
+    //location = "/admin/product";
   }
 }

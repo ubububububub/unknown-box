@@ -1,4 +1,3 @@
-//import { editBox, deleteBox } from "../../apis/index.js";
 import Component from "../../core/Component.js";
 import {
   qs,
@@ -8,6 +7,8 @@ import {
 } from "../../utils/index.js";
 import ImageUploadForm from "../ImageUploadForm/ImageUploadForm.js";
 import Modal from "../Modal/Modal.js";
+import { getBoxDetail, editBox, deleteBox } from "../../apis/index.js";
+
 import style from "./randomBox.css" assert { type: "css" };
 document.adoptedStyleSheets.push(style);
 
@@ -36,7 +37,7 @@ export default class Product extends Component {
                 </div>
                 <div class="price">
                   ${
-                    discount
+                    !Number(discount)
                       ? `<span style="text-decoration: line-through">${price.toLocaleString()}원</span>
                           <span>${discount.toLocaleString()}원</span>`
                       : `<span>${price.toLocaleString()}원</span>`
@@ -69,8 +70,7 @@ export default class Product extends Component {
   }
 
   async editHandler() {
-    // const box = await getBoxDetail(this.props.box.randomboxId);
-    // props 데이터가 아닌 디테일 정보를 받아왔다 가정
+    const box = await getBoxDetail(this.props.box.randomboxId);
     const {
       randomboxId,
       thumbnail,
@@ -78,12 +78,12 @@ export default class Product extends Component {
       categoryName,
       price,
       discount,
-      productMin,
-      productMax,
+      productMin = 0,
+      productMax = 0,
       description,
       products,
       count
-    } = this.props.box;
+    } = box;
 
     const domList = [
       {
@@ -146,7 +146,7 @@ export default class Product extends Component {
             MODAL.Span({}, ["상품목록"]),
             MODAL.Div(
               { className: "modal-products-list" },
-              products.map(product => MODAL.Div({}, [product]))
+              products?.map(product => MODAL.Div({}, [product.productName]))
             )
           ])
         ]

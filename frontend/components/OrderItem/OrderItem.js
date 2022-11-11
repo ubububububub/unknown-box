@@ -5,11 +5,11 @@ document.adoptedStyleSheets.push(style);
 
 export default class OrderItem extends Component {
   template() {
-    const { orderId, orderState, createdAt, updatedAt } = this.props.order;
+    const { orderId, state, createdAt, updatedAt } = this.props.order;
 
     return `<tr class="order-${orderId}">
                 <td>${orderId}</td>
-                <td>${orderState}</td>
+                <td>${state}</td>
                 <td>${createdAt}</td>
                 <td>${updatedAt}</td>
                 <td class="order-btns">

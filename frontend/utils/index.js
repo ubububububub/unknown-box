@@ -12,16 +12,14 @@ export function isClassContained(dom, selector) {
   return dom.classList.contains(selector);
 }
 
-export function createDom(tagName, attr = {}, children = [], handler) {
+export function createDom(tagName, attr = {}, children = []) {
   const dom = document.createElement(tagName);
 
   for (let [key, value] of Object.entries(attr)) {
     dom[key] = value;
   }
   children.forEach(child => dom.append(child));
-  if (tagName === "button") {
-    dom.addEventListener("click", handler);
-  }
+
   return dom;
 }
 
@@ -38,9 +36,6 @@ export const MODAL = {
 
   Div(attr, children) {
     return createDom("div", attr, children);
-  },
-  Button(attr, children, handler) {
-    return createDom("button", attr, children, handler);
   },
   Textarea(attr, children) {
     return createDom("textarea", attr, children);

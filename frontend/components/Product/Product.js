@@ -2,7 +2,7 @@ import { qs, createEditForm, isClassContained } from "../../utils/index.js";
 import ImageUploadForm from "../ImageUploadForm/ImageUploadForm.js";
 import Component from "../../core/Component.js";
 import Modal from "../Modal/Modal.js";
-// import { getProductDetail } from "../../apis/index.js";
+import { getProductDetail } from "../../apis/index.js";
 import style from "./product.css" assert { type: "css" };
 document.adoptedStyleSheets.push(style);
 
@@ -52,8 +52,8 @@ export default class Product extends Component {
   }
 
   async editHandler() {
-    // const product = await getProductDetail(this.props.product.productId);
-    // props 데이터가 아닌 디테일 정보를 받아왔다 가정
+    const product = await getProductDetail(this.props.product.productId);
+    console.log(product.json());
     const {
       productId,
       thumbnail,
@@ -62,7 +62,7 @@ export default class Product extends Component {
       price,
       description,
       count
-    } = this.props.product;
+    } = product;
 
     const domList = [
       {

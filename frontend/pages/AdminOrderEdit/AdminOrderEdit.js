@@ -1,40 +1,19 @@
 import Component from "../../core/Component.js";
 import { qs } from "../../utils/index.js";
-// import { getOrderDetail, deleteOrder, editOrder } from "../../apis/index.js";
+import { getOrderDetail, deleteOrder, editOrder } from "../../apis/index.js";
 
 export class AdminOrderEdit extends Component {
-  setup() {
+  async setup() {
     const orderId = this.props[0];
-    //const order = await getOrderDetail(orderId);
-
-    const mockData = {
-      orderId: 1,
-      orderTime: "22-10-10",
-      orderState: "배송준비중",
-      orderName: "이상조",
-      orderPhone: "01074253535",
-      orderAddress: {
-        postalcode: "123123",
-        roadAddress: "사랑시 고백구 행복동",
-        jibunAddress: "사랑시 고백구 행복동",
-        detailAddress: "상세한주소",
-        extraAddress: "이건뭐이야"
-      },
-      randomboxes: [{ randomboxName: "의류 랜덤박스 Dia", count: 2 }],
-      boxesPrice: 60000,
-      deliveryPrice: 3000,
-      totalPrice: 63000,
-      createdAt: "22-10-10",
-      updatedAt: "22-10-12"
-    };
-    this.state = { order: mockData };
+    const order = await getOrderDetail(orderId);
+    this.state = { order };
   }
 
   template() {
     const {
       orderId,
-      orderTime,
-      orderState,
+      createdAt,
+      state,
       orderName,
       orderPhone,
       orderAddress,
@@ -49,11 +28,11 @@ export class AdminOrderEdit extends Component {
                 <div class="order-info">
                     <div class="order-time">
                         <span>주문날짜</span>
-                        <span>${orderTime}</span>
+                        <span>${createdAt}</span>
                     </div>
                     <div class="order-state">
                         <span>배송상태</span>
-                        <input value="${orderState}"/>
+                        <input value="${state}"/>
                     </div>
                     <div class="orderer-info">
                         <div class="order-name">
@@ -66,7 +45,7 @@ export class AdminOrderEdit extends Component {
                         </div>
                         <div class="order-address">
                             <span>우편 번호</span>
-                            <p>${orderAddress.postalcode}</p>
+                            <p>${orderAddress.postalCode}</p>
                             <span>도로명 주소</span>
                             <p>${orderAddress.roadAddress}</p>
                             <span>지번 주소</span>
@@ -82,11 +61,19 @@ export class AdminOrderEdit extends Component {
                         <ul>
                         ${randomboxes
                           .map(
-                            ({ randomboxName, price, count }) =>
+                            ({ opened, randomboxName, price, product }) =>
                               `<li>
                                 <div>${randomboxName}</div>
                                 <div>${price}</div>
-                                <div>${count}</div>
+                                <div>${
+                                  opened
+                                    ? `<span>당첨 상품</span>
+                                  <div>${product.thumbnail}</div>
+                                  <div>${product.productName}</div>
+                                  <div>${product.price}</div>`
+                                    : ""
+                                }
+                                </div>
                             </li>`
                           )
                           .join("")}
@@ -108,14 +95,14 @@ export class AdminOrderEdit extends Component {
     const { orderId } = this.state.order;
 
     qs(".order-submitBtn").addEventListener("click", async () => {
-      const orderState = qs(".order-state > input").value;
-      // await editOrder(orderId, orderState);
+      const state = qs(".order-state input").value;
+      await editOrder(orderId, { state });
       location = "/admin/order";
     });
 
     qs(".order-cancelBtn").addEventListener("click", async () => {
-      // await deleteOrder(orderId);
-      location = "/admin/order";
+      await deleteOrder(orderId);
+      // location = "/admin/order";
     });
   }
 }
