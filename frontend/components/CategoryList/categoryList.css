@@ -1,0 +1,16 @@
+@charset "utf-8";
+
+.admin_category-list {
+  font-size: 20px;
+}
+
+.category-addBtn {
+  width: 100px;
+  height: 40px;
+  background: #e7e6ef;
+  border: none;
+  border-radius: 2px;
+  text-align: center;
+  color: #ffffff;
+  margin-right: 40px;
+}

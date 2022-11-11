@@ -1,0 +1,58 @@
+@charset "utf-8";
+
+.admin_randombox-list .randombox-item {
+  width: 25%;
+  margin: 40px 0;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+}
+
+.admin_randombox-list .randombox-thumbnail {
+  width: 150px;
+  height: 150px;
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  background-color: #e8ebed;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+}
+
+.admin_randombox-list .randombox-thumbnail .img {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  box-sizing: border-box;
+  border-radius: 12px;
+}
+
+.admin_randombox-list .info {
+  display: flex;
+  height: 80px;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.randombox-item .info .randombox-name {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.randombox-btns > button {
+  width: 68px;
+  height: 30px;
+  background-color: #fce374;
+  border: none;
+  border-radius: 2px;
+  text-align: center;
+  color: #ffffff;
+}
+
+.randombox_carousel-item {
+  width: 600px;
+  height: 600px;
+}

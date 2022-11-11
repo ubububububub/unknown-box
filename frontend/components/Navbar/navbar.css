@@ -1,0 +1,13 @@
+@charset "utf-8";
+
+.navbar-item {
+  display: flex;
+  align-items: center;
+  height: 100%;
+  box-sizing: border-box;
+  border-bottom: 3px solid transparent;
+}
+
+.navbar-item-selected {
+  border-bottom: 3px solid black;
+}

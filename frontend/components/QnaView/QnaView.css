@@ -1,0 +1,44 @@
+@charset "utf-8";
+
+#qna-container table.qnaview-table {
+  border-top: 2px solid #FCE374;
+  border-bottom: 1px solid #333333;
+}
+
+#qna-container table.qnaview-table tr {
+  border-top: 1px solid #333333;
+}
+
+#qna-container table.qnaview-table tr td {
+  width: 100%;
+  padding: 10px;
+}
+
+#qna-container table.qnaview-table thead tr th {
+  padding: 20px 10px;
+  text-align: left;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+#qna-container table.qnaview-table tr td span {
+  font-size: 12px;
+}
+
+#qna-container table.qnaview-table tr td.qnaview-area {
+  height: 250px;
+  overflow-y: scroll;
+  text-align: left;
+  vertical-align: top;
+  display: block;
+}
+
+#qna-container .qnaview-control {
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+}
+
+#qna-container .qnaview-control a{
+  padding: 10px;
+}

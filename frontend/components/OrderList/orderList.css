@@ -1,0 +1,18 @@
+@charset "utf-8";
+
+#admin_order-list-wrapper {
+  text-align: center;
+  font-size: 18px;
+  border-collapse: separate;
+}
+
+#admin_order-list-wrapper th {
+  font-weight: 600;
+  font-size: 20px;
+  padding: 20px 0;
+}
+
+#admin_order-list-wrapper td {
+  border-bottom: 1px solid #e7e6ef;
+  padding: 25px 0;
+}

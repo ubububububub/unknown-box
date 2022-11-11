@@ -1,12 +1,12 @@
 module.exports = {
   env: {
     browser: true,
-    es2022: true,
+    es2022: true
   },
   extends: ["eslint:recommended", "airbnb-base", "plugin:prettier/recommended"],
   parserOptions: {
     ecmaVersion: "latest",
-    sourceType: "module",
+    sourceType: "module"
   },
   plugins: ["prettier"],
   rules: {
@@ -28,15 +28,25 @@ module.exports = {
     "prettier/prettier": [
       "off",
       {
-        endOfLine: "auto",
+        endOfLine: "auto"
       },
       {
-        usePrettierrc: true,
-      },
+        usePrettierrc: true
+      }
     ],
     "no-console": "off",
     "import/prefer-default-export": "off",
     "func-names": "off",
     "no-param-reassign": "off",
-  },
+    "class-methods-use-this": "off",
+    "consistent-return": "off",
+    camelcase: "off",
+    "import/extensions": "off",
+    "no-new": "off",
+    "import/no-unresolved": "off",
+    "no-return-assign": "off",
+    "array-callback-return": "off",
+    "no-restricted-globals": "off",
+    "import/no-cycle": "off"
+  }
 };
