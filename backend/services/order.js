@@ -14,7 +14,7 @@ class OrderService {
     this.productModel = productModel;
   }
   async postOrder({ formData, products }, accessToken) {
-    const {
+    const [
       orderName,
       orderPhone,
       postalcode,
@@ -22,19 +22,19 @@ class OrderService {
       jibunAddress,
       detailAddress,
       extraAddress
-    } = formData;
+    ] = formData;
     const { boxesPrice, deliveryPrice, randomboxes, totalPrice } = products;
     const { email } = JWT.decodeToken(accessToken);
     const randomboxInfo = {
       orderEmail: email,
-      orderName,
-      orderPhone,
+      orderName: orderName[1],
+      orderPhone: orderPhone[1],
       orderAddress: {
-        postalcode,
-        roadAddress,
-        jibunAddress,
-        detailAddress,
-        extraAddress
+        postalcode: postalcode[1],
+        roadAddress: roadAddress[1],
+        jibunAddress: jibunAddress[1],
+        detailAddress: detailAddress[1],
+        extraAddress: extraAddress[1]
       },
       randomboxes: [],
       randomboxesCount: 0,
@@ -67,9 +67,9 @@ class OrderService {
       });
     }
     await this.userModel.modify(email, {
-      name: orderName,
-      address: orderAddress,
-      phone: orderPhone
+      name: randomboxInfo.orderName,
+      address: randomboxInfo.orderAddress,
+      phone: randomboxInfo.orderPhone
     });
     return order._id;
   }
