@@ -19,6 +19,9 @@ export class Cart extends Component {
     return `<div id="cart_container">
       <h2>장바구니</h2>
       <section class="cart_sub-container">
+        <li class="cart_button">
+          <button type="button" class="cart_button-delete">전체 삭제</button>
+        </li>
         <ul class="cart_list">
         </ul>
       </section>
