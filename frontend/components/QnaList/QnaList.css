@@ -6,6 +6,8 @@
 
 #qna-container {
   margin: 50px;
+  width: 900px;
+  margin: 50px auto ;
 }
 
 #qna-container table {

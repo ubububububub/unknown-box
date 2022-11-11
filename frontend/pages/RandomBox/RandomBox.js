@@ -4,7 +4,7 @@ import { qs } from "../../utils/index.js";
 import style from "./randomBox.css" assert { type: "css" };
 document.adoptedStyleSheets.push(style);
 
-const PRODUCTS_NUM = 7;
+const PRODUCTS_NUM = 3;
 const ANIMATION_TIME = 8000;
 const IMAGE_SIZE = 600 * -1;
 const ANIMATION_FRAME_UNIT = 1;

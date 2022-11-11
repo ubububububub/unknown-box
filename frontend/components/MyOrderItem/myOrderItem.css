@@ -43,12 +43,12 @@
 .myorderitem-product-status > button {
   width: 100%;
   height: 24px;
-  background: #fb2e86;
+  background: rgb(252, 227, 116);
   border: none;
   border-radius: 12px;
   text-align: center;
   font-size: 16px;
-  color: #ffffff;
+  color: #000;
 }
 
 .myorderitem-product-status > button:disabled {

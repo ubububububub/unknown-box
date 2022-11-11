@@ -21,6 +21,12 @@
   margin-bottom: 10px;
 }
 
+.admin_product-list .product-thumbnail img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
 .product-item .product-thumbnail .img {
   position: absolute;
   top: 0;
@@ -49,6 +55,6 @@
   border: none;
   border-radius: 2px;
   text-align: center;
-  color: #ffffff;
+  color: #000;
   cursor: pointer;
 }
