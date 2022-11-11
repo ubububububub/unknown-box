@@ -22,7 +22,7 @@ class MyOrderItemBox extends Component {
     qsAll(".myorderitem-product-list")[this.props.parentIdx].children[
       this.props.boxIdx
     ].addEventListener("mousedown", e => {
-      if (item.product) {
+      if (item.product.thumbnail) {
         e.currentTarget.innerHTML = ` <img src="${item.product.thumbnail}"/>
             <span>${item.product.productName}</span>`;
       }
@@ -31,7 +31,7 @@ class MyOrderItemBox extends Component {
     qsAll(".myorderitem-product-list")[this.props.parentIdx].children[
       this.props.boxIdx
     ].addEventListener("mouseup", e => {
-      if (item.product) {
+      if (item.product.thumbnail) {
         e.currentTarget.innerHTML = ` <img src="${item.thumbnail}"/>
         <span>${item.randomboxName}</span>`;
       }

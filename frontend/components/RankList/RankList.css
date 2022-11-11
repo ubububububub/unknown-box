@@ -11,12 +11,13 @@
 .rank-list {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
+  justify-content: flex-start;
   align-content: center;
 }
 
 .rank-list > li {
   width: 19%;
+  margin: 0px 0.5%;
   transition: transform 1s;
 }
 
@@ -34,7 +35,7 @@
   display: block;
 }
 
-.rank-list > li span {
+.rank-list > li span.ranklist-boxname {
   display: block;
   text-align: center;
   margin: 10px 0 20px;
@@ -48,7 +49,14 @@
   transition: transform 1s;
 }
 
-.rank-list > li:hover span {
+.rank-list > li:hover span.ranklist-boxname  {
   background-color: #fff6bc;
 }
 
+.ranklist-catename {
+  text-align: center;
+  font-size: 23px;
+  font-weight: 500;
+  display: block;
+  margin-bottom: 11px;
+}

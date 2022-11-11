@@ -17,7 +17,7 @@
 
 .main-catelist > li {
   width: 19%;
-  margin-right: 1.25%;
+  margin: 0px 0.5%;
   transition: transform 1s;
 }
 

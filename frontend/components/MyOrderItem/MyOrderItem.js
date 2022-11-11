@@ -8,9 +8,9 @@ document.adoptedStyleSheets.push(style);
 class MyOrderItem extends Component {
   template() {
     const { item, idx, deleteOrder } = this.props;
+    const parsedDate = item.createdAt.split("T")[0];
     return `<div id="myorderitem-container">
-              <span class="myorderitem-order-time">${item.createdAt} 주문</span>
-              <span class="myorderitem-order-id">주문번호 ${item.orderId}</span>
+              <span class="myorderitem-order-time">${parsedDate} 주문</span>
               <div class="myorderitem-product-section">
                 <div class="myorderitem-product-list">
                 </div>
