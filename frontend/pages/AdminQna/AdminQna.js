@@ -96,9 +96,9 @@ export class AdminQna extends Component {
               MODAL.Span({}, ["작성자"]),
               MODAL.Span({}, [author])
             ]),
-            MODAL.Div({ className: "anq-answer" }, [
+            MODAL.Div({ className: "qna-answer" }, [
               MODAL.Span({}, ["답변"]),
-              answer == undefined
+              answer == null
                 ? MODAL.Div({}, [MODAL.Textarea({}, [])])
                 : MODAL.Span({}, [answer])
             ])

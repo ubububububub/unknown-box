@@ -1,3 +1,9 @@
+#admin_order-list-wrapper .orderer-info,
+#admin_order-list-wrapper .order-list,
+#admin_order-list-wrapper .order-price {
+  font-size: 16px;
+}
+
 #admin_order-container {
   display: flex;
   flex-direction: column;
@@ -14,44 +20,82 @@
   margin-bottom: 48px;
   gap: 16px;
 }
-#admin_order-list-wrapper {
-  width: 900px;
-}
 
-#admin_order-list-wrapper .order-info {
-  padding: 10px;
-  height: 500px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
 #admin_order-list-wrapper .detail-info {
+  margin: 10px 0;
   font-weight: 600;
   font-size: 24px;
 }
 
-#admin_order-list-wrapper .orderer-info {
+.detail-contents {
+  margin: 0 auto;
+}
+
+#admin_order-list-wrapper .order-info {
   display: flex;
   flex-direction: column;
-  padding: 40px;
-  width: 500px;
-  margin: auto;
+  text-align: left;
+  margin: 50px;
 }
-#admin_order-list-wrapper .order-address > div {
+
+#admin_order-list-wrapper .order-info > div {
   padding: 10px;
 }
-#admin_order-list-wrapper .order-address span {
+
+#admin_order-list-wrapper .order-info span:first-child {
+  padding: 0 25px;
   font-weight: 600;
 }
-#admin_order-list-wrapper .order-state {
-  padding: 10px;
-}
+
 #admin_order-list-wrapper .order-state > input {
   border-radius: 15px;
   border: 1px solid #c7c4df;
-  width: 200px;
+  width: 150px;
   height: 20px;
+  padding: 0 20px;
 }
 
-#admin_order-list-wrapper .order-list > ul {
+#admin_order-list-wrapper .order-list {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  border: 1px solid #c7c4df;
+  border-radius: 15px;
+  margin: 40px 20px 20px 20px;
+  padding: 30px;
+}
+
+#admin_order-list-wrapper .order-list img {
+  width: 250px;
+}
+
+#admin_order-container {
+  padding-bottom: 50px;
+}
+
+.selected-product {
+  margin: 20px 0;
+}
+
+#admin_order-container .detail-contents {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#admin_order-list-wrapper .order-price > div {
+  padding: 5px 0;
+}
+
+#admin_order-list-wrapper .order-btns {
+  padding: 50px;
+}
+
+#admin_order-list-wrapper .order-price span:first-child {
+  font-weight: 600;
+}
+
+#admin_order-list-wrapper .order-product {
+  font-weight: 600;
+  margin: 10px;
 }
