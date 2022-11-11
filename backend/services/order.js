@@ -86,16 +86,14 @@ class OrderService {
         createdAt,
         updatedAt,
         state,
-        randomboxes: randomboxes.map(
-          ({ randombox, opened, product, thumbnail }) => ({
-            randomboxId: randombox._id,
-            randomboxName: randombox.randomboxName,
-            price: randombox.price,
-            opened,
-            product,
-            thumbnail
-          })
-        ),
+        randomboxes: randomboxes.map(({ randombox, opened, product }) => ({
+          randomboxId: randombox._id,
+          randomboxName: randombox.randomboxName,
+          price: randombox.price,
+          opened,
+          product,
+          thumbnail: randombox.thumbnail
+        })),
         totalPrice
       })
     );
