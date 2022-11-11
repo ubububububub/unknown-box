@@ -16,13 +16,17 @@ export async function postLogin(formData) {
       method: "POST",
       body: formData
     });
-    const json = await response.json();
-    localStorage.setItem("accessToken", json.accessToken);
-    localStorage.setItem("refreshToken", json.refreshToken);
-    localStorage.setItem("role", json.role);
-    window.location = "/";
+    if (response.status !== 200) {
+      throw new Error("가입된 회원 아이디가 아니거나 비밀번호가 틀립니다.");
+    } else {
+      const json = await response.json();
+      localStorage.setItem("accessToken", json.accessToken);
+      localStorage.setItem("refreshToken", json.refreshToken);
+      localStorage.setItem("role", json.role);
+      window.location = "/";
+    }
   } catch (err) {
-    console.dir(err);
+    return err;
   }
 }
 
@@ -227,6 +231,10 @@ export async function postKakaoLoginToken(email) {
 
 export async function postPayment(formData, product) {
   try {
+    console.log(product);
+    for (var pair of formData.entries()) {
+      console.log(pair[0] + ", " + pair[1]);
+    }
     const response = await fetch(`http://localhost:8080/api/order`, {
       method: "POST",
       headers: {
@@ -461,9 +469,6 @@ export async function getProductDetail(id) {
 
 export async function editProduct(id, data) {
   try {
-    for (const [key, value] of data.entries()) {
-      console.log(key, value);
-    }
     await fetch(`http://localhost:8080/api/admin/product/${id}`, {
       method: "PUT",
       headers: {
