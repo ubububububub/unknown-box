@@ -41,13 +41,13 @@ form.qnawrite-form {
   height: 200px;
 }
 
-.qnawrite-form button { 
+.qnawrite-form button {
   display: block;
   margin: 20px auto;
- }
+}
 
 .qnawrite-control a {
   width: 90%;
   display: block;
   margin: 0 auto;
- }
+}
