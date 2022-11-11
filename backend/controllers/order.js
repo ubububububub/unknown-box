@@ -24,6 +24,14 @@ orderController.get("/", async (req, res, next) => {
     next(err);
   }
 });
+orderController.get("/:orderId", async (req, res, next) => {
+  try {
+    const orderInfo = await orderService.getOrderInfo(req.params);
+    res.status(200).json(orderInfo);
+  } catch (err) {
+    next(err);
+  }
+});
 orderController.put("/:orderId", async (req, res, next) => {
   try {
     const result = await orderService.putOrder(req.params, req.body);

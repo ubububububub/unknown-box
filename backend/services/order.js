@@ -13,8 +13,8 @@ class OrderService {
     this.userModel = userModel;
     this.productModel = productModel;
   }
-  async postOrder({ formData, products }, accessToken) {
-    const {
+  async postOrder({ formData, product }, accessToken) {
+    const [
       orderName,
       orderPhone,
       postalcode,
@@ -22,23 +22,23 @@ class OrderService {
       jibunAddress,
       detailAddress,
       extraAddress
-    } = formData;
-    const { boxesPrice, deliveryPrice, randomboxes, totalPrice } = products;
+    ] = formData;
+    const { boxesPrice, deliveryPrice, randomboxes, totalPrice } = product;
     const { email } = JWT.decodeToken(accessToken);
     const randomboxInfo = {
       orderEmail: email,
-      orderName,
-      orderPhone,
+      orderName: orderName[1],
+      orderPhone: orderPhone[1],
       orderAddress: {
-        postalcode,
-        roadAddress,
-        jibunAddress,
-        detailAddress,
-        extraAddress
+        postalcode: postalcode[1],
+        roadAddress: roadAddress[1],
+        jibunAddress: jibunAddress[1],
+        detailAddress: detailAddress[1],
+        extraAddress: extraAddress[1]
       },
       randomboxes: [],
       randomboxesCount: 0,
-      boxesPrice,
+      boxesPrice: boxesPrice.reduce((acc, val) => acc + val, 0),
       deliveryPrice,
       totalPrice
     };
@@ -67,9 +67,9 @@ class OrderService {
       });
     }
     await this.userModel.modify(email, {
-      name: orderName,
-      address: orderAddress,
-      phone: orderPhone
+      name: randomboxInfo.orderName,
+      address: randomboxInfo.orderAddress,
+      phone: randomboxInfo.orderPhone
     });
     return order._id;
   }
@@ -80,25 +80,46 @@ class OrderService {
     for (let i = 0; i < orders.length; i++) {
       await orders[i].populate("randomboxes.randombox");
     }
-    return orders.map(({ _id, createdAt, updatedAt, state, randomboxes }) => ({
-      orderId: _id,
-      createdAt,
-      updatedAt,
-      state,
-      randomboxes: randomboxes.map(({ randombox, opened, product }) => ({
-        randomboxId: randombox._id,
-        randomboxName: randombox.randomboxName,
-        price: randombox.price,
-        opened,
-        product
-      }))
-    }));
+    return orders.map(
+      ({ _id, createdAt, updatedAt, state, randomboxes, totalPrice }) => ({
+        orderId: _id,
+        createdAt,
+        updatedAt,
+        state,
+        randomboxes: randomboxes.map(({ randombox, opened, product }) => ({
+          randomboxId: randombox._id,
+          randomboxName: randombox.randomboxName,
+          price: randombox.price,
+          opened,
+          product,
+          thumbnail: randombox.thumbnail
+        })),
+        totalPrice
+      })
+    );
   }
-  async putOrder({ orderId }, { orderName, orderPhone, orderAddress }) {
+  async putOrder(
+    { orderId },
+    {
+      orderName,
+      orderPhone,
+      postalcode,
+      roadAddress,
+      jibunAddress,
+      detailAddress,
+      extraAddress
+    }
+  ) {
     const orderInfo = {};
     if (orderName) orderInfo.orderName = orderName;
     if (orderPhone) orderInfo.orderPhone = orderPhone;
-    if (orderAddress) orderInfo.orderAddress = orderAddress;
+    orderInfo.orderAddress = {
+      postalcode,
+      roadAddress,
+      jibunAddress,
+      detailAddress,
+      extraAddress
+    };
     const result = await this.orderModel.modify({ _id: orderId }, orderInfo);
     return { result: result.matchedCount ? "success" : "fail" };
   }
@@ -161,6 +182,11 @@ class OrderService {
   async changeState({ orderId }, { state }) {
     const result = await this.orderModel.modify({ _id: orderId }, { state });
     return { result: result.matchedCount ? "success" : "fail" };
+  }
+  async getOrderInfo({ orderId }) {
+    const { orderName, orderPhone, orderAddress } =
+      await this.orderModel.getOne(orderId);
+    return { orderName, orderPhone, orderAddress };
   }
 }
 
