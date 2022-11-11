@@ -13,13 +13,15 @@ export class DetailView extends Component {
                   <img src="http://unsplash.it/500/500?random=9" alt="">
                 </div>
                 <div class="detail-info">
-                    <h5>상품명</h5>
-                      <h4 id="product-name"></h4>
-                    <p></p>
                   <div class="list-pay">
-                    <h5>가격</h5>
+                      <h4 id="product-name"></h4>
+                  </div>
+                  <div class="list-pay">
                       <h5 id="price"></h5>
-                      <span></span>
+                  </div>
+                  <div class="list-pay">
+                    <label>상품설명</label>
+                    <h5 id="description"></h5>
                   </div>
                   <div class="list-pay">
                     <h5>수량</h5>
@@ -36,40 +38,44 @@ export class DetailView extends Component {
         );
     }
     setEvent() {
-        const item = this.props;
         let count = 1;
-        getItem(item).then(x => {
-          qs("#product-name").innerHTML = x.name;
-          qs("#price").innerHTML = x.price + "원";
-          qs("#count").innerHTML = count + "개";
 
-          qs("#plus").addEventListener('click',()=>{
-              qs("#count").innerHTML = (count + 1 ) + "개";
-              count++;
-          })
-          qs("#minus").addEventListener('click',()=>{
-            if(count > 0){
-                qs("#count").innerHTML = (count - 1 ) + "개";
-                count--;
-            }
-          })
+        getItem(this.props).then(x => {
+            console.log(x);
+            const maxCount = x.count;
+            qs("#product-name").innerHTML = x.randomboxName;
+            qs("#price").innerHTML = x.price + "원";
+            qs("#count").innerHTML = count + "개";
+            qs("#description").innerHTML = x.description;
 
+            qs("#plus").addEventListener('click',()=>{
+                if(count === maxCount){alert("등록할 수 있는 최대 수량입니다."); return false;}
+                else {
+                    qs("#count").innerHTML = (count + 1 ) + "개";
+                    count++;
+                }
+            })
+            qs("#minus").addEventListener('click',()=>{
+                if(count > 1) {
+                    qs("#count").innerHTML = (count - 1) + "개";
+                    count--;
+                }
+            })
 
-
-          qs("#addCart").addEventListener("click",() => {
-              if(confirm("장바구니에 추가하시겠습니까?")){
-                  cart.setCartItem({
-                      randombox: "아이디",
-                      thumbnail : "랜덤박스 img",
-                      randomboxName : "랜덤박스 등급명",
-                      categoryName :"”카테고리 이름”",
-                      price : 50000,
-                      quantity : 50,
-                  })
-              }
-          })
-      });
-  }
+            qs("#addCart").addEventListener("click",() => {
+                if(confirm("장바구니에 추가하시겠습니까?")){
+                    cart.setCartItem({
+                        randombox: x.randomboxId,
+                        thumbnail : x.thumbnail,
+                        randomboxName :x.randomboxName,
+                        categoryName :x.categoryName,
+                        price : x.price,
+                        quantity : this.count,
+                    })
+                }
+            })
+        });
+    }
 }
 
 export default DetailView;

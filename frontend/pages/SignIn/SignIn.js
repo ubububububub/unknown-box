@@ -1,5 +1,10 @@
-import { postSignIn } from "../../apis/index.js";
+import {
+  getEmailConfirmVerified,
+  postEmailConfirmSend,
+  postSignIn
+} from "../../apis/index.js";
 import Form from "../../components/Form/Form.js";
+import Toast from "../../components/Toast/Toast.js";
 import Component from "../../core/Component.js";
 import {
   emailValidation,
@@ -36,6 +41,21 @@ export class SignIn extends Component {
         type: "text"
       },
       {
+        id: "emailConfirmSend",
+        title: "인증코드 발송",
+        type: "button"
+      },
+      {
+        id: "emailConfirm",
+        title: "인증코드 입력",
+        type: "text"
+      },
+      {
+        id: "emailConfirmVerified",
+        title: "인증확인",
+        type: "button"
+      },
+      {
         id: "password",
         title: "비밀번호",
         type: "password"
@@ -50,8 +70,19 @@ export class SignIn extends Component {
   }
 
   setEvent() {
+    qs(".form-email_container").classList.add("form_input-margin-none");
+    qs(".form-emailConfirm_container").classList.add("form_input-margin-none");
+
     qs(".signin_signin_btn").addEventListener("click", e => {
       this.handleSignIn(e);
+    });
+
+    qs(".form-emailConfirmSend-btn").addEventListener("click", e => {
+      this.handleEmailConfirmSend(e);
+    });
+
+    qs(".form-emailConfirmVerified-btn").addEventListener("click", e => {
+      this.handleEmailConfirmVerified(e);
     });
   }
 
@@ -65,6 +96,36 @@ export class SignIn extends Component {
       nameValidation(qs("#name"))
     ) {
       postSignIn(Form.getFormData());
+    }
+  }
+
+  async handleEmailConfirmSend(e) {
+    e.preventDefault();
+    const email = qs('[name="email"]');
+    const response = await postEmailConfirmSend(email.value);
+    if (response.message === "fail") {
+      new Toast("이미 가입된 이메일입니다.");
+    } else {
+      new Toast("인증코드가 이메일로 발송되었습니다.");
+    }
+  }
+
+  async handleEmailConfirmVerified(e) {
+    e.preventDefault();
+    const email = qs('[name="email"]');
+    const emailConfirm = qs('[name="emailConfirm"]');
+    const response = await getEmailConfirmVerified(
+      email.value,
+      emailConfirm.value
+    );
+    if (response.message === "fail") {
+      new Toast("인증코드가 잘못되었습니다.");
+    } else {
+      new Toast("인증되었습니다.");
+      email.setAttribute("readonly", true);
+      emailConfirm.disabled = true;
+      qs(".form-emailConfirmVerified-btn").disabled = true;
+      qs(".form-emailConfirmSend-btn").disabled = true;
     }
   }
 }

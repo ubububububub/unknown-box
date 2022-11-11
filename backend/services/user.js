@@ -37,6 +37,15 @@ class UserService {
       await this.model.getByEmail(email);
     return { email, benefit, randomboxes, products, role };
   }
+  async getUserInfo(accessToken) {
+    const { email } = JWT.decodeToken(accessToken);
+    const { name, address, phone } = await this.model.getByEmail(email);
+    return {
+      orderName: name || null,
+      orderPhone: phone || null,
+      orderAddress: address || null
+    };
+  }
 }
 
 const userService = new UserService(userModel);
