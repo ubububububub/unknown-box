@@ -8,7 +8,8 @@ joinRouter.post("/", async (req, res, next) => {
     const userInfo = req.body;
     await userService.createUser(userInfo);
 
-    res.status(201);
+    res.status(201).end();
+    next();
   } catch (error) {
     next(error);
   }

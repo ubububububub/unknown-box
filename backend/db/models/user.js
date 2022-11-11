@@ -22,25 +22,14 @@ class UserModel {
     return user;
   }
 
-  async setRefreshToken(email, refreshToken) {
-    await this.model.updateOne({ email }, { refreshToken });
-  }
-
   async getRefreshTokenByEmail(email) {
     const user = await this.model.findOne({ email });
     return user;
   }
 
-  async getOne(email) {
-    const user = await this.model.find({ email });
-    return user;
-  }
-  async changePassword(email, password) {
-    const result = await this.model.updateOne({ email }, { password });
-    return result;
-  }
   async modify(email, userInfo) {
-    await this.model.updateOne({ email }, userInfo);
+    const result = await this.model.updateOne({ email }, userInfo);
+    return result;
   }
 }
 

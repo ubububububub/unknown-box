@@ -23,11 +23,12 @@ class ProductModel {
     const result = await Product.updateOne({ _id }, productInfo);
     return result;
   }
-  async getSome(categoryName, min, max) {
+  async getSome(categoryName, productMin, productMax) {
     const products = await Product.find({
       categoryName,
-      price: { $gte: min, $lte: max }
+      price: { $gte: productMin, $lte: productMax }
     });
+    console.log(products);
     return products;
   }
 }

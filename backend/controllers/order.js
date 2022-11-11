@@ -3,14 +3,6 @@ import { orderService } from "../services";
 
 const orderController = Router();
 
-orderController.get("/", async (req, res, next) => {
-  try {
-    const orders = await orderService.getList(req.headers["x-access-token"]);
-    res.status(200).json(orders);
-  } catch (err) {
-    next(err);
-  }
-});
 orderController.post("/", async (req, res, next) => {
   try {
     const orderId = await orderService.postOrder(
@@ -22,10 +14,12 @@ orderController.post("/", async (req, res, next) => {
     next(err);
   }
 });
-orderController.get("/:orderId", async (req, res, next) => {
+orderController.get("/", async (req, res, next) => {
   try {
-    const order = await orderService.getOrder(req.params);
-    res.status(200).json(order);
+    const orders = await orderService.getListByUser(
+      req.headers["x-access-token"]
+    );
+    res.status(200).json(orders);
   } catch (err) {
     next(err);
   }

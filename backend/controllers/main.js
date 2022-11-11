@@ -6,8 +6,8 @@ const mainController = Router();
 mainController.get("/", async (req, res, next) => {
   try {
     const randomboxes = await randomboxService.getTwoForMain();
-    const categories = await categoryService.getListForMain();
-    res.status(200).json(randomboxes, categories);
+    const categories = await categoryService.getList();
+    res.status(200).json({ randomboxes, categories });
   } catch (err) {
     next(err);
   }

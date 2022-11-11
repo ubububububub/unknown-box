@@ -1,12 +1,12 @@
 import { Router } from "express";
-import { categoryService } from "../services";
+import { randomboxService } from "../services";
 
 const categoryController = Router();
 
-categoryController.get("/", async (req, res, next) => {
+categoryController.get("/:categoryId/randombox", async (req, res, next) => {
   try {
-    const categories = await categoryService.getList();
-    res.status(200).json(categories);
+    const randomboxes = await randomboxService.getListByCategory(req.params);
+    res.status(200).json(randomboxes);
   } catch (err) {
     next(err);
   }

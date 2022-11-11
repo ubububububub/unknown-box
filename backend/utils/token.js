@@ -51,7 +51,7 @@ class JWT {
       }
     );
 
-    await userModel.setRefreshToken(email, refreshToken);
+    await userModel.modify(email, { refreshToken });
 
     return refreshToken;
   }

@@ -55,12 +55,7 @@ class ProductService {
     if (!product) throw new Error("없는 상품입니다.");
     return {
       productId: product._id,
-      productName: product.name,
-      categoryName: product.category,
-      price: product.price,
-      count: product.count,
-      description: product.description,
-      thumbnail: product.thumbnail
+      ...product
     };
   }
   async remove({ productId }) {

@@ -1,19 +1,19 @@
 import { userService } from "./user";
 import { loginService } from "./login";
 import { authService } from "./auth";
-import { productService } from "./product";
 import { categoryService } from "./category";
-import { orderService } from "./order";
 import { randomboxService } from "./randombox";
+import { orderService } from "./order";
 import { qnaboardService } from "./qnaboard";
+import { productService } from "./product";
 
 export {
   userService,
   loginService,
   authService,
-  productService,
   categoryService,
-  orderService,
   randomboxService,
-  qnaboardService
+  orderService,
+  qnaboardService,
+  productService
 };

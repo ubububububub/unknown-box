@@ -1,16 +1,9 @@
 import { Router } from "express";
 import { randomboxService } from "../services";
+import { checkTokens } from "../middlewares";
 
 const randomboxController = Router();
 
-randomboxController.get("/:categoryId/randombox", async (req, res, next) => {
-  try {
-    const randomboxes = await randomboxService.getListByCategory(req.params);
-    res.status(200).json(randomboxes);
-  } catch (err) {
-    next(err);
-  }
-});
 randomboxController.get("/:randomboxId", async (req, res, next) => {
   try {
     const randombox = await randomboxService.getRandombox(req.params);
@@ -19,24 +12,21 @@ randomboxController.get("/:randomboxId", async (req, res, next) => {
     next(err);
   }
 });
-randomboxController.put("/:randomboxId", async (req, res, next) => {
-  try {
-    await randomboxService.openRandombox(
-      req.params,
-      req.body,
-      req.headers["x-access-token"]
-    );
-  } catch (err) {
-    next(err);
+randomboxController.put(
+  "/:randomboxId",
+  checkTokens,
+  async (req, res, next) => {
+    try {
+      await randomboxService.openRandombox(
+        req.params,
+        req.body,
+        req.headers["x-access-token"]
+      );
+      res.status(200).end();
+    } catch (err) {
+      next(err);
+    }
   }
-});
-randomboxController.get("/", async (req, res, next) => {
-  try {
-    const randomboxes = await randomboxService.getRandomboxes();
-    res.status(200).json(randomboxes);
-  } catch (err) {
-    next(err);
-  }
-});
+);
 
 export { randomboxController };

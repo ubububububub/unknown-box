@@ -20,8 +20,8 @@ class OrderModel {
     const order = await Order.findOne({ _id });
     return order;
   }
-  async modify(_id, orderInfo) {
-    const result = await Order.updateOne({ _id }, orderInfo);
+  async modify(condition, orderInfo) {
+    const result = await Order.updateOne(condition, orderInfo);
     return result;
   }
   async remove(_id) {

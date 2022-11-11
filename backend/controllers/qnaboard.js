@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { qnaboardService } from "../services";
+import { checkTokens } from "../middlewares";
 
 const qnaboardController = Router();
 
@@ -11,7 +12,7 @@ qnaboardController.get("/", async (req, res, next) => {
     next(err);
   }
 });
-qnaboardController.get("/:qnaboardId", async (req, res, next) => {
+qnaboardController.get("/:qnaboardId", checkTokens, async (req, res, next) => {
   try {
     const qnaboard = await qnaboardService.getPost(req.params, req.query);
     res.status(200).json(qnaboard);
@@ -19,7 +20,7 @@ qnaboardController.get("/:qnaboardId", async (req, res, next) => {
     next(err);
   }
 });
-qnaboardController.post("/", async (req, res, next) => {
+qnaboardController.post("/", checkTokens, async (req, res, next) => {
   try {
     const qnaboard = await qnaboardService.regist(
       req.body,
@@ -30,7 +31,7 @@ qnaboardController.post("/", async (req, res, next) => {
     next(err);
   }
 });
-qnaboardController.put("/:qnaboardId", async (req, res, next) => {
+qnaboardController.put("/:qnaboardId", checkTokens, async (req, res, next) => {
   try {
     const result = await qnaboardService.modify(req.params, req.body);
     res.status(200).json(result);
@@ -38,13 +39,17 @@ qnaboardController.put("/:qnaboardId", async (req, res, next) => {
     next(err);
   }
 });
-qnaboardController.delete("/:qnaboardId", async (req, res, next) => {
-  try {
-    const result = await qnaboardService.remove(req.params, req.body);
-    res.status(200).json(result);
-  } catch (err) {
-    next(err);
+qnaboardController.delete(
+  "/:qnaboardId",
+  checkTokens,
+  async (req, res, next) => {
+    try {
+      const result = await qnaboardService.remove(req.params, req.body);
+      res.status(200).json(result);
+    } catch (err) {
+      next(err);
+    }
   }
-});
+);
 
 export { qnaboardController };

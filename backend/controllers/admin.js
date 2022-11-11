@@ -20,7 +20,7 @@ adminController.get("/category", async (req, res, next) => {
 adminController.post("/category", async (req, res, next) => {
   try {
     await categoryService.regist(req.body);
-    res.status(201);
+    res.status(201).end();
   } catch (err) {
     next(err);
   }
@@ -43,8 +43,16 @@ adminController.delete("/category/:categoryId", async (req, res, next) => {
 });
 adminController.get("/product", async (req, res, next) => {
   try {
-    const products = await productService.getList();
+    const products = await productService.getProducts();
     res.status(200).json(products);
+  } catch (err) {
+    next(err);
+  }
+});
+adminController.post("/product", async (req, res, next) => {
+  try {
+    await productService.regist(req.body);
+    res.status(201).end();
   } catch (err) {
     next(err);
   }
@@ -53,14 +61,6 @@ adminController.get("/product/:productId", async (req, res, next) => {
   try {
     const product = await productService.getProduct(req.params);
     res.status(200).json(product);
-  } catch (err) {
-    next(err);
-  }
-});
-adminController.post("/product", async (req, res, next) => {
-  try {
-    await productService.regist(req.body);
-    res.status(201);
   } catch (err) {
     next(err);
   }
@@ -76,6 +76,46 @@ adminController.delete("/product/:productId", async (req, res, next) => {
 adminController.put("/product/:productId", async (req, res, next) => {
   try {
     const result = await productService.modify(req.params, req.body);
+    res.status(200).json(result);
+  } catch (err) {
+    next(err);
+  }
+});
+adminController.get("/randombox", async (req, res, next) => {
+  try {
+    const randomboxes = await randomboxService.getRandomboxes();
+    res.status(200).json(randomboxes);
+  } catch (err) {
+    next(err);
+  }
+});
+adminController.post("/randombox", async (req, res, next) => {
+  try {
+    await randomboxService.regist(req.body);
+    res.status(201).end();
+  } catch (err) {
+    next(err);
+  }
+});
+adminController.get("/randombox/:randomboxId", async (req, res, next) => {
+  try {
+    const randombox = await randomboxService.getRandomboxForAdmin(req.params);
+    res.status(200).json(randombox);
+  } catch (err) {
+    next(err);
+  }
+});
+adminController.put("/randombox/:randomboxId", async (req, res, next) => {
+  try {
+    const result = await randomboxService.modify(req.params, req.body);
+    res.status(200).json(result);
+  } catch (err) {
+    next(err);
+  }
+});
+adminController.delete("/randombox/:randomboxId", async (req, res, next) => {
+  try {
+    const result = await randomboxService.remove(req.params);
     res.status(200).json(result);
   } catch (err) {
     next(err);
@@ -108,46 +148,6 @@ adminController.put("/order/:orderId", async (req, res, next) => {
 adminController.delete("/order/:orderId", async (req, res, next) => {
   try {
     const result = await orderService.cancel(req.params);
-    res.status(200).json(result);
-  } catch (err) {
-    next(err);
-  }
-});
-adminController.get("/randombox", async (req, res, next) => {
-  try {
-    const randomboxes = await randomboxService.getRandomboxes();
-    res.status(200).json(randomboxes);
-  } catch (err) {
-    next(err);
-  }
-});
-adminController.get("/randombox/:randomboxId", async (req, res, next) => {
-  try {
-    const randombox = await randomboxService.getRandomboxForAdmin(req.params);
-    res.status(200).json(randombox);
-  } catch (err) {
-    next(err);
-  }
-});
-adminController.post("/randombox", async (req, res, next) => {
-  try {
-    await randomboxService.regist(req.body);
-    res.status(201);
-  } catch (err) {
-    next(err);
-  }
-});
-adminController.put("/randombox/:randomboxId", async (req, res, next) => {
-  try {
-    const result = await randomboxService.modify(req.params, req.body);
-    res.status(200).json(result);
-  } catch (err) {
-    next(err);
-  }
-});
-adminController.delete("/randombox/:randomboxId", async (req, res, next) => {
-  try {
-    const result = await randomboxService.remove(req.params);
     res.status(200).json(result);
   } catch (err) {
     next(err);

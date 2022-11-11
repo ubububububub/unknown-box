@@ -27,7 +27,7 @@ class QnaboardService {
   async getPostForAdmin({ qnaboardId }) {
     const qnaboard = await this.qnaboardModel.getOne(qnaboardId);
     if (!qnaboard) throw new Error("문의가 존재하지 않습니다.");
-    return { qnaboardId: qnaboard._id, ...qnaboard };
+    return qnaboard;
   }
   async regist({ title, content, password }, accessToken) {
     const { email } = JWT.decodeToken(accessToken);
