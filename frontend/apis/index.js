@@ -651,3 +651,18 @@ export async function getEmailConfirmVerified(email, mailnum) {
     console.dir(err);
   }
 }
+
+export async function getUserInfo() {
+  try {
+    const res = await fetch(`http://localhost:8080/api/order/userinfo`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "X-Access-Token": localStorage.getItem("accessToken")
+      }
+    });
+    return res.json();
+  } catch (err) {
+    console.dir(err);
+  }
+}
