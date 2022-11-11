@@ -13,7 +13,7 @@ class OrderService {
     this.userModel = userModel;
     this.productModel = productModel;
   }
-  async postOrder({ formData, products }, accessToken) {
+  async postOrder({ formData, product }, accessToken) {
     const [
       orderName,
       orderPhone,
@@ -23,7 +23,7 @@ class OrderService {
       detailAddress,
       extraAddress
     ] = formData;
-    const { boxesPrice, deliveryPrice, randomboxes, totalPrice } = products;
+    const { boxesPrice, deliveryPrice, randomboxes, totalPrice } = product;
     const { email } = JWT.decodeToken(accessToken);
     const randomboxInfo = {
       orderEmail: email,
@@ -38,7 +38,7 @@ class OrderService {
       },
       randomboxes: [],
       randomboxesCount: 0,
-      boxesPrice,
+      boxesPrice: boxesPrice.reduce((acc, val) => acc + val, 0),
       deliveryPrice,
       totalPrice
     };
