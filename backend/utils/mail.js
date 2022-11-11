@@ -22,7 +22,7 @@ class Mail {
     this.message = {
       from: `${process.env.NODEMAILER_USER}`,
       to,
-      subject: "회원가입 이메일 인증입니다.",
+      subject: "랜덤박스 회원가입 이메일 인증 메일입니다.",
       text
     };
   }
