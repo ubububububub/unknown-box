@@ -39,9 +39,6 @@ export default class Modal extends Component {
         return;
       }
       const form = new FormData(qs(".modal-body form"));
-      for (let [key, value] of form.entries()) {
-        console.log(key, value);
-      }
       this.props.type === "ADD"
         ? this.props.submit(form)
         : this.props.submit(this.props.id, form);

@@ -62,7 +62,6 @@ class MyOrderItem extends Component {
 
   handleDeleteBtn(e) {
     e.preventDefault();
-    console.log(this.props.item.orderId);
     deleteOrderInfo(this.props.item.orderId);
     this.props.deleteOrder(this.props.item.orderId);
   }

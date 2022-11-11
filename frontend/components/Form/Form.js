@@ -59,10 +59,6 @@ class Form extends Component {
 
   static getFormData() {
     const formData = new FormData(qs("#form_section"));
-    for (var pair of formData.entries()) {
-      console.log(pair[0] + ", " + pair[1]);
-    }
-
     return formData;
   }
 }

@@ -82,7 +82,6 @@ export default class RandomBoxList extends Component {
 
   async addBoxProduct(data) {
     const res = await addBox(data);
-    console.log(res);
     //location = "/admin/randombox";
   }
 
@@ -94,7 +93,6 @@ export default class RandomBoxList extends Component {
 
   async editBoxProduct(id, data) {
     const res = await editBox(id, data);
-    console.log(res);
     //location = "/admin/randombox";
   }
 }
