@@ -22,16 +22,16 @@ class MyOrderItemBox extends Component {
     qsAll(".myorderitem-product-list")[this.props.parentIdx].children[
       this.props.boxIdx
     ].addEventListener("mousedown", e => {
-      if (item.products) {
-        e.currentTarget.innerHTML = ` <img src="${item.products.thumbnail}"/>
-            <span>${item.products.productName}</span>`;
+      if (item.product) {
+        e.currentTarget.innerHTML = ` <img src="${item.product.thumbnail}"/>
+            <span>${item.product.productName}</span>`;
       }
     });
 
     qsAll(".myorderitem-product-list")[this.props.parentIdx].children[
       this.props.boxIdx
     ].addEventListener("mouseup", e => {
-      if (item.products) {
+      if (item.product) {
         e.currentTarget.innerHTML = ` <img src="${item.thumbnail}"/>
         <span>${item.randomboxName}</span>`;
       }
