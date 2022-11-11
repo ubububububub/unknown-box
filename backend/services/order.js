@@ -168,6 +168,11 @@ class OrderService {
     const result = await this.orderModel.modify({ _id: orderId }, { state });
     return { result: result.matchedCount ? "success" : "fail" };
   }
+  async getOrderInfo({ orderId }) {
+    const { orderName, orderPhone, orderAddress } =
+      await this.orderModel.getOne(orderId);
+    return { orderName, orderPhone, orderAddress };
+  }
 }
 
 const orderService = new OrderService(
