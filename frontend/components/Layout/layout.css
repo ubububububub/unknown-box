@@ -18,7 +18,7 @@ body { margin: 0; }
 .header-top-box {  margin-top: 20px; }
 .header .header-fix .header-top .header-top-box a { font-size: 12px; }
 .header .header-fix .header-top .header-top-box .header-toplist { display: flex; justify-content: space-between; }
-.header .header-fix .header-top .header-top-box .header-toplist li:first-child { padding-right: 8px; }
+.header .header-fix .header-top .header-top-box .header-toplist li { padding-left: 8px; }
 .header .header-fix .header-top .header-top-box .header-btlist li { text-align: right; }
 #btn-nav-open { font-size:15px; cursor: pointer; }
 
