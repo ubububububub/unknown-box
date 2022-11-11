@@ -17,6 +17,7 @@ import { SignIn } from "../pages/SignIn/SignIn.js";
 import { RandomBox } from "../pages/RandomBox/RandomBox.js";
 import { QnaBoard } from "../pages/QnaBoard/QnaBoard.js";
 import { Rank } from "../pages/Rank/Rank.js";
+import { AdminOrderEdit } from "../pages/AdminOrderEdit/AdminOrderEdit.js";
 
 const routes = [
   { path: "/", view: Main, isPublic: true },
@@ -53,7 +54,11 @@ const routes = [
     isAdmin: true
   },
   { path: "/qnaboard", view: QnaBoard, isPublic: true },
-  { path: "/randombox/:id", view: RandomBox, isPublic: false },
+  {
+    path: "/randombox/:orderId/:randomboxtId",
+    view: RandomBox,
+    isPublic: false
+  },
   { path: "/404", view: NotFound, isPublic: true }
 ];
 

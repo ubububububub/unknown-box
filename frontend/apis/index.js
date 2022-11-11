@@ -170,30 +170,38 @@ export async function postRefreshToken() {
   }
 }
 
-export async function getRandomBoxProducts() {
+export async function getRandomBoxProducts(randomboxId) {
   try {
-    const response = await fetch("랜덤 박스 상품 api", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json"
+    const response = await fetch(
+      `http://localhost:8080/api/randombox/${randomboxId}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json"
+        }
       }
-    });
+    );
     return await response.json();
   } catch (err) {
     console.dir(err);
   }
 }
 
-export async function postRandomBoxResult(product) {
+export async function putRandomBoxResult(randomboxId, orderId, productId) {
   try {
-    await fetch("랜덤 박스 결과 api", {
-      method: "POST",
+    await fetch(`http://localhost:8080/api/randombox/${randomboxId}`, {
+      method: "PUT",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "X-Access-Token": localStorage.getItem("accessToken")
       },
-      body: JSON.stringify({ product })
+      body: JSON.stringify({ orderId, productId })
     });
   } catch (err) {
+    if (response.status === 403) {
+      await postRefreshToken();
+      await putRandomBoxResult(randomboxId);
+    }
     console.dir(err);
   }
 }
