@@ -3,13 +3,13 @@ import CategoryItem from "../CategoryItem/CategoryItem.js";
 import { MODAL, qs } from "../../utils/index.js";
 //import { getCategoryList, addCategory, deleteCategory } from "../../apis/index.js";
 import Modal from "../Modal/Modal.js";
+import style from "./categoryList.css" assert { type: "css" };
+document.adoptedStyleSheets.push(style);
 
 export default class CategoryList extends Component {
   template() {
-    return `<ul class="category-list">
-              <button type="button" class="category-addBtn">추가하기</button>
-            </ul>
-              `;
+    return `<button type="button" class="category-addBtn">추가하기</button>
+            <ul class="admin_category-list"></ul>`;
   }
 
   async mounted() {
@@ -26,7 +26,7 @@ export default class CategoryList extends Component {
     };
 
     this.state.category.forEach(({ categoryId, categoryName }) => {
-      new CategoryItem(qs(".category-list"), {
+      new CategoryItem(qs(".admin_category-list"), {
         categoryId,
         categoryName,
         editCategoryName: this.editCategoryName.bind(this),

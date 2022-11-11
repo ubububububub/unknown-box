@@ -1,5 +1,5 @@
 import Component from "../../core/Component.js";
-import { isClassContained, qs, editForm } from "../../utils/index.js";
+import { isClassContained, qs, createEditForm } from "../../utils/index.js";
 import Modal from "../Modal/Modal.js";
 import Product from "../Product/Product.js";
 import ImageUploadForm from "../ImageUploadForm/ImageUploadForm.js";
@@ -9,13 +9,13 @@ import ImageUploadForm from "../ImageUploadForm/ImageUploadForm.js";
 //   deleteProduct,
 //   addProduct
 // } from "../../apis/index.js";
+import style from "./productList.css" assert { type: "css" };
+document.adoptedStyleSheets.push(style);
 
 export class ProductList extends Component {
   template() {
-    return `
-      <ul class="product-list">
-          <button type="button" class="btn product-addBtn">추가하기</button>
-      </ul>`;
+    return `<button type="button" class="btn product-addBtn">추가하기</button>
+            <ul class="admin_product-list"></ul>`;
   }
 
   async mounted() {
@@ -26,7 +26,8 @@ export class ProductList extends Component {
         productName: "에어팟",
         categoryName: "전자제품",
         price: 190000,
-        thumbnail: "#",
+        thumbnail:
+          "https://i.picsum.photos/id/32/400/400.jpg?hmac=QyKPcU_C9dLLat_LHQnq5_FJlOJPGxo2okcvlCjXQYQ",
         count: 10,
         description: ""
       },
@@ -47,6 +48,24 @@ export class ProductList extends Component {
         thumbnail: "#",
         count: 10,
         description: ""
+      },
+      {
+        productId: 4,
+        productName: "에어팟",
+        categoryName: "전자제품",
+        price: 190000,
+        thumbnail: "#",
+        count: 10,
+        description: ""
+      },
+      {
+        productId: 5,
+        productName: "에어팟",
+        categoryName: "전자제품",
+        price: 190000,
+        thumbnail: "#",
+        count: 10,
+        description: ""
       }
     ];
 
@@ -54,7 +73,7 @@ export class ProductList extends Component {
 
     this.state.products.forEach(
       product =>
-        new Product(qs(".product-list"), {
+        new Product(qs(".admin_product-list"), {
           product,
           editProductItem: this.editProductItem.bind(this),
           deleteProductItem: this.deleteProductItem.bind(this)
@@ -95,7 +114,7 @@ export class ProductList extends Component {
     await new Modal(qs("#app"), {
       type: "ADD",
       headerText: "상품 아이템 추가하기",
-      contents: { body: [editForm(domList)] },
+      contents: { body: [createEditForm(domList)] },
       submit: this.addProductItem.bind(this)
     });
 

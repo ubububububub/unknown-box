@@ -1,21 +1,22 @@
 import Component from "../../core/Component.js";
-import { isClassContained, qs, editForm } from "../../utils/index.js";
+import { isClassContained, qs, createEditForm } from "../../utils/index.js";
 import ImageUploadForm from "../ImageUploadForm/ImageUploadForm.js";
 import Modal from "../Modal/Modal.js";
 import RandomBox from "../RandomBox/RandomBox.js";
+
 // import {
 //   getBoxList,
 //   editBox,
 //   deleteBox,
 //   addBox
 // } from "../../apis/index.js";
+import style from "./randomBoxList.css" assert { type: "css" };
+document.adoptedStyleSheets.push(style);
 
 export default class RandomBoxList extends Component {
   template() {
-    return `
-      <ul class="randombox-list">
-          <button type="button" class="btn randombox-addBtn">추가하기</button>
-      </ul>`;
+    return `<button type="button" class="btn randombox-addBtn">추가하기</button>
+              <ul class="admin_randombox-list"></ul>`;
   }
 
   async mounted() {
@@ -28,11 +29,12 @@ export default class RandomBoxList extends Component {
         price: 39900,
         productMin: 5000,
         productMax: 100000,
-        thumbnail: "#",
+        thumbnail:
+          "https://i.picsum.photos/id/32/400/400.jpg?hmac=QyKPcU_C9dLLat_LHQnq5_FJlOJPGxo2okcvlCjXQYQ",
         discount: null,
         count: 10,
         description: "",
-        products: ["아이템1", "아이템2", "아이템3"]
+        products: ["아이템1", "아이템2", "아이템3", "아이템4", "아이템5"]
       },
       {
         randomboxId: 2,
@@ -41,7 +43,8 @@ export default class RandomBoxList extends Component {
         price: 49900,
         productMin: 5000,
         productMax: 120000,
-        thumbnail: "#",
+        thumbnail:
+          "https://i.picsum.photos/id/32/400/400.jpg?hmac=QyKPcU_C9dLLat_LHQnq5_FJlOJPGxo2okcvlCjXQYQ",
         discount: 44910,
         count: 20,
         description: "",
@@ -54,7 +57,50 @@ export default class RandomBoxList extends Component {
         price: 29900,
         productMin: 2000,
         productMax: 80000,
-        thumbnail: "#",
+        thumbnail:
+          "https://i.picsum.photos/id/32/400/400.jpg?hmac=QyKPcU_C9dLLat_LHQnq5_FJlOJPGxo2okcvlCjXQYQ",
+        discount: null,
+        count: 7,
+        description: "",
+        products: ["아이템1", "아이템2", "아이템3"]
+      },
+      {
+        randomboxId: 4,
+        randomboxName: "의류 랜덤박스 Gold",
+        categoryName: "의류",
+        price: 29900,
+        productMin: 2000,
+        productMax: 80000,
+        thumbnail:
+          "https://i.picsum.photos/id/32/400/400.jpg?hmac=QyKPcU_C9dLLat_LHQnq5_FJlOJPGxo2okcvlCjXQYQ",
+        discount: null,
+        count: 7,
+        description: "",
+        products: ["아이템1", "아이템2", "아이템3"]
+      },
+      {
+        randomboxId: 5,
+        randomboxName: "의류 랜덤박스 Gold",
+        categoryName: "의류",
+        price: 29900,
+        productMin: 2000,
+        productMax: 80000,
+        thumbnail:
+          "https://i.picsum.photos/id/32/400/400.jpg?hmac=QyKPcU_C9dLLat_LHQnq5_FJlOJPGxo2okcvlCjXQYQ",
+        discount: null,
+        count: 7,
+        description: "",
+        products: ["아이템1", "아이템2", "아이템3"]
+      },
+      {
+        randomboxId: 6,
+        randomboxName: "의류 랜덤박스 Gold",
+        categoryName: "의류",
+        price: 29900,
+        productMin: 2000,
+        productMax: 80000,
+        thumbnail:
+          "https://i.picsum.photos/id/32/400/400.jpg?hmac=QyKPcU_C9dLLat_LHQnq5_FJlOJPGxo2okcvlCjXQYQ",
         discount: null,
         count: 7,
         description: "",
@@ -66,7 +112,7 @@ export default class RandomBoxList extends Component {
 
     this.state.boxList.forEach(
       box =>
-        new RandomBox(qs(".randombox-list"), {
+        new RandomBox(qs(".admin_randombox-list"), {
           box,
           editBoxProduct: this.editBoxProduct.bind(this),
           deleteBoxProduct: this.deleteBoxProduct.bind(this)
@@ -87,7 +133,8 @@ export default class RandomBoxList extends Component {
   async addHandler() {
     const domList = [
       {
-        className: "randombox-img"
+        className: "randombox-img",
+        title: "썸네일"
       },
       {
         className: "randombox-name",
@@ -118,7 +165,7 @@ export default class RandomBoxList extends Component {
     await new Modal(qs("#app"), {
       type: "ADD",
       headerText: "랜덤박스 추가하기",
-      contents: { body: [editForm(domList)] },
+      contents: { body: [createEditForm(domList)] },
       submit: this.addBoxProduct.bind(this)
     });
     new ImageUploadForm(qs("form > .randombox-img"));

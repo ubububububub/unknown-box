@@ -1,35 +1,35 @@
-import { qs, editForm, isClassContained } from "../../utils/index.js";
+import { qs, createEditForm, isClassContained } from "../../utils/index.js";
 import ImageUploadForm from "../ImageUploadForm/ImageUploadForm.js";
 import Component from "../../core/Component.js";
 import Modal from "../Modal/Modal.js";
 // import { getProductDetail } from "../../apis/index.js";
+import style from "./product.css" assert { type: "css" };
+document.adoptedStyleSheets.push(style);
 
 export default class Product extends Component {
   template() {
     const { productId, productName, categoryName, price, thumbnail } =
       this.props.product;
 
-    return `
-            <li class="product-${productId}">
-              <div class="product-img">
+    return `<li class="product-item product-${productId}">
+              <div class="product-thumbnail">
                 <img src="${thumbnail}"/>
               </div>
               <div class="info">
-                <div class="item-name">
-                  <span>상품명</span>
+                <div class="product-name">
                   <span>${productName}</span>
                 </div>
                 <div class="category-name">
-                  <span>카테고리명</span>
                   <span>${categoryName}</span>
                 </div>
-                <div class="price">
-                  <span>가격</span>
-                  <span>${price}</span>
+                <div class="product-price">
+                  <span>${price.toLocaleString()}원</span>
                 </div>
               </div>
+              <div class="product-btns">
                 <button type="button" class="btn product-editBtn">수정하기</button>
                 <button type="button" class="btn product-delBtn">삭제하기</button>
+              <div>
             </li>
         `;
   }
@@ -100,7 +100,7 @@ export default class Product extends Component {
       headerText: "아이템 수정",
       type: "EDIT",
       contents: {
-        body: [editForm(domList)]
+        body: [createEditForm(domList)]
       },
       submit: this.props.editProductItem.bind(this)
     });
