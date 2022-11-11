@@ -142,19 +142,26 @@ export async function getMyInfo() {
   }
 }
 
-export async function postMyPassword(formData) {
+export async function putMyPassword(formData) {
   try {
-    const response = await fetch(`http://localhost:8080/api/user`, {
-      method: "POST",
-      body: formData,
-      "X-Access-Token": localStorage.getItem("accessToken")
+    const response = await fetch(`http://localhost:8080/api/mypage`, {
+      method: "PUT",
+      headers: {
+        "X-Access-Token": localStorage.getItem("accessToken")
+      },
+      body: formData
     });
     if (response.status === 403) {
       await postRefreshToken();
-      await postMyPassword(formData);
+      await putMyPassword(formData);
+    }
+    if (response.status === 200) {
+      location.reload();
+    } else {
+      throw new Error("현재 비밀번호가 틀렸습니다.");
     }
   } catch (err) {
-    console.dir(err);
+    return err;
   }
 }
 
@@ -231,10 +238,6 @@ export async function postKakaoLoginToken(email) {
 
 export async function postPayment(formData, product) {
   try {
-    console.log(product);
-    for (var pair of formData.entries()) {
-      console.log(pair[0] + ", " + pair[1]);
-    }
     const response = await fetch(`http://localhost:8080/api/order`, {
       method: "POST",
       headers: {

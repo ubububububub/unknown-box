@@ -45,7 +45,6 @@ class OrderEdit extends Component {
   }
 
   async setup() {
-    console.log(this.props);
     const data = await getOrderInfo(this.props);
     this.state = data;
   }
