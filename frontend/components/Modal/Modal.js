@@ -14,7 +14,7 @@ export default class Modal extends Component {
                     <div class="modal-body">
                     </div>
                     <div class="modal-footer">
-                      <button type="button" class="btn modal-submit-btn">완료</button>
+                      <button type="submit" class="btn modal-submit-btn">완료</button>
                     </div>
                 </div>
             </div>`;
@@ -29,7 +29,8 @@ export default class Modal extends Component {
   }
 
   setEvent() {
-    qs(".modal-submit-btn").addEventListener("click", () => {
+    qs(".modal-submit-btn").addEventListener("click", e => {
+      e.preventDefault();
       if (this.props.type === "ANSWER") {
         const newValue = qs(".modal-body textarea").value;
 
@@ -38,7 +39,9 @@ export default class Modal extends Component {
         return;
       }
       const form = new FormData(qs(".modal-body form"));
-
+      for (let [key, value] of form.entries()) {
+        console.log(key, value);
+      }
       this.props.type === "ADD"
         ? this.props.submit(form)
         : this.props.submit(this.props.id, form);

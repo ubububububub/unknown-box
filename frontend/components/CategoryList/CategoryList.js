@@ -1,11 +1,12 @@
 import Component from "../../core/Component.js";
 import CategoryItem from "../CategoryItem/CategoryItem.js";
 import { MODAL, qs } from "../../utils/index.js";
-// import {
-//   getCategoryList,
-//   addCategory,
-//   deleteCategory
-// } from "../../apis/index.js";
+import {
+  getCategoryList,
+  addCategory,
+  editCategory,
+  deleteCategory
+} from "../../apis/index.js";
 import Modal from "../Modal/Modal.js";
 import style from "./categoryList.css" assert { type: "css" };
 document.adoptedStyleSheets.push(style);
@@ -17,17 +18,8 @@ export default class CategoryList extends Component {
   }
 
   async mounted() {
-    //  const list = await getCategoryList();
-    //  this.state = { category: list };
-    const mockData = [
-      { categoryId: 1, categoryName: "의류 랜덤박스" },
-      { categoryId: 2, categoryName: "전자제품 랜덤박스" },
-      { categoryId: 3, categoryName: "랜덤박스" }
-    ];
-
-    this.state = {
-      category: mockData
-    };
+    const list = await getCategoryList();
+    this.state = { category: list };
 
     this.state.category.forEach(({ categoryId, categoryName }) => {
       new CategoryItem(qs(".admin_category-list"), {
@@ -57,17 +49,17 @@ export default class CategoryList extends Component {
   }
 
   async addCategoryName(data) {
-    // await addCategory(data);
+    await addCategory(data);
     location = "/admin";
   }
 
   async editCategoryName(id, data) {
-    // await editCategory(id, data);
+    await editCategory(id, data);
     location = "/admin";
   }
 
   async deleteCategoryName(id) {
-    // await deleteCategory(id);
+    await deleteCategory(id);
     const remain = this.state.category.filter(
       category => category.categoryId !== id
     );

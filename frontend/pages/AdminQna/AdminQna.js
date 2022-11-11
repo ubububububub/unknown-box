@@ -11,32 +11,9 @@ import { ADMIN_PAGE_NAV } from "../../constants/index.js";
 import Modal from "../../components/Modal/Modal.js";
 
 export class AdminQna extends Component {
-  setup() {
-    //const qnaList = await getAdminQnaList();
-    const mock = [
-      {
-        qnaboardId: 11,
-        title: "test",
-        author: "nahyun",
-        createdAt: "2022-11-09T15:51:52",
-        updatedAt: "2022-11-10T16:52:52"
-      },
-      {
-        qnaboardId: 12,
-        title: "test",
-        author: "nahyun",
-        createdAt: "2022-11-09T15:51:52",
-        updatedAt: "2022-11-10T16:52:52"
-      },
-      {
-        qnaboardId: 13,
-        title: "test",
-        author: "nahyun",
-        createdAt: "2022-11-09T15:51:52",
-        updatedAt: "2022-11-10T16:52:52"
-      }
-    ];
-    this.state = { qnaList: mock };
+  async setup() {
+    const qnaList = await getAdminQnaList();
+    this.state = { qnaList };
   }
   template() {
     return `
@@ -63,7 +40,8 @@ export class AdminQna extends Component {
                     <td>${qna.updatedAt.slice(0, 10)}</td>
                     <td>
                       <button type="button" class="qna-btn admin_getDetail-qna">게시글 보기</button>
-                    </td>
+                      <button type="button" class="qna-btn admin_del-qna">게시글 삭제</button>
+                      </td>
                 </tr>`
               )
               .join("")}
@@ -85,13 +63,16 @@ export class AdminQna extends Component {
       if (isClassContained(e.target, "admin_getDetail-qna")) {
         this.getDetailHandler(qnaId);
       }
+
+      if (isClassContained(e.target, "admin_del-qna")) {
+        this.deleteHandler(qnaId);
+      }
     });
   }
 
-  getDetailHandler(qnaId) {
-    //const qnaDetail = await getAdminQnaDetail(qnaId);
-    const { qnaboardId, title, content, author, answer } =
-      this.state.qnaList[0];
+  async getDetailHandler(qnaId) {
+    const qnaDetail = await getAdminQnaDetail(qnaId);
+    const { qnaboardId, title, content, author, answer } = qnaDetail;
 
     new Modal(qs("#app"), {
       id: qnaboardId,
@@ -119,20 +100,18 @@ export class AdminQna extends Component {
                 : MODAL.Span({}, [answer])
             ])
           ])
-        ],
-        footer: [
-          MODAL.Button({}, ["삭제"], () => this.deleteHandler(qnaboardId))
         ]
       },
       submit: this.answerQna
     });
   }
 
-  answerQna(id, data) {
-    // await postAdminQna(id, data);
+  async answerQna(id, data) {
+    await postAdminQna(id, { answer: data });
   }
 
-  deleteHandler(id) {
-    // await deleteAdminQna(id);
+  async deleteHandler(id) {
+    await deleteAdminQna(id);
+    //location = "/admin/qna";
   }
 }

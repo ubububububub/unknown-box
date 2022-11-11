@@ -3,14 +3,9 @@ import { isClassContained, qs, createEditForm } from "../../utils/index.js";
 import ImageUploadForm from "../ImageUploadForm/ImageUploadForm.js";
 import Modal from "../Modal/Modal.js";
 import RandomBox from "../RandomBox/RandomBox.js";
-
-// import {
-//   getBoxList,
-//   editBox,
-//   deleteBox,
-//   addBox
-// } from "../../apis/index.js";
+import { getBoxList, editBox, deleteBox, addBox } from "../../apis/index.js";
 import style from "./randomBoxList.css" assert { type: "css" };
+import Toast from "../Toast/Toast.js";
 document.adoptedStyleSheets.push(style);
 
 export default class RandomBoxList extends Component {
@@ -20,95 +15,9 @@ export default class RandomBoxList extends Component {
   }
 
   async mounted() {
-    // const boxList = await getboxList();
-    const mockData = [
-      {
-        randomboxId: 1,
-        randomboxName: "의류 랜덤박스 Platinum",
-        categoryName: "의류",
-        price: 39900,
-        productMin: 5000,
-        productMax: 100000,
-        thumbnail:
-          "https://i.picsum.photos/id/32/400/400.jpg?hmac=QyKPcU_C9dLLat_LHQnq5_FJlOJPGxo2okcvlCjXQYQ",
-        discount: null,
-        count: 10,
-        description: "",
-        products: ["아이템1", "아이템2", "아이템3", "아이템4", "아이템5"]
-      },
-      {
-        randomboxId: 2,
-        randomboxName: "전자제품 랜덤박스 Dia",
-        categoryName: "전자제품",
-        price: 49900,
-        productMin: 5000,
-        productMax: 120000,
-        thumbnail:
-          "https://i.picsum.photos/id/32/400/400.jpg?hmac=QyKPcU_C9dLLat_LHQnq5_FJlOJPGxo2okcvlCjXQYQ",
-        discount: 44910,
-        count: 20,
-        description: "",
-        products: ["아이템1", "아이템2", "아이템3"]
-      },
-      {
-        randomboxId: 3,
-        randomboxName: "의류 랜덤박스 Gold",
-        categoryName: "의류",
-        price: 29900,
-        productMin: 2000,
-        productMax: 80000,
-        thumbnail:
-          "https://i.picsum.photos/id/32/400/400.jpg?hmac=QyKPcU_C9dLLat_LHQnq5_FJlOJPGxo2okcvlCjXQYQ",
-        discount: null,
-        count: 7,
-        description: "",
-        products: ["아이템1", "아이템2", "아이템3"]
-      },
-      {
-        randomboxId: 4,
-        randomboxName: "의류 랜덤박스 Gold",
-        categoryName: "의류",
-        price: 29900,
-        productMin: 2000,
-        productMax: 80000,
-        thumbnail:
-          "https://i.picsum.photos/id/32/400/400.jpg?hmac=QyKPcU_C9dLLat_LHQnq5_FJlOJPGxo2okcvlCjXQYQ",
-        discount: null,
-        count: 7,
-        description: "",
-        products: ["아이템1", "아이템2", "아이템3"]
-      },
-      {
-        randomboxId: 5,
-        randomboxName: "의류 랜덤박스 Gold",
-        categoryName: "의류",
-        price: 29900,
-        productMin: 2000,
-        productMax: 80000,
-        thumbnail:
-          "https://i.picsum.photos/id/32/400/400.jpg?hmac=QyKPcU_C9dLLat_LHQnq5_FJlOJPGxo2okcvlCjXQYQ",
-        discount: null,
-        count: 7,
-        description: "",
-        products: ["아이템1", "아이템2", "아이템3"]
-      },
-      {
-        randomboxId: 6,
-        randomboxName: "의류 랜덤박스 Gold",
-        categoryName: "의류",
-        price: 29900,
-        productMin: 2000,
-        productMax: 80000,
-        thumbnail:
-          "https://i.picsum.photos/id/32/400/400.jpg?hmac=QyKPcU_C9dLLat_LHQnq5_FJlOJPGxo2okcvlCjXQYQ",
-        discount: null,
-        count: 7,
-        description: "",
-        products: ["아이템1", "아이템2", "아이템3"]
-      }
-    ];
+    const boxList = await getBoxList();
 
-    this.state = { boxList: mockData };
+    this.state = { boxList };
 
     this.state.boxList.forEach(
       box =>
@@ -172,18 +81,20 @@ export default class RandomBoxList extends Component {
   }
 
   async addBoxProduct(data) {
-    // await addBox(data);
-    location = "/admin/randombox";
+    const res = await addBox(data);
+    console.log(res);
+    //location = "/admin/randombox";
   }
 
   async deleteBoxProduct(id) {
-    // await deleteBox(id);
+    await deleteBox(id);
     const remain = this.state.boxList.filter(box => box.randomboxId !== id);
     this.setState({ boxList: remain });
   }
 
   async editBoxProduct(id, data) {
-    // await editBox(id, data);
-    location = "/admin/randombox";
+    const res = await editBox(id, data);
+    console.log(res);
+    //location = "/admin/randombox";
   }
 }
