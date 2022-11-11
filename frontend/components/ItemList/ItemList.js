@@ -17,11 +17,12 @@ export class ItemList extends Component {
     setEvent() {
         getMain().then(result => {
             result.randomboxes.map( x =>{
+                console.log(x);
                 qs("#ltemList-listwrap").innerHTML +=
                     `<li class="ltemList-item">
                  <a href="/detail/${x.randomboxId}">
                   <div class="ltemList-img">
-                    <img src="${x.categoryName}" alt="">
+                    <img src="${x.thumbnail}" alt="">
                   </div>
                   <div class="ltemList-info">
                     <h4>${x.randomboxName}</h4>

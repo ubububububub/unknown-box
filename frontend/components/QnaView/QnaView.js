@@ -99,13 +99,14 @@ export default class QnaView extends Component {
 
                             qs("#delete").addEventListener('click',()=>{
                                 const formData = new FormData();
-                                formData.append("password", x.password);
+                                console.log(x.password);
+                                formData.append("password", password);
                                 deleteQna(formData,x.qnaboardId).then(x =>{
                                     if (x.status === 200){
-                                        alert("수정이 완료 되었습니다.");
+                                        alert("삭제가 완료 되었습니다.");
                                         window.location.href = "/qnaboard/list";
                                     }else{
-                                        alert("수정실패");
+                                        alert("삭제실패");
                                         return false;
                                     }
                                 })
@@ -116,7 +117,7 @@ export default class QnaView extends Component {
                 );
             }else{
                 alert('권한이 없습니다');
-                return false;
+                window.location.href = "/qnaboard/list";
             }
         });
     }
