@@ -1,3 +1,5 @@
+@charset "utf-8";
+
 .admin_product-list {
   display: flex;
   flex-wrap: wrap;

@@ -1,4 +1,4 @@
-import { qs, editForm, isClassContained } from "../../utils/index.js";
+import { qs, createEditForm, isClassContained } from "../../utils/index.js";
 import ImageUploadForm from "../ImageUploadForm/ImageUploadForm.js";
 import Component from "../../core/Component.js";
 import Modal from "../Modal/Modal.js";
@@ -100,7 +100,7 @@ export default class Product extends Component {
       headerText: "아이템 수정",
       type: "EDIT",
       contents: {
-        body: [editForm(domList)]
+        body: [createEditForm(domList)]
       },
       submit: this.props.editProductItem.bind(this)
     });

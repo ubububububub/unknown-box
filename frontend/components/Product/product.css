@@ -1,3 +1,5 @@
+@charset "utf-8";
+
 .admin_product-list .product-item {
   width: 25%;
   margin: 40px 0;
@@ -48,4 +50,5 @@
   border-radius: 2px;
   text-align: center;
   color: #ffffff;
+  cursor: pointer;
 }

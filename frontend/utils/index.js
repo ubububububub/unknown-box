@@ -42,7 +42,7 @@ export const MODAL = {
   }
 };
 
-export function editForm(elementList) {
+export function createEditForm(elementList) {
   return MODAL.Form(
     {},
     elementList.map(({ className, title, attr = {} }) =>

@@ -1,37 +1,12 @@
 import Component from "../../core/Component.js";
 import { qs } from "../../utils/index.js";
+import style from "./modal.css" assert { type: "css" };
+document.adoptedStyleSheets.push(style);
 
 export default class Modal extends Component {
   template() {
-    const modalStyle = `
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 9999;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: rgba(0, 0, 0, 0.2);
-
-    `;
-
-    const contentsStyle = `
-        background-color: #fefefe;
-        display:flex;
-        flex-direction: column;
-        align-items:center;
-        border-radius: 10px;
-        width: 30%;
-        height: 50%;
-        box-shadow: 0px 4px 10px rgb(0, 0, 0, 0.1);
-        position: fixed;
-        
-    `;
-
-    return `<div class="modal" style="${modalStyle}">
-                <div class="modal-contents" style="${contentsStyle}">
+    return `<div class="modal">
+                <div class="modal-contents">
                     <h3 class="modal-header">
                         ${this.props.headerText}
                         <button class="close-modal">X</button>

@@ -17,9 +17,6 @@
 
 #admin_category-wrapper {
   width: 900px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   display: inline-block;
   text-align: right;
 }

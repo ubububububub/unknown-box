@@ -1,5 +1,5 @@
 import Component from "../../core/Component.js";
-import { isClassContained, qs, editForm } from "../../utils/index.js";
+import { isClassContained, qs, createEditForm } from "../../utils/index.js";
 import Modal from "../Modal/Modal.js";
 import Product from "../Product/Product.js";
 import ImageUploadForm from "../ImageUploadForm/ImageUploadForm.js";
@@ -50,7 +50,7 @@ export class ProductList extends Component {
         description: ""
       },
       {
-        productId: 1,
+        productId: 4,
         productName: "에어팟",
         categoryName: "전자제품",
         price: 190000,
@@ -59,7 +59,7 @@ export class ProductList extends Component {
         description: ""
       },
       {
-        productId: 1,
+        productId: 5,
         productName: "에어팟",
         categoryName: "전자제품",
         price: 190000,
@@ -114,7 +114,7 @@ export class ProductList extends Component {
     await new Modal(qs("#app"), {
       type: "ADD",
       headerText: "상품 아이템 추가하기",
-      contents: { body: [editForm(domList)] },
+      contents: { body: [createEditForm(domList)] },
       submit: this.addProductItem.bind(this)
     });
 

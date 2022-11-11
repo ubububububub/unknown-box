@@ -1,6 +1,12 @@
 //import { editBox, deleteBox } from "../../apis/index.js";
 import Component from "../../core/Component.js";
-import { qs, editForm, MODAL, isClassContained } from "../../utils/index.js";
+import {
+  qs,
+  createEditForm,
+  MODAL,
+  isClassContained
+} from "../../utils/index.js";
+import ImageUploadForm from "../ImageUploadForm/ImageUploadForm.js";
 import Modal from "../Modal/Modal.js";
 import style from "./randomBox.css" assert { type: "css" };
 document.adoptedStyleSheets.push(style);
@@ -62,7 +68,7 @@ export default class Product extends Component {
     });
   }
 
-  editHandler() {
+  async editHandler() {
     // const box = await getBoxDetail(this.props.box.randomboxId);
     // props 데이터가 아닌 디테일 정보를 받아왔다 가정
     const {
@@ -80,6 +86,10 @@ export default class Product extends Component {
     } = this.props.box;
 
     const domList = [
+      {
+        className: "box-img",
+        title: "이미지"
+      },
       {
         className: "box-name",
         title: "상품명",
@@ -125,20 +135,25 @@ export default class Product extends Component {
       }
     ];
 
-    new Modal(qs("#app"), {
+    await new Modal(qs("#app"), {
       id: randomboxId,
       headerText: "상품 수정",
       type: "EDIT",
       contents: {
         body: [
-          editForm(domList),
-          MODAL.Div({ className: "products-list" }, [
-            ...products.map(product => MODAL.Span({}, [product]))
+          createEditForm(domList),
+          MODAL.Div({ className: "modal-products-list-wrapper" }, [
+            MODAL.Span({}, ["상품목록"]),
+            MODAL.Div(
+              { className: "modal-products-list" },
+              products.map(product => MODAL.Div({}, [product]))
+            )
           ])
         ]
       },
       submit: this.props.editBoxProduct.bind(this)
     });
+    new ImageUploadForm(qs("form > .box-img"));
   }
 
   deleteHandler() {
