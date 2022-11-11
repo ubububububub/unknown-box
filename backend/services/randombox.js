@@ -82,7 +82,7 @@ class RandomboxService {
     const order = await this.orderModel.getOne(orderId);
     const state =
       order.randomboxesCount === order.productsCount + 1
-        ? "상품준비중"
+        ? "배송 준비중"
         : order.state;
     await this.orderModel.modify(
       { _id: orderId, "randomboxes.randombox": randomboxId },
