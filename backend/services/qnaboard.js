@@ -22,12 +22,28 @@ class QnaboardService {
     if (!qnaboard) throw new Error("문의가 존재하지 않습니다.");
     if (qnaboard.password !== hashPassword(password))
       throw new Error("잘못된 비밀번호입니다.");
-    return { qnaboardId: qnaboard._id, ...qnaboard };
+    return {
+      qnaboardId: qnaboard._id,
+      title: qnaboard.title,
+      content: qnaboard.content,
+      author: qnaboard.author,
+      answer: qnaboard.answer || null,
+      createdAt: qnaboard.createdAt,
+      updatedAt: qnaboard.updatedAt
+    };
   }
   async getPostForAdmin({ qnaboardId }) {
     const qnaboard = await this.qnaboardModel.getOne(qnaboardId);
     if (!qnaboard) throw new Error("문의가 존재하지 않습니다.");
-    return qnaboard;
+    return {
+      qnaboardId: qnaboard._id,
+      title: qnaboard.title,
+      content: qnaboard.content,
+      author: qnaboard.author,
+      answer: qnaboard.answer || null,
+      createdAt: qnaboard.createdAt,
+      updatedAt: qnaboard.updatedAt
+    };
   }
   async regist({ title, content, password }, accessToken) {
     const { email } = JWT.decodeToken(accessToken);

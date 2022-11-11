@@ -144,7 +144,7 @@ class RandomboxService {
     );
     if (products.length === 0) throw new Error("조건에 맞는 상품이 없습니다.");
     randomboxInfo.products = products.map(({ _id }) => ({ product: _id }));
-    await this.regist(randomboxInfo);
+    await this.randomboxModel.regist(randomboxInfo);
   }
   async modify(
     { randomboxId },
@@ -187,8 +187,7 @@ class RandomboxService {
       );
       if (products.length === 0)
         throw new Error("조건에 맞는 상품이 없습니다.");
-      randomboxInfo.products = products;
-      // .map(({ _id }) => ({ product: _id }));
+      randomboxInfo.products = products.map(({ _id }) => ({ product: _id }));
     }
     const result = await this.randomboxModel.modify(randomboxId, randomboxInfo);
     return { result: result.matchedCount ? "success" : "fail" };

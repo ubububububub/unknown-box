@@ -28,7 +28,6 @@ class ProductModel {
       categoryName,
       price: { $gte: productMin, $lte: productMax }
     });
-    console.log(products);
     return products;
   }
 }
