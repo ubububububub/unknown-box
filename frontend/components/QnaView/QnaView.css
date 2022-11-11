@@ -36,9 +36,30 @@
 #qna-container .qnaview-control {
   display: flex;
   flex-flow: row;
-  justify-content: space-between;
+  justify-content: flex-end;
+  margin-top: 20px;
 }
 
 #qna-container .qnaview-control a{
   padding: 10px;
+}
+
+.qnaview-control button,
+.qnaview-control a { 
+  background-color: rgb(252, 227, 116);
+  border: none;
+  border-radius: 2px;
+  text-align: center;
+  color: rgb(0, 0, 0);
+  margin: 0 5px;
+  font-size: 14px;
+  width: 100px;
+}
+
+.qnaview-control a { 
+  width: 80px;
+}
+
+.qnaview-control button{ 
+  width: 100px;
 }

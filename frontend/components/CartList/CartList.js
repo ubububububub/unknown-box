@@ -103,7 +103,7 @@ export class CartList extends Component {
                   </ul>
                 </li>
                 <li class="cart_product-item-price">${price.toLocaleString()}</li>
-                <li class="cart_product-item-quantity>
+                <li class="cart_product-item-quantity">
                   <div class="temp">
                     <button type="button" class="cart_product-button-subtract">-</button>
                     <span class="cart_product-item-quantity-text">${quantity}</span>

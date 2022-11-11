@@ -48,15 +48,16 @@ export class Header extends Component {
             <nav id="side-nav" class="side-nav">
               <div class="nav-inner">
                 <div class="nav-header">
-                  <a href="/" class="header-logo">Shop logo</a>
+                  <a href="/" class="header-logo">UnknownBox</a>
                   <a href="javascript:void(0);" id="side-nav-close">메뉴닫기</a>
                 </div>
                 <ul class="">
+                <span class="main-nav-title">카테고리</span>
                   <li class="menu" id="side-menu">
                      
                   </li>
                   <li class="menu">
-                    <a href="#">고객센터</a>
+                    <span class="main-nav-title">고객센터</span>
                     <div class="depth2">
                       <ul>
                          <li><a href="/qnaboard/list">Q&A 게시판</a></li>
