@@ -47,12 +47,6 @@ const routes = [
     isAdmin: true
   },
   { path: "/admin/order", view: AdminOrder, isPublic: false, isAdmin: true },
-  {
-    path: "/admin/order/:id",
-    view: AdminOrderEdit,
-    isPublic: false,
-    isAdmin: true
-  },
   { path: "/qnaboard", view: QnaBoard, isPublic: true },
   {
     path: "/randombox/:orderId/:randomboxtId",

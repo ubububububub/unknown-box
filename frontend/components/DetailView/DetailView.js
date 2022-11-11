@@ -8,8 +8,7 @@ document.adoptedStyleSheets.push(style);
 export class DetailView extends Component {
     template() {
         return (
-            `<section class="detail-content">
-            <div class="detail-wrap">
+            `<div class="detail-wrap">
                 <div class="detail-img">
                   <img src="http://unsplash.it/500/500?random=9" alt="">
                 </div>
@@ -24,41 +23,48 @@ export class DetailView extends Component {
                   </div>
                   <div class="list-pay">
                     <h5>수량</h5>
-                      <h5 id="count"></h5>
+                      <button id="plus">+</button><button id="minus">-</button>  
+                      <h5 id="count">0</h5>
                       <span></span>
                   </div>
-                  <select name="" id="">
-                    <option value="">size</option>
-                    <option value="빨강">S</option>
-                    <option value="파랑">M</option>
-                    <option value="노랑">L</option>
-                  </select>
-               </div> 
-                  <div class="btn">
+                  <div class="detail-item-btn">
                     <button>BUY NOW</button>
                     <button id="addCart">장바구니</button>
                   </div>
-              </div>
-          </section>`
+               </div> 
+              </div>`
         );
     }
     setEvent() {
         const item = this.props;
-
+        let count = 1;
         getItem(item).then(x => {
           qs("#product-name").innerHTML = x.name;
           qs("#price").innerHTML = x.price + "원";
-          qs("#count").innerHTML = x.count + "개";
+          qs("#count").innerHTML = count + "개";
+
+          qs("#plus").addEventListener('click',()=>{
+              qs("#count").innerHTML = (count + 1 ) + "개";
+              count++;
+          })
+          qs("#minus").addEventListener('click',()=>{
+            if(count > 0){
+                qs("#count").innerHTML = (count - 1 ) + "개";
+                count--;
+            }
+          })
+
+
 
           qs("#addCart").addEventListener("click",() => {
               if(confirm("장바구니에 추가하시겠습니까?")){
                   cart.setCartItem({
-                      name  : x.name,
-                      price : x.price,
-                      option: {
-                          color: "orange",
-                          size : "m"
-                      }
+                      randombox: "아이디",
+                      thumbnail : "랜덤박스 img",
+                      randomboxName : "랜덤박스 등급명",
+                      categoryName :"”카테고리 이름”",
+                      price : 50000,
+                      quantity : 50,
                   })
               }
           })
