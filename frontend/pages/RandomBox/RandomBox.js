@@ -26,6 +26,7 @@ export class RandomBox extends Component {
       this.state.productItems.products
     );
     this.state.count = this.getRandomNum();
+
     this.state.productItems.products = this.convertProductItems(maxIndex);
   }
 
@@ -35,7 +36,7 @@ export class RandomBox extends Component {
         return (
           prev +
           `<li class="randombox_carousel-item">
-            <img src="${curr.thumbnail}" alt="carousel-${index}" />
+            <img src="${curr.thumbnail}" alt="carousel-${index}"/>
             <div class="randombox_carousel-item-desc">
               <h3 class="randombox_carousel-item-name">${curr.productName}</h3>
               <strong class="randombox_carousel-item-price">정상가 : ${curr.price.toLocaleString()}원</strong>
@@ -71,7 +72,7 @@ export class RandomBox extends Component {
       await putRandomBoxResult({
         randomboxId: this.state.randomboxId,
         orderId: this.state.orderId,
-        productId: this.state.productItems.prodcuts[this.state.count].productId
+        productId: this.state.productItems.products[this.state.count].productId
       });
 
       this.startCarouselAnimation();
@@ -103,7 +104,7 @@ export class RandomBox extends Component {
     let start = ANIMATION_FRAME_START_INIT;
 
     const callback = () => {
-      const end = this.state.productItems.length - 1;
+      const end = this.state.productItems.products.length - 1;
 
       if (end < start) {
         this.showMyPageMoveButton();
@@ -148,8 +149,8 @@ export class RandomBox extends Component {
     } else if (this.state.count !== maxIndex) {
       newProducts = [
         ...temp,
-        this.state.productItems[maxIndex],
-        this.state.productItems[this.state.count]
+        this.state.productItems.products[maxIndex],
+        this.state.productItems.products[this.state.count]
       ];
     }
 

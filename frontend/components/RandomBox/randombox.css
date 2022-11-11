@@ -51,3 +51,8 @@
   text-align: center;
   color: #ffffff;
 }
+
+.randombox_carousel-item {
+  width: 600px;
+  height: 600px;
+}

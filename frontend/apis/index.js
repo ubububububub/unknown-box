@@ -187,7 +187,7 @@ export async function getRandomBoxProducts(randomboxId) {
   }
 }
 
-export async function putRandomBoxResult(randomboxId, orderId, productId) {
+export async function putRandomBoxResult({ randomboxId, orderId, productId }) {
   try {
     const response = await fetch(
       `http://localhost:8080/api/randombox/${randomboxId}`,
