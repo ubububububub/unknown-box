@@ -9,12 +9,24 @@ import {
 } from "../../utils/index.js";
 import Form from "../../components/Form/Form.js";
 import { cart } from "../../store/cart.js";
-import { postPayment } from "../../apis/index.js";
+import { getUserInfo, postPayment } from "../../apis/index.js";
 import style from "./payment.css" assert { type: "css" };
 document.adoptedStyleSheets.push(style);
 
 export class Payment extends Component {
-  setup() {
+  async setup() {
+    const userInfo = await getUserInfo();
+
+    if (userInfo.orderPhone) {
+      this.state = {
+        cartList: cart.getCartList(),
+        buttonEvent: this.handleClickPayment.bind(this),
+        userInfo
+      };
+
+      return;
+    }
+
     this.state = {
       cartList: cart.getCartList(),
       buttonEvent: this.handleClickPayment.bind(this)
@@ -29,29 +41,8 @@ export class Payment extends Component {
   }
 
   mounted() {
-    const formChildren = [
-      {
-        id: "orderName",
-        title: "주문자명",
-        type: "text"
-      },
-      {
-        id: "orderPhone",
-        title: "주문자 전화번호",
-        type: "text"
-      },
-      { type: "address" }
-    ];
-    const formProps = {
-      formChildren,
-      orderAddress: {
-        postalcode: "123123",
-        roadAddress: "사랑시 고백구 행복동",
-        jibunAddress: "사랑시 고백구 행복동",
-        detailAddress: "상세한주소",
-        extraAddress: "이건뭐이야"
-      }
-    };
+    const formProps = this.setUserInfo();
+
     new Form(qs(".payment_content"), formProps);
     new PaymentInfo(qs(".payment_content"), this.state);
   }
@@ -121,5 +112,63 @@ export class Payment extends Component {
 
       return (window.location = "/order/recipt");
     }
+  }
+
+  setUserInfo() {
+    let formProps;
+
+    if (this.userInfo) {
+      const formChildren = [
+        {
+          id: "orderName",
+          title: "주문자명",
+          type: "text",
+          value: this.userInfo.orderName
+        },
+        {
+          id: "orderPhone",
+          title: "주문자 전화번호",
+          type: "text",
+          value: this.userInfo.orderPhone
+        },
+        { type: "address" }
+      ];
+      formProps = {
+        formChildren,
+        orderAddress: {
+          postalcode: this.userInfo.orderAddress.postalCode,
+          roadAddress: this.userInfo.orderAddress.roadAddress,
+          jibunAddress: this.userInfo.orderAddress.jibunAddress,
+          detailAddress: this.userInfo.orderAddress.detailAddress,
+          extraAddress: this.userInfo.orderAddress.extraAddress
+        }
+      };
+    } else {
+      const formChildren = [
+        {
+          id: "orderName",
+          title: "주문자명",
+          type: "text"
+        },
+        {
+          id: "orderPhone",
+          title: "주문자 전화번호",
+          type: "text"
+        },
+        { type: "address" }
+      ];
+      formProps = {
+        formChildren,
+        orderAddress: {
+          postalcode: "",
+          roadAddress: "",
+          jibunAddress: "",
+          detailAddress: "",
+          extraAddress: ""
+        }
+      };
+    }
+
+    return formProps;
   }
 }
