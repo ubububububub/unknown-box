@@ -6,7 +6,7 @@ import {
   phoneValidation,
   qs
 } from "../../utils/index.js";
-import { postOrderInfo } from "../../apis/index.js";
+import { getOrderInfo, putOrderInfo } from "../../apis/index.js";
 import style from "./orderEdit.css" assert { type: "css" };
 document.adoptedStyleSheets.push(style);
 
@@ -45,22 +45,9 @@ class OrderEdit extends Component {
   }
 
   async setup() {
-    const mockData = {
-      orderId: 1,
-      orderTime: "22-10-10",
-      orderState: "배송준비중",
-      orderName: "이상조",
-      orderPhone: "01074253535",
-      orderAddress: {
-        postalcode: "123123",
-        roadAddress: "사랑시 고백구 행복동",
-        jibunAddress: "사랑시 고백구 행복동",
-        detailAddress: "상세한주소",
-        extraAddress: "이건뭐이야"
-      }
-    };
-    // const data = await getOrderInfo(this.props);
-    this.state = mockData;
+    console.log(this.props);
+    const data = await getOrderInfo(this.props);
+    this.state = data;
   }
 
   setEvent() {
@@ -76,7 +63,7 @@ class OrderEdit extends Component {
       phoneValidation(qs("#orderPhone")) &&
       detailAddressValidation(qs("#detailAddress"))
     ) {
-      postOrderInfo(Form.getFormData(), this.props);
+      putOrderInfo(Form.getFormData(), this.props);
     }
   }
 }

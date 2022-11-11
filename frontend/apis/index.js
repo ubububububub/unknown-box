@@ -64,16 +64,18 @@ export async function getOrderInfo(orderId) {
   }
 }
 
-export async function postOrderInfo(formData, orderId) {
+export async function putOrderInfo(formData, orderId) {
   try {
     const response = await fetch(`http://localhost:8080/api/order/${orderId}`, {
-      method: "POST",
-      "X-Access-Token": localStorage.getItem("accessToken"),
+      method: "PUT",
+      headers: {
+        "X-Access-Token": localStorage.getItem("accessToken")
+      },
       body: formData
     });
     if (response.status === 403) {
       await postRefreshToken();
-      await postOrderInfo(formData, orderId);
+      await putOrderInfo(formData, orderId);
     }
   } catch (err) {
     console.dir(err);
@@ -87,8 +89,7 @@ export async function deleteOrderInfo(orderId) {
       headers: {
         "Content-Type": "application/json",
         "X-Access-Token": localStorage.getItem("accessToken")
-      },
-      body: JSON.stringify(data)
+      }
     });
     if (response.status === 403) {
       await postRefreshToken();
@@ -187,7 +188,7 @@ export async function getRandomBoxProducts(randomboxId) {
   }
 }
 
-export async function putRandomBoxResult(randomboxId, orderId, productId) {
+export async function putRandomBoxResult({ randomboxId, orderId, productId }) {
   try {
     const response = await fetch(
       `http://localhost:8080/api/randombox/${randomboxId}`,
