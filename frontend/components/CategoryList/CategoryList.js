@@ -1,6 +1,6 @@
 import Component from "../../core/Component.js";
 import CategoryItem from "../CategoryItem/CategoryItem.js";
-import { MODAL, qs } from "../../utils/index.js";
+import { isClassContained, MODAL, qs } from "../../utils/index.js";
 import {
   getCategoryList,
   addCategory,
@@ -32,7 +32,8 @@ export default class CategoryList extends Component {
   }
 
   setEvent() {
-    qs(".category-addBtn").addEventListener("click", () => {
+    this.target.addEventListener("click", e => {
+      if (!isClassContained(e.target, "category-addBtn")) return;
       new Modal(qs("#app"), {
         headerText: "카테고리 추가",
         type: "ADD",

@@ -53,14 +53,13 @@ export default class Product extends Component {
 
   async editHandler() {
     const product = await getProductDetail(this.props.product.productId);
-    console.log(product.json());
     const {
       productId,
       thumbnail,
       productName,
       categoryName,
       price,
-      description,
+      description = "",
       count
     } = product;
 

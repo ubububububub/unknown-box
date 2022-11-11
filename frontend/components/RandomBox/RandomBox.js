@@ -7,7 +7,7 @@ import {
 } from "../../utils/index.js";
 import ImageUploadForm from "../ImageUploadForm/ImageUploadForm.js";
 import Modal from "../Modal/Modal.js";
-import { getBoxDetail, editBox, deleteBox } from "../../apis/index.js";
+import { getBoxDetail } from "../../apis/index.js";
 
 import style from "./randomBox.css" assert { type: "css" };
 document.adoptedStyleSheets.push(style);
@@ -37,7 +37,7 @@ export default class Product extends Component {
                 </div>
                 <div class="price">
                   ${
-                    !Number(discount)
+                    discount != price
                       ? `<span style="text-decoration: line-through">${price.toLocaleString()}원</span>
                           <span>${discount.toLocaleString()}원</span>`
                       : `<span>${price.toLocaleString()}원</span>`
@@ -110,7 +110,9 @@ export default class Product extends Component {
         title: "할인율",
         attr: {
           name: "discount",
-          value: discount ? Math.round(100 - (discount / price) * 100) : 0
+          value: Number(discount)
+            ? Math.round(100 - (discount / price) * 100)
+            : 0
         }
       },
       {

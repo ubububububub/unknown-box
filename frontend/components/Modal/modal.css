@@ -47,7 +47,7 @@
   flex-direction: column;
 }
 
-form {
+.modal form {
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -55,14 +55,14 @@ form {
   align-items: center;
 }
 
-form > div {
+.modal form > div {
   padding: 5px;
   display: flex;
   width: 100%;
   justify-content: space-between;
 }
 
-form input:not(.image-upload-form_input) {
+.modal form input:not(.image-upload-form_input) {
   width: 300px;
   border: 1px solid #e7e6ef;
   height: 38px;
@@ -70,29 +70,29 @@ form input:not(.image-upload-form_input) {
   text-align: center;
 }
 
-form input:focus {
+.modal form input:focus {
   outline: none;
   box-shadow: 0 0 0 1px #fce374;
 }
 
-form span {
+.modal form span {
   margin: auto 0;
 }
 
-.image-upload-form_preview {
+.modal .image-upload-form_preview {
   overflow: hidden;
 }
 
-.image-upload-form_preview img {
+.modal .image-upload-form_preview img {
   max-width: 380px;
   max-height: 380px;
 }
 
-.modal-footer {
+.modal .modal-footer {
   margin: 10px auto;
 }
 
-.modal-submit-btn {
+.modal .modal-submit-btn {
   background-color: #fce374;
   cursor: pointer;
   border: none;

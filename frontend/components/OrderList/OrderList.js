@@ -4,6 +4,7 @@ import OrderItem from "../OrderItem/OrderItem.js";
 import { getOrderList } from "../../apis/index.js";
 import style from "./orderList.css" assert { type: "css" };
 document.adoptedStyleSheets.push(style);
+import { deleteOrder } from "../../apis/index.js";
 
 export default class OrderList extends Component {
   template() {
