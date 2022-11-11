@@ -17,7 +17,6 @@ export default class MainRandom extends Component {
         }]
 
         getMain().then(result => {
-            console.log(cateImg[0]["test"])
             result.categories.map(x =>
             {
                 console.log(x);

@@ -28,7 +28,7 @@ export class Header extends Component {
                       }
                     </li>
                     <li>
-                      ${isAdmin ? `<a>관리자 계정입니다.</a>` : ``}
+                      ${isAdmin ? `<a href='/admin'>상품 등록</a>` : ``}
                     </li>
                   </ul>
                   <ul class="header-btlist">

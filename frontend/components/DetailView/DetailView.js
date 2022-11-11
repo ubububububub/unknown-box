@@ -30,7 +30,6 @@ export class DetailView extends Component {
                       <span></span>
                   </div>
                   <div class="detail-item-btn">
-                    <button>BUY NOW</button>
                     <button id="addCart">장바구니</button>
                   </div>
                </div> 
@@ -70,7 +69,7 @@ export class DetailView extends Component {
                         randomboxName :x.randomboxName,
                         categoryName :x.categoryName,
                         price : x.price,
-                        quantity : this.count,
+                        quantity : count,
                     })
                 }
             })
