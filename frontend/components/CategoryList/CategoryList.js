@@ -1,7 +1,11 @@
 import Component from "../../core/Component.js";
 import CategoryItem from "../CategoryItem/CategoryItem.js";
 import { MODAL, qs } from "../../utils/index.js";
-//import { getCategoryList, addCategory, deleteCategory } from "../../apis/index.js";
+// import {
+//   getCategoryList,
+//   addCategory,
+//   deleteCategory
+// } from "../../apis/index.js";
 import Modal from "../Modal/Modal.js";
 import style from "./categoryList.css" assert { type: "css" };
 document.adoptedStyleSheets.push(style);
@@ -13,8 +17,8 @@ export default class CategoryList extends Component {
   }
 
   async mounted() {
-    // const list = await getCategoryList();
-    // this.state = { category: list };
+    //  const list = await getCategoryList();
+    //  this.state = { category: list };
     const mockData = [
       { categoryId: 1, categoryName: "의류 랜덤박스" },
       { categoryId: 2, categoryName: "전자제품 랜덤박스" },

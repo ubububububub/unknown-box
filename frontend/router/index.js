@@ -3,6 +3,7 @@ import { AdminRandomBox } from "../pages/AdminRandomBox/AdminRandomBox.js";
 import { AdminOrder } from "../pages/AdminOrder/AdminOrder.js";
 import { AdminOrderEdit } from "../pages/AdminOrderEdit/AdminOrderEdit.js";
 import { AdminProduct } from "../pages/AdminProduct/AdminProduct.js";
+import { AdminQna } from "../pages/AdminQna/AdminQna.js";
 import { Cart } from "../pages/Cart/Cart.js";
 import { Detail } from "../pages/Detail/Detail.js";
 import { Login } from "../pages/Login/Login.js";
@@ -47,6 +48,13 @@ const routes = [
     isAdmin: true
   },
   { path: "/admin/order", view: AdminOrder, isPublic: false, isAdmin: true },
+  {
+    path: "/admin/order/:id",
+    view: AdminOrderEdit,
+    isPublic: false,
+    isAdmin: true
+  },
+  { path: "/admin/qna", view: AdminQna, isPublic: true, isAdmin: true },
   { path: "/qnaboard", view: QnaBoard, isPublic: true },
   {
     path: "/randombox/:orderId/:randomboxtId",

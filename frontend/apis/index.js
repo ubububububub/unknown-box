@@ -241,7 +241,8 @@ export async function getCategoryList() {
     const response = await fetch("http://localhost:8080/api/admin/category", {
       method: "GET",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "X-Access-Token": localStorage.getItem("accessToken")
       }
     });
     return response.json();
@@ -282,7 +283,8 @@ export async function deleteCategory(id) {
     await fetch(`http://localhost:8080/api/admin/category/${id}`, {
       method: "DELETE",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "X-Access-Token": localStorage.getItem("accessToken")
       }
     });
   } catch (err) {
@@ -295,7 +297,8 @@ export async function getBoxList() {
     const response = await fetch("http://localhost:8080/api/admin/randombox", {
       method: "GET",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "X-Access-Token": localStorage.getItem("accessToken")
       }
     });
     return await response.json();
@@ -320,7 +323,8 @@ export async function getBoxDetail(id) {
     const response = await fetch(`http://localhost:8080/api/randombox/${id}`, {
       method: "GET",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "X-Access-Token": localStorage.getItem("accessToken")
       }
     });
     return response.json();
@@ -345,7 +349,8 @@ export async function deletebox(id) {
     await fetch(`http://localhost:8080/api/admin/randombox/${id}`, {
       method: "DELETE",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "X-Access-Token": localStorage.getItem("accessToken")
       }
     });
   } catch (err) {
@@ -358,7 +363,8 @@ export async function getProductList() {
     const response = await fetch("http://localhost:8080/api/admin/product", {
       method: "GET",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "X-Access-Token": localStorage.getItem("accessToken")
       }
     });
     return await response.json();
@@ -383,7 +389,8 @@ export async function getProductDetail(id) {
     const response = await fetch(`http://localhost:8080/api/product/${id}`, {
       method: "GET",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "X-Access-Token": localStorage.getItem("accessToken")
       }
     });
     return response.json();
@@ -408,7 +415,8 @@ export async function deleteProduct(id) {
     await fetch(`http://localhost:8080/api/admin/product/${id}`, {
       method: "DELETE",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "X-Access-Token": localStorage.getItem("accessToken")
       }
     });
   } catch (err) {
@@ -421,7 +429,8 @@ export async function getOrderList() {
     const response = await fetch(`http://localhost:8080/api/admin/order`, {
       method: "GET",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "X-Access-Token": localStorage.getItem("accessToken")
       }
     });
     return response.json();
@@ -437,7 +446,8 @@ export async function getOrderDetail(id) {
       {
         method: "GET",
         headers: {
-          "Content-Type": "application/json"
+          "Content-Type": "application/json",
+          "X-Access-Token": localStorage.getItem("accessToken")
         }
       }
     );
@@ -452,7 +462,8 @@ export async function editOrder(id, data) {
     await fetch(`http://localhost:8080/api/admin/order/${id}`, {
       method: "PUT",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "X-Access-Token": localStorage.getItem("accessToken")
       },
       body: JSON.stringify(data)
     });
@@ -466,7 +477,65 @@ export async function deleteOrder(id) {
     await fetch(`http://localhost:8080/api/admin/order/${id}`, {
       method: "DELETE",
       headers: {
-        "Content-Type": "application/json"
+        "Content-Type": "application/json",
+        "X-Access-Token": localStorage.getItem("accessToken")
+      }
+    });
+  } catch (err) {
+    console.dir(err);
+  }
+}
+
+export async function getAdminQnaList() {
+  try {
+    const response = await fetch(`http://localhost:8080/api/admin/qnaboard`, {
+      method: "POST"
+    });
+    return response.json();
+  } catch (err) {
+    console.dir(err);
+  }
+}
+
+export async function getAdminQnaDetail(id) {
+  try {
+    const response = await fetch(`http://localhost:8080/api/qnaboard/${id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "X-Access-Token": localStorage.getItem("accessToken")
+      }
+    });
+    console.log(response);
+    return await response.json();
+  } catch (err) {
+    console.dir(err);
+  }
+}
+
+export async function postAdminQna(id, data) {
+  try {
+    const response = await fetch(`http://localhost:8080/api/qnaboard/${id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "X-Access-Token": localStorage.getItem("accessToken")
+      },
+      body: JSON.stringify(data)
+    });
+    return await response.json();
+  } catch (err) {
+    console.dir(err);
+  }
+}
+
+export async function deleteAdminQna(id) {
+  try {
+    await fetch(`http://localhost:8080/api/qnaboard/${id}`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "X-Access-Token": localStorage.getItem("accessToken")
       }
     });
   } catch (err) {
