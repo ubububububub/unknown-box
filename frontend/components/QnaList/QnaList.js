@@ -29,7 +29,7 @@ export default class QnaList extends Component {
 
   mounted() {
     getQnaList().then(list => {
-      const pagingCount = 10;
+      const pagingCount = 7;
       list.reverse();
       for (let i = 0; i <= (list.length / pagingCount +1); i++) {
         console.log(i);
@@ -37,7 +37,7 @@ export default class QnaList extends Component {
           qs('#paging').innerHTML += `<input type="button" value=${i}></input>`;
         }
       }
-      list.push([{startPage:0,endPage:9,boardNum:list.length}])
+      list.push([{startPage:0,endPage:6,boardNum:list.length}])
       qs("#paging").addEventListener('click',(e) =>{
         if(e.target.value){
           qs("#qna-list-body").innerHTML = "";

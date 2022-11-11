@@ -1,3 +1,4 @@
+import { getMain } from "../../apis/main.js";
 import Component from "../../core/Component.js";
 import style from "./layout.css" assert { type: "css" };
 import { qs } from "../../utils/index.js";
@@ -7,6 +8,7 @@ export class Header extends Component {
   template() {
     const isLogin = !!localStorage.getItem("role");
     const isAdmin = localStorage.getItem("role") === "admin";
+    const cartCount = JSON.parse(localStorage.getItem("cart")).length
     return `<section class="header">
             <div class="header-fix">
               <div class="header-top">
@@ -26,15 +28,13 @@ export class Header extends Component {
                           ? `<a href='/signin'>회원가입</a>`
                           : `<a href='/mypage'>마이페이지</a>`
                       }
-                    </li>
-                    <li>
                       ${isAdmin ? `<a href='/admin'>상품 등록</a>` : ``}
                     </li>
                   </ul>
                   <ul class="header-btlist">
                     <li class="box-basket">
                         <a href="/cart" id="btn-cart" class="btn-cart">
-                          <span class="s_cart_cnt">0</span>
+                          <span class="s_cart_cnt"> ${cartCount}</span>
                           장바구니
                         </a>
                     </li>
@@ -52,15 +52,9 @@ export class Header extends Component {
                   <a href="javascript:void(0);" id="side-nav-close">메뉴닫기</a>
                 </div>
                 <ul class="">
-                  <li class="menu">
-                      <a href="#">카테고리</a>
-                      <div class="depth2">
-                        <a href="#">가전</a>
-                      </div>
-                      <div class="depth2">
-                        <a href="#">의류</a>
-                      </div>
-                    </li>
+                  <li class="menu" id="side-menu">
+                     
+                  </li>
                   <li class="menu">
                     <a href="#">고객센터</a>
                     <div class="depth2">
@@ -90,6 +84,20 @@ export class Header extends Component {
 
     qs("#side-nav-close").addEventListener("click", () => {
       qs("#side-nav").style.left = "-450px";
+    });
+  }
+
+  mounted() {
+    super.mounted();
+    getMain().then(result => {
+      result.categories.map(x =>
+      {
+        qs("#side-menu").innerHTML += `
+                      <div class="depth2">
+                        <a href="/rank?cate=${x.categoryId}">${x.categoryName}</a>
+                      </div>
+                    `
+      })
     });
   }
 }
