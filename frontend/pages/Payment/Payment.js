@@ -137,7 +137,7 @@ export class Payment extends Component {
       formProps = {
         formChildren,
         orderAddress: {
-          postalcode: this.state.userInfo.orderAddress.postalCode,
+          postalcode: this.state.userInfo.orderAddress.postalcode,
           roadAddress: this.state.userInfo.orderAddress.roadAddress,
           jibunAddress: this.state.userInfo.orderAddress.jibunAddress,
           detailAddress: this.state.userInfo.orderAddress.detailAddress,
