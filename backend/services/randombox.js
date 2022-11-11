@@ -89,7 +89,7 @@ class RandomboxService {
       {
         state,
         $set: {
-          "randomboxes.$.opened": true,
+          "randomboxes.$.opened": false,
           "randomboxes.$.product": { productId, productName, price, thumbnail }
         },
         productsCount: order.productsCount + 1
