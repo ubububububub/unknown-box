@@ -21,7 +21,7 @@ class Form extends Component {
           <div class="form-${item.id}_container" >
             <label for="${item.id}">${item.title}</label>
             <input type="text" id="${item.id}" name="${item.id}" ${
-            item.value ? `value="${item.value}"` : null
+            item.value ? `value="${item.value}"` : ""
           }/>
           </div>`
         );
@@ -32,7 +32,7 @@ class Form extends Component {
           <div class="form-${item.id}_container" >
             <label for="${item.id}">${item.title}</label>
             <input type="password" id="${item.id}" name="${item.id}" ${
-            item.value ? `value="${item.value}"` : null
+            item.value ? `value="${item.value}"` : ""
           }/>
           </div>`
         );
@@ -48,6 +48,11 @@ class Form extends Component {
           `<div id="image-upload-container"></div>`
         );
         new ImageUploadForm(qs("#image-upload_container"));
+      } else if (item.type === "button") {
+        qs("#form_section").insertAdjacentHTML(
+          "beforeend",
+          `<button class="form-${item.id}-btn form_btn" >${item.title}</div>`
+        );
       }
     });
   }

@@ -35,12 +35,12 @@ export async function getMyOrder() {
         "X-Access-Token": localStorage.getItem("accessToken")
       }
     });
-    return await response.json();
-  } catch (err) {
-    if (err.response.status === 403) {
+    if (response.status === 403) {
       await postRefreshToken();
       await getMyOrder();
     }
+    return await response.json();
+  } catch (err) {
     console.dir(err);
   }
 }
@@ -54,35 +54,35 @@ export async function getOrderInfo(orderId) {
         "X-Access-Token": localStorage.getItem("accessToken")
       }
     });
-    return await response.json();
-  } catch (err) {
-    if (err.response.status === 403) {
+    if (response.status === 403) {
       await postRefreshToken();
       await getOrderInfo(orderId);
     }
+    return await response.json();
+  } catch (err) {
     console.dir(err);
   }
 }
 
 export async function postOrderInfo(formData, orderId) {
   try {
-    await fetch(`http://localhost:8080/api/order/${orderId}`, {
+    const response = await fetch(`http://localhost:8080/api/order/${orderId}`, {
       method: "POST",
       "X-Access-Token": localStorage.getItem("accessToken"),
       body: formData
     });
-  } catch (err) {
-    if (err.response.status === 403) {
+    if (response.status === 403) {
       await postRefreshToken();
       await postOrderInfo(formData, orderId);
     }
+  } catch (err) {
     console.dir(err);
   }
 }
 
 export async function deleteOrderInfo(orderId) {
   try {
-    await fetch(`http://localhost:8080/api/order/${orderId}`, {
+    const response = await fetch(`http://localhost:8080/api/order/${orderId}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -90,18 +90,18 @@ export async function deleteOrderInfo(orderId) {
       },
       body: JSON.stringify(data)
     });
-  } catch (err) {
-    if (err.response.status === 403) {
+    if (response.status === 403) {
       await postRefreshToken();
       await deleteOrderInfo(orderId);
     }
+  } catch (err) {
     console.dir(err);
   }
 }
 
 export async function postOrder(data) {
   try {
-    await fetch("http://localhost:8080/api/order", {
+    const response = await fetch("http://localhost:8080/api/order", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -109,46 +109,46 @@ export async function postOrder(data) {
       },
       body: JSON.stringify(data)
     });
-  } catch (err) {
-    if (err.response.status === 403) {
+    if (response.status === 403) {
       await postRefreshToken();
       await postOrder(data);
     }
+  } catch (err) {
     console.dir(err);
   }
 }
 
 export async function getMyInfo() {
   try {
-    const response = await fetch(`http://localhost:8080/api/user`, {
+    const response = await fetch(`http://localhost:8080/api/mypage`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
         "X-Access-Token": localStorage.getItem("accessToken")
       }
     });
-    return await response.json();
-  } catch (err) {
     if (response.status === 403) {
       await postRefreshToken();
       await getMyInfo();
     }
+    return await response.json();
+  } catch (err) {
     console.dir(err);
   }
 }
 
 export async function postMyPassword(formData) {
   try {
-    await fetch(`http://localhost:8080/api/user`, {
+    const response = await fetch(`http://localhost:8080/api/user`, {
       method: "POST",
       body: formData,
       "X-Access-Token": localStorage.getItem("accessToken")
     });
-  } catch (err) {
     if (response.status === 403) {
       await postRefreshToken();
       await postMyPassword(formData);
     }
+  } catch (err) {
     console.dir(err);
   }
 }
@@ -189,19 +189,22 @@ export async function getRandomBoxProducts(randomboxId) {
 
 export async function putRandomBoxResult(randomboxId, orderId, productId) {
   try {
-    await fetch(`http://localhost:8080/api/randombox/${randomboxId}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        "X-Access-Token": localStorage.getItem("accessToken")
-      },
-      body: JSON.stringify({ orderId, productId })
-    });
-  } catch (err) {
+    const response = await fetch(
+      `http://localhost:8080/api/randombox/${randomboxId}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          "X-Access-Token": localStorage.getItem("accessToken")
+        },
+        body: JSON.stringify({ orderId, productId })
+      }
+    );
     if (response.status === 403) {
       await postRefreshToken();
-      await putRandomBoxResult(randomboxId);
+      await putRandomBoxResult(randomboxId, orderId, productId);
     }
+  } catch (err) {
     console.dir(err);
   }
 }
@@ -223,16 +226,17 @@ export async function postKakaoLoginToken(email) {
 
 export async function postPayment(formData, product) {
   try {
-    await fetch(`http://localhost:8080/api/order`, {
+    const response = await fetch(`http://localhost:8080/api/order`, {
       method: "POST",
       "X-Access-Token": localStorage.getItem("accessToken"),
       body: JSON.stringify({ ...formData, ...product })
     });
-  } catch (err) {
-    if (err.response.status === 403) {
+    if (response.status === 403) {
       await postRefreshToken();
-      await postPayment(formData, orderId, product);
+      await postPayment(formData, product);
     }
+  } catch (err) {
+    console.dir(err);
   }
 }
 
@@ -245,6 +249,10 @@ export async function getCategoryList() {
         "X-Access-Token": localStorage.getItem("accessToken")
       }
     });
+    if (response.status === 403) {
+      await postRefreshToken();
+      await getCategoryList();
+    }
     return response.json();
   } catch (err) {
     console.dir(err);
@@ -280,13 +288,20 @@ export async function editCategory(id, data) {
 
 export async function deleteCategory(id) {
   try {
-    await fetch(`http://localhost:8080/api/admin/category/${id}`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-        "X-Access-Token": localStorage.getItem("accessToken")
+    const response = await fetch(
+      `http://localhost:8080/api/admin/category/${id}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          "X-Access-Token": localStorage.getItem("accessToken")
+        }
       }
-    });
+    );
+    if (response.status === 403) {
+      await postRefreshToken();
+      await deleteCategory(id);
+    }
   } catch (err) {
     console.dir(err);
   }
@@ -301,6 +316,10 @@ export async function getBoxList() {
         "X-Access-Token": localStorage.getItem("accessToken")
       }
     });
+    if (response.status === 403) {
+      await postRefreshToken();
+      await getBoxList();
+    }
     return await response.json();
   } catch (err) {
     console.dir(err);
@@ -327,6 +346,10 @@ export async function getBoxDetail(id) {
         "X-Access-Token": localStorage.getItem("accessToken")
       }
     });
+    if (response.status === 403) {
+      await postRefreshToken();
+      await getBoxDetail(id);
+    }
     return response.json();
   } catch (err) {
     console.dir(err);
@@ -346,13 +369,20 @@ export async function editBox(id, data) {
 
 export async function deletebox(id) {
   try {
-    await fetch(`http://localhost:8080/api/admin/randombox/${id}`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-        "X-Access-Token": localStorage.getItem("accessToken")
+    const response = await fetch(
+      `http://localhost:8080/api/admin/randombox/${id}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          "X-Access-Token": localStorage.getItem("accessToken")
+        }
       }
-    });
+    );
+    if (response.status === 403) {
+      await postRefreshToken();
+      await deletebox(id);
+    }
   } catch (err) {
     console.dir(err);
   }
@@ -367,6 +397,10 @@ export async function getProductList() {
         "X-Access-Token": localStorage.getItem("accessToken")
       }
     });
+    if (response.status === 403) {
+      await postRefreshToken();
+      await getProductList();
+    }
     return await response.json();
   } catch (err) {
     console.dir(err);
@@ -393,6 +427,10 @@ export async function getProductDetail(id) {
         "X-Access-Token": localStorage.getItem("accessToken")
       }
     });
+    if (response.status === 403) {
+      await postRefreshToken();
+      await getProductDetail(id);
+    }
     return response.json();
   } catch (err) {
     console.dir(err);
@@ -412,13 +450,20 @@ export async function editProduct(id, data) {
 
 export async function deleteProduct(id) {
   try {
-    await fetch(`http://localhost:8080/api/admin/product/${id}`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-        "X-Access-Token": localStorage.getItem("accessToken")
+    const response = await fetch(
+      `http://localhost:8080/api/admin/product/${id}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          "X-Access-Token": localStorage.getItem("accessToken")
+        }
       }
-    });
+    );
+    if (response.status === 403) {
+      await postRefreshToken();
+      await deleteProduct(id);
+    }
   } catch (err) {
     console.dir(err);
   }
@@ -433,6 +478,10 @@ export async function getOrderList() {
         "X-Access-Token": localStorage.getItem("accessToken")
       }
     });
+    if (response.status === 403) {
+      await postRefreshToken();
+      await getOrderList();
+    }
     return response.json();
   } catch (err) {
     console.dir(err);
@@ -451,6 +500,10 @@ export async function getOrderDetail(id) {
         }
       }
     );
+    if (response.status === 403) {
+      await postRefreshToken();
+      await getOrderDetail(id);
+    }
     return response.json();
   } catch (err) {
     console.dir(err);
@@ -459,14 +512,21 @@ export async function getOrderDetail(id) {
 
 export async function editOrder(id, data) {
   try {
-    await fetch(`http://localhost:8080/api/admin/order/${id}`, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-        "X-Access-Token": localStorage.getItem("accessToken")
-      },
-      body: JSON.stringify(data)
-    });
+    const response = await fetch(
+      `http://localhost:8080/api/admin/order/${id}`,
+      {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          "X-Access-Token": localStorage.getItem("accessToken")
+        },
+        body: JSON.stringify(data)
+      }
+    );
+    if (response.status === 403) {
+      await postRefreshToken();
+      await editOrder(id, data);
+    }
   } catch (err) {
     console.dir(err);
   }
@@ -474,13 +534,20 @@ export async function editOrder(id, data) {
 
 export async function deleteOrder(id) {
   try {
-    await fetch(`http://localhost:8080/api/admin/order/${id}`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-        "X-Access-Token": localStorage.getItem("accessToken")
+    const response = await fetch(
+      `http://localhost:8080/api/admin/order/${id}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          "X-Access-Token": localStorage.getItem("accessToken")
+        }
       }
-    });
+    );
+    if (response.status === 403) {
+      await postRefreshToken();
+      await deleteOrder(id);
+    }
   } catch (err) {
     console.dir(err);
   }
@@ -506,7 +573,10 @@ export async function getAdminQnaDetail(id) {
         "X-Access-Token": localStorage.getItem("accessToken")
       }
     });
-    console.log(response);
+    if (response.status === 403) {
+      await postRefreshToken();
+      await getAdminQnaDetail(id);
+    }
     return await response.json();
   } catch (err) {
     console.dir(err);
@@ -523,6 +593,10 @@ export async function postAdminQna(id, data) {
       },
       body: JSON.stringify(data)
     });
+    if (response.status === 403) {
+      await postRefreshToken();
+      await postAdminQna(id, data);
+    }
     return await response.json();
   } catch (err) {
     console.dir(err);
@@ -531,13 +605,48 @@ export async function postAdminQna(id, data) {
 
 export async function deleteAdminQna(id) {
   try {
-    await fetch(`http://localhost:8080/api/qnaboard/${id}`, {
+    const response = await fetch(`http://localhost:8080/api/qnaboard/${id}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
         "X-Access-Token": localStorage.getItem("accessToken")
       }
     });
+    if (response.status === 403) {
+      await postRefreshToken();
+      await deleteAdminQna(id);
+    }
+  } catch (err) {
+    console.dir(err);
+  }
+}
+
+export async function postEmailConfirmSend(email) {
+  try {
+    const response = await fetch("http://localhost:8080/api/auth/mail", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ email })
+    });
+    return await response.json();
+  } catch (err) {
+    console.dir(err);
+  }
+}
+
+export async function getEmailConfirmVerified(email, mailnum) {
+  try {
+    const response = await fetch(`http://localhost:8080/api/auth/mailnum`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "x-email": email,
+        "x-mail-num": mailnum
+      }
+    });
+    return await response.json();
   } catch (err) {
     console.dir(err);
   }

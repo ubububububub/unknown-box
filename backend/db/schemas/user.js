@@ -17,11 +17,7 @@ const userSchema = new Schema(
     },
     address: {
       type: {
-        postalCode: {
-          type: String,
-          required: true,
-          default: "등록된 주소가 없습니다."
-        },
+        postalCode: String,
         roadAddress: String,
         jibunAddress: String,
         detailAddress: String,

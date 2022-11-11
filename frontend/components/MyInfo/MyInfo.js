@@ -28,7 +28,7 @@ class MyInfo extends Component {
                   </div>
                   <div class="myinfo-myprofit-item">
                     <img src="../../assets/coffee.png" width="64px">
-                    <span>커피 1${Math.floor(benefit / 4500)}잔</span>
+                    <span>커피 ${Math.floor(benefit / 4500)}잔</span>
                   </div>
                   <div class="myinfo-myprofit-item">
                     <img src="../../assets/dollars.png" width="64px">

@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { orderService } from "../services";
+import { orderService, userService } from "../services";
 
 const orderController = Router();
 
@@ -36,6 +36,16 @@ orderController.delete("/:orderId", async (req, res, next) => {
   try {
     const result = await orderService.cancel(req.params);
     res.status(200).json(result);
+  } catch (err) {
+    next(err);
+  }
+});
+orderController.get("/userinfo", async (req, res, next) => {
+  try {
+    const userinfo = await userService.getUserInfo(
+      req.headers["x-access-token"]
+    );
+    res.status(200).json(userinfo);
   } catch (err) {
     next(err);
   }
