@@ -100,11 +100,29 @@ class OrderService {
       })
     );
   }
-  async putOrder({ orderId }, { orderName, orderPhone, orderAddress }) {
+  async putOrder(
+    { orderId },
+    {
+      orderName,
+      orderPhone,
+      postalcode,
+      roadAddress,
+      jibunAddress,
+      detailAddress,
+      extraAddress
+    }
+  ) {
     const orderInfo = {};
     if (orderName) orderInfo.orderName = orderName;
     if (orderPhone) orderInfo.orderPhone = orderPhone;
-    if (orderAddress) orderInfo.orderAddress = orderAddress;
+    if (orderAddress)
+      orderInfo.orderAddress = {
+        postalcode,
+        roadAddress,
+        jibunAddress,
+        detailAddress,
+        extraAddress
+      };
     const result = await this.orderModel.modify({ _id: orderId }, orderInfo);
     return { result: result.matchedCount ? "success" : "fail" };
   }
