@@ -27,9 +27,9 @@ authRouter.get("/kakao/callback", async (req, res, next) => {
   const { code } = req.query;
 
   try {
-    const email = await authService.authKakaoJoin(code);
+    const { email, role } = await authService.authKakaoJoin(code);
 
-    res.redirect("/login/kakao/callback?email=" + email);
+    res.redirect(`/login/kakao/callback?email=${email}&role=${role}`);
   } catch (error) {
     next(error);
   }

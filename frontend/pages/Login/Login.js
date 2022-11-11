@@ -46,7 +46,7 @@ export class Login extends Component {
 
     qs(".login-kakao-login_btn").addEventListener("click", () => {
       window.location =
-        "https://kauth.kakao.com/oauth/authorize?client_id=86c7682643aad4626e8d5822b0107da9&redirect_uri=http://localhost:8080/api/auth/kakao/callback&response_type=code";
+        "https://kauth.kakao.com/oauth/authorize?client_id=6637eb959da098fc61370452cb5af5d1&redirect_uri=http://localhost:8080/api/auth/kakao/callback&response_type=code";
     });
   }
 

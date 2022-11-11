@@ -18,7 +18,6 @@ import { SignIn } from "../pages/SignIn/SignIn.js";
 import { RandomBox } from "../pages/RandomBox/RandomBox.js";
 import { QnaBoard } from "../pages/QnaBoard/QnaBoard.js";
 import { Rank } from "../pages/Rank/Rank.js";
-import { AdminOrderEdit } from "../pages/AdminOrderEdit/AdminOrderEdit.js";
 
 const routes = [
   { path: "/", view: Main, isPublic: true },
