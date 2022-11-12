@@ -1,5 +1,3 @@
-const BASE_URL = process.env.JS_APP_SERVER_API_KEY;
-
 export async function postSignIn(formData) {
   try {
     await fetch("http://localhost:5001/api/join", {
