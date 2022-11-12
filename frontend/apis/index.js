@@ -423,14 +423,13 @@ export async function getProductList() {
 
 export async function addProduct(data) {
   try {
-    const res = await fetch(`${BASE_URL}/api/admin/product`, {
+    await fetch(`${BASE_URL}/api/admin/product`, {
       method: "POST",
       headers: {
         "X-Access-Token": localStorage.getItem("accessToken")
       },
       body: data
     });
-    console.log("res", res);
   } catch (err) {
     console.dir(err);
   }
