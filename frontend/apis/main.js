@@ -1,6 +1,6 @@
 export async function getList() {
   try {
-    const response = await fetch("http://localhost:8080/api/product", {
+    const response = await fetch("http://localhost:5001/api/product", {
       method: "GET",
       headers: {
         "Content-Type": "application/json"
@@ -14,7 +14,7 @@ export async function getList() {
 
 export async function getMain() {
   try {
-    const response = await fetch("http://localhost:8080/api/main", {
+    const response = await fetch("http://localhost:5001/api/main", {
       method: "GET",
       headers: {
         "Content-Type": "application/json"
@@ -28,7 +28,7 @@ export async function getMain() {
 
 export async function getItem(id) {
   try {
-    const response = await fetch(`http://localhost:8080/api/randombox/${id}`, {
+    const response = await fetch(`http://localhost:5001/api/randombox/${id}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json"
@@ -42,12 +42,15 @@ export async function getItem(id) {
 
 export async function getCate(id) {
   try {
-    const response = await fetch(`http://localhost:8080/api/category/${id}/randombox`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json"
+    const response = await fetch(
+      `http://localhost:5001/api/category/${id}/randombox`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json"
+        }
       }
-    });
+    );
     return await response.json();
   } catch (err) {
     console.dir(err);
