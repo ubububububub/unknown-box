@@ -31,35 +31,41 @@ export default class QnaList extends Component {
     getQnaList().then(list => {
       const pagingCount = 7;
       list.reverse();
-      for (let i = 0; i <= list.length / pagingCount + 1; i++) {
+      for (let i = 0; i <= (list.length / pagingCount + 1); i++) {
         if (i !== 0) {
           qs("#paging").innerHTML += `<input type="button" value=${i}></input>`;
         }
       }
-      list.push([{ startPage: 0, endPage: 6, boardNum: list.length }]);
+      list.push([{ startPage: 0, endPage: (list.length >= 6 ? 6 : list.length) ,boardNum: list.length}]);
       qs("#paging").addEventListener("click", e => {
         if (e.target.value) {
           qs("#qna-list-body").innerHTML = "";
-          list[list.length - 1][0].startPage =
-            e.target.value * pagingCount - pagingCount;
-          list[list.length - 1][0].endPage = e.target.value * pagingCount - 1;
+          list[list.length - 1][0].startPage = (e.target.value * pagingCount) - pagingCount;
+          list[list.length - 1][0].endPage =  (e.target.value * pagingCount -1) ;
           for (
             let i = list[list.length - 1][0].startPage;
             i <= list[list.length - 1][0].endPage;
             i++
           ) {
-            list[i].boardNum = list.length - i;
+            list[list.length -1][0].boardNum = list.length - (i+1);
+            if(list[list.length -1][0].boardNum > 0){
+            list[i].boardNum =  list[list.length -1][0].boardNum;
             new QnaItem(qs("#qna-list-body"), list[i]);
+            }
+
           }
         }
       });
       for (
         let i = list[list.length - 1][0].startPage;
-        i <= list[list.length - 1][0].endPage;
+        i < list[list.length - 1][0].endPage +1;
         i++
       ) {
-        list[i].boardNum = list.length - i;
-        new QnaItem(qs("#qna-list-body"), list[i]);
+        list[list.length -1][0].boardNum = list.length - (i+1);
+        if(list[list.length -1][0].boardNum > 0){
+          list[i].boardNum =  list[list.length -1][0].boardNum;
+          new QnaItem(qs("#qna-list-body"), list[i]);
+        }
       }
     });
   }
