@@ -58,16 +58,10 @@ export class CartList extends Component {
       if (this.isEmptyCartList()) {
         return;
       }
-
+      window.location.reload();
       cart.setCartList([]);
       this.state.setCartList({ cartList: [] });
     });
-  }
-
-  getAllDeleteButtonTemplate() {
-    return `<li class="cart_button">
-      <button type="button" class="cart_button-delete">전체 삭제</button>
-    </li>`;
   }
 
   getEmptyTemplate() {
@@ -166,6 +160,7 @@ export class CartList extends Component {
 
     cart.setCartList(newCartList);
     this.state.setCartList({ cartList: [...newCartList] });
+    window.location.reload();
   }
 
   isEmptyCartList() {

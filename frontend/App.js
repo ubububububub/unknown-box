@@ -50,6 +50,10 @@ const App = async () => {
 };
 
 document.addEventListener("DOMContentLoaded", () => {
+  if (!localStorage.getItem("cart")) {
+    localStorage.setItem("cart", JSON.stringify([]));
+  }
+
   document.body.addEventListener("click", e => {
     if (e.target.matches("[data-link]")) {
       e.preventDefault();

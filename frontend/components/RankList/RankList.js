@@ -20,15 +20,18 @@ export default class RankList extends Component {
                 x.map( box => {
                     qs('#rankItem').innerHTML += `
                     <li>
-                        <span class="ranklist-catename">${box.categoryName} 랜덤박스</span>
+                        <span>${box.categoryName} 랜덤박스</span>
                         <a href="/detail/${box.randomboxId}">
-                            <img src="https://cdn.dribbble.com/users/948184/screenshots/3787246/media/d67be67672960bffb78a6309af936540.gif" />
+                            <img src="../../assets/randombox.gif" />
                         </a>
-                        <span class="ranklist-boxname">${box.randomboxName}</span>
+                        <span>${box.randomboxName}</span>
                     </li>`
                 })
             }else{
-                qs('#rankItem').innerHTML += `<h1>랜덤박스가 없습니다 !!</h1>`
+                qs('#rankItem').innerHTML += `
+                    <li>
+                        <h1>랜덤박스가 없습니다 !!</h1>
+                    </li>`
             }
         });
     }
