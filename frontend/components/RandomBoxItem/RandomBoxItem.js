@@ -78,8 +78,6 @@ export default class RandomBoxItem extends Component {
       categoryName,
       price,
       discount,
-      productMin = 0,
-      productMax = 0,
       description,
       products,
       count
@@ -93,12 +91,12 @@ export default class RandomBoxItem extends Component {
       {
         className: "box-name",
         title: "상품명",
-        attr: { name: "Name", value: randomboxName }
+        attr: { name: "randomboxName", value: randomboxName }
       },
       {
         className: "category-name",
         title: "카테고리명",
-        attr: { name: "category", value: categoryName }
+        attr: { name: "categoryName", value: categoryName }
       },
       {
         className: "price",
@@ -123,17 +121,17 @@ export default class RandomBoxItem extends Component {
       {
         className: "product-min-price",
         title: "최저가",
-        attr: { name: "prouctMin", value: productMin }
+        attr: { name: "productMin", value: 0 }
       },
       {
         className: "product-max-price",
         title: "최고가",
-        attr: { name: "productMax", value: productMax }
+        attr: { name: "productMax", value: price * 2 }
       },
       {
         className: "desc",
         title: "상세설명",
-        attr: { name: "description", value: description }
+        attr: { name: "description", value: description || "" }
       }
     ];
 

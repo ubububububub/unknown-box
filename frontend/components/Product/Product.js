@@ -59,7 +59,7 @@ export default class Product extends Component {
       productName,
       categoryName,
       price,
-      description = "",
+      description,
       count
     } = product;
 
@@ -90,7 +90,7 @@ export default class Product extends Component {
       {
         className: "desc",
         title: "상세설명",
-        attr: { name: "description", value: description }
+        attr: { name: "description", value: description || "" }
       }
     ];
 
