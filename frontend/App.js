@@ -12,6 +12,10 @@ const pathToRegex = path =>
   new RegExp("^" + path.replace(/\//g, "\\/").replace(/:\w+/g, "(.+)") + "$");
 
 const App = async () => {
+  if (!localStorage.getItem("cart")) {
+    localStorage.setItem("cart", "[]");
+  }
+
   const params = [];
   const pageMatches = routes.map(route => {
     const parsedPath = window.location.pathname.match(pathToRegex(route.path));
