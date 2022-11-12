@@ -173,6 +173,8 @@ class RandomboxService {
       if (!category) throw new Error("등록되지 않은 카테고리입니다.");
       randomboxInfo.categoryName = categoryName;
     }
+    price = Number(price);
+    randomboxInfo.price = price;
     if (discount > 0)
       randomboxInfo.discount = price - (price * Number(discount)) / 100;
     if (count) randomboxInfo.count = Number(count);
