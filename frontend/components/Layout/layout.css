@@ -32,7 +32,7 @@ body { margin: 0; }
 .header .nav-header a#side-nav-close { margin-top: 10px; }
 .header .side-nav .menu { margin-bottom:30px; }
 .header .side-nav .menu a { display:inline-block; }
-.header .side-nav .menu > a { margin-bottom:10px; font-weight:700; font-size:36px; color:var(--main-font-color); }
+.header .side-nav .menu > a { margin-bottom:10px; font-weight:700; font-size:36px; color:rgb(255, 255, 255, 0.8); }
 .header .side-nav .menu .depth2 a { padding:8px 0; font-size:17px; line-height: 18px; color:rgb(255, 255, 255, 0.8); }
 .header .side-nav .menu .depth3 a { padding:4px 0; font-size: 14px; opacity: 0.7; }
 .header .main-nav-title { font-size: 30px; font-weight: bold; }

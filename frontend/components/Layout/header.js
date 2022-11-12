@@ -6,8 +6,9 @@ document.adoptedStyleSheets.push(style);
 
 export class Header extends Component {
   template() {
-    const isLogin = !!localStorage.getItem("accessToken");
+    const isLogin = !!localStorage.getItem("role");
     const isAdmin = localStorage.getItem("role") === "admin";
+    const cartCount = localStorage.getItem("cart") ? JSON.parse(localStorage.getItem("cart")).length : 0;
     return `<section class="header">
             <div class="header-fix">
               <div class="header-top">
@@ -33,7 +34,7 @@ export class Header extends Component {
                   <ul class="header-btlist">
                     <li class="box-basket">
                         <a href="/cart" id="btn-cart" class="btn-cart">
-                          
+                          <span class="s_cart_cnt"> ${cartCount}</span>
                           장바구니
                         </a>
                     </li>
@@ -52,15 +53,16 @@ export class Header extends Component {
                 </div>
                 <ul class="">
                 <span class="main-nav-title">카테고리</span>
-                  <li class="menu" id="side-menu">
-                     
-                  </li>
+                  <li class="menu" id="side-menu"></li>
                   <li class="menu">
                     <span class="main-nav-title">고객센터</span>
                     <div class="depth2">
                       <ul>
-                         <li><a href="/qnaboard/list">Q&A 게시판</a></li>
-                      </ul>
+                          <li><a href="/qnaboard/list">Q&A 게시판</a></li>
+                        </ul>
+                      </div>
+                    </li>
+                      </ul> 
                     </div>
                   </li>
                 </ul> 
@@ -88,7 +90,7 @@ export class Header extends Component {
   }
 
   mounted() {
-    super.mounted();
+   if(getMain()){
     getMain().then(result => {
       result.categories.map(x => {
         qs("#side-menu").innerHTML += `
@@ -98,6 +100,7 @@ export class Header extends Component {
                     `;
       });
     });
+   }
   }
 }
 
