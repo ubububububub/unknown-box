@@ -20,10 +20,6 @@ class Store {
   }
 
   setCartItem(product) {
-    if (this.isNull()) {
-      this.initCartItem();
-    }
-
     if (this.checkDuplication(product)) {
       new Toast("이미 장바구니에 있는 상품입니다.");
       return false;
@@ -62,16 +58,6 @@ class Store {
   isEmpty() {
     const cartList = this.getCartList();
     return cartList.length === 0;
-  }
-
-  isNull() {
-    const cartList = this.getCartList();
-
-    if (!cartList) {
-      return true;
-    }
-
-    return false;
   }
 }
 
