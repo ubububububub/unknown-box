@@ -2,7 +2,7 @@ import Component from "../../core/Component.js";
 import { isClassContained, qs, createEditForm } from "../../utils/index.js";
 import ImageUploadForm from "../ImageUploadForm/ImageUploadForm.js";
 import Modal from "../Modal/Modal.js";
-import RandomBox from "../RandomBox/RandomBox.js";
+import RandomBoxItem from "../RandomBoxItem/RandomBoxItem.js";
 import { getBoxList, editBox, deleteBox, addBox } from "../../apis/index.js";
 import style from "./randomBoxList.css" assert { type: "css" };
 document.adoptedStyleSheets.push(style);
@@ -20,7 +20,7 @@ export default class RandomBoxList extends Component {
 
     this.state.boxList.forEach(
       box =>
-        new RandomBox(qs(".admin_randombox-list"), {
+        new RandomBoxItem(qs(".admin_randombox-list"), {
           box,
           editBoxProduct: this.editBoxProduct.bind(this),
           deleteBoxProduct: this.deleteBoxProduct.bind(this)
