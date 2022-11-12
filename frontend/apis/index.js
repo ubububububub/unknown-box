@@ -1,6 +1,6 @@
 export async function postSignIn(formData) {
   try {
-    await fetch("http://localhost:5001/api/join", {
+    await fetch("http://kdt-sw3-team11.elicecoding.com/ api/join", {
       method: "POST",
       body: formData
     });
@@ -12,10 +12,13 @@ export async function postSignIn(formData) {
 
 export async function postLogin(formData) {
   try {
-    const response = await fetch("http://localhost:5001/api/login", {
-      method: "POST",
-      body: formData
-    });
+    const response = await fetch(
+      "http://kdt-sw3-team11.elicecoding.com/ api/login",
+      {
+        method: "POST",
+        body: formData
+      }
+    );
     if (response.status !== 200) {
       throw new Error("가입된 회원 아이디가 아니거나 비밀번호가 틀립니다.");
     } else {
@@ -32,13 +35,16 @@ export async function postLogin(formData) {
 
 export async function getMyOrder() {
   try {
-    const response = await fetch(`http://localhost:5001/api/order`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        "X-Access-Token": localStorage.getItem("accessToken")
+    const response = await fetch(
+      `http://kdt-sw3-team11.elicecoding.com/ api/order`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "X-Access-Token": localStorage.getItem("accessToken")
+        }
       }
-    });
+    );
     if (response.status === 403) {
       await postRefreshToken();
       await getMyOrder();
@@ -51,13 +57,16 @@ export async function getMyOrder() {
 
 export async function getOrderInfo(orderId) {
   try {
-    const response = await fetch(`http://localhost:5001/api/order/${orderId}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        "X-Access-Token": localStorage.getItem("accessToken")
+    const response = await fetch(
+      `http://kdt-sw3-team11.elicecoding.com/ api/order/${orderId}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "X-Access-Token": localStorage.getItem("accessToken")
+        }
       }
-    });
+    );
     if (response.status === 403) {
       await postRefreshToken();
       await getOrderInfo(orderId);
@@ -70,13 +79,16 @@ export async function getOrderInfo(orderId) {
 
 export async function putOrderInfo(formData, orderId) {
   try {
-    const response = await fetch(`http://localhost:5001/api/order/${orderId}`, {
-      method: "PUT",
-      headers: {
-        "X-Access-Token": localStorage.getItem("accessToken")
-      },
-      body: formData
-    });
+    const response = await fetch(
+      `http://kdt-sw3-team11.elicecoding.com/ api/order/${orderId}`,
+      {
+        method: "PUT",
+        headers: {
+          "X-Access-Token": localStorage.getItem("accessToken")
+        },
+        body: formData
+      }
+    );
     if (response.status === 403) {
       await postRefreshToken();
       await putOrderInfo(formData, orderId);
@@ -88,13 +100,16 @@ export async function putOrderInfo(formData, orderId) {
 
 export async function deleteOrderInfo(orderId) {
   try {
-    const response = await fetch(`http://localhost:5001/api/order/${orderId}`, {
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-        "X-Access-Token": localStorage.getItem("accessToken")
+    const response = await fetch(
+      `http://kdt-sw3-team11.elicecoding.com/ api/order/${orderId}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          "X-Access-Token": localStorage.getItem("accessToken")
+        }
       }
-    });
+    );
     if (response.status === 403) {
       await postRefreshToken();
       await deleteOrderInfo(orderId);
@@ -106,14 +121,17 @@ export async function deleteOrderInfo(orderId) {
 
 export async function postOrder(data) {
   try {
-    const response = await fetch("http://localhost:5001/api/order", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "X-Access-Token": localStorage.getItem("accessToken")
-      },
-      body: JSON.stringify(data)
-    });
+    const response = await fetch(
+      "http://kdt-sw3-team11.elicecoding.com/ api/order",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-Access-Token": localStorage.getItem("accessToken")
+        },
+        body: JSON.stringify(data)
+      }
+    );
     if (response.status === 403) {
       await postRefreshToken();
       await postOrder(data);
@@ -125,13 +143,16 @@ export async function postOrder(data) {
 
 export async function getMyInfo() {
   try {
-    const response = await fetch(`http://localhost:5001/api/mypage`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        "X-Access-Token": localStorage.getItem("accessToken")
+    const response = await fetch(
+      `http://kdt-sw3-team11.elicecoding.com/ api/mypage`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "X-Access-Token": localStorage.getItem("accessToken")
+        }
       }
-    });
+    );
     if (response.status === 403) {
       await postRefreshToken();
       await getMyInfo();
@@ -144,13 +165,16 @@ export async function getMyInfo() {
 
 export async function putMyPassword(formData) {
   try {
-    const response = await fetch(`http://localhost:5001/api/mypage`, {
-      method: "PUT",
-      headers: {
-        "X-Access-Token": localStorage.getItem("accessToken")
-      },
-      body: formData
-    });
+    const response = await fetch(
+      `http://kdt-sw3-team11.elicecoding.com/ api/mypage`,
+      {
+        method: "PUT",
+        headers: {
+          "X-Access-Token": localStorage.getItem("accessToken")
+        },
+        body: formData
+      }
+    );
     if (response.status === 403) {
       await postRefreshToken();
       await putMyPassword(formData);
@@ -167,13 +191,16 @@ export async function putMyPassword(formData) {
 
 export async function postRefreshToken() {
   try {
-    const response = await fetch("http://localhost:5001/api/auth", {
-      method: "POST",
-      headers: {
-        "X-Access-Token": localStorage.getItem("accessToken"),
-        "X-Refresh-Token": localStorage.getItem("refreshToken")
+    const response = await fetch(
+      "http://kdt-sw3-team11.elicecoding.com/ api/auth",
+      {
+        method: "POST",
+        headers: {
+          "X-Access-Token": localStorage.getItem("accessToken"),
+          "X-Refresh-Token": localStorage.getItem("refreshToken")
+        }
       }
-    });
+    );
     const json = await response.json();
     localStorage.setItem("accessToken", json.accessToken);
     localStorage.setItem("refreshToken", json.refreshToken);
@@ -185,7 +212,7 @@ export async function postRefreshToken() {
 export async function getRandomBoxProducts(randomboxId) {
   try {
     const response = await fetch(
-      `http://localhost:5001/api/randombox/${randomboxId}`,
+      `http://kdt-sw3-team11.elicecoding.com/ api/randombox/${randomboxId}`,
       {
         method: "GET",
         headers: {
@@ -202,7 +229,7 @@ export async function getRandomBoxProducts(randomboxId) {
 export async function putRandomBoxResult({ randomboxId, orderId, productId }) {
   try {
     const response = await fetch(
-      `http://localhost:5001/api/randombox/${randomboxId}`,
+      `http://kdt-sw3-team11.elicecoding.com/ api/randombox/${randomboxId}`,
       {
         method: "PUT",
         headers: {
@@ -223,13 +250,16 @@ export async function putRandomBoxResult({ randomboxId, orderId, productId }) {
 
 export async function postKakaoLoginToken(email) {
   try {
-    const res = await fetch("http://localhost:5001/api/auth/kakao/tokens", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ email })
-    });
+    const res = await fetch(
+      "http://kdt-sw3-team11.elicecoding.com/ api/auth/kakao/tokens",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ email })
+      }
+    );
     return await res.json();
   } catch (err) {
     console.dir(err);
@@ -238,14 +268,17 @@ export async function postKakaoLoginToken(email) {
 
 export async function postPayment(formData, product) {
   try {
-    const response = await fetch(`http://localhost:5001/api/order`, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        "X-Access-Token": localStorage.getItem("accessToken")
-      },
-      body: JSON.stringify({ formData: [...formData], product })
-    });
+    const response = await fetch(
+      `http://kdt-sw3-team11.elicecoding.com/ api/order`,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "X-Access-Token": localStorage.getItem("accessToken")
+        },
+        body: JSON.stringify({ formData: [...formData], product })
+      }
+    );
     if (response.status === 403) {
       await postRefreshToken();
       await postPayment(formData, product);
@@ -257,13 +290,16 @@ export async function postPayment(formData, product) {
 
 export async function getCategoryList() {
   try {
-    const response = await fetch("http://localhost:5001/api/admin/category", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        "X-Access-Token": localStorage.getItem("accessToken")
+    const response = await fetch(
+      "http://kdt-sw3-team11.elicecoding.com/ api/admin/category",
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "X-Access-Token": localStorage.getItem("accessToken")
+        }
       }
-    });
+    );
     if (response.status === 403) {
       await postRefreshToken();
       await getCategoryList();
@@ -276,7 +312,7 @@ export async function getCategoryList() {
 
 export async function addCategory(data) {
   try {
-    await fetch(`http://localhost:5001/api/admin/category`, {
+    await fetch(`http://kdt-sw3-team11.elicecoding.com/ api/admin/category`, {
       method: "POST",
       headers: {
         "X-Access-Token": localStorage.getItem("accessToken")
@@ -291,7 +327,7 @@ export async function addCategory(data) {
 export async function editCategory(id, data) {
   try {
     const response = await fetch(
-      `http://localhost:5001/api/admin/category/${id}`,
+      `http://kdt-sw3-team11.elicecoding.com/ api/admin/category/${id}`,
       {
         method: "PUT",
         headers: {
@@ -309,7 +345,7 @@ export async function editCategory(id, data) {
 export async function deleteCategory(id) {
   try {
     const response = await fetch(
-      `http://localhost:5001/api/admin/category/${id}`,
+      `http://kdt-sw3-team11.elicecoding.com/ api/admin/category/${id}`,
       {
         method: "DELETE",
         headers: {
@@ -329,13 +365,16 @@ export async function deleteCategory(id) {
 
 export async function getBoxList() {
   try {
-    const response = await fetch("http://localhost:5001/api/admin/randombox", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        "X-Access-Token": localStorage.getItem("accessToken")
+    const response = await fetch(
+      "http://kdt-sw3-team11.elicecoding.com/ api/admin/randombox",
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "X-Access-Token": localStorage.getItem("accessToken")
+        }
       }
-    });
+    );
     if (response.status === 403) {
       await postRefreshToken();
       await getBoxList();
@@ -348,7 +387,7 @@ export async function getBoxList() {
 
 export async function addBox(data) {
   try {
-    await fetch(`http://localhost:5001/api/admin/randombox`, {
+    await fetch(`http://kdt-sw3-team11.elicecoding.com/ api/admin/randombox`, {
       method: "POST",
       headers: {
         "X-Access-Token": localStorage.getItem("accessToken")
@@ -362,13 +401,16 @@ export async function addBox(data) {
 
 export async function getBoxDetail(id) {
   try {
-    const response = await fetch(`http://localhost:5001/api/randombox/${id}`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        "X-Access-Token": localStorage.getItem("accessToken")
+    const response = await fetch(
+      `http://kdt-sw3-team11.elicecoding.com/ api/randombox/${id}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "X-Access-Token": localStorage.getItem("accessToken")
+        }
       }
-    });
+    );
     if (response.status === 403) {
       await postRefreshToken();
       await getBoxDetail(id);
@@ -382,7 +424,7 @@ export async function getBoxDetail(id) {
 export async function editBox(id, data) {
   try {
     const response = await fetch(
-      `http://localhost:5001/api/admin/randombox/${id}`,
+      `http://kdt-sw3-team11.elicecoding.com/ api/admin/randombox/${id}`,
       {
         method: "PUT",
         headers: {
@@ -400,7 +442,7 @@ export async function editBox(id, data) {
 export async function deleteBox(id) {
   try {
     const response = await fetch(
-      `http://localhost:5001/api/admin/randombox/${id}`,
+      `http://kdt-sw3-team11.elicecoding.com/ api/admin/randombox/${id}`,
       {
         method: "DELETE",
         headers: {
@@ -420,13 +462,16 @@ export async function deleteBox(id) {
 
 export async function getProductList() {
   try {
-    const response = await fetch("http://localhost:5001/api/admin/product", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        "X-Access-Token": localStorage.getItem("accessToken")
+    const response = await fetch(
+      "http://kdt-sw3-team11.elicecoding.com/ api/admin/product",
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "X-Access-Token": localStorage.getItem("accessToken")
+        }
       }
-    });
+    );
     if (response.status === 403) {
       await postRefreshToken();
       await getProductList();
@@ -439,13 +484,16 @@ export async function getProductList() {
 
 export async function addProduct(data) {
   try {
-    const res = await fetch(`http://localhost:5001/api/admin/product`, {
-      method: "POST",
-      headers: {
-        "X-Access-Token": localStorage.getItem("accessToken")
-      },
-      body: data
-    });
+    const res = await fetch(
+      `http://kdt-sw3-team11.elicecoding.com/ api/admin/product`,
+      {
+        method: "POST",
+        headers: {
+          "X-Access-Token": localStorage.getItem("accessToken")
+        },
+        body: data
+      }
+    );
     console.log("res", res);
   } catch (err) {
     console.dir(err);
@@ -455,7 +503,7 @@ export async function addProduct(data) {
 export async function getProductDetail(id) {
   try {
     const response = await fetch(
-      `http://localhost:5001/api/admin/product/${id}`,
+      `http://kdt-sw3-team11.elicecoding.com/ api/admin/product/${id}`,
       {
         method: "GET",
         headers: {
@@ -476,13 +524,16 @@ export async function getProductDetail(id) {
 
 export async function editProduct(id, data) {
   try {
-    await fetch(`http://localhost:5001/api/admin/product/${id}`, {
-      method: "PUT",
-      headers: {
-        "X-Access-Token": localStorage.getItem("accessToken")
-      },
-      body: data
-    });
+    await fetch(
+      `http://kdt-sw3-team11.elicecoding.com/ api/admin/product/${id}`,
+      {
+        method: "PUT",
+        headers: {
+          "X-Access-Token": localStorage.getItem("accessToken")
+        },
+        body: data
+      }
+    );
   } catch (err) {
     console.dir(err);
   }
@@ -491,7 +542,7 @@ export async function editProduct(id, data) {
 export async function deleteProduct(id) {
   try {
     const response = await fetch(
-      `http://localhost:5001/api/admin/product/${id}`,
+      `http://kdt-sw3-team11.elicecoding.com/ api/admin/product/${id}`,
       {
         method: "DELETE",
         headers: {
@@ -511,13 +562,16 @@ export async function deleteProduct(id) {
 
 export async function getOrderList() {
   try {
-    const response = await fetch(`http://localhost:5001/api/admin/order`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        "X-Access-Token": localStorage.getItem("accessToken")
+    const response = await fetch(
+      `http://kdt-sw3-team11.elicecoding.com/ api/admin/order`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "X-Access-Token": localStorage.getItem("accessToken")
+        }
       }
-    });
+    );
     if (response.status === 403) {
       await postRefreshToken();
       await getOrderList();
@@ -531,7 +585,7 @@ export async function getOrderList() {
 export async function getOrderDetail(id) {
   try {
     const response = await fetch(
-      `http://localhost:5001/api/admin/order/${id}`,
+      `http://kdt-sw3-team11.elicecoding.com/ api/admin/order/${id}`,
       {
         method: "GET",
         headers: {
@@ -553,7 +607,7 @@ export async function getOrderDetail(id) {
 export async function editOrder(id, data) {
   try {
     const response = await fetch(
-      `http://localhost:5001/api/admin/order/${id}`,
+      `http://kdt-sw3-team11.elicecoding.com/ api/admin/order/${id}`,
       {
         method: "PUT",
         headers: {
@@ -575,7 +629,7 @@ export async function editOrder(id, data) {
 export async function deleteOrder(id) {
   try {
     const response = await fetch(
-      `http://localhost:5001/api/admin/order/${id}`,
+      `http://kdt-sw3-team11.elicecoding.com/ api/admin/order/${id}`,
       {
         method: "DELETE",
         headers: {
@@ -595,13 +649,16 @@ export async function deleteOrder(id) {
 
 export async function getAdminQnaList() {
   try {
-    const response = await fetch(`http://localhost:5001/api/admin/qnaboard`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        "X-Access-Token": localStorage.getItem("accessToken")
+    const response = await fetch(
+      `http://kdt-sw3-team11.elicecoding.com/ api/admin/qnaboard`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "X-Access-Token": localStorage.getItem("accessToken")
+        }
       }
-    });
+    );
 
     return response.json();
   } catch (err) {
@@ -612,7 +669,7 @@ export async function getAdminQnaList() {
 export async function getAdminQnaDetail(id) {
   try {
     const response = await fetch(
-      `http://localhost:5001/api/admin/qnaboard/${id}`,
+      `http://kdt-sw3-team11.elicecoding.com/ api/admin/qnaboard/${id}`,
       {
         method: "GET",
         headers: {
@@ -634,7 +691,7 @@ export async function getAdminQnaDetail(id) {
 export async function postAdminQna(id, data) {
   try {
     const response = await fetch(
-      `http://localhost:5001/api/admin/qnaboard/${id}`,
+      `http://kdt-sw3-team11.elicecoding.com/ api/admin/qnaboard/${id}`,
       {
         method: "POST",
         headers: {
@@ -657,7 +714,7 @@ export async function postAdminQna(id, data) {
 export async function deleteAdminQna(id) {
   try {
     const response = await fetch(
-      `http://localhost:5001/api/admin/qnaboard/${id}`,
+      `http://kdt-sw3-team11.elicecoding.com/ api/admin/qnaboard/${id}`,
       {
         method: "DELETE",
         headers: {
@@ -677,13 +734,16 @@ export async function deleteAdminQna(id) {
 
 export async function postEmailConfirmSend(email) {
   try {
-    const response = await fetch("http://localhost:5001/api/auth/mail", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ email })
-    });
+    const response = await fetch(
+      "http://kdt-sw3-team11.elicecoding.com/ api/auth/mail",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ email })
+      }
+    );
     return await response.json();
   } catch (err) {
     console.dir(err);
@@ -692,14 +752,17 @@ export async function postEmailConfirmSend(email) {
 
 export async function getEmailConfirmVerified(email, mailnum) {
   try {
-    const response = await fetch(`http://localhost:5001/api/auth/mailnum`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        "x-email": email,
-        "x-mail-num": mailnum
+    const response = await fetch(
+      `http://kdt-sw3-team11.elicecoding.com/ api/auth/mailnum`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "x-email": email,
+          "x-mail-num": mailnum
+        }
       }
-    });
+    );
     return await response.json();
   } catch (err) {
     console.dir(err);
@@ -708,13 +771,16 @@ export async function getEmailConfirmVerified(email, mailnum) {
 
 export async function getUserInfo() {
   try {
-    const res = await fetch(`http://localhost:5001/api/order/userinfo`, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        "X-Access-Token": localStorage.getItem("accessToken")
+    const res = await fetch(
+      `http://kdt-sw3-team11.elicecoding.com/ api/order/userinfo`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "X-Access-Token": localStorage.getItem("accessToken")
+        }
       }
-    });
+    );
     return res.json();
   } catch (err) {
     console.dir(err);
