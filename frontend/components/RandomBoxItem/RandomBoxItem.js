@@ -9,10 +9,10 @@ import ImageUploadForm from "../ImageUploadForm/ImageUploadForm.js";
 import Modal from "../Modal/Modal.js";
 import { getBoxDetail } from "../../apis/index.js";
 
-import style from "./randomBox.css" assert { type: "css" };
+import style from "./randomBoxItem.css" assert { type: "css" };
 document.adoptedStyleSheets.push(style);
 
-export default class Product extends Component {
+export default class RandomBoxItem extends Component {
   template() {
     const {
       randomboxId,
