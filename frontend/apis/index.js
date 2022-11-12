@@ -1,6 +1,6 @@
 export async function postSignIn(formData) {
   try {
-    await fetch("http://kdt-sw3-team11.elicecoding.com/ api/join", {
+    await fetch("http://kdt-sw3-team11.elicecoding.com/api/join", {
       method: "POST",
       body: formData
     });
@@ -13,7 +13,7 @@ export async function postSignIn(formData) {
 export async function postLogin(formData) {
   try {
     const response = await fetch(
-      "http://kdt-sw3-team11.elicecoding.com/ api/login",
+      "http://kdt-sw3-team11.elicecoding.com/api/login",
       {
         method: "POST",
         body: formData
@@ -36,7 +36,7 @@ export async function postLogin(formData) {
 export async function getMyOrder() {
   try {
     const response = await fetch(
-      `http://kdt-sw3-team11.elicecoding.com/ api/order`,
+      `http://kdt-sw3-team11.elicecoding.com/api/order`,
       {
         method: "GET",
         headers: {
@@ -58,7 +58,7 @@ export async function getMyOrder() {
 export async function getOrderInfo(orderId) {
   try {
     const response = await fetch(
-      `http://kdt-sw3-team11.elicecoding.com/ api/order/${orderId}`,
+      `http://kdt-sw3-team11.elicecoding.com/api/order/${orderId}`,
       {
         method: "GET",
         headers: {
@@ -80,7 +80,7 @@ export async function getOrderInfo(orderId) {
 export async function putOrderInfo(formData, orderId) {
   try {
     const response = await fetch(
-      `http://kdt-sw3-team11.elicecoding.com/ api/order/${orderId}`,
+      `http://kdt-sw3-team11.elicecoding.com/api/order/${orderId}`,
       {
         method: "PUT",
         headers: {
@@ -101,7 +101,7 @@ export async function putOrderInfo(formData, orderId) {
 export async function deleteOrderInfo(orderId) {
   try {
     const response = await fetch(
-      `http://kdt-sw3-team11.elicecoding.com/ api/order/${orderId}`,
+      `http://kdt-sw3-team11.elicecoding.com/api/order/${orderId}`,
       {
         method: "DELETE",
         headers: {
@@ -122,7 +122,7 @@ export async function deleteOrderInfo(orderId) {
 export async function postOrder(data) {
   try {
     const response = await fetch(
-      "http://kdt-sw3-team11.elicecoding.com/ api/order",
+      "http://kdt-sw3-team11.elicecoding.com/api/order",
       {
         method: "POST",
         headers: {
@@ -144,7 +144,7 @@ export async function postOrder(data) {
 export async function getMyInfo() {
   try {
     const response = await fetch(
-      `http://kdt-sw3-team11.elicecoding.com/ api/mypage`,
+      `http://kdt-sw3-team11.elicecoding.com/api/mypage`,
       {
         method: "GET",
         headers: {
@@ -166,7 +166,7 @@ export async function getMyInfo() {
 export async function putMyPassword(formData) {
   try {
     const response = await fetch(
-      `http://kdt-sw3-team11.elicecoding.com/ api/mypage`,
+      `http://kdt-sw3-team11.elicecoding.com/api/mypage`,
       {
         method: "PUT",
         headers: {
@@ -192,7 +192,7 @@ export async function putMyPassword(formData) {
 export async function postRefreshToken() {
   try {
     const response = await fetch(
-      "http://kdt-sw3-team11.elicecoding.com/ api/auth",
+      "http://kdt-sw3-team11.elicecoding.com/api/auth",
       {
         method: "POST",
         headers: {
@@ -212,7 +212,7 @@ export async function postRefreshToken() {
 export async function getRandomBoxProducts(randomboxId) {
   try {
     const response = await fetch(
-      `http://kdt-sw3-team11.elicecoding.com/ api/randombox/${randomboxId}`,
+      `http://kdt-sw3-team11.elicecoding.com/api/randombox/${randomboxId}`,
       {
         method: "GET",
         headers: {
@@ -229,7 +229,7 @@ export async function getRandomBoxProducts(randomboxId) {
 export async function putRandomBoxResult({ randomboxId, orderId, productId }) {
   try {
     const response = await fetch(
-      `http://kdt-sw3-team11.elicecoding.com/ api/randombox/${randomboxId}`,
+      `http://kdt-sw3-team11.elicecoding.com/api/randombox/${randomboxId}`,
       {
         method: "PUT",
         headers: {
@@ -251,7 +251,7 @@ export async function putRandomBoxResult({ randomboxId, orderId, productId }) {
 export async function postKakaoLoginToken(email) {
   try {
     const res = await fetch(
-      "http://kdt-sw3-team11.elicecoding.com/ api/auth/kakao/tokens",
+      "http://kdt-sw3-team11.elicecoding.com/api/auth/kakao/tokens",
       {
         method: "POST",
         headers: {
@@ -269,7 +269,7 @@ export async function postKakaoLoginToken(email) {
 export async function postPayment(formData, product) {
   try {
     const response = await fetch(
-      `http://kdt-sw3-team11.elicecoding.com/ api/order`,
+      `http://kdt-sw3-team11.elicecoding.com/api/order`,
       {
         method: "POST",
         headers: {
@@ -291,7 +291,7 @@ export async function postPayment(formData, product) {
 export async function getCategoryList() {
   try {
     const response = await fetch(
-      "http://kdt-sw3-team11.elicecoding.com/ api/admin/category",
+      "http://kdt-sw3-team11.elicecoding.com/api/admin/category",
       {
         method: "GET",
         headers: {
@@ -312,7 +312,7 @@ export async function getCategoryList() {
 
 export async function addCategory(data) {
   try {
-    await fetch(`http://kdt-sw3-team11.elicecoding.com/ api/admin/category`, {
+    await fetch(`http://kdt-sw3-team11.elicecoding.com/api/admin/category`, {
       method: "POST",
       headers: {
         "X-Access-Token": localStorage.getItem("accessToken")
@@ -327,7 +327,7 @@ export async function addCategory(data) {
 export async function editCategory(id, data) {
   try {
     const response = await fetch(
-      `http://kdt-sw3-team11.elicecoding.com/ api/admin/category/${id}`,
+      `http://kdt-sw3-team11.elicecoding.com/api/admin/category/${id}`,
       {
         method: "PUT",
         headers: {
@@ -345,7 +345,7 @@ export async function editCategory(id, data) {
 export async function deleteCategory(id) {
   try {
     const response = await fetch(
-      `http://kdt-sw3-team11.elicecoding.com/ api/admin/category/${id}`,
+      `http://kdt-sw3-team11.elicecoding.com/api/admin/category/${id}`,
       {
         method: "DELETE",
         headers: {
@@ -366,7 +366,7 @@ export async function deleteCategory(id) {
 export async function getBoxList() {
   try {
     const response = await fetch(
-      "http://kdt-sw3-team11.elicecoding.com/ api/admin/randombox",
+      "http://kdt-sw3-team11.elicecoding.com/api/admin/randombox",
       {
         method: "GET",
         headers: {
@@ -387,7 +387,7 @@ export async function getBoxList() {
 
 export async function addBox(data) {
   try {
-    await fetch(`http://kdt-sw3-team11.elicecoding.com/ api/admin/randombox`, {
+    await fetch(`http://kdt-sw3-team11.elicecoding.com/api/admin/randombox`, {
       method: "POST",
       headers: {
         "X-Access-Token": localStorage.getItem("accessToken")
@@ -402,7 +402,7 @@ export async function addBox(data) {
 export async function getBoxDetail(id) {
   try {
     const response = await fetch(
-      `http://kdt-sw3-team11.elicecoding.com/ api/randombox/${id}`,
+      `http://kdt-sw3-team11.elicecoding.com/api/randombox/${id}`,
       {
         method: "GET",
         headers: {
@@ -424,7 +424,7 @@ export async function getBoxDetail(id) {
 export async function editBox(id, data) {
   try {
     const response = await fetch(
-      `http://kdt-sw3-team11.elicecoding.com/ api/admin/randombox/${id}`,
+      `http://kdt-sw3-team11.elicecoding.com/api/admin/randombox/${id}`,
       {
         method: "PUT",
         headers: {
@@ -442,7 +442,7 @@ export async function editBox(id, data) {
 export async function deleteBox(id) {
   try {
     const response = await fetch(
-      `http://kdt-sw3-team11.elicecoding.com/ api/admin/randombox/${id}`,
+      `http://kdt-sw3-team11.elicecoding.com/api/admin/randombox/${id}`,
       {
         method: "DELETE",
         headers: {
@@ -463,7 +463,7 @@ export async function deleteBox(id) {
 export async function getProductList() {
   try {
     const response = await fetch(
-      "http://kdt-sw3-team11.elicecoding.com/ api/admin/product",
+      "http://kdt-sw3-team11.elicecoding.com/api/admin/product",
       {
         method: "GET",
         headers: {
@@ -485,7 +485,7 @@ export async function getProductList() {
 export async function addProduct(data) {
   try {
     const res = await fetch(
-      `http://kdt-sw3-team11.elicecoding.com/ api/admin/product`,
+      `http://kdt-sw3-team11.elicecoding.com/api/admin/product`,
       {
         method: "POST",
         headers: {
@@ -503,7 +503,7 @@ export async function addProduct(data) {
 export async function getProductDetail(id) {
   try {
     const response = await fetch(
-      `http://kdt-sw3-team11.elicecoding.com/ api/admin/product/${id}`,
+      `http://kdt-sw3-team11.elicecoding.com/api/admin/product/${id}`,
       {
         method: "GET",
         headers: {
@@ -525,7 +525,7 @@ export async function getProductDetail(id) {
 export async function editProduct(id, data) {
   try {
     await fetch(
-      `http://kdt-sw3-team11.elicecoding.com/ api/admin/product/${id}`,
+      `http://kdt-sw3-team11.elicecoding.com/api/admin/product/${id}`,
       {
         method: "PUT",
         headers: {
@@ -542,7 +542,7 @@ export async function editProduct(id, data) {
 export async function deleteProduct(id) {
   try {
     const response = await fetch(
-      `http://kdt-sw3-team11.elicecoding.com/ api/admin/product/${id}`,
+      `http://kdt-sw3-team11.elicecoding.com/api/admin/product/${id}`,
       {
         method: "DELETE",
         headers: {
@@ -563,7 +563,7 @@ export async function deleteProduct(id) {
 export async function getOrderList() {
   try {
     const response = await fetch(
-      `http://kdt-sw3-team11.elicecoding.com/ api/admin/order`,
+      `http://kdt-sw3-team11.elicecoding.com/api/admin/order`,
       {
         method: "GET",
         headers: {
@@ -585,7 +585,7 @@ export async function getOrderList() {
 export async function getOrderDetail(id) {
   try {
     const response = await fetch(
-      `http://kdt-sw3-team11.elicecoding.com/ api/admin/order/${id}`,
+      `http://kdt-sw3-team11.elicecoding.com/api/admin/order/${id}`,
       {
         method: "GET",
         headers: {
@@ -607,7 +607,7 @@ export async function getOrderDetail(id) {
 export async function editOrder(id, data) {
   try {
     const response = await fetch(
-      `http://kdt-sw3-team11.elicecoding.com/ api/admin/order/${id}`,
+      `http://kdt-sw3-team11.elicecoding.com/api/admin/order/${id}`,
       {
         method: "PUT",
         headers: {
@@ -629,7 +629,7 @@ export async function editOrder(id, data) {
 export async function deleteOrder(id) {
   try {
     const response = await fetch(
-      `http://kdt-sw3-team11.elicecoding.com/ api/admin/order/${id}`,
+      `http://kdt-sw3-team11.elicecoding.com/api/admin/order/${id}`,
       {
         method: "DELETE",
         headers: {
@@ -650,7 +650,7 @@ export async function deleteOrder(id) {
 export async function getAdminQnaList() {
   try {
     const response = await fetch(
-      `http://kdt-sw3-team11.elicecoding.com/ api/admin/qnaboard`,
+      `http://kdt-sw3-team11.elicecoding.com/api/admin/qnaboard`,
       {
         method: "GET",
         headers: {
@@ -669,7 +669,7 @@ export async function getAdminQnaList() {
 export async function getAdminQnaDetail(id) {
   try {
     const response = await fetch(
-      `http://kdt-sw3-team11.elicecoding.com/ api/admin/qnaboard/${id}`,
+      `http://kdt-sw3-team11.elicecoding.com/api/admin/qnaboard/${id}`,
       {
         method: "GET",
         headers: {
@@ -691,7 +691,7 @@ export async function getAdminQnaDetail(id) {
 export async function postAdminQna(id, data) {
   try {
     const response = await fetch(
-      `http://kdt-sw3-team11.elicecoding.com/ api/admin/qnaboard/${id}`,
+      `http://kdt-sw3-team11.elicecoding.com/api/admin/qnaboard/${id}`,
       {
         method: "POST",
         headers: {
@@ -714,7 +714,7 @@ export async function postAdminQna(id, data) {
 export async function deleteAdminQna(id) {
   try {
     const response = await fetch(
-      `http://kdt-sw3-team11.elicecoding.com/ api/admin/qnaboard/${id}`,
+      `http://kdt-sw3-team11.elicecoding.com/api/admin/qnaboard/${id}`,
       {
         method: "DELETE",
         headers: {
@@ -735,7 +735,7 @@ export async function deleteAdminQna(id) {
 export async function postEmailConfirmSend(email) {
   try {
     const response = await fetch(
-      "http://kdt-sw3-team11.elicecoding.com/ api/auth/mail",
+      "http://kdt-sw3-team11.elicecoding.com/api/auth/mail",
       {
         method: "POST",
         headers: {
@@ -753,7 +753,7 @@ export async function postEmailConfirmSend(email) {
 export async function getEmailConfirmVerified(email, mailnum) {
   try {
     const response = await fetch(
-      `http://kdt-sw3-team11.elicecoding.com/ api/auth/mailnum`,
+      `http://kdt-sw3-team11.elicecoding.com/api/auth/mailnum`,
       {
         method: "GET",
         headers: {
@@ -772,7 +772,7 @@ export async function getEmailConfirmVerified(email, mailnum) {
 export async function getUserInfo() {
   try {
     const res = await fetch(
-      `http://kdt-sw3-team11.elicecoding.com/ api/order/userinfo`,
+      `http://kdt-sw3-team11.elicecoding.com/api/order/userinfo`,
       {
         method: "GET",
         headers: {
