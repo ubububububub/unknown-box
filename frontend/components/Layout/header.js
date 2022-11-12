@@ -6,9 +6,8 @@ document.adoptedStyleSheets.push(style);
 
 export class Header extends Component {
   template() {
-    const isLogin = !!localStorage.getItem("role");
+    const isLogin = !!localStorage.getItem("accessToken");
     const isAdmin = localStorage.getItem("role") === "admin";
-    const cartCount = JSON.parse(localStorage.getItem("cart")).length;
     return `<section class="header">
             <div class="header-fix">
               <div class="header-top">
@@ -34,7 +33,7 @@ export class Header extends Component {
                   <ul class="header-btlist">
                     <li class="box-basket">
                         <a href="/cart" id="btn-cart" class="btn-cart">
-                          <span class="s_cart_cnt"> ${cartCount}</span>
+                          
                           장바구니
                         </a>
                     </li>
