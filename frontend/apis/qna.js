@@ -1,6 +1,6 @@
 export async function insertQna(formData) {
   try {
-    const response = await fetch(`http://localhost:8080/api/qnaboard/`, {
+    const response = await fetch(`http://localhost:5001/api/qnaboard/`, {
       method: "POST",
       body: formData,
       headers: {
@@ -15,7 +15,7 @@ export async function insertQna(formData) {
 
 export async function updateQna(formData, id) {
   try {
-    const response = await fetch(`http://localhost:8080/api/qnaboard/${id}`, {
+    const response = await fetch(`http://localhost:5001/api/qnaboard/${id}`, {
       method: "PUT",
       body: formData,
       headers: {
@@ -30,7 +30,7 @@ export async function updateQna(formData, id) {
 
 export async function deleteQna(formData, id) {
   try {
-    const response = await fetch(`http://localhost:8080/api/qnaboard/${id}`, {
+    const response = await fetch(`http://localhost:5001/api/qnaboard/${id}`, {
       method: "DELETE",
       body: formData,
       headers: {
@@ -45,7 +45,7 @@ export async function deleteQna(formData, id) {
 
 export async function getQnaList() {
   try {
-    const response = await fetch("http://localhost:8080/api/qnaboard", {
+    const response = await fetch("http://localhost:5001/api/qnaboard", {
       method: "GET",
       headers: {
         "Content-Type": "application/json"
@@ -61,7 +61,7 @@ export async function getQnaDetail(id, password) {
   try {
     password = encodeURI(password);
     const response = await fetch(
-      `http://localhost:8080/api/qnaboard/${id}?password=${password}`,
+      `http://localhost:5001/api/qnaboard/${id}?password=${password}`,
       {
         method: "GET",
         headers: {

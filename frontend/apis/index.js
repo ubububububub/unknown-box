@@ -1,6 +1,8 @@
+const BASE_URL = process.env.JS_APP_SERVER_API_KEY;
+
 export async function postSignIn(formData) {
   try {
-    await fetch("http://localhost:8080/api/join", {
+    await fetch("http://localhost:5001/api/join", {
       method: "POST",
       body: formData
     });
@@ -12,7 +14,7 @@ export async function postSignIn(formData) {
 
 export async function postLogin(formData) {
   try {
-    const response = await fetch("http://localhost:8080/api/login", {
+    const response = await fetch("http://localhost:5001/api/login", {
       method: "POST",
       body: formData
     });
@@ -32,7 +34,7 @@ export async function postLogin(formData) {
 
 export async function getMyOrder() {
   try {
-    const response = await fetch(`http://localhost:8080/api/order`, {
+    const response = await fetch(`http://localhost:5001/api/order`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -51,7 +53,7 @@ export async function getMyOrder() {
 
 export async function getOrderInfo(orderId) {
   try {
-    const response = await fetch(`http://localhost:8080/api/order/${orderId}`, {
+    const response = await fetch(`http://localhost:5001/api/order/${orderId}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -70,7 +72,7 @@ export async function getOrderInfo(orderId) {
 
 export async function putOrderInfo(formData, orderId) {
   try {
-    const response = await fetch(`http://localhost:8080/api/order/${orderId}`, {
+    const response = await fetch(`http://localhost:5001/api/order/${orderId}`, {
       method: "PUT",
       headers: {
         "X-Access-Token": localStorage.getItem("accessToken")
@@ -88,7 +90,7 @@ export async function putOrderInfo(formData, orderId) {
 
 export async function deleteOrderInfo(orderId) {
   try {
-    const response = await fetch(`http://localhost:8080/api/order/${orderId}`, {
+    const response = await fetch(`http://localhost:5001/api/order/${orderId}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -106,7 +108,7 @@ export async function deleteOrderInfo(orderId) {
 
 export async function postOrder(data) {
   try {
-    const response = await fetch("http://localhost:8080/api/order", {
+    const response = await fetch("http://localhost:5001/api/order", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -125,7 +127,7 @@ export async function postOrder(data) {
 
 export async function getMyInfo() {
   try {
-    const response = await fetch(`http://localhost:8080/api/mypage`, {
+    const response = await fetch(`http://localhost:5001/api/mypage`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -144,7 +146,7 @@ export async function getMyInfo() {
 
 export async function putMyPassword(formData) {
   try {
-    const response = await fetch(`http://localhost:8080/api/mypage`, {
+    const response = await fetch(`http://localhost:5001/api/mypage`, {
       method: "PUT",
       headers: {
         "X-Access-Token": localStorage.getItem("accessToken")
@@ -167,7 +169,7 @@ export async function putMyPassword(formData) {
 
 export async function postRefreshToken() {
   try {
-    const response = await fetch("http://localhost:8080/api/auth", {
+    const response = await fetch("http://localhost:5001/api/auth", {
       method: "POST",
       headers: {
         "X-Access-Token": localStorage.getItem("accessToken"),
@@ -185,7 +187,7 @@ export async function postRefreshToken() {
 export async function getRandomBoxProducts(randomboxId) {
   try {
     const response = await fetch(
-      `http://localhost:8080/api/randombox/${randomboxId}`,
+      `http://localhost:5001/api/randombox/${randomboxId}`,
       {
         method: "GET",
         headers: {
@@ -202,7 +204,7 @@ export async function getRandomBoxProducts(randomboxId) {
 export async function putRandomBoxResult({ randomboxId, orderId, productId }) {
   try {
     const response = await fetch(
-      `http://localhost:8080/api/randombox/${randomboxId}`,
+      `http://localhost:5001/api/randombox/${randomboxId}`,
       {
         method: "PUT",
         headers: {
@@ -223,7 +225,7 @@ export async function putRandomBoxResult({ randomboxId, orderId, productId }) {
 
 export async function postKakaoLoginToken(email) {
   try {
-    const res = await fetch("http://localhost:8080/api/auth/kakao/tokens", {
+    const res = await fetch("http://localhost:5001/api/auth/kakao/tokens", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -238,7 +240,7 @@ export async function postKakaoLoginToken(email) {
 
 export async function postPayment(formData, product) {
   try {
-    const response = await fetch(`http://localhost:8080/api/order`, {
+    const response = await fetch(`http://localhost:5001/api/order`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -257,7 +259,7 @@ export async function postPayment(formData, product) {
 
 export async function getCategoryList() {
   try {
-    const response = await fetch("http://localhost:8080/api/admin/category", {
+    const response = await fetch("http://localhost:5001/api/admin/category", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -276,7 +278,7 @@ export async function getCategoryList() {
 
 export async function addCategory(data) {
   try {
-    await fetch(`http://localhost:8080/api/admin/category`, {
+    await fetch(`http://localhost:5001/api/admin/category`, {
       method: "POST",
       headers: {
         "X-Access-Token": localStorage.getItem("accessToken")
@@ -291,7 +293,7 @@ export async function addCategory(data) {
 export async function editCategory(id, data) {
   try {
     const response = await fetch(
-      `http://localhost:8080/api/admin/category/${id}`,
+      `http://localhost:5001/api/admin/category/${id}`,
       {
         method: "PUT",
         headers: {
@@ -309,7 +311,7 @@ export async function editCategory(id, data) {
 export async function deleteCategory(id) {
   try {
     const response = await fetch(
-      `http://localhost:8080/api/admin/category/${id}`,
+      `http://localhost:5001/api/admin/category/${id}`,
       {
         method: "DELETE",
         headers: {
@@ -329,7 +331,7 @@ export async function deleteCategory(id) {
 
 export async function getBoxList() {
   try {
-    const response = await fetch("http://localhost:8080/api/admin/randombox", {
+    const response = await fetch("http://localhost:5001/api/admin/randombox", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -348,7 +350,7 @@ export async function getBoxList() {
 
 export async function addBox(data) {
   try {
-    await fetch(`http://localhost:8080/api/admin/randombox`, {
+    await fetch(`http://localhost:5001/api/admin/randombox`, {
       method: "POST",
       headers: {
         "X-Access-Token": localStorage.getItem("accessToken")
@@ -362,7 +364,7 @@ export async function addBox(data) {
 
 export async function getBoxDetail(id) {
   try {
-    const response = await fetch(`http://localhost:8080/api/randombox/${id}`, {
+    const response = await fetch(`http://localhost:5001/api/randombox/${id}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -382,7 +384,7 @@ export async function getBoxDetail(id) {
 export async function editBox(id, data) {
   try {
     const response = await fetch(
-      `http://localhost:8080/api/admin/randombox/${id}`,
+      `http://localhost:5001/api/admin/randombox/${id}`,
       {
         method: "PUT",
         headers: {
@@ -400,7 +402,7 @@ export async function editBox(id, data) {
 export async function deleteBox(id) {
   try {
     const response = await fetch(
-      `http://localhost:8080/api/admin/randombox/${id}`,
+      `http://localhost:5001/api/admin/randombox/${id}`,
       {
         method: "DELETE",
         headers: {
@@ -420,7 +422,7 @@ export async function deleteBox(id) {
 
 export async function getProductList() {
   try {
-    const response = await fetch("http://localhost:8080/api/admin/product", {
+    const response = await fetch("http://localhost:5001/api/admin/product", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -439,7 +441,7 @@ export async function getProductList() {
 
 export async function addProduct(data) {
   try {
-    const res = await fetch(`http://localhost:8080/api/admin/product`, {
+    const res = await fetch(`http://localhost:5001/api/admin/product`, {
       method: "POST",
       headers: {
         "X-Access-Token": localStorage.getItem("accessToken")
@@ -455,7 +457,7 @@ export async function addProduct(data) {
 export async function getProductDetail(id) {
   try {
     const response = await fetch(
-      `http://localhost:8080/api/admin/product/${id}`,
+      `http://localhost:5001/api/admin/product/${id}`,
       {
         method: "GET",
         headers: {
@@ -476,7 +478,7 @@ export async function getProductDetail(id) {
 
 export async function editProduct(id, data) {
   try {
-    await fetch(`http://localhost:8080/api/admin/product/${id}`, {
+    await fetch(`http://localhost:5001/api/admin/product/${id}`, {
       method: "PUT",
       headers: {
         "X-Access-Token": localStorage.getItem("accessToken")
@@ -491,7 +493,7 @@ export async function editProduct(id, data) {
 export async function deleteProduct(id) {
   try {
     const response = await fetch(
-      `http://localhost:8080/api/admin/product/${id}`,
+      `http://localhost:5001/api/admin/product/${id}`,
       {
         method: "DELETE",
         headers: {
@@ -511,7 +513,7 @@ export async function deleteProduct(id) {
 
 export async function getOrderList() {
   try {
-    const response = await fetch(`http://localhost:8080/api/admin/order`, {
+    const response = await fetch(`http://localhost:5001/api/admin/order`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -531,7 +533,7 @@ export async function getOrderList() {
 export async function getOrderDetail(id) {
   try {
     const response = await fetch(
-      `http://localhost:8080/api/admin/order/${id}`,
+      `http://localhost:5001/api/admin/order/${id}`,
       {
         method: "GET",
         headers: {
@@ -553,7 +555,7 @@ export async function getOrderDetail(id) {
 export async function editOrder(id, data) {
   try {
     const response = await fetch(
-      `http://localhost:8080/api/admin/order/${id}`,
+      `http://localhost:5001/api/admin/order/${id}`,
       {
         method: "PUT",
         headers: {
@@ -575,7 +577,7 @@ export async function editOrder(id, data) {
 export async function deleteOrder(id) {
   try {
     const response = await fetch(
-      `http://localhost:8080/api/admin/order/${id}`,
+      `http://localhost:5001/api/admin/order/${id}`,
       {
         method: "DELETE",
         headers: {
@@ -595,7 +597,7 @@ export async function deleteOrder(id) {
 
 export async function getAdminQnaList() {
   try {
-    const response = await fetch(`http://localhost:8080/api/admin/qnaboard`, {
+    const response = await fetch(`http://localhost:5001/api/admin/qnaboard`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -612,7 +614,7 @@ export async function getAdminQnaList() {
 export async function getAdminQnaDetail(id) {
   try {
     const response = await fetch(
-      `http://localhost:8080/api/admin/qnaboard/${id}`,
+      `http://localhost:5001/api/admin/qnaboard/${id}`,
       {
         method: "GET",
         headers: {
@@ -634,7 +636,7 @@ export async function getAdminQnaDetail(id) {
 export async function postAdminQna(id, data) {
   try {
     const response = await fetch(
-      `http://localhost:8080/api/admin/qnaboard/${id}`,
+      `http://localhost:5001/api/admin/qnaboard/${id}`,
       {
         method: "POST",
         headers: {
@@ -657,7 +659,7 @@ export async function postAdminQna(id, data) {
 export async function deleteAdminQna(id) {
   try {
     const response = await fetch(
-      `http://localhost:8080/api/admin/qnaboard/${id}`,
+      `http://localhost:5001/api/admin/qnaboard/${id}`,
       {
         method: "DELETE",
         headers: {
@@ -677,7 +679,7 @@ export async function deleteAdminQna(id) {
 
 export async function postEmailConfirmSend(email) {
   try {
-    const response = await fetch("http://localhost:8080/api/auth/mail", {
+    const response = await fetch("http://localhost:5001/api/auth/mail", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -692,7 +694,7 @@ export async function postEmailConfirmSend(email) {
 
 export async function getEmailConfirmVerified(email, mailnum) {
   try {
-    const response = await fetch(`http://localhost:8080/api/auth/mailnum`, {
+    const response = await fetch(`http://localhost:5001/api/auth/mailnum`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -708,7 +710,7 @@ export async function getEmailConfirmVerified(email, mailnum) {
 
 export async function getUserInfo() {
   try {
-    const res = await fetch(`http://localhost:8080/api/order/userinfo`, {
+    const res = await fetch(`http://localhost:5001/api/order/userinfo`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
