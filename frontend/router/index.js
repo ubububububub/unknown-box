@@ -32,7 +32,7 @@ const routes = [
   { path: "/cart", view: Cart, isPublic: true },
   { path: "/order/payment", view: Payment, isPublic: false },
   { path: "/order/recipt", view: Recipt, isPublic: false },
-  { path: "/qnaboard/:mode", view: QnaBoard , isPublic: true},
+  { path: "/qnaboard/:mode", view: QnaBoard, isPublic: true },
   { path: "/rank", view: Rank },
   { path: "/admin", view: Admin, isPublic: false, isAdmin: true },
   {
@@ -57,7 +57,7 @@ const routes = [
   { path: "/admin/qna", view: AdminQna, isPublic: true, isAdmin: true },
   { path: "/qnaboard", view: QnaBoard, isPublic: true },
   {
-    path: "/randombox/:orderId/:randomboxtId",
+    path: "/randombox/:orderId/:randomboxId/:newboxId",
     view: RandomBox,
     isPublic: false
   },
