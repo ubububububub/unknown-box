@@ -43,8 +43,10 @@ class OrderService {
       totalPrice
     };
     randomboxes.forEach(({ randombox, count }) => {
-      randomboxInfo.randomboxes.push({ randombox });
-      randomboxInfo.randomboxesCount += Number(count);
+      for (let i = 0; i < count; i++) {
+        randomboxInfo.randomboxes.push({ randombox });
+        randomboxInfo.randomboxesCount += 1;
+      }
     });
     const order = await this.orderModel.createOrder(randomboxInfo);
     for (let i = 0; i < randomboxes.length; i++) {
