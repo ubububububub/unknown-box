@@ -12,12 +12,13 @@ const MAX_INDEX_START_INIT = 0;
 
 export class RandomBox extends Component {
   async setup() {
-    const [orderId, randomboxId] = this.props;
+    const [orderId, randomboxId, newboxId] = this.props;
 
     this.state = {
       count: 0,
       orderId,
       randomboxId,
+      newboxId,
       productItems: await getRandomBoxProducts(randomboxId),
       productsNum: 0
     };
@@ -71,6 +72,7 @@ export class RandomBox extends Component {
       await putRandomBoxResult({
         randomboxId: this.state.randomboxId,
         orderId: this.state.orderId,
+        newboxId: this.state.newboxId,
         productId:
           this.state.productItems.products[this.state.productsNum - 1].productId
       });
