@@ -102,7 +102,7 @@ class RandomboxService {
     if (result.modifiedCount !== 0) {
       const { email } = JWT.decodeToken(accessToken);
       await this.userModel.modify(email, {
-        $inc: { benefit: discount - price },
+        $inc: { benefit: price - discount },
         $pull: { randomboxes: { randomboxId } },
         $push: { products: { productId, productName, thumbnail, price } }
       });

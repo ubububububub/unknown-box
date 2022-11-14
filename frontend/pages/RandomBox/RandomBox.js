@@ -4,7 +4,6 @@ import { qs } from "../../utils/index.js";
 import style from "./randomBox.css" assert { type: "css" };
 document.adoptedStyleSheets.push(style);
 
-const PRODUCTS_NUM = 3;
 const ANIMATION_TIME = 8000;
 const IMAGE_SIZE = 600 * -1;
 const ANIMATION_FRAME_UNIT = 1;
@@ -19,14 +18,14 @@ export class RandomBox extends Component {
       count: 0,
       orderId,
       randomboxId,
-      productItems: await getRandomBoxProducts(randomboxId)
+      productItems: await getRandomBoxProducts(randomboxId),
+      productsNum: 0
     };
-
+    this.state.productsNum = this.state.productItems.products.length;
     const maxIndex = await this.getMaxPriceIndex(
       this.state.productItems.products
     );
     this.state.count = this.getRandomNum();
-
     this.state.productItems.products = this.convertProductItems(maxIndex);
   }
 
@@ -72,7 +71,8 @@ export class RandomBox extends Component {
       await putRandomBoxResult({
         randomboxId: this.state.randomboxId,
         orderId: this.state.orderId,
-        productId: this.state.productItems.products[this.state.count].productId
+        productId:
+          this.state.productItems.products[this.state.productsNum - 1].productId
       });
 
       this.startCarouselAnimation();
@@ -97,7 +97,7 @@ export class RandomBox extends Component {
   }
 
   getRandomNum() {
-    return Math.floor(Math.random() * PRODUCTS_NUM);
+    return Math.floor(Math.random() * this.state.productsNum);
   }
 
   startCarouselAnimation() {
