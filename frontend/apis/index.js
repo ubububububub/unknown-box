@@ -177,8 +177,8 @@ export async function postRefreshToken() {
       }
     });
     const json = await response.json();
-    localStorage.setItem("accessToken", json.accessToken);
-    localStorage.setItem("refreshToken", json.refreshToken);
+    localStorage.setItem("accessToken", json.newAccessToken);
+    localStorage.setItem("refreshToken", json.newRefreshToken);
   } catch (err) {
     console.dir(err);
   }
