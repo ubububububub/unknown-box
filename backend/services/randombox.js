@@ -74,7 +74,11 @@ class RandomboxService {
       }))
     };
   }
-  async openRandombox({ randomboxId }, { orderId, productId }, accessToken) {
+  async openRandombox(
+    { randomboxId },
+    { orderId, productId, newboxId },
+    accessToken
+  ) {
     const { discount } = await this.randomboxModel.getOne(randomboxId);
     const { productName, price, count, thumbnail } =
       await this.productModel.getOne(productId);
@@ -103,7 +107,7 @@ class RandomboxService {
       const { email } = JWT.decodeToken(accessToken);
       await this.userModel.modify(email, {
         $inc: { benefit: price - discount },
-        $pull: { randomboxes: { randomboxId } },
+        $pull: { randomboxes: { _id: newboxId } },
         $push: { products: { productId, productName, thumbnail, price } }
       });
     }

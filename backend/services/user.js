@@ -35,7 +35,22 @@ class UserService {
     const { email } = JWT.decodeToken(accessToken);
     const { benefit, randomboxes, products, role } =
       await this.model.getByEmail(email);
-    return { email, benefit, randomboxes, products, role };
+    return {
+      email,
+      benefit,
+      randomboxes: randomboxes.map(
+        ({ randomboxId, randomboxName, thumbnail, price, orderId, _id }) => ({
+          randomboxId,
+          randomboxName,
+          thumbnail,
+          price,
+          orderId,
+          newboxId: _id
+        })
+      ),
+      products,
+      role
+    };
   }
   async getUserInfo(accessToken) {
     const { email } = JWT.decodeToken(accessToken);
