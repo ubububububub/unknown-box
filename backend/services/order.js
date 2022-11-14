@@ -49,12 +49,10 @@ class OrderService {
       }
     });
     const order = await this.orderModel.createOrder(randomboxInfo);
-    for (let i = 0; i < randomboxes.length; i++) {
-      const randombox = await this.randomboxModel.getOne(
-        randomboxes[i].randombox
-      );
+    await order.populate("randomboxes.randombox");
+    for (const { randombox } of order.randomboxes) {
       await this.randomboxModel.modify(randombox._id, {
-        count: randombox.count - randomboxes[i].count
+        $inc: { count: -1 }
       });
       await this.userModel.modify(email, {
         $push: {
