@@ -47,6 +47,13 @@
   transition: left 8s cubic-bezier(0.25, 0, 0.01, 1);
 }
 
+.randombox_carousel-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
 .randombox_carousel-item-desc {
   margin-top: 8px;
   display: flex;
