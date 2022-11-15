@@ -2,6 +2,8 @@
 
 랜덤박스 쇼핑몰 프로젝트입니다.
 
+https://user-images.githubusercontent.com/116259958/201844619-5996f185-b304-4222-b744-3a30b94e4f1a.mp4
+
 # 기술 스택
 
 ## 프론트엔드
@@ -26,7 +28,9 @@
 
 ## 이상조(팀장)
 
-- 프론트엔드:
+- 바닐라 JS SPA 프로젝트 세팅(Routing, Protected Routing, Class Component … )
+- 재사용 컴포넌트 및 함수(Form, AddressForm, ImageUploadForm, Toast, validationFn … ) 작성
+- Login, SignIn, MyPage, MyOrder, MyOrderEdit, NotFound 페이지 구현
 
 ## 김유범
 
@@ -35,15 +39,15 @@
 
 ## 김지택
 
-- 백엔드: 김유범님에 이은 나머지 api 구현
+- 김유범님에 이은 나머지 api 구현
 
 ## 고나현
 
-- 프론트엔드:
+- 어드민 페이지 구현
 
 ## 조혜인
 
-- 프론트엔드:
+- 메인, QNA, 상품 상세 페이지 구현
 
 # 폴더 구조
 
@@ -84,7 +88,7 @@
 
 ## 1. git에서 파일 받아오기
 
-> git clone https://kdt-gitlab.elice.io/sw_track/class_03/web_project/team11/my-project.git
+> git clone https://github.com/ubububububub/unknown-box.git
 
 ## 2. 라이브러리 설치
 
